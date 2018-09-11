@@ -1,11 +1,11 @@
 import * as moment from 'moment';
 import { Moment } from 'moment';
 
-export function assertValid(moment: Moment): Moment {
-  if (moment.isValid()) {
-    return moment;
+export function assertValid(value: Moment): Moment {
+  if (value.isValid()) {
+    return value;
   } else {
-    console.log(moment);
+    console.log(value);
     throw new Error('Not a valid moment object');
   }
 }

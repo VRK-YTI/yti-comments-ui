@@ -3,11 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
-import { Router, RouterModule, Routes } from '@angular/router';
-// import { TranslateLoader, TranslateModule } from 'ng2-translate';
+import { RouterModule, Routes } from '@angular/router';
 import { of } from 'rxjs';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { CommentsComponent } from './comments/comments.component';
 import { CommentRoundsComponent } from './commentrounds/commentrounds.component';
 import { GlobalCommentsComponent } from './globalcomments/globalcomments.component';
@@ -15,10 +14,6 @@ import { CommentComponent } from './comment/comment.component';
 import { CommentRoundComponent } from './commentround/commentround.component';
 
 declare var require: any;
-
-export function createTranslateLoader(): TranslateLoader {
-  return { getTranslation: (lang: string) => of(localizations[lang]) };
-}
 
 const localizations: { [lang: string]: string } = {
   fi: Object.assign({},
@@ -29,6 +24,10 @@ const localizations: { [lang: string]: string } = {
     require('json-loader!po-loader?format=mf!../../po/en.po')
   )
 };
+
+export function createTranslateLoader(): TranslateLoader {
+  return { getTranslation: (lang: string) => of(localizations[lang]) };
+}
 
 const appRoutes: Routes = [
   { path: '', component: CommentRoundsComponent },
