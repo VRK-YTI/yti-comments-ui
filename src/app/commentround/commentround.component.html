@@ -1,0 +1,34 @@
+<div *ngIf="!loading">
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="content-box">
+        <h4 class="strong" translate>Comment round</h4>
+        <hr/>
+        <span>label: </span><span>{{ commentRound.label }}</span>
+        <br/>
+        <span>userId: </span><span>{{ commentRound.userId }}</span>
+        <br/>
+        <span>description: </span><span>{{ commentRound.description }}</span>
+        <br/>
+        <span>created: </span><span>{{ commentRound.createdDisplayValue }}</span>
+        <br/>
+        <span>modified: </span><span>{{ commentRound.modifiedDisplayValue }}</span>
+        <br/>
+        <span>resource uri: </span><a href="commentRound.source.containerUri">{{ commentRound.source.containerUri }}</a>
+        <hr/>
+        <h4 class="strong" translate>Comments</h4>
+        <hr/>
+        <div *ngFor="let comment of comments">
+          <div>
+            <span>content: </span><span class="title" (click)="viewComment(comment)">{{ comment.content }}</span>
+            <br/>
+            <span>resource uri: </span><a href="comment.resourceUri">{{ comment.resourceUri }}</a>
+          </div>
+          <hr/>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

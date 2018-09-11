@@ -1,0 +1,17 @@
+<div *ngIf="!loading">
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="content-box">
+        <h4 class="strong" translate>Comment rounds</h4>
+
+        <div *ngFor="let commentRound of commentRounds">
+          <span class="name">{{ commentRound.label }}</span>
+          <span class="name">{{ commentRound.description }}</span>
+          <span class="name">{{ commentRound.source.containerUri }}</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

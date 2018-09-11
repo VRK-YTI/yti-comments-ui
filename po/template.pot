@@ -1,0 +1,23 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Comment round"
+msgstr ""
+
+msgid "Comment rounds"
+msgstr ""
+
+msgid "ERR_MSG_USER_401"
+msgstr ""
+
+msgid "ERR_MSG_USER_404"
+msgstr ""
+
+msgid "ERR_MSG_USER_406"
+msgstr ""
+
+msgid "ERR_MSG_USER_500"
+msgstr ""

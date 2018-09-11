@@ -1,0 +1,23 @@
+<div *ngIf="!loading">
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="content-box">
+        <h4 class="strong" translate>Comment</h4>
+        <hr/>
+        <span>user: </span><span>{{ comment.userId }}</span>
+        <br/>
+        <span>content: </span><span>{{ comment.content }}</span>
+        <br/>
+        <span>proposed status: </span><span *ngIf="comment.proposedStatus">{{ comment.proposedStatus }}</span><span *ngIf="!comment.proposedStatus">-</span>
+        <br/>
+        <span>created: </span><span>{{ comment.createdDisplayValue }}</span>
+        <br/>
+        <span>modified: </span><span>{{ comment.modifiedDisplayValue }}</span>
+        <br/>
+        <span>resource uri: </span><a href="comment.resourceUri">{{ comment.resourceUri }}</a>
+        <hr/>
+      </div>
+    </div>
+  </div>
+</div>

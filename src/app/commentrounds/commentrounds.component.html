@@ -1,0 +1,23 @@
+<div *ngIf="!loading">
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="content-box">
+        <h4 class="strong" translate>Comment rounds</h4>
+        <hr/>
+        <div *ngFor="let commentRound of commentRounds">
+          <div>
+            <span>label: </span><span class="title" (click)="viewCommentRound(commentRound)">{{ commentRound.label }}</span>
+            <br/>
+            <span>description: </span><span>{{ commentRound.description }}</span>
+            <br/>
+            <br/>
+            <span>container uri: </span><a href="commentRound.source.containerUri">{{ commentRound.source.containerUri }}</a>
+            <hr/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

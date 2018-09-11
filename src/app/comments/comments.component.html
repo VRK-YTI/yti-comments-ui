@@ -1,0 +1,17 @@
+<div *ngIf="!loading">
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="content-box">
+        <h4 class="strong" translate>Comments</h4>
+
+        <div *ngFor="let comment of comments">
+          <span class="name">{{ comment.content }}</span>
+          <span class="name">{{ comment.resourceUri }}</span>
+          <span class="name">{{ comment.proposedStatus }}</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
