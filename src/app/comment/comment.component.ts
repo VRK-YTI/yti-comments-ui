@@ -27,4 +27,8 @@ export class CommentComponent implements OnInit {
       this.comment = comment;
     });
   }
+
+  get loading(): boolean {
+    return this.comment == null;
+  }
 }
