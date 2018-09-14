@@ -9,6 +9,9 @@ export class CommentRound extends AbstractResource {
   userId: string;
   label: string;
   description?: string;
+  status: string;
+  fixedComments: boolean;
+  openComments: boolean;
   source: Source;
   created: Moment | null = null;
   modified: Moment | null = null;
@@ -20,6 +23,9 @@ export class CommentRound extends AbstractResource {
     this.userId = data.userId;
     this.label = data.label;
     this.description = data.description;
+    this.status = data.status;
+    this.fixedComments = data.fixedComments;
+    this.openComments = data.openComments;
     if (data.source) {
       this.source = new Source(data.source);
     }

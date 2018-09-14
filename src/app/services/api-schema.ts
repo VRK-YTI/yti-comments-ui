@@ -9,6 +9,9 @@ export interface CommentRoundType extends BaseResourceType {
   userId: string;
   label: string;
   description?: string;
+  status: string;
+  fixedComments: boolean;
+  openComments: boolean;
   created: string;
   modified: string;
   startDate: string;
@@ -34,6 +37,7 @@ export interface CommentType extends BaseResourceType {
   userId: string;
   proposedStatus: string;
   resourceUri: string;
+  resourceSuggestion: string;
   created: string;
   modified: string;
 }
