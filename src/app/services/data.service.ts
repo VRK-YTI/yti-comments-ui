@@ -295,8 +295,6 @@ export class DataService {
 
   getContainers(containerType: string, language: string): Observable<IntegrationResource[]> {
 
-    console.log('getContainers with containerType: ' + containerType);
-
     let params = new HttpParams();
 
     if (language) {
@@ -304,8 +302,6 @@ export class DataService {
     }
 
     const containerPath = DataService.resolveIntegrationApiPathForContainerType(containerType) + '/' + containers;
-
-    console.log('getContainers with uri: ' + containerPath);
 
     return this.http.get<WithResults<IntegrationResource>>(containerPath, { params: params })
       .pipe(map(res => res.results.map(data => new IntegrationResource(data))));
