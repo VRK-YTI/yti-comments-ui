@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-08-30 13:41+0300\n"
+"PO-Revision-Date: 2018-10-01 11:58+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -13,20 +13,337 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Comment round"
-msgstr "Kommentointikierros"
+msgid "enabled"
+msgstr "valittu"
 
-msgid "Comment rounds"
-msgstr "Kommentointikierrokset"
+msgid "Status"
+msgstr "Tila"
 
-msgid "ERR_MSG_USER_401"
+msgid "Valid from"
+msgstr "Alkamispäivä"
+
+msgid "Valid to"
+msgstr "Päättymispäivä"
+
+msgid "Save"
+msgstr "Tallenna"
+
+msgid "Cancel"
+msgstr "Peruuta"
+
+msgid "Edit"
+msgstr "Muokkaa"
+
+msgid "Add organization"
+msgstr "Valitse organisaatio"
+
+msgid "Choose organization"
+msgstr "Valitse organisaatio"
+
+msgid "Search organization"
+msgstr "Etsi organisaatio"
+
+msgid "Select comment"
+msgstr "Valitse kommentti"
+
+msgid "Choose comment"
+msgstr "Valitse kommentti"
+
+msgid "Search comment"
+msgstr "Etsi kommentti"
+
+msgid "Proposed status"
+msgstr "Ehdotettu tila"
+
+msgid "{{option}}"
 msgstr ""
 
-msgid "ERR_MSG_USER_404"
+msgid "Select tool"
+msgstr "Valitse työkalu"
+
+msgid "Select resource"
+msgstr "Valitse resurssi"
+
+msgid "Choose source"
+msgstr "Valitse lähde"
+
+msgid "Search term"
+msgstr "Hakutermi"
+
+msgid "All organizations"
+msgstr "Kaikki organisaatiot"
+
+msgid "Comments"
+msgstr "Kommentit"
+
+msgid "Comment round name"
+msgstr "Kommentointikierroksen nimi"
+
+msgid "Comment thread name"
+msgstr "Kommentointiketjun nimi"
+
+msgid "Comment thread resource uri"
+msgstr "Kommentointiketju resurssin URI"
+
+msgid "Comment"
+msgstr "Kommentti"
+
+msgid "Parent comment"
+msgstr "Ylätason kommentti"
+
+msgid "Create comment"
+msgstr "Luo kommentti"
+
+msgid "Created"
+msgstr "Luontiajankohta"
+
+msgid "Description"
+msgstr "Kuvaus"
+
+msgid "Organization"
+msgstr "Organisaatio"
+
+msgid "Source URI"
+msgstr "Lähde URI"
+
+msgid "Source"
+msgstr "Lähde"
+
+msgid "Fixed threads"
+msgstr "Avoin kommentoitavien resurssien lisäys"
+
+msgid "Open threads"
+msgstr "Avoin kommentointi päätason containeriin"
+
+msgid "Validity"
+msgstr "Voimassaolo"
+
+msgid "Create comment round"
+msgstr "Luo kommentointikierros"
+
+msgid "Last modification"
+msgstr "Viimeisin muokkaus"
+
+msgid "Add comment thread"
+msgstr "Luo kommenttiketju"
+
+msgid "Comment threads"
+msgstr "Kommentointiketjut"
+
+msgid "Definition"
+msgstr "Määritelmä"
+
+msgid "Resource"
+msgstr "Resurssi"
+
+msgid "Proposed text"
+msgstr "Ehdotettu teksti"
+
+msgid "Create comment thread"
+msgstr "Luo kommenttiketju"
+
+msgid "Add comment"
+msgstr "Luo kommentti"
+
+msgid "comment round"
+msgstr "kommentointikierros"
+
+msgid "comment rounds"
+msgstr "kommentointikierrosta"
+
+msgid "Frontpage long description"
+msgstr ""
+"Yhteentoimivuusalustan Kommentit-palvelussa voi laatia "
+"kommentointikierroksia Sanastot-, Koodistot- ja Tietomallit-työkalujen "
+"tietosisällöistä. Lisäksi palvelun kautta voi kommentoida "
+"kommentointikierrokselle lähetettyjä tietosisältöjä sekä lukea muiden "
+"antamia kommentteja."
+
+msgid "Add comment round"
+msgstr "Luo kommentointikierros"
+
+msgid "Filter results"
+msgstr "Suodata hakutuloksia"
+
+msgid "Did not find any comment rounds."
+msgstr "Kommentointikierroksia ei löytynyt."
+
+msgid "Impersonate user"
+msgstr "Esiinny käyttäjänä"
+
+msgid "LOG IN"
+msgstr "KIRJAUDU SISÄÄN"
+
+msgid "LOG OUT"
+msgstr "KIRJAUDU ULOS"
+
+msgid "User details"
+msgstr "Käyttäjätiedot"
+
+msgid "Suomi.fi Reference Data"
+msgstr "Suomi.fi-koodistot"
+
+msgid "Suomi.fi Controlled Vocabularies"
+msgstr "Suomi.fi-sanastot"
+
+msgid "Suomi.fi Data Vocabularies"
+msgstr "Suomi.fi-tietomallit"
+
+msgid "User right management"
+msgstr "Oikeuksienhallinta"
+
+msgid "Name"
+msgstr "Nimi"
+
+msgid "Email"
+msgstr "Sähköposti"
+
+msgid "Organizations and roles"
+msgstr "Organisaatiot ja toolkit"
+
+msgid "Unknown organization"
+msgstr "Tuntematon organisaatio"
+
+msgid "Waiting for approval"
+msgstr "Odottaa hyväksymistä"
+
+msgid "Send"
+msgstr "Lähetä"
+
+msgid "INFO_TEXT_INTEGRATION_RESOURCE"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_LABEL"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_DESCRIPTION"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_ORGANIZATION"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_FIXED_THREADS"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_STATUS"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_VALIDITY"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_CREATED"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_LAST_MODIFICATION"
 msgstr ""
 
 msgid "ERR_MSG_USER_406"
-msgstr ""
+msgstr "Epäsopivaa data"
+
+msgid "Front page"
+msgstr "Etusivu"
+
+msgid "SUPERSEDED"
+msgstr "Korvattu"
+
+msgid "SUBMITTED"
+msgstr "Odottaa hyväksyntää"
+
+msgid "RETIRED"
+msgstr "Poistettu"
+
+msgid "VALID"
+msgstr "Voimassa oleva"
+
+msgid "INVALID"
+msgstr "Virheellinen"
+
+msgid "DRAFT"
+msgstr "Luonnos"
+
+msgid "INCOMPLETE"
+msgstr "Keskeneräinen"
+
+msgid "AWAIT"
+msgstr "Kesken"
+
+msgid "INPROGRESS"
+msgstr "Käynnissä"
+
+msgid "ENDED"
+msgstr "Päättynyt"
+
+msgid "CLOSED"
+msgstr "Suljettu"
+
+msgid "ERR_MSG_USER_401"
+msgstr "Ei käyttöoikeutta"
+
+msgid "ERR_MSG_USER_404"
+msgstr "Resurssia ei löydy"
+
+msgid "NOSTATUS"
+msgstr "Ei valittua tilaa"
 
 msgid "ERR_MSG_USER_500"
-msgstr ""
+msgstr "Tapahtui odottamaton virhe"
+
+msgid "ADMIN"
+msgstr "Ylläpitäjä"
+
+msgid "DATA_MODEL_EDITOR"
+msgstr "Tietomallintaja"
+
+msgid "TERMINOLOGY_EDITOR"
+msgstr "Tietomallintaja"
+
+msgid "CODE_LIST_EDITOR"
+msgstr "Koodistotyöntekijä"
+
+msgid "required"
+msgstr "vaadittu"
+
+msgid "codelist"
+msgstr "Suomi.fi-koodistot"
+
+msgid "terminology"
+msgstr "Suomi.fi-sanastot"
+
+msgid "datamodel"
+msgstr "Suomi.fi-tietomallit"
+
+msgid "All statuses"
+msgstr "Kaikki tilat"
+
+msgid "All integrations"
+msgstr "Kaikki sovellukset"
+
+msgid "Comment round"
+msgstr "kommentointikierros"
+
+msgid "Comment thread"
+msgstr "Kommentointiketju"
+
+msgid "Select interoperability tool"
+msgstr "Valitse lähde työkalu"
+
+#, fuzzy
+#~| msgid "Comment"
+#~ msgid "Comment/div>"
+#~ msgstr "Kommentti"
+
+#~ msgid "No resources found."
+#~ msgstr "Ei hakutuloksia."
+
+#, fuzzy
+#~| msgid "Comment Round"
+#~ msgid "CommentRoundStatus"
+#~ msgstr "Kommentointikierros"
+
+#~ msgid "Comment round label"
+#~ msgstr "Kommentointikierroksen nimi"
+
+#, fuzzy
+#~| msgid "Suomi.fi Controlled Vocabularies"
+#~ msgid "Get concept from Controlled Vocabularies"
+#~ msgstr "Suomi.fi-sanastot"

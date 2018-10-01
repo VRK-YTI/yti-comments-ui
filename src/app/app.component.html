@@ -1,6 +1,8 @@
-<div style="text-align:center">
-  <h1 translate>Comment round</h1>
-  <div class="container-fluid">
-    <router-outlet></router-outlet>
-  </div>
+<ng-template ngbModalContainer></ng-template>
+<app-navigation-bar></app-navigation-bar>
+<div class="container-fluid">
+  <app-breadcrumb [location]="location" [linkActive]="true" [refreshPath]="['re']"></app-breadcrumb>
+  <router-outlet></router-outlet>
 </div>
+<app-footer [title]="'Comments' | translate"
+            (informationClick)="navigateToInformation()"></app-footer>

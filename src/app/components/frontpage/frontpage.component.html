@@ -1,0 +1,72 @@
+<div *ngIf="loading">
+  <app-ajax-loading-indicator></app-ajax-loading-indicator>
+</div>
+
+<div *ngIf="!loading">
+
+  <div class="yti-tool-front-page" *ngIf="!loading">
+    <div class="row mb-12">
+      <div class="col-md-10">
+        <p translate>Frontpage long description</p>
+      </div>
+
+      <div *ngIf="canCreateCommentRound()" class="col-md-2 float-right d-inline-block">
+        <button id="create_commentround_button"
+                type="button"
+                class="btn btn-action float-right"
+                (click)="createNewCommentRound()">
+          <span translate>Add comment round</span>
+        </button>
+      </div>
+
+      <div class="col-md-12">
+
+        <div *ngIf="searchInProgress" class="content-box">
+          <app-ajax-loading-indicator></app-ajax-loading-indicator>
+        </div>
+
+        <div class="content-box result-list-container" *ngIf="!searchInProgress">
+
+          <div class="row mb-4">
+            <div class="col-md-12 result-list-filter-row">
+            <span class="search-label search-label-inline with-info" style="padding-right: 0px"
+                  translate>Filter results</span>
+              <app-information-symbol [infoText]="'INFO_TEXT_FRONTPAGE_FILTER_RESULTS'"></app-information-symbol>
+
+              <app-filter-dropdown class="d-inline-block"
+                                   id="organization_filter_dropdown"
+                                   [filterSubject]="organization$"
+                                   [options]="organizationOptions"></app-filter-dropdown>
+
+              <app-filter-dropdown class="d-inline-block"
+                                   id="status_filter_dropdown"
+                                   [filterSubject]="status$"
+                                   [options]="statusOptions"></app-filter-dropdown>
+
+              <app-filter-dropdown class="d-inline-block"
+                                   id="integration_filter_dropdown"
+                                   [filterSubject]="containerType$"
+                                   [options]="containerTypeOptions"></app-filter-dropdown>
+            </div>
+          </div>
+
+          <div class="col-md-12 mb-4 result-list-filter-row">
+            <span *ngIf="commentRounds.length == 0" translate>Did not find any comment rounds.</span>
+            <span *ngIf="commentRounds.length == 1">1 {{'comment round' | translate}}</span>
+            <span *ngIf="commentRounds.length > 1">{{commentRounds.length}} {{'comment rounds' | translate}}</span>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div *ngFor="let commentRound of commentRounds" class="result-list-item">
+                <app-comment-round-listitem [commentRound]="commentRound"
+                                            (toggleDescriptionFunction)="toggleFullDescription($event)"
+                                            [fullDescription]="fullDescription"></app-comment-round-listitem>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

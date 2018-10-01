@@ -1,0 +1,63 @@
+<div *ngIf="loading">
+  <app-ajax-loading-indicator></app-ajax-loading-indicator>
+</div>
+
+<div *ngIf="!loading" class="content-box">
+
+  <app-back-button [id]="'commentthread_create_back_button'" (back)="back()"></app-back-button>
+
+  <div class="row">
+    <div class="col-12">
+      <h1 class="float-left" translate>Create comment thread</h1>
+      <app-content-language></app-content-language>
+    </div>
+  </div>
+
+  <form [formGroup]="commentThreadForm" #form="ngForm">
+    <div class="row">
+      <div class="col-12">
+        <app-editable-buttons [form]="form"></app-editable-buttons>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-8 col-md-10">
+        <div class="form-group">
+          <app-error-messages id="commentthread_form_error_messages" [control]="commentThreadForm"></app-error-messages>
+        </div>
+
+        <app-literal [id]="'commentround_name'"
+                     [label]="'Comment round name' | translate"
+                     [value]="commentRound.label"></app-literal>
+
+        <app-localizable-input [id]="'commentthread_name_input'"
+                               [label]="'Comment thread name' | translate"
+                               [required]="true"
+                               [infoText]="'INFO_TEXT_COMMENTTHREAD_NAME'"
+                               [formControlName]="'label'"></app-localizable-input>
+
+        <app-localizable-textarea [id]="'commentthread_definition_input'"
+                                  [label]="'Definition' | translate"
+                                  [required]="true"
+                                  [infoText]="'INFO_TEXT_COMMENTTHREAD_DEFINITION'"
+                                  [formControlName]="'definition'"></app-localizable-textarea>
+
+        <app-source-input id="integration_resource_input"
+                          [label]="'Resource' | translate"
+                          [required]="true"
+                          [containerUri]="commentRound.source.containerUri"
+                          [infoText]="'INFO_TEXT_INTEGRATION_RESOURCE'"
+                          [formControlName]="'resource'"></app-source-input>
+
+        <app-literal-textarea [id]="'commentthread_proposedtext_input'"
+                              [label]="'Proposed text' | translate"
+                              [infoText]="'INFO_TEXT_COMMENTTHREAD_PROPOSEDTEXT'"
+                              [formControlName]="'proposedText'"></app-literal-textarea>
+
+        <app-proposedstatus-input id="commentthread_proposedstatus_input"
+                                  [infoText]="'INFO_TEXT_COMMENTTHREAD_PROPOSEDSTATUS'"
+                                  [formControlName]="'proposedStatus'"></app-proposedstatus-input>
+      </div>
+    </div>
+  </form>
+</div>

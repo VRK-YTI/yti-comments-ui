@@ -23,7 +23,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/simple-line-icons/scss/simple-line-icons.scss"
             ],
             "scripts": []
           },

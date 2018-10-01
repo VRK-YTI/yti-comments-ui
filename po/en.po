@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-08-30 13:41+0300\n"
+"PO-Revision-Date: 2018-10-01 11:58+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -13,20 +13,316 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Comment round"
-msgstr "Kommentointikierros"
-
-msgid "Comment rounds"
+msgid "enabled"
 msgstr ""
 
-msgid "ERR_MSG_USER_401"
+msgid "Status"
 msgstr ""
 
-msgid "ERR_MSG_USER_404"
+msgid "Valid from"
+msgstr ""
+
+msgid "Valid to"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Add organization"
+msgstr ""
+
+msgid "Choose organization"
+msgstr ""
+
+msgid "Search organization"
+msgstr ""
+
+msgid "Select comment"
+msgstr ""
+
+msgid "Choose comment"
+msgstr ""
+
+msgid "Search comment"
+msgstr ""
+
+msgid "Proposed status"
+msgstr ""
+
+msgid "{{option}}"
+msgstr ""
+
+msgid "Select tool"
+msgstr ""
+
+msgid "Select resource"
+msgstr ""
+
+msgid "Choose source"
+msgstr ""
+
+msgid "Search term"
+msgstr ""
+
+msgid "All organizations"
+msgstr ""
+
+msgid "Comments"
+msgstr ""
+
+msgid "Comment round name"
+msgstr ""
+
+msgid "Comment thread name"
+msgstr ""
+
+msgid "Comment thread resource uri"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+msgid "Parent comment"
+msgstr ""
+
+msgid "Create comment"
+msgstr ""
+
+msgid "Created"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Organization"
+msgstr ""
+
+msgid "Source URI"
+msgstr ""
+
+msgid "Source"
+msgstr ""
+
+msgid "Fixed threads"
+msgstr ""
+
+msgid "Open threads"
+msgstr ""
+
+msgid "Validity"
+msgstr ""
+
+msgid "Create comment round"
+msgstr ""
+
+msgid "Last modification"
+msgstr ""
+
+msgid "Add comment thread"
+msgstr ""
+
+msgid "Comment threads"
+msgstr ""
+
+msgid "Definition"
+msgstr ""
+
+msgid "Resource"
+msgstr ""
+
+msgid "Proposed text"
+msgstr ""
+
+msgid "Create comment thread"
+msgstr ""
+
+msgid "Add comment"
+msgstr ""
+
+msgid "comment round"
+msgstr ""
+
+msgid "comment rounds"
+msgstr ""
+
+msgid "Frontpage long description"
+msgstr ""
+"In Interoperabilityplatforms Comment Round Tool users can create comment "
+"rounds for Controlled Vocabularies-, Reference Data- and Data Vocabulary- "
+"Tool content. In addition, the Comment Round Tool is used for commenting "
+"information content added for commenting in a comment round, and read "
+"comments sent by others."
+
+msgid "Add comment round"
+msgstr ""
+
+msgid "Filter results"
+msgstr ""
+
+msgid "Did not find any comment rounds."
+msgstr ""
+
+msgid "Impersonate user"
+msgstr ""
+
+msgid "LOG IN"
+msgstr ""
+
+msgid "LOG OUT"
+msgstr ""
+
+msgid "User details"
+msgstr ""
+
+msgid "Suomi.fi Reference Data"
+msgstr ""
+
+msgid "Suomi.fi Controlled Vocabularies"
+msgstr ""
+
+msgid "Suomi.fi Data Vocabularies"
+msgstr ""
+
+msgid "User right management"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Organizations and roles"
+msgstr ""
+
+msgid "Unknown organization"
+msgstr ""
+
+msgid "Waiting for approval"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "INFO_TEXT_INTEGRATION_RESOURCE"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_LABEL"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_DESCRIPTION"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_ORGANIZATION"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_FIXED_THREADS"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_STATUS"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_VALIDITY"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_CREATED"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_LAST_MODIFICATION"
 msgstr ""
 
 msgid "ERR_MSG_USER_406"
+msgstr "Erroneous data"
+
+msgid "Front page"
 msgstr ""
 
+msgid "SUPERSEDED"
+msgstr "Superseded"
+
+msgid "SUBMITTED"
+msgstr "Submitted"
+
+msgid "RETIRED"
+msgstr "Retired"
+
+msgid "VALID"
+msgstr "Valid"
+
+msgid "INVALID"
+msgstr "Invalid"
+
+msgid "DRAFT"
+msgstr "Draft"
+
+msgid "INCOMPLETE"
+msgstr "Incomplete"
+
+msgid "AWAIT"
+msgstr "Await"
+
+msgid "INPROGRESS"
+msgstr "In progress"
+
+msgid "ENDED"
+msgstr "Ended"
+
+msgid "CLOSED"
+msgstr "Closed"
+
+msgid "ERR_MSG_USER_401"
+msgstr "You are unauthorized to perform this action"
+
+msgid "ERR_MSG_USER_404"
+msgstr "Resource not found"
+
+msgid "NOSTATUS"
+msgstr "No selected status"
+
 msgid "ERR_MSG_USER_500"
+msgstr "Unexpected error"
+
+msgid "ADMIN"
+msgstr "Admin"
+
+msgid "DATA_MODEL_EDITOR"
+msgstr "Data model editor"
+
+msgid "TERMINOLOGY_EDITOR"
+msgstr "Terminology editor"
+
+msgid "CODE_LIST_EDITOR"
+msgstr "Code list editor"
+
+msgid "required"
+msgstr ""
+
+msgid "codelist"
+msgstr "Suomi.fi Reference Data"
+
+msgid "terminology"
+msgstr "Suomi.fi Controlled Vocabularies"
+
+msgid "datamodel"
+msgstr "Suomi.fi Data Vocabularies"
+
+msgid "All statuses"
+msgstr ""
+
+msgid "All integrations"
+msgstr ""
+
+msgid "Comment round"
+msgstr ""
+
+msgid "Comment thread"
+msgstr ""
+
+msgid "Select interoperability tool"
 msgstr ""

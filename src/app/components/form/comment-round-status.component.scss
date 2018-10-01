@@ -1,0 +1,16 @@
+@import '../../../../node_modules/yti-common-ui/theme/variables';
+
+:host {
+  display: inline-block;
+}
+
+span {
+  color: $white;
+  border-radius: 3px;
+  padding: 3px 10px;
+}
+
+span.bg-white {
+  color: $black !important;
+  border: 1px $black solid;
+}

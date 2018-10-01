@@ -1,0 +1,77 @@
+<div *ngIf="loading">
+  <app-ajax-loading-indicator></app-ajax-loading-indicator>
+</div>
+
+<div *ngIf="!loading" class="content-box">
+
+  <app-back-button [id]="'commentround_create_back_button'" (back)="back()"></app-back-button>
+
+  <h1 class="text-content-wrap">{{ commentThread.label | translateValue:true }}</h1>
+
+  <div class="row">
+    <div class="col-12">
+      <app-editable-buttons [form]="form"
+                            [entity]="commentRound"></app-editable-buttons>
+
+      <div *ngIf="canCreateComment()" class="col-md-2 float-right d-inline-block">
+        <button id="create_comment_button"
+                type="button"
+                class="btn btn-action float-right"
+                (click)="createNewComment()">
+          <span translate>Add comment</span>
+        </button>
+      </div>
+
+      <app-content-language></app-content-language>
+
+    </div>
+  </div>
+
+  <form [formGroup]="commentThreadForm" #form="ngForm">
+
+    <app-literal [id]="'commentround_name'"
+                 [label]="'Comment round name' | translate"
+                 [value]="commentRound.label"></app-literal>
+
+    <app-localizable-input [id]="'commentthread_name_input'"
+                           [label]="'Comment thread name' | translate"
+                           [required]="true"
+                           [infoText]="'INFO_TEXT_COMMENTTHREAD_LABEL'"
+                           [formControlName]="'label'"></app-localizable-input>
+
+    <app-localizable-textarea [id]="'commentthread_definition_input'"
+                              [label]="'Definition' | translate"
+                              [required]="true"
+                              [infoText]="'INFO_TEXT_COMMENTTHREAD_DEFINITION'"
+                              [formControlName]="'definition'"></app-localizable-textarea>
+
+    <app-source-input id="integration_resource_input"
+                      [label]="'Source' | translate"
+                      [required]="true"
+                      [containerUri]="commentRound.source.containerUri"
+                      [infoText]="'INFO_TEXT_INTEGRATION_RESOURCE'"
+                      [formControlName]="'resource'"></app-source-input>
+
+    <app-literal-textarea [id]="'commentthread_proposedtext_input'"
+                          [label]="'Proposed text' | translate"
+                          [infoText]="'INFO_TEXT_COMMENTTHREAD_PROPOSEDTEXT'"
+                          [formControlName]="'proposedText'"></app-literal-textarea>
+
+    <app-proposedstatus-input id="commentthread_proposedstatus_input"
+                              [infoText]="'INFO_TEXT_COMMENTTHREAD_PROPOSEDSTATUS'"
+                              [formControlName]="'proposedStatus'"></app-proposedstatus-input>
+
+    <app-literal [label]="'Created' | translate"
+                 [value]="commentThread.createdDisplayValue"
+                 [infoText]="'INFO_TEXT_COMMENTTHREAD_CREATED'"></app-literal>
+  </form>
+
+  <h4 class="strong" translate>Comments</h4>
+
+  <div *ngFor="let comment of comments">
+    <app-comment-listitem [commentRound]="commentRound"
+                          [commentThread]="commentThread"
+                          [comment]="comment"></app-comment-listitem>
+  </div>
+
+</div>

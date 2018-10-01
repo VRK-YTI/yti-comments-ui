@@ -1,0 +1,98 @@
+<div *ngIf="loading">
+  <app-ajax-loading-indicator></app-ajax-loading-indicator>
+</div>
+
+<div *ngIf="!loading" class="content-box">
+
+  <app-back-button [id]="'commentround_create_back_button'" (back)="back()"></app-back-button>
+
+  <h1 class="text-content-wrap">{{ commentRound.label }}</h1>
+
+  <div class="row">
+    <div class="col-12">
+      <app-commentround-status class="float-left" [status]="commentRound.status"></app-commentround-status>
+
+      <app-editable-buttons [form]="form"
+                            [entity]="commentRound"></app-editable-buttons>
+
+      <div *ngIf="canCreateCommentThread()" class="col-md-2 float-right d-inline-block">
+        <button id="create_commentround_button"
+                type="button"
+                class="btn btn-action float-right"
+                (click)="createNewCommentThread()">
+          <span translate>Add comment thread</span>
+        </button>
+      </div>
+
+      <app-content-language></app-content-language>
+
+    </div>
+  </div>
+
+  <form [formGroup]="commentRoundForm" #form="ngForm">
+
+    <app-literal-input [id]="'commentround_name_input'"
+                       [label]="'Comment round name' | translate"
+                       [required]="true"
+                       [infoText]="'INFO_TEXT_COMMENTROUND_LABEL'"
+                       [formControlName]="'label'"></app-literal-input>
+
+    <app-literal-textarea [id]="'commentround_description_input'"
+                          [label]="'Description' | translate"
+                          [required]="true"
+                          [infoText]="'INFO_TEXT_COMMENTROUND_DESCRIPTION'"
+                          [formControlName]="'description'"></app-literal-textarea>
+
+    <app-organizations-input id="registry_organizations_input"
+                             [label]="'Organization' | translate"
+                             [required]="true"
+                             [infoText]="'INFO_TEXT_COMMENTROUND_ORGANIZATION'"
+                             [formControlName]="'organizations'"></app-organizations-input>
+
+    <app-literal id="integration_resource_containneruri"
+                 [label]="'Source URI' | translate"
+                 [infoText]="'INFO_TEXT_INTEGRATION_RESOURCEURI'"
+                 [value]="getResourceUri"></app-literal>
+
+    <app-source-input id="integration_resource_input"
+                      [label]="'Source' | translate"
+                      [required]="true"
+                      [infoText]="'INFO_TEXT_INTEGRATION_RESOURCE'"
+                      [formControlName]="'resource'"></app-source-input>
+
+    <app-boolean-input [id]="'commentround_fixedthreads_textarea'"
+                       [label]="'Fixed threads' | translate"
+                       [infoText]="'INFO_TEXT_COMMENTROUND_FIXED_THREADS'"
+                       [formControlName]="'fixedThreads'"></app-boolean-input>
+
+    <app-boolean-input [id]="'commentround_openthreads_input'"
+                       [label]="'Open threads' | translate"
+                       [infoText]="'INFO_TEXT_COMMENTROUND_OPEN_THREADS'"
+                       [formControlName]="'openThreads'"></app-boolean-input>
+
+    <app-comment-round-status-input id="commentround_status_input"
+                                    [infoText]="'INFO_TEXT_COMMENTROUND_STATUS'"
+                                    [formControlName]="'status'"></app-comment-round-status-input>
+
+    <app-literal [label]="'Created' | translate"
+                 [value]="commentRound.createdDisplayValue"
+                 [infoText]="'INFO_TEXT_COMMENTROUND_CREATED'"></app-literal>
+
+    <app-literal [label]="'Last modification' | translate"
+                 [value]="commentRound.modifiedDisplayValue"
+                 [infoText]="'INFO_TEXT_COMMENTROUND_LAST_MODIFICATION'"></app-literal>
+
+    <app-date-range-input id="commentround_validity_input"
+                          [label]="'Validity' | translate"
+                          [infoText]="'INFO_TEXT_COMMENTROUND_VALIDITY'"
+                          [formControlName]="'validity'"></app-date-range-input>
+  </form>
+
+  <h4 class="strong" translate>Comment threads</h4>
+
+  <div *ngFor="let commentThread of commentThreads">
+    <app-comment-thread-listitem [commentRound]="commentRound"
+                                 [commentThread]="commentThread"></app-comment-thread-listitem>
+  </div>
+
+</div>

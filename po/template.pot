@@ -4,10 +4,262 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "Comment round"
+msgid "enabled"
 msgstr ""
 
-msgid "Comment rounds"
+msgid "Status"
+msgstr ""
+
+msgid "Valid from"
+msgstr ""
+
+msgid "Valid to"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Add organization"
+msgstr ""
+
+msgid "Choose organization"
+msgstr ""
+
+msgid "Search organization"
+msgstr ""
+
+msgid "Select comment"
+msgstr ""
+
+msgid "Choose comment"
+msgstr ""
+
+msgid "Search comment"
+msgstr ""
+
+msgid "Proposed status"
+msgstr ""
+
+msgid "{{option}}"
+msgstr ""
+
+msgid "Select tool"
+msgstr ""
+
+msgid "Select resource"
+msgstr ""
+
+msgid "Choose source"
+msgstr ""
+
+msgid "Search term"
+msgstr ""
+
+msgid "All organizations"
+msgstr ""
+
+msgid "Comments"
+msgstr ""
+
+msgid "Comment round name"
+msgstr ""
+
+msgid "Comment thread name"
+msgstr ""
+
+msgid "Comment thread resource uri"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+msgid "Parent comment"
+msgstr ""
+
+msgid "Create comment"
+msgstr ""
+
+msgid "Created"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Organization"
+msgstr ""
+
+msgid "Source URI"
+msgstr ""
+
+msgid "Source"
+msgstr ""
+
+msgid "Fixed threads"
+msgstr ""
+
+msgid "Open threads"
+msgstr ""
+
+msgid "Validity"
+msgstr ""
+
+msgid "Create comment round"
+msgstr ""
+
+msgid "Last modification"
+msgstr ""
+
+msgid "Add comment thread"
+msgstr ""
+
+msgid "Comment threads"
+msgstr ""
+
+msgid "Definition"
+msgstr ""
+
+msgid "Resource"
+msgstr ""
+
+msgid "Proposed text"
+msgstr ""
+
+msgid "Create comment thread"
+msgstr ""
+
+msgid "Add comment"
+msgstr ""
+
+msgid "comment round"
+msgstr ""
+
+msgid "comment rounds"
+msgstr ""
+
+msgid "Frontpage long description"
+msgstr ""
+
+msgid "Add comment round"
+msgstr ""
+
+msgid "Filter results"
+msgstr ""
+
+msgid "Did not find any comment rounds."
+msgstr ""
+
+msgid "Impersonate user"
+msgstr ""
+
+msgid "LOG IN"
+msgstr ""
+
+msgid "LOG OUT"
+msgstr ""
+
+msgid "User details"
+msgstr ""
+
+msgid "Suomi.fi Reference Data"
+msgstr ""
+
+msgid "Suomi.fi Controlled Vocabularies"
+msgstr ""
+
+msgid "Suomi.fi Data Vocabularies"
+msgstr ""
+
+msgid "User right management"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Organizations and roles"
+msgstr ""
+
+msgid "Unknown organization"
+msgstr ""
+
+msgid "Waiting for approval"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "INFO_TEXT_INTEGRATION_RESOURCE"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_LABEL"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_DESCRIPTION"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_ORGANIZATION"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_FIXED_THREADS"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_STATUS"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_VALIDITY"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_CREATED"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_LAST_MODIFICATION"
+msgstr ""
+
+msgid "ERR_MSG_USER_406"
+msgstr ""
+
+msgid "Front page"
+msgstr ""
+
+msgid "SUPERSEDED"
+msgstr ""
+
+msgid "SUBMITTED"
+msgstr ""
+
+msgid "RETIRED"
+msgstr ""
+
+msgid "VALID"
+msgstr ""
+
+msgid "INVALID"
+msgstr ""
+
+msgid "DRAFT"
+msgstr ""
+
+msgid "INCOMPLETE"
+msgstr ""
+
+msgid "AWAIT"
+msgstr ""
+
+msgid "INPROGRESS"
+msgstr ""
+
+msgid "ENDED"
+msgstr ""
+
+msgid "CLOSED"
 msgstr ""
 
 msgid "ERR_MSG_USER_401"
@@ -16,8 +268,47 @@ msgstr ""
 msgid "ERR_MSG_USER_404"
 msgstr ""
 
-msgid "ERR_MSG_USER_406"
+msgid "NOSTATUS"
 msgstr ""
 
 msgid "ERR_MSG_USER_500"
+msgstr ""
+
+msgid "ADMIN"
+msgstr ""
+
+msgid "DATA_MODEL_EDITOR"
+msgstr ""
+
+msgid "TERMINOLOGY_EDITOR"
+msgstr ""
+
+msgid "CODE_LIST_EDITOR"
+msgstr ""
+
+msgid "required"
+msgstr ""
+
+msgid "codelist"
+msgstr ""
+
+msgid "terminology"
+msgstr ""
+
+msgid "datamodel"
+msgstr ""
+
+msgid "All statuses"
+msgstr ""
+
+msgid "All integrations"
+msgstr ""
+
+msgid "Comment round"
+msgstr ""
+
+msgid "Comment thread"
+msgstr ""
+
+msgid "Select interoperability tool"
 msgstr ""
