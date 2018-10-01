@@ -6,10 +6,11 @@ import { Source } from './source';
 import { Location } from 'yti-common-ui/types/location';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { OrganizationSimple } from './organization-simple';
+import { User } from './user';
 
 export class CommentRound extends AbstractResource {
 
-  userId: string;
+  user: User;
   label: string;
   sourceLabel: Localizable = {};
   description: string;
@@ -26,7 +27,7 @@ export class CommentRound extends AbstractResource {
   constructor(data: CommentRoundType) {
 
     super(data);
-    this.userId = data.userId;
+    this.user = new User(data.user);
     this.label = data.label;
     this.description = data.description;
     this.status = data.status;
@@ -90,7 +91,7 @@ export class CommentRound extends AbstractResource {
     return {
       id: this.id,
       url: this.url,
-      userId: this.userId,
+      user: this.user.serialize(),
       status: this.status,
       created: formatDateTime(this.created),
       modified: formatDateTime(this.modified),

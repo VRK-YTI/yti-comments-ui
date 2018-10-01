@@ -31,6 +31,11 @@
 
   <form [formGroup]="commentRoundForm" #form="ngForm">
 
+    <app-literal id="commentround_user_name"
+                 [label]="'User' | translate"
+                 [infoText]="'INFO_TEXT_COMMENTROUND_USER'"
+                 [value]="commentRound.user.getDisplayName()"></app-literal>
+
     <app-literal-input [id]="'commentround_name_input'"
                        [label]="'Comment round name' | translate"
                        [required]="true"
@@ -43,7 +48,7 @@
                           [infoText]="'INFO_TEXT_COMMENTROUND_DESCRIPTION'"
                           [formControlName]="'description'"></app-literal-textarea>
 
-    <app-organizations-input id="registry_organizations_input"
+    <app-organizations-input id="commentround_organizations_input"
                              [label]="'Organization' | translate"
                              [required]="true"
                              [infoText]="'INFO_TEXT_COMMENTROUND_ORGANIZATION'"

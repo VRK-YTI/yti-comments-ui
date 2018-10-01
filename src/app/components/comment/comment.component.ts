@@ -100,7 +100,7 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
     const updatedCommentType: CommentType = <CommentType> {
       id: thisComment.id,
       url: thisComment.url,
-      userId: thisComment.userId,
+      user: thisComment.user.serialize(),
       content: content,
       proposedStatus: proposedStatus !== 'NOSTATUS' ? proposedStatus : null,
       parentComment: parentComment,

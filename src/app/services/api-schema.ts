@@ -9,7 +9,7 @@ export interface BaseResourceType {
 
 export interface CommentRoundSimpleType extends BaseResourceType {
 
-  userId: string;
+  user: UserType;
   label: string;
   description: string;
   sourceLabel: Localizable;
@@ -25,7 +25,7 @@ export interface CommentRoundSimpleType extends BaseResourceType {
 
 export interface CommentRoundType extends BaseResourceType {
 
-  userId: string;
+  user?: UserType;
   label: string;
   description: string;
   sourceLabel: Localizable;
@@ -48,10 +48,18 @@ export interface SourceType {
   containerUri: string;
 }
 
+export interface UserType {
+
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+}
+
 export interface CommentSimpleType extends BaseResourceType {
 
   content: string;
-  userId: string;
+  user: UserType;
   proposedStatus: string;
   created?: string | null;
   modified?: string;
@@ -61,7 +69,7 @@ export interface CommentSimpleType extends BaseResourceType {
 export interface CommentType extends BaseResourceType {
 
   content: string;
-  userId: string;
+  user?: UserType;
   proposedStatus: string;
   created?: string | null;
   modified?: string;
@@ -76,7 +84,7 @@ export interface CommentThreadType extends BaseResourceType {
   definition: Localizable;
   proposedText: string;
   proposedStatus: string;
-  userId: string;
+  user?: UserType;
   created?: string | null;
   commentRound: CommentRoundType;
 }
@@ -88,7 +96,7 @@ export interface CommentThreadSimpleType extends BaseResourceType {
   definition: Localizable;
   proposedText: string;
   proposedStatus: string;
-  userId: string;
+  user: UserType;
   created?: string | null;
 }
 

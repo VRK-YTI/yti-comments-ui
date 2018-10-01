@@ -135,7 +135,7 @@ export class CommentThreadComponent implements OnInit {
     const updatedCommentThreadType: CommentThreadType = <CommentThreadType> {
       id: thisCommentThread.id,
       url: thisCommentThread.url,
-      userId: thisCommentThread.userId,
+      user: thisCommentThread.user.serialize(),
       label: label,
       definition: definition,
       proposedText: proposedText,

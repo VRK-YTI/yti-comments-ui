@@ -26,7 +26,11 @@ import { CommentRound } from '../../entity/commentround';
         </li>
       </ul>
 
-      <a class="uri">{{ commentRound.source.containerUri }}</a>
+      <div>
+        <span>{{ 'User' | translate }}: {{ commentRound.user.getDisplayName() }}</span>
+      </div>
+
+      <a class="uri">{{ 'URI' | translate }}: {{ commentRound.source.containerUri }}</a>
     </div>
   `
 })

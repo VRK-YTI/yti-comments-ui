@@ -77,12 +77,11 @@ export class CommentCreateComponent implements OnInit {
 
   save(formData: any): Observable<any> {
 
-    const { id, url, userId, content, proposedStatus, parentComment } = formData;
+    const { id, url, content, proposedStatus, parentComment } = formData;
 
     const comment: CommentType = <CommentType> {
       id: id,
       url: url,
-      userId: userId,
       content: content,
       proposedStatus: proposedStatus !== 'NOSTATUS' ? proposedStatus : null,
       parentComment: parentComment,

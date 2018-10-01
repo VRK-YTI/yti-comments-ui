@@ -4,6 +4,12 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+msgid "User"
+msgstr ""
+
+msgid "URI"
+msgstr ""
+
 msgid "enabled"
 msgstr ""
 

@@ -72,12 +72,11 @@ export class CommentThreadCreateComponent implements OnInit {
 
   save(formData: any): Observable<any> {
 
-    const { id, url, userId, label, definition, proposedStatus, proposedText, resource } = formData;
+    const { id, url, label, definition, proposedStatus, proposedText, resource } = formData;
 
     const commentThread: CommentThreadType = <CommentThreadType> {
       id: id,
       url: url,
-      userId: userId,
       label: label,
       definition: definition,
       proposedStatus: proposedStatus !== 'NOSTATUS' ? proposedStatus : null,

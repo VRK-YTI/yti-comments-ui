@@ -29,6 +29,11 @@
 
   <form [formGroup]="commentThreadForm" #form="ngForm">
 
+    <app-literal id="commentthread_user_name"
+                 [label]="'User' | translate"
+                 [infoText]="'INFO_TEXT_COMMENTTHREAD_USER'"
+                 [value]="commentThread.user.getDisplayName()"></app-literal>
+
     <app-literal [id]="'commentround_name'"
                  [label]="'Comment round name' | translate"
                  [value]="commentRound.label"></app-literal>

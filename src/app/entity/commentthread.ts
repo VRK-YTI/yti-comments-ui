@@ -5,6 +5,7 @@ import { Localizable } from 'yti-common-ui/types/localization';
 import { formatDateTime, formatDisplayDateTime, parseDateTime } from '../utils/date';
 import { Moment } from 'moment';
 import { Location } from 'yti-common-ui/types/location';
+import { User } from './user';
 
 export class CommentThread extends AbstractResource {
 
@@ -13,7 +14,7 @@ export class CommentThread extends AbstractResource {
   definition: Localizable = {};
   proposedText: string;
   proposedStatus: string;
-  userId: string;
+  user: User;
   created: Moment | null = null;
   commentRound: CommentRound;
 
@@ -25,7 +26,7 @@ export class CommentThread extends AbstractResource {
     this.definition = data.definition || {};
     this.proposedText = data.proposedText;
     this.proposedStatus = data.proposedStatus;
-    this.userId = data.userId;
+    this.user = new User(data.user);
     if (data.created) {
       this.created = parseDateTime(data.created);
     }
@@ -65,7 +66,7 @@ export class CommentThread extends AbstractResource {
     return {
       id: this.id,
       url: this.url,
-      userId: this.userId,
+      user: this.user.serialize(),
       resourceUri: this.resourceUri,
       definition: this.definition,
       created: formatDateTime(this.created),

@@ -3,10 +3,11 @@ import { Moment } from 'moment';
 import { AbstractResource } from './abstract-resource';
 import { CommentSimpleType, CommentType } from '../services/api-schema';
 import { Location } from 'yti-common-ui/types/location';
+import { User } from './user';
 
 export class CommentSimple extends AbstractResource {
 
-  userId: string;
+  user: User;
   content: string;
   proposedStatus: string;
   created: Moment | null = null;
@@ -15,7 +16,7 @@ export class CommentSimple extends AbstractResource {
   constructor(data: CommentSimpleType) {
 
     super(data);
-    this.userId = data.userId;
+    this.user = new User(data.user);
     this.content = data.content;
     this.proposedStatus = data.proposedStatus;
     if (data.created) {
@@ -60,7 +61,7 @@ export class CommentSimple extends AbstractResource {
       url: this.url,
       content: this.content,
       proposedStatus: this.proposedStatus,
-      userId: this.userId,
+      user: this.user.serialize(),
       created: formatDateTime(this.created)
     };
   }

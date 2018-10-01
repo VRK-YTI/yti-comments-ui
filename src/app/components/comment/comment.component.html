@@ -22,6 +22,11 @@
           <app-error-messages id="commentthread_form_error_messages" [control]="commentForm"></app-error-messages>
         </div>
 
+        <app-literal id="comment_user_name"
+                     [label]="'User' | translate"
+                     [infoText]="'INFO_TEXT_COMMENT_USER'"
+                     [value]="comment.user.getDisplayName()"></app-literal>
+
         <app-literal [id]="'commentround_name'"
                      [label]="'Comment round name' | translate"
                      [value]="commentRound.label"></app-literal>
