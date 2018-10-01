@@ -5,7 +5,7 @@ import { DataService } from '../../services/data.service';
 import { CommentThread } from '../../entity/commentthread';
 import { EditableService } from '../../services/editable.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { formatDate, validDateRange } from '../../utils/date';
+import { validDateRange } from '../../utils/date';
 import { CommentRoundStatus } from '../../entity/comment-round-status';
 import { requiredList } from 'yti-common-ui/utils/validator';
 import { Location } from '@angular/common';
@@ -144,8 +144,8 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
       description: description,
       fixedThreads: fixedThreads,
       openThreads: openThreads,
-      startDate: formatDate(validity.start),
-      endDate: formatDate(validity.end),
+      startDate: validity.start,
+      endDate: validity.end,
       organizations: organizations,
       source: source,
       sourceLabel: resource.prefLabel,
