@@ -223,7 +223,7 @@ msgstr ""
 msgid "INFO_TEXT_COMMENTROUND_LAST_MODIFICATION"
 msgstr ""
 
-msgid "ERR_MSG_USER_500"
+msgid "ERR_MSG_USER_END_BEFORE_START_DATE"
 msgstr ""
 
 msgid "Front page"
@@ -271,10 +271,16 @@ msgstr ""
 msgid "ERR_MSG_USER_406"
 msgstr ""
 
+msgid "ERR_MSG_USER_500"
+msgstr ""
+
 msgid "NOSTATUS"
 msgstr ""
 
-msgid "ERR_MSG_USER_END_BEFORE_START_DATE"
+msgid "Submit error"
+msgstr ""
+
+msgid "Unexpected error"
 msgstr ""
 
 msgid "ADMIN"
