@@ -30,7 +30,7 @@
         <app-literal-input [id]="'commentround_name_input'"
                            [label]="'Comment round name' | translate"
                            [required]="true"
-                           [infoText]="'INFO_TEXT_COMMENTROUND_LABEL'"
+                           [infoText]="'INFO_TEXT_COMMENTROUND_NAME'"
                            [formControlName]="'label'"></app-literal-input>
 
         <app-literal-textarea [id]="'commentround_description_input'"
@@ -39,21 +39,21 @@
                               [infoText]="'INFO_TEXT_COMMENTROUND_DESCRIPTION'"
                               [formControlName]="'description'"></app-literal-textarea>
 
-        <app-organizations-input id="registry_organizations_input"
+        <app-organizations-input id="commentround_organizations_input"
                                  [label]="'Organization' | translate"
                                  [required]="true"
                                  [infoText]="'INFO_TEXT_COMMENTROUND_ORGANIZATION'"
                                  [formControlName]="'organizations'"></app-organizations-input>
 
-        <app-literal id="integration_resource_containneruri"
+        <app-literal id="integration_resource_containeruri"
                      [label]="'Source URI' | translate"
-                     [infoText]="'INFO_TEXT_INTEGRATION_RESOURCEURI'"
+                     [infoText]="'INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCEURI'"
                      [value]="getResourceUri"></app-literal>
 
         <app-source-input id="integration_resource_input"
                           [label]="'Source' | translate"
                           [required]="true"
-                          [infoText]="'INFO_TEXT_INTEGRATION_RESOURCE'"
+                          [infoText]="'INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE'"
                           [formControlName]="'resource'"></app-source-input>
 
         <app-boolean-input [id]="'commentround_fixedthreads_textarea'"

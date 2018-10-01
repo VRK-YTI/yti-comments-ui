@@ -9,7 +9,7 @@ export interface BaseResourceType {
 
 export interface CommentRoundSimpleType extends BaseResourceType {
 
-  user: UserType;
+  user?: UserType;
   label: string;
   description: string;
   sourceLabel: Localizable;
@@ -59,7 +59,7 @@ export interface UserType {
 export interface CommentSimpleType extends BaseResourceType {
 
   content: string;
-  user: UserType;
+  user?: UserType;
   proposedStatus: string;
   created?: string | null;
   modified?: string;
@@ -96,7 +96,7 @@ export interface CommentThreadSimpleType extends BaseResourceType {
   definition: Localizable;
   proposedText: string;
   proposedStatus: string;
-  user: UserType;
+  user?: UserType;
   created?: string | null;
 }
 

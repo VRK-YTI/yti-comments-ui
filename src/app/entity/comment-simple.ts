@@ -16,7 +16,9 @@ export class CommentSimple extends AbstractResource {
   constructor(data: CommentSimpleType) {
 
     super(data);
-    this.user = new User(data.user);
+    if (data.user) {
+      this.user = new User(data.user);
+    }
     this.content = data.content;
     this.proposedStatus = data.proposedStatus;
     if (data.created) {
@@ -58,10 +60,10 @@ export class CommentSimple extends AbstractResource {
   serialize(): CommentSimpleType {
     return {
       id: this.id,
+      user: this.user ? this.user.serialize() : undefined,
       url: this.url,
       content: this.content,
       proposedStatus: this.proposedStatus,
-      user: this.user.serialize(),
       created: formatDateTime(this.created)
     };
   }

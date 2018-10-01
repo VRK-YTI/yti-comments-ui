@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-01 15:30+0300\n"
+"PO-Revision-Date: 2018-10-01 16:28+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -216,32 +216,95 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-msgid "INFO_TEXT_INTEGRATION_RESOURCE"
-msgstr ""
+msgid "INFO_TEXT_COMMENTTHREAD_DEFINITION"
+msgstr "Comment thread definition"
 
-msgid "INFO_TEXT_COMMENTROUND_LABEL"
-msgstr ""
+msgid "INFO_TEXT_COMMENTROUND_USER"
+msgstr "User that created this comment round"
+
+msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE_URI"
+msgstr "Comment round integration resource URI address"
+
+msgid "INFO_TEXT_COMMENTROUND_NAME"
+msgstr "Comment round name that is shown on the front page"
 
 msgid "INFO_TEXT_COMMENTROUND_DESCRIPTION"
-msgstr ""
+msgstr "Comment round description text"
 
 msgid "INFO_TEXT_COMMENTROUND_ORGANIZATION"
-msgstr ""
+msgstr "Organizations that can add comments to this comment round"
 
 msgid "INFO_TEXT_COMMENTROUND_FIXED_THREADS"
 msgstr ""
+"Defines whether or not new resources can be added for commenting after the "
+"comment round has started"
+
+msgid "INFO_TEXT_COMMENTROUND_OPEN_THREADS"
+msgstr "Defines whether or not container level comments are allowed"
 
 msgid "INFO_TEXT_COMMENTROUND_STATUS"
-msgstr ""
+msgstr "Comment round status"
 
 msgid "INFO_TEXT_COMMENTROUND_VALIDITY"
-msgstr ""
+msgstr "Time period when this comment round allows commenting"
 
 msgid "INFO_TEXT_COMMENTROUND_CREATED"
-msgstr ""
+msgstr "Comment round creation time"
 
 msgid "INFO_TEXT_COMMENTROUND_LAST_MODIFICATION"
+msgstr "Last edit time"
+
+msgid "INFO_TEXT_COMMENTTHREAD_USER"
+msgstr "User that created this comment thread"
+
+msgid "INFO_TEXT_COMMENTTHREAD_NAME"
+msgstr "Comment thread name"
+
+msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE"
+msgstr "Comment round container preflabel localized text"
+
+msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
+msgstr "Comment thread integration resource URI address"
+
+msgid "INFO_TEXT_COMMENTTHREAD_PROPOSEDTEXT"
+msgstr "Proposed text for the resource"
+
+msgid "INFO_TEXT_COMMENTTHREAD_PROPOSEDSTATUS"
+msgstr "Proposed status for the resource"
+
+msgid "INFO_TEXT_COMMENTTHREAD_CREATED"
+msgstr "Comment thread creation time"
+
+msgid "INFO_TEXT_COMMENT_USER"
+msgstr "User that created this comment"
+
+msgid "INFO_TEXT_COMMENT_COMMENTROUND_NAME"
+msgstr "Comment round name for this comment"
+
+msgid "INFO_TEXT_COMMENT_COMMENTTHREAD_NAME"
+msgstr "Comment thread name for this comment"
+
+msgid "INFO_TEXT_COMMENT_CONTENT"
+msgstr "Comment content"
+
+msgid "INFO_TEXT_COMMENT_COMMENTTHREAD_RESOURCEURI"
+msgstr "Resource uri related to this comment thread"
+
+msgid "INFO_TEXT_COMMENT_PARENT_COMMENT"
+msgstr "Upper level comment for this comment in the comment thread"
+
+msgid "INFO_TEXT_COMMENT_PROPOSEDSTATUS"
+msgstr "Status proposed by this comment for the resource"
+
+msgid "INFO_TEXT_COMMENT_CREATED"
+msgstr "Comment creation time"
+
+msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr ""
+"Results can be filtered by organization, status and tool using dropdown"
+
+msgid "INFO_TEXT_SOURCE_FILTER_RESULTS"
+msgstr "Tool selection from which container resources are fetched"
 
 msgid "ERR_MSG_USER_END_BEFORE_START_DATE"
 msgstr "The enddate is before the startdate."

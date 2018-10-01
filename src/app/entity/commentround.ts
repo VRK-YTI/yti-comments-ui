@@ -27,7 +27,9 @@ export class CommentRound extends AbstractResource {
   constructor(data: CommentRoundType) {
 
     super(data);
-    this.user = new User(data.user);
+    if (data.user) {
+      this.user = new User(data.user);
+    }
     this.label = data.label;
     this.description = data.description;
     this.status = data.status;
@@ -91,7 +93,7 @@ export class CommentRound extends AbstractResource {
     return {
       id: this.id,
       url: this.url,
-      user: this.user.serialize(),
+      user: this.user ? this.user.serialize() : undefined,
       status: this.status,
       created: formatDateTime(this.created),
       modified: formatDateTime(this.modified),

@@ -26,7 +26,9 @@ export class CommentThread extends AbstractResource {
     this.definition = data.definition || {};
     this.proposedText = data.proposedText;
     this.proposedStatus = data.proposedStatus;
-    this.user = new User(data.user);
+    if (data.user) {
+      this.user = new User(data.user);
+    }
     if (data.created) {
       this.created = parseDateTime(data.created);
     }
@@ -66,7 +68,7 @@ export class CommentThread extends AbstractResource {
     return {
       id: this.id,
       url: this.url,
-      user: this.user.serialize(),
+      user: this.user ? this.user.serialize() : undefined,
       resourceUri: this.resourceUri,
       definition: this.definition,
       created: formatDateTime(this.created),

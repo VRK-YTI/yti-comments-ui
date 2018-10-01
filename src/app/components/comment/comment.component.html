@@ -29,14 +29,17 @@
 
         <app-literal [id]="'commentround_name'"
                      [label]="'Comment round name' | translate"
+                     [infoText]="'INFO_TEXT_COMMENT_COMMENTROUND_NAME'"
                      [value]="commentRound.label"></app-literal>
 
         <app-literal [id]="'commentthread_name'"
                      [label]="'Comment thread name'"
+                     [infoText]="'INFO_TEXT_COMMENT_COMMENTTHREAD_NAME'"
                      [value]="commentThread.label | translateValue"></app-literal>
 
         <app-literal [id]="'commentthread_resourceuri'"
                      [label]="'Comment thread resource uri' | translate"
+                     [infoText]="'INFO_TEXT_COMMENT_COMMENTTHREAD_RESOURCEURI'"
                      [value]="commentThread.resourceUri"></app-literal>
 
         <app-literal-textarea [id]="'comment_content_input'"

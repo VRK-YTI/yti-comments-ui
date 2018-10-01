@@ -18,7 +18,9 @@ export class Comment extends AbstractResource {
 
   constructor(data: CommentType) {
     super(data);
-    this.user = new User(data.user);
+    if (data.user) {
+      this.user = new User(data.user);
+    }
     this.content = data.content;
     this.proposedStatus = data.proposedStatus;
     if (data.created) {
@@ -63,7 +65,7 @@ export class Comment extends AbstractResource {
       id: this.id,
       url: this.url,
       content: this.content,
-      user: this.user.serialize(),
+      user: this.user ? this.user.serialize() : undefined,
       proposedStatus: this.proposedStatus,
       created: formatDateTime(this.created),
       parentComment: this.parentComment ? this.parentComment.serialize() : undefined,

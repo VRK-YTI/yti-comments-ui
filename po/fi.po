@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-01 15:30+0300\n"
+"PO-Revision-Date: 2018-10-01 16:28+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -216,35 +216,104 @@ msgstr "Odottaa hyväksymistä"
 msgid "Send"
 msgstr "Lähetä"
 
-msgid "INFO_TEXT_INTEGRATION_RESOURCE"
-msgstr ""
+msgid "INFO_TEXT_COMMENTTHREAD_DEFINITION"
+msgstr "Kommenttiketjun määritelmä"
 
-msgid "INFO_TEXT_COMMENTROUND_LABEL"
-msgstr ""
+msgid "INFO_TEXT_COMMENTROUND_USER"
+msgstr "Kommentointikierroksen perustanut käyttäjä"
+
+msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE_URI"
+msgstr "Kommentointikierroksen resurssin URI-osoite"
+
+msgid "INFO_TEXT_COMMENTROUND_NAME"
+msgstr "Kommentointikierroksen nimi, joka näkyy otsikossa ja hakutuloksissa"
 
 msgid "INFO_TEXT_COMMENTROUND_DESCRIPTION"
-msgstr ""
+msgstr "Kommentointikierrosta kuvaava teksti"
 
 msgid "INFO_TEXT_COMMENTROUND_ORGANIZATION"
 msgstr ""
+"Kommentointikierrokseen kytketyt organisaatiot, joiden käyttäjät voivat "
+"lisätä kommentteja"
 
 msgid "INFO_TEXT_COMMENTROUND_FIXED_THREADS"
 msgstr ""
+"Määrittää voiko käyttäjä lisätä kierrokselle uusia kommentoitavia resursseja "
+"sen käynnistymisen jälkeen. Vakiona kytketty päälle, jolloin resurssit tulee "
+"lisätä ennen kierroksen alkua"
+
+msgid "INFO_TEXT_COMMENTROUND_OPEN_THREADS"
+msgstr ""
+"Määrittää voiko käyttäjä kommentoida containeria ilman määriteltyä "
+"resurssia. Esim. uuden resurssin ehdotus"
 
 msgid "INFO_TEXT_COMMENTROUND_STATUS"
-msgstr ""
+msgstr "Kommentointikierroksen tile"
 
 msgid "INFO_TEXT_COMMENTROUND_VALIDITY"
-msgstr ""
+msgstr "Ajanjakso, jolloin kommentointikierrokseen voi kommentoida"
 
 msgid "INFO_TEXT_COMMENTROUND_CREATED"
-msgstr ""
+msgstr "Kommentointikierroksen luontiajankohta"
 
 msgid "INFO_TEXT_COMMENTROUND_LAST_MODIFICATION"
+msgstr "Viimeisin muokkauksen ajanhetki"
+
+msgid "INFO_TEXT_COMMENTTHREAD_USER"
+msgstr "Kommenttiketjun perustanut käyttäjä"
+
+msgid "INFO_TEXT_COMMENTTHREAD_NAME"
+msgstr "Kommenttiketjun nimi"
+
+msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE"
+msgstr "Kommentointikierroksen container-resurssi, jota aletaan kommentoimaan"
+
+msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
+msgstr "Kommenttiketjun kommentoitava resurssi"
+
+msgid "INFO_TEXT_COMMENTTHREAD_PROPOSEDTEXT"
+msgstr "Kommenttiketjussa ehdotettu teksti"
+
+msgid "INFO_TEXT_COMMENTTHREAD_PROPOSEDSTATUS"
+msgstr "Kommenttiketjussa ehdotettu till"
+
+msgid "INFO_TEXT_COMMENTTHREAD_CREATED"
+msgstr "Luontiajanhetki"
+
+msgid "INFO_TEXT_COMMENT_USER"
+msgstr "Kommentin lisännyt käyttäjä"
+
+msgid "INFO_TEXT_COMMENT_COMMENTROUND_NAME"
+msgstr "Kommenttiin liittyvän kommenttikierroksen nimi"
+
+msgid "INFO_TEXT_COMMENT_COMMENTTHREAD_NAME"
+msgstr "Kommenttiin liittyvän kommenttiketjun nimi"
+
+msgid "INFO_TEXT_COMMENT_CONTENT"
+msgstr "Käyttäjän antama kommentti resurssiin"
+
+msgid "INFO_TEXT_COMMENT_COMMENTTHREAD_RESOURCEURI"
+msgstr "Kommenttiketjun resurssin URI-osoite"
+
+msgid "INFO_TEXT_COMMENT_PARENT_COMMENT"
+msgstr "Ylätason kommentti, johon tämä kommentti liittyy"
+
+msgid "INFO_TEXT_COMMENT_PROPOSEDSTATUS"
+msgstr "Ehdotettu tila kommentoidulle resurssille"
+
+msgid "INFO_TEXT_COMMENT_CREATED"
+msgstr "Kommentin luontiajankohta"
+
+msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr ""
+"Hakutuloksia voi rajatalla organisaatio-, tila- ja työkalukohtaisesti "
+"alasvetivalikoiden uvula"
+
+msgid "INFO_TEXT_SOURCE_FILTER_RESULTS"
+msgstr "Työkalun valinta, josta kommentoitava resurssi noudetaan"
 
 msgid "ERR_MSG_USER_END_BEFORE_START_DATE"
-msgstr "Loppupäivä ennen alkupäivää."
+msgstr "Loppupäivä ennen alkupäivää"
 
 msgid "Front page"
 msgstr "Etusivu"
