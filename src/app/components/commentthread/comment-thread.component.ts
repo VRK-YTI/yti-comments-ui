@@ -31,7 +31,7 @@ export class CommentThreadComponent implements OnInit {
 
   commentThreadForm = new FormGroup({
     label: new FormControl({}),
-    definition: new FormControl({}),
+    description: new FormControl({}),
     proposedText: new FormControl(''),
     proposedStatus: new FormControl(''),
     resource: new FormControl(null)
@@ -108,7 +108,7 @@ export class CommentThreadComponent implements OnInit {
 
   private reset() {
 
-    const { label, definition, resourceUri, proposedStatus, proposedText }
+    const { label, description, resourceUri, proposedStatus, proposedText }
       = this.commentThread;
 
     const integrationResource: IntegrationReourceType = <IntegrationReourceType> {
@@ -119,7 +119,7 @@ export class CommentThreadComponent implements OnInit {
 
     this.commentThreadForm.reset({
       label: label,
-      definition: definition,
+      description: description,
       resource: resource,
       proposedStatus: proposedStatus == null ? 'NOSTATUS' : proposedStatus,
       proposedText: proposedText
@@ -128,7 +128,7 @@ export class CommentThreadComponent implements OnInit {
 
   save(formData: any): Observable<any> {
 
-    const { label, proposedText, proposedStatus, definition, resource } = formData;
+    const { label, proposedText, proposedStatus, description, resource } = formData;
 
     const thisCommentThread = this.commentThread.clone();
 
@@ -137,7 +137,7 @@ export class CommentThreadComponent implements OnInit {
       url: thisCommentThread.url,
       user: thisCommentThread.user.serialize(),
       label: label,
-      definition: definition,
+      description: description,
       proposedText: proposedText,
       proposedStatus: proposedStatus !== 'NOSTATUS' ? proposedStatus : null,
       resourceUri: resource.uri,

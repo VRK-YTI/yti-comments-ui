@@ -127,9 +127,6 @@ msgstr ""
 msgid "Comment threads"
 msgstr ""
 
-msgid "Definition"
-msgstr ""
-
 msgid "Resource"
 msgstr ""
 
@@ -202,7 +199,7 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-msgid "INFO_TEXT_COMMENTTHREAD_DEFINITION"
+msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
 msgstr ""
 
 msgid "INFO_TEXT_COMMENTROUND_USER"

@@ -10,7 +10,7 @@ export class CommentThreadSimple extends AbstractResource {
 
   resourceUri: string;
   label: Localizable = {};
-  definition: Localizable = {};
+  description: Localizable = {};
   proposedText: string;
   proposedStatus: string;
   user: User;
@@ -21,7 +21,7 @@ export class CommentThreadSimple extends AbstractResource {
     super(data);
     this.resourceUri = data.resourceUri;
     this.label = data.label || {};
-    this.definition = data.definition || {};
+    this.description = data.description || {};
     this.proposedText = data.proposedText;
     this.proposedStatus = data.proposedStatus;
     if (data.user) {
@@ -67,7 +67,7 @@ export class CommentThreadSimple extends AbstractResource {
       url: this.url,
       user: this.user ? this.user.serialize() : undefined,
       resourceUri: this.resourceUri,
-      definition: this.definition,
+      description: this.description,
       created: formatDateTime(this.created),
       label: this.label,
       proposedText: this.proposedText,

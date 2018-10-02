@@ -81,7 +81,7 @@ export interface CommentThreadType extends BaseResourceType {
 
   resourceUri: string;
   label: Localizable;
-  definition: Localizable;
+  description: Localizable;
   proposedText: string;
   proposedStatus: string;
   user?: UserType;
@@ -93,7 +93,7 @@ export interface CommentThreadSimpleType extends BaseResourceType {
 
   resourceUri: string;
   label: Localizable;
-  definition: Localizable;
+  description: Localizable;
   proposedText: string;
   proposedStatus: string;
   user?: UserType;

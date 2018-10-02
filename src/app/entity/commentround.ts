@@ -7,8 +7,9 @@ import { Location } from 'yti-common-ui/types/location';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { OrganizationSimple } from './organization-simple';
 import { User } from './user';
+import { EditableEntity } from './editable-entity';
 
-export class CommentRound extends AbstractResource {
+export class CommentRound extends AbstractResource implements EditableEntity {
 
   user: User;
   label: string;
@@ -112,5 +113,15 @@ export class CommentRound extends AbstractResource {
   clone(): CommentRound {
 
     return new CommentRound(this.serialize());
+  }
+
+  allowOrganizationEdit(): boolean {
+
+    return true;
+  }
+
+  getOwningOrganizationIds(): string[] {
+
+    return this.organizations.map(org => org.id);
   }
 }

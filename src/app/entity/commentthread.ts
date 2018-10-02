@@ -6,12 +6,13 @@ import { formatDateTime, formatDisplayDateTime, parseDateTime } from '../utils/d
 import { Moment } from 'moment';
 import { Location } from 'yti-common-ui/types/location';
 import { User } from './user';
+import { EditableEntity } from './editable-entity';
 
-export class CommentThread extends AbstractResource {
+export class CommentThread extends AbstractResource implements EditableEntity {
 
   resourceUri: string;
   label: Localizable = {};
-  definition: Localizable = {};
+  description: Localizable = {};
   proposedText: string;
   proposedStatus: string;
   user: User;
@@ -23,7 +24,7 @@ export class CommentThread extends AbstractResource {
     super(data);
     this.resourceUri = data.resourceUri;
     this.label = data.label || {};
-    this.definition = data.definition || {};
+    this.description = data.description || {};
     this.proposedText = data.proposedText;
     this.proposedStatus = data.proposedStatus;
     if (data.user) {
@@ -70,7 +71,7 @@ export class CommentThread extends AbstractResource {
       url: this.url,
       user: this.user ? this.user.serialize() : undefined,
       resourceUri: this.resourceUri,
-      definition: this.definition,
+      description: this.description,
       created: formatDateTime(this.created),
       label: this.label,
       proposedText: this.proposedText,
@@ -81,5 +82,15 @@ export class CommentThread extends AbstractResource {
 
   clone(): CommentThread {
     return new CommentThread(this.serialize());
+  }
+
+  allowOrganizationEdit(): boolean {
+
+    return true;
+  }
+
+  getOwningOrganizationIds(): string[] {
+
+    return this.commentRound.organizations.map(org => org.id);
   }
 }

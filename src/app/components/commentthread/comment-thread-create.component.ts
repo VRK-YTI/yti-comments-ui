@@ -24,7 +24,7 @@ export class CommentThreadCreateComponent implements OnInit {
 
   commentThreadForm = new FormGroup({
     label: new FormControl({}),
-    definition: new FormControl({}),
+    description: new FormControl({}),
     proposedText: new FormControl(''),
     proposedStatus: new FormControl('NOSTATUS'),
     resource: new FormControl(null)
@@ -72,13 +72,13 @@ export class CommentThreadCreateComponent implements OnInit {
 
   save(formData: any): Observable<any> {
 
-    const { id, url, label, definition, proposedStatus, proposedText, resource } = formData;
+    const { id, url, label, description, proposedStatus, proposedText, resource } = formData;
 
     const commentThread: CommentThreadType = <CommentThreadType> {
       id: id,
       url: url,
       label: label,
-      definition: definition,
+      description: description,
       proposedStatus: proposedStatus !== 'NOSTATUS' ? proposedStatus : null,
       proposedText: proposedText,
       resourceUri: resource.uri,

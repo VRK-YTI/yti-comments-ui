@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-01 16:28+0300\n"
+"PO-Revision-Date: 2018-10-02 13:21+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -136,9 +136,6 @@ msgstr "Luo kommenttiketju"
 msgid "Comment threads"
 msgstr "Kommentointiketjut"
 
-msgid "Definition"
-msgstr "Määritelmä"
-
 msgid "Resource"
 msgstr "Resurssi"
 
@@ -216,8 +213,8 @@ msgstr "Odottaa hyväksymistä"
 msgid "Send"
 msgstr "Lähetä"
 
-msgid "INFO_TEXT_COMMENTTHREAD_DEFINITION"
-msgstr "Kommenttiketjun määritelmä"
+msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
+msgstr "Kommenttiketjun kuvaus"
 
 msgid "INFO_TEXT_COMMENTROUND_USER"
 msgstr "Kommentointikierroksen perustanut käyttäjä"
@@ -410,24 +407,3 @@ msgstr "Kommentointiketju"
 
 msgid "Select interoperability tool"
 msgstr "Valitse lähde työkalu"
-
-#, fuzzy
-#~| msgid "Comment"
-#~ msgid "Comment/div>"
-#~ msgstr "Kommentti"
-
-#~ msgid "No resources found."
-#~ msgstr "Ei hakutuloksia."
-
-#, fuzzy
-#~| msgid "Comment Round"
-#~ msgid "CommentRoundStatus"
-#~ msgstr "Kommentointikierros"
-
-#~ msgid "Comment round label"
-#~ msgstr "Kommentointikierroksen nimi"
-
-#, fuzzy
-#~| msgid "Suomi.fi Controlled Vocabularies"
-#~ msgid "Get concept from Controlled Vocabularies"
-#~ msgstr "Suomi.fi-sanastot"
