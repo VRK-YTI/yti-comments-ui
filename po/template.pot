@@ -106,10 +106,10 @@ msgstr ""
 msgid "Source"
 msgstr ""
 
-msgid "Fixed threads"
+msgid "Only selected resources"
 msgstr ""
 
-msgid "Open threads"
+msgid "Allow new comment threads"
 msgstr ""
 
 msgid "Validity"
@@ -130,7 +130,7 @@ msgstr ""
 msgid "Resource"
 msgstr ""
 
-msgid "Proposed text"
+msgid "Proposed action"
 msgstr ""
 
 msgid "Create comment thread"

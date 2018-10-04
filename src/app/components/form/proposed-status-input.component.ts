@@ -13,7 +13,6 @@ import { Status } from 'yti-common-ui/entities/status';
         <app-required-symbol *ngIf="required && editing"></app-required-symbol>
       </dt>
       <dd>
-        <!--<span *ngIf="!editing">{{status | translate}}</span>-->
         <app-status *ngIf="!editing && status !== 'NOSTATUS'" [status]="status"></app-status>
         <span *ngIf="!editing && status === 'NOSTATUS'">-</span>
 
