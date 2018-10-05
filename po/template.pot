@@ -100,6 +100,9 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
+msgid "Add comment"
+msgstr ""
+
 msgid "Description"
 msgstr ""
 
@@ -148,10 +151,10 @@ msgstr ""
 msgid "Proposed action"
 msgstr ""
 
-msgid "Create comment thread"
+msgid "Current status"
 msgstr ""
 
-msgid "Add comment"
+msgid "Create comment thread"
 msgstr ""
 
 msgid "comment round"
@@ -211,7 +214,7 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
+msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
 msgstr ""
 
 msgid "INFO_TEXT_COMMENTROUND_USER"
@@ -253,10 +256,10 @@ msgstr ""
 msgid "INFO_TEXT_COMMENTTHREAD_NAME"
 msgstr ""
 
-msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE"
+msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
 msgstr ""
 
-msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
+msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE"
 msgstr ""
 
 msgid "INFO_TEXT_COMMENTTHREAD_PROPOSEDTEXT"
@@ -266,6 +269,9 @@ msgid "INFO_TEXT_COMMENTTHREAD_PROPOSEDSTATUS"
 msgstr ""
 
 msgid "INFO_TEXT_COMMENTTHREAD_CREATED"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTTHREAD_CURRENTSTATUS"
 msgstr ""
 
 msgid "INFO_TEXT_COMMENT_USER"

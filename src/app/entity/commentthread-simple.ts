@@ -12,6 +12,7 @@ export class CommentThreadSimple extends AbstractResource {
   label: Localizable = {};
   description: Localizable = {};
   proposedText: string;
+  currentStatus: string | undefined;
   proposedStatus: string;
   user: User;
   created: Moment | null = null;
@@ -23,6 +24,7 @@ export class CommentThreadSimple extends AbstractResource {
     this.label = data.label || {};
     this.description = data.description || {};
     this.proposedText = data.proposedText;
+    this.currentStatus = data.currentStatus;
     this.proposedStatus = data.proposedStatus;
     if (data.user) {
       this.user = new User(data.user);
@@ -71,6 +73,7 @@ export class CommentThreadSimple extends AbstractResource {
       created: formatDateTime(this.created),
       label: this.label,
       proposedText: this.proposedText,
+      currentStatus: this.currentStatus,
       proposedStatus: this.proposedStatus
     };
   }

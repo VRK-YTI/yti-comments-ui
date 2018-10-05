@@ -30,6 +30,7 @@ export class CommentThreadCreateComponent implements OnInit {
     label: new FormControl({}),
     description: new FormControl({}),
     proposedText: new FormControl(''),
+    currentStatus: new FormControl(),
     proposedStatus: new FormControl('NOSTATUS'),
     resource: new FormControl(null)
   }, null);
@@ -84,9 +85,11 @@ export class CommentThreadCreateComponent implements OnInit {
     if (resource) {
       this.commentThreadForm.patchValue({ label : resource.prefLabel });
       this.commentThreadForm.patchValue({ description : resource.description });
+      this.commentThreadForm.patchValue({ currentStatus: resource.status });
     } else {
       this.commentThreadForm.patchValue({ label : {} });
       this.commentThreadForm.patchValue({ description : {} });
+      this.commentThreadForm.patchValue({ currentStatus: null });
     }
   }
 
@@ -108,7 +111,7 @@ export class CommentThreadCreateComponent implements OnInit {
     return {};
   }
 
-  get hasResourceUri(): boolean {
+  get hasResource(): boolean {
 
     return !!this.commentThreadForm.controls['resource'].value;
   }
@@ -129,13 +132,14 @@ export class CommentThreadCreateComponent implements OnInit {
 
   save(formData: any): Observable<any> {
 
-    const { id, url, label, description, proposedStatus, proposedText, resource } = formData;
+    const { id, url, label, description, currentStatus, proposedStatus, proposedText, resource } = formData;
 
     const commentThread: CommentThreadType = <CommentThreadType> {
       id: id,
       url: url,
       label: label,
       description: description,
+      currentStatus: currentStatus,
       proposedStatus: proposedStatus !== 'NOSTATUS' ? proposedStatus : null,
       proposedText: proposedText,
       resourceUri: resource.uri,

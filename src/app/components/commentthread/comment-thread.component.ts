@@ -110,9 +110,11 @@ export class CommentThreadComponent implements OnInit {
     if (resource) {
       this.commentThreadForm.patchValue({ label : resource.prefLabel });
       this.commentThreadForm.patchValue({ description : resource.description });
+      this.commentThread.currentStatus = resource.status;
     } else {
       this.commentThreadForm.patchValue({ label : {} });
       this.commentThreadForm.patchValue({ description : {} });
+      this.commentThread.currentStatus = undefined;
     }
   }
 
@@ -134,7 +136,7 @@ export class CommentThreadComponent implements OnInit {
     return {};
   }
 
-  get hasResourceUri(): boolean {
+  get hasResource(): boolean {
 
     return !!this.commentThreadForm.controls['resource'].value;
   }
@@ -151,13 +153,14 @@ export class CommentThreadComponent implements OnInit {
 
   private reset() {
 
-    const { label, description, resourceUri, proposedStatus, proposedText }
+    const { label, description, resourceUri, currentStatus, proposedStatus, proposedText }
       = this.commentThread;
 
     const integrationResource: IntegrationReourceType = <IntegrationReourceType> {
       uri: resourceUri,
       prefLabel: label,
-      description: description
+      description: description,
+      status: currentStatus
     };
 
     const resource: IntegrationResource = new IntegrationResource(integrationResource);
@@ -175,9 +178,6 @@ export class CommentThreadComponent implements OnInit {
 
     const { label, description, proposedText, proposedStatus, resource } = formData;
 
-    console.log('label: ' + label.fi);
-    console.log('description: ' + description.fi);
-
     const thisCommentThread = this.commentThread.clone();
 
     const updatedCommentThreadType: CommentThreadType = <CommentThreadType> {
@@ -187,6 +187,7 @@ export class CommentThreadComponent implements OnInit {
       label: label,
       description: description,
       proposedText: proposedText,
+      currentStatus: thisCommentThread.currentStatus,
       proposedStatus: proposedStatus !== 'NOSTATUS' ? proposedStatus : null,
       resourceUri: resource.uri,
       created: null,
@@ -194,9 +195,6 @@ export class CommentThreadComponent implements OnInit {
     };
 
     const updatedCommentThread: CommentThread = new CommentThread(updatedCommentThreadType);
-
-    console.log('label 2: ' + updatedCommentThread.label.fi);
-    console.log('description 2: ' + updatedCommentThread.description.fi);
 
     const save = () => {
       return this.dataService.updateCommentThread(updatedCommentThread.serialize()).pipe(tap(() => this.ngOnInit()));

@@ -14,6 +14,7 @@ export class CommentThread extends AbstractResource implements EditableEntity {
   label: Localizable = {};
   description: Localizable = {};
   proposedText: string;
+  currentStatus: string | undefined;
   proposedStatus: string;
   user: User;
   created: Moment | null = null;
@@ -26,6 +27,7 @@ export class CommentThread extends AbstractResource implements EditableEntity {
     this.label = data.label || {};
     this.description = data.description || {};
     this.proposedText = data.proposedText;
+    this.currentStatus = data.currentStatus;
     this.proposedStatus = data.proposedStatus;
     if (data.user) {
       this.user = new User(data.user);
@@ -75,6 +77,7 @@ export class CommentThread extends AbstractResource implements EditableEntity {
       created: formatDateTime(this.created),
       label: this.label,
       proposedText: this.proposedText,
+      currentStatus: this.currentStatus,
       proposedStatus: this.proposedStatus,
       commentRound: this.commentRound.serialize()
     };

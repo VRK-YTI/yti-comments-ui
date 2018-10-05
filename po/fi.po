@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-05 16:55+0300\n"
+"PO-Revision-Date: 2018-10-05 18:48+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -109,6 +109,9 @@ msgstr "Luo kommentti"
 msgid "Created"
 msgstr "Luontiajankohta"
 
+msgid "Add comment"
+msgstr "Luo kommentti"
+
 msgid "Description"
 msgstr "Kuvaus"
 
@@ -157,11 +160,11 @@ msgstr "Resurssi"
 msgid "Proposed action"
 msgstr "Ehdotettu toiminto"
 
+msgid "Current status"
+msgstr "Nykyinen tila"
+
 msgid "Create comment thread"
 msgstr "Luo kommenttiketju"
-
-msgid "Add comment"
-msgstr "Luo kommentti"
 
 msgid "comment round"
 msgstr "kommentointikierros"
@@ -225,8 +228,8 @@ msgstr "Odottaa hyväksymistä"
 msgid "Send"
 msgstr "Lähetä"
 
-msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
-msgstr "Kommenttiketjun kuvaus"
+msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
+msgstr "Kommenttiketjun kommentoitava resurssi"
 
 msgid "INFO_TEXT_COMMENTROUND_USER"
 msgstr "Kommentointikierroksen perustanut käyttäjä"
@@ -274,11 +277,11 @@ msgstr "Kommenttiketjun perustanut käyttäjä"
 msgid "INFO_TEXT_COMMENTTHREAD_NAME"
 msgstr "Kommenttiketjun nimi"
 
+msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
+msgstr "Kommenttiketjun kuvaus"
+
 msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE"
 msgstr "Kommentointikierroksen container-resurssi, jota aletaan kommentoimaan"
-
-msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
-msgstr "Kommenttiketjun kommentoitava resurssi"
 
 msgid "INFO_TEXT_COMMENTTHREAD_PROPOSEDTEXT"
 msgstr "Ehdotettu toiminto"
@@ -288,6 +291,9 @@ msgstr "Kommenttiketjussa ehdotettu tila"
 
 msgid "INFO_TEXT_COMMENTTHREAD_CREATED"
 msgstr "Luontiajanhetki"
+
+msgid "INFO_TEXT_COMMENTTHREAD_CURRENTSTATUS"
+msgstr "Kommentoitavan resurssin nykyinen tila"
 
 msgid "INFO_TEXT_COMMENT_USER"
 msgstr "Kommentin lisännyt käyttäjä"

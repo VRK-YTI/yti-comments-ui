@@ -83,6 +83,7 @@ export interface CommentThreadType extends BaseResourceType {
   label: Localizable;
   description: Localizable;
   proposedText: string;
+  currentStatus?: string;
   proposedStatus: string;
   user?: UserType;
   created?: string | null;
@@ -95,6 +96,7 @@ export interface CommentThreadSimpleType extends BaseResourceType {
   label: Localizable;
   description: Localizable;
   proposedText: string;
+  currentStatus?: string;
   proposedStatus: string;
   user?: UserType;
   created?: string | null;

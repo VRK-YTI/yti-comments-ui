@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-05 16:55+0300\n"
+"PO-Revision-Date: 2018-10-05 18:48+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -109,6 +109,9 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
+msgid "Add comment"
+msgstr ""
+
 msgid "Description"
 msgstr ""
 
@@ -157,10 +160,10 @@ msgstr ""
 msgid "Proposed action"
 msgstr ""
 
-msgid "Create comment thread"
+msgid "Current status"
 msgstr ""
 
-msgid "Add comment"
+msgid "Create comment thread"
 msgstr ""
 
 msgid "comment round"
@@ -225,8 +228,8 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
-msgstr "Comment thread description"
+msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
+msgstr "Comment thread integration resource URI address"
 
 msgid "INFO_TEXT_COMMENTROUND_USER"
 msgstr "User that created this comment round"
@@ -271,11 +274,11 @@ msgstr "User that created this comment thread"
 msgid "INFO_TEXT_COMMENTTHREAD_NAME"
 msgstr "Comment thread name"
 
+msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
+msgstr "Comment thread description"
+
 msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE"
 msgstr "Comment round container preflabel localized text"
-
-msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
-msgstr "Comment thread integration resource URI address"
 
 msgid "INFO_TEXT_COMMENTTHREAD_PROPOSEDTEXT"
 msgstr "Proposed action"
@@ -285,6 +288,9 @@ msgstr "Proposed status for the resource"
 
 msgid "INFO_TEXT_COMMENTTHREAD_CREATED"
 msgstr "Comment thread creation time"
+
+msgid "INFO_TEXT_COMMENTTHREAD_CURRENTSTATUS"
+msgstr "Current status for the resource"
 
 msgid "INFO_TEXT_COMMENT_USER"
 msgstr "User that created this comment"

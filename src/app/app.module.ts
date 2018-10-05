@@ -67,6 +67,7 @@ import { LiteralTextareaComponent } from './components/form/literal-textarea';
 import { LocalizableTextareaComponent } from './components/form/localizable-textarea';
 import { ClipboardComponent } from './components/form/clipboard';
 import { ClipboardModule } from 'ngx-clipboard';
+import { CurrentStatusComponent } from './components/form/current-status';
 
 declare var require: any;
 
@@ -183,7 +184,8 @@ const appRoutes: Routes = [
     ProposedStatusInputComponent,
     ProposedStatusDropdownComponent,
     CommentRoundStatusComponent,
-    LiteralTextareaComponent
+    LiteralTextareaComponent,
+    CurrentStatusComponent
   ],
   entryComponents: [ // needed for modal components
     SearchLinkedIntegrationResourceModalComponent,

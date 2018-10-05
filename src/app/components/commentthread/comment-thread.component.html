@@ -65,7 +65,7 @@
                                     [infoText]="'INFO_TEXT_COMMENTTHREAD_DESCRIPTION'"
                                     [formControlName]="'description'"></app-localizable-textarea-input>
 
-    <app-clipboard *ngIf="hasResourceUri"
+    <app-clipboard *ngIf="hasResource"
                    [id]="'integration_resource_containeruri'"
                    [label]="'Resource URI' | translate"
                    [value]="getResourceUri"
@@ -83,6 +83,12 @@
                           [label]="'Proposed action' | translate"
                           [infoText]="'INFO_TEXT_COMMENTTHREAD_PROPOSEDTEXT'"
                           [formControlName]="'proposedText'"></app-literal-textarea>
+
+    <app-current-status *ngIf="hasResource"
+                        id="commentthread_currentstatus"
+                        [label]="'Current status' | translate"
+                        [infoText]="'INFO_TEXT_COMMENTTHREAD_CURRENTSTATUS'"
+                        [status]="getResource.status"></app-current-status>
 
     <app-proposedstatus-input id="commentthread_proposedstatus_input"
                               [infoText]="'INFO_TEXT_COMMENTTHREAD_PROPOSEDSTATUS'"
