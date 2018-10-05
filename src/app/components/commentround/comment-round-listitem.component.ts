@@ -11,6 +11,13 @@ import { CommentRound } from '../../entity/commentround';
       <app-commentround-status class="status"
                                [status]="commentRound.status"></app-commentround-status>
       <a class="name" [routerLink]="commentRound.route">{{ commentRound.label }}</a>
+
+      <div>
+        <span>{{ 'User' | translate }}: {{ commentRound.user.getDisplayName() }}</span>
+      </div>
+
+      <a class="uri">{{ 'URI' | translate }}: {{ commentRound.source.containerUri }}</a>
+
       <div class="description-container"
            style="width: calc(100% - 260px);"
            [ngClass]="{ 'expand': fullDescription[commentRound.id] }">
@@ -25,12 +32,6 @@ import { CommentRound } from '../../entity/commentround';
           {{org.prefLabel | translateValue:true}}
         </li>
       </ul>
-
-      <div>
-        <span>{{ 'User' | translate }}: {{ commentRound.user.getDisplayName() }}</span>
-      </div>
-
-      <a class="uri">{{ 'URI' | translate }}: {{ commentRound.source.containerUri }}</a>
     </div>
   `
 })

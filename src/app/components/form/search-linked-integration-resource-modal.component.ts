@@ -10,6 +10,7 @@ import { IntegrationResource } from '../../entity/integration-resource';
 import { containerTypes } from '../common/containertypes';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
 import { TranslateService } from '@ngx-translate/core';
+import { regularStatuses, Status } from 'yti-common-ui/entities/status';
 
 @Component({
   selector: 'app-search-linked-source-modal',
@@ -23,16 +24,22 @@ import { TranslateService } from '@ngx-translate/core';
     </div>
     <div class="modal-body full-height">
 
-      <div *ngIf="!containerUri">
-        <div>
-          <span class="search-label search-label with-info" translate>Select tool</span>
+      <div>
+        <div class="filter-info">
+          <span class="search-label search-label with-info" translate>Filter results</span>
           <app-information-symbol [infoText]="'INFO_TEXT_SOURCE_FILTER_RESULTS'"></app-information-symbol>
         </div>
 
-        <app-filter-dropdown class="d-inline-block mb-3"
+        <app-filter-dropdown *ngIf="!containerUri"
+                             class="d-inline-block mb-3"
                              id="integration_filter_dropdown"
                              [filterSubject]="containerType$"
                              [options]="containerTypeOptions"></app-filter-dropdown>
+
+        <app-filter-dropdown class="d-inline-block mb-3"
+                             id="integration_filter_dropdown"
+                             [filterSubject]="status$"
+                             [options]="statusOptions"></app-filter-dropdown>
       </div>
 
       <div class="row mb-2">
@@ -55,6 +62,7 @@ import { TranslateService } from '@ngx-translate/core';
                    (click)="select(resource)">
                 <div class="content" [class.last]="last">
                   <span class="title" [innerHTML]="resource.getDisplayName(languageService, useUILanguage)"></span>
+                  <app-status [status]="resource.status"></app-status>
                   <span class="body" [innerHTML]="resource.getDescription(languageService, useUILanguage)"></span>
                   <span class="body" [innerHTML]="resource.uri"></span>
                 </div>
@@ -86,12 +94,14 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
   @Input() containerUri: string | null;
   @Input() containerType: string;
 
+  statusOptions: FilterOptions<Status>;
   containerTypeOptions: FilterOptions<string>;
 
   resources$: Observable<IntegrationResource[]>;
   resources: IntegrationResource[];
   searchResults$: Observable<IntegrationResource[]>;
 
+  status$ = new BehaviorSubject<Status | null>(null);
   containerType$ = new BehaviorSubject<string | null>(null);
   search$ = new BehaviorSubject('');
 
@@ -106,8 +116,14 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
   ngOnInit() {
     this.containerTypeOptions = [null, ...containerTypes].map(containerType => ({
       value: containerType,
-      name: () => this.translateService.instant(containerType ? containerType : 'Select interoperability tool'),
+      name: () => this.translateService.instant(containerType ? containerType : 'Select tool'),
       idIdentifier: () => status ? status : 'select_source_container_type'
+    }));
+
+    this.statusOptions = [null, ...regularStatuses].map(status => ({
+      value: status,
+      name: () => this.translateService.instant(status ? status : 'All statuses'),
+      idIdentifier: () => status ? status : 'all_selected'
     }));
 
     if (this.containerUri) {
@@ -127,15 +143,16 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
     const initialSearch = this.search$.pipe(take(1));
     const debouncedSearch = this.search$.pipe(skip(1), debounceTime(500));
 
-    this.searchResults$ = combineLatest(this.resources$, concat(initialSearch, debouncedSearch))
+    this.searchResults$ = combineLatest(this.resources$, this.status$, concat(initialSearch, debouncedSearch))
       .pipe(
         tap(() => this.loading = false),
-        map(([integrationResources, search]) => {
+        map(([integrationResources, status, search]) => {
           return integrationResources.filter(integrationResource => {
             const label = this.languageService.translate(integrationResource.prefLabel, true);
             const searchMatches = !search || label.toLowerCase().indexOf(search.toLowerCase()) !== -1;
             const isNotRestricted = !contains(this.restricts, integrationResource.id);
-            return searchMatches && isNotRestricted;
+            const statusMatches = !status || integrationResource.status === status;
+            return searchMatches && isNotRestricted && statusMatches;
           });
         })
       );

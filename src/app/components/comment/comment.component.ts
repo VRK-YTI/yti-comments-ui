@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { CommentRound } from '../../entity/commentround';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -12,6 +12,7 @@ import { CommentType } from '../../services/api-schema';
 import { tap } from 'rxjs/operators';
 import { Comment } from '../../entity/comment';
 import { CommentThread } from '../../entity/commentthread';
+import { AuthorizationManager } from '../../services/authorization-manager';
 
 @Component({
   selector: 'app-comment',
@@ -35,9 +36,11 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(private dataService: DataService,
               private route: ActivatedRoute,
+              private router: Router,
               private editableService: EditableService,
               private locationService: LocationService,
-              private location: Location) {
+              private location: Location,
+              private authorizationManager: AuthorizationManager) {
 
     this.cancelSubscription = editableService.cancel$.subscribe(() => this.reset());
 
@@ -66,6 +69,24 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
       this.locationService.atCommentPage(comment);
       this.reset();
     });
+  }
+
+  canCreateComment() {
+
+    return this.authorizationManager.canCreateComment();
+  }
+
+  createNewComment() {
+
+    this.router.navigate(
+      ['createcomment',
+        {
+          commentRoundId: this.commentRound.id,
+          commentThreadId: this.commentThread.id,
+          parentCommentId: this.comment.id
+        }
+      ]
+    );
   }
 
   ngOnDestroy() {

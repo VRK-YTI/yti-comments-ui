@@ -73,7 +73,7 @@ export class FrontpageComponent implements OnInit, OnDestroy {
 
     this.containerTypeOptions = [null, ...containerTypes].map(containerType => ({
       value: containerType,
-      name: () => this.translateService.instant(containerType ? containerType : 'All integrations'),
+      name: () => this.translateService.instant(containerType ? containerType : 'All tools'),
       idIdentifier: () => status ? status : 'all_selected'
     }));
 

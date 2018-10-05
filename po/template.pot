@@ -61,7 +61,7 @@ msgstr ""
 msgid "{{option}}"
 msgstr ""
 
-msgid "Select tool"
+msgid "Filter results"
 msgstr ""
 
 msgid "Select resource"
@@ -164,9 +164,6 @@ msgid "Frontpage long description"
 msgstr ""
 
 msgid "Add comment round"
-msgstr ""
-
-msgid "Filter results"
 msgstr ""
 
 msgid "Did not find any comment rounds."
@@ -388,7 +385,7 @@ msgstr ""
 msgid "All statuses"
 msgstr ""
 
-msgid "All integrations"
+msgid "All tools"
 msgstr ""
 
 msgid "Comment round"
@@ -397,5 +394,5 @@ msgstr ""
 msgid "Comment thread"
 msgstr ""
 
-msgid "Select interoperability tool"
+msgid "Select tool"
 msgstr ""

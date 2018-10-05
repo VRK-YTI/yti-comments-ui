@@ -14,6 +14,14 @@
 
 .modal-body.full-height {
   .row.full-height {
-    height: calc(100% - 154px);
+    height: calc(100% - 140px);
   }
+}
+
+app-filter-dropdown {
+  padding-right: 10px;
+}
+
+.filter-info {
+  padding-bottom: 4px;
 }

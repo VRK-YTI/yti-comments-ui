@@ -11,6 +11,16 @@
   <div class="row">
     <div class="col-12">
       <app-editable-buttons [form]="form"></app-editable-buttons>
+
+      <div *ngIf="canCreateComment()" class="col-md-2 float-right d-inline-block">
+        <button id="create_comment_button"
+                type="button"
+                class="btn btn-action float-right"
+                (click)="createNewComment()">
+          <span translate>Add comment</span>
+        </button>
+      </div>
+
       <app-content-language></app-content-language>
     </div>
   </div>

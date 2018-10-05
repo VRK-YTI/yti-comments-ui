@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
@@ -7,10 +7,11 @@ import { DataService } from '../../services/data.service';
 import { EditableService } from '../../services/editable.service';
 import { LanguageService } from '../../services/language.service';
 import { LocationService } from '../../services/location.service';
-import { CommentType } from '../../services/api-schema';
+import { CommentSimpleType, CommentType } from '../../services/api-schema';
 import { tap } from 'rxjs/operators';
 import { CommentRound } from '../../entity/commentround';
 import { CommentThread } from '../../entity/commentthread';
+import { CommentSimple } from '../../entity/comment-simple';
 
 @Component({
   selector: 'app-comment-create',
@@ -23,6 +24,8 @@ export class CommentCreateComponent implements OnInit {
   env: string;
   commentThread: CommentThread;
   commentRound: CommentRound;
+  parentComment: CommentSimple;
+  hasParentComment: boolean;
 
   commentForm = new FormGroup({
     content: new FormControl(''),
@@ -48,6 +51,7 @@ export class CommentCreateComponent implements OnInit {
 
     const commentRoundId = this.route.snapshot.params.commentRoundId;
     const commentThreadId = this.route.snapshot.params.commentThreadId;
+    const parentCommentId = this.route.snapshot.params.parentCommentId;
 
     if (!commentRoundId || !commentThreadId) {
       throw new Error(`Illegal route, commentRound: '${commentRoundId}', commentThread: '${commentThreadId}'`);
@@ -62,13 +66,24 @@ export class CommentCreateComponent implements OnInit {
       this.commentRound = commentRound;
     });
 
+    if (parentCommentId != null) {
+      this.hasParentComment = true;
+      this.dataService.getCommentRoundCommentThreadComment(commentRoundId, commentThreadId, parentCommentId).subscribe(parentComment => {
+        this.parentComment = parentComment;
+        this.commentForm.controls['parentComment'].setValue(parentComment);
+      });
+    }
+
     this.dataService.getServiceConfiguration().subscribe(configuration => {
       this.env = configuration.env;
     });
   }
 
   get loading(): boolean {
-    return this.env == null || this.commentRound == null || this.commentThread == null;
+    return this.env == null ||
+      this.commentRound == null ||
+      this.commentThread == null ||
+      (this.parentComment == null && this.hasParentComment);
   }
 
   back() {
@@ -84,7 +99,7 @@ export class CommentCreateComponent implements OnInit {
       url: url,
       content: content,
       proposedStatus: proposedStatus !== 'NOSTATUS' ? proposedStatus : null,
-      parentComment: parentComment,
+      parentComment: parentComment.serialize(),
       commentThread: this.commentThread.serialize()
     };
 

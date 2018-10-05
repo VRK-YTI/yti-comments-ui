@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-05 16:16+0300\n"
+"PO-Revision-Date: 2018-10-05 16:55+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -70,8 +70,8 @@ msgstr "Ehdotettu tila"
 msgid "{{option}}"
 msgstr ""
 
-msgid "Select tool"
-msgstr "Valitse työkalu"
+msgid "Filter results"
+msgstr "Suodata hakutuloksia"
 
 msgid "Select resource"
 msgstr "Valitse resurssi"
@@ -179,9 +179,6 @@ msgstr ""
 
 msgid "Add comment round"
 msgstr "Luo kommentointikierros"
-
-msgid "Filter results"
-msgstr "Suodata hakutuloksia"
 
 msgid "Did not find any comment rounds."
 msgstr "Kommentointikierroksia ei löytynyt."
@@ -411,8 +408,8 @@ msgstr "Suomi.fi-tietomallit"
 msgid "All statuses"
 msgstr "Kaikki tilat"
 
-msgid "All integrations"
-msgstr "Kaikki sovellukset"
+msgid "All tools"
+msgstr "Kaikki työkalut"
 
 msgid "Comment round"
 msgstr "kommentointikierros"
@@ -420,51 +417,5 @@ msgstr "kommentointikierros"
 msgid "Comment thread"
 msgstr "Kommentointiketju"
 
-msgid "Select interoperability tool"
-msgstr "Valitse lähde työkalu"
-
-#~ msgid "Comment thread label"
-#~ msgstr "Kommentointiketjun nimi"
-
-#, fuzzy
-#~| msgid "Select resource"
-#~ msgid "Only selected sources"
-#~ msgstr "Valitse resurssi"
-
-#, fuzzy
-#~| msgid "All integrations"
-#~ msgid "Allow new suggestions"
-#~ msgstr "Kaikki sovellukset"
-
-#~ msgid "Fixed threads"
-#~ msgstr "Avoin kommentoitavien resurssien lisäys"
-
-#~ msgid "Open threads"
-#~ msgstr "Avoin kommentointi päätason containeriin"
-
-#~ msgid "Proposed text"
-#~ msgstr "Ehdotettu teksti"
-
-#~ msgid "Definition"
-#~ msgstr "Määritelmä"
-
-#, fuzzy
-#~| msgid "Comment"
-#~ msgid "Comment/div>"
-#~ msgstr "Kommentti"
-
-#~ msgid "No resources found."
-#~ msgstr "Ei hakutuloksia."
-
-#, fuzzy
-#~| msgid "Comment Round"
-#~ msgid "CommentRoundStatus"
-#~ msgstr "Kommentointikierros"
-
-#~ msgid "Comment round label"
-#~ msgstr "Kommentointikierroksen nimi"
-
-#, fuzzy
-#~| msgid "Suomi.fi Controlled Vocabularies"
-#~ msgid "Get concept from Controlled Vocabularies"
-#~ msgstr "Suomi.fi-sanastot"
+msgid "Select tool"
+msgstr "Valitse työkalu"
