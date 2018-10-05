@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-04 16:56+0300\n"
+"PO-Revision-Date: 2018-10-05 16:16+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -21,6 +21,12 @@ msgstr "URI"
 
 msgid "enabled"
 msgstr "valittu"
+
+msgid "Copy value to clipboard"
+msgstr "Kopioi {{value}} leikepöydälle"
+
+msgid "Copied to clipboard"
+msgstr "Kopioitu leikepöydälle"
 
 msgid "Status"
 msgstr "Tila"
@@ -88,7 +94,7 @@ msgstr "Kommentointikierroksen nimi"
 msgid "Comment thread name"
 msgstr "Kommentointiketjun nimi"
 
-msgid "Comment thread resource uri"
+msgid "Comment thread resource URI"
 msgstr "Kommentointiketju resurssin URI"
 
 msgid "Comment"
@@ -135,6 +141,15 @@ msgstr "Luo kommenttiketju"
 
 msgid "Comment threads"
 msgstr "Kommentointiketjut"
+
+msgid "Resource name"
+msgstr "Resurssin nimi"
+
+msgid "Resource description"
+msgstr "Resurssin kuvaus"
+
+msgid "Resource URI"
+msgstr "Resurssin URI"
 
 msgid "Resource"
 msgstr "Resurssi"
@@ -407,3 +422,49 @@ msgstr "Kommentointiketju"
 
 msgid "Select interoperability tool"
 msgstr "Valitse lähde työkalu"
+
+#~ msgid "Comment thread label"
+#~ msgstr "Kommentointiketjun nimi"
+
+#, fuzzy
+#~| msgid "Select resource"
+#~ msgid "Only selected sources"
+#~ msgstr "Valitse resurssi"
+
+#, fuzzy
+#~| msgid "All integrations"
+#~ msgid "Allow new suggestions"
+#~ msgstr "Kaikki sovellukset"
+
+#~ msgid "Fixed threads"
+#~ msgstr "Avoin kommentoitavien resurssien lisäys"
+
+#~ msgid "Open threads"
+#~ msgstr "Avoin kommentointi päätason containeriin"
+
+#~ msgid "Proposed text"
+#~ msgstr "Ehdotettu teksti"
+
+#~ msgid "Definition"
+#~ msgstr "Määritelmä"
+
+#, fuzzy
+#~| msgid "Comment"
+#~ msgid "Comment/div>"
+#~ msgstr "Kommentti"
+
+#~ msgid "No resources found."
+#~ msgstr "Ei hakutuloksia."
+
+#, fuzzy
+#~| msgid "Comment Round"
+#~ msgid "CommentRoundStatus"
+#~ msgstr "Kommentointikierros"
+
+#~ msgid "Comment round label"
+#~ msgstr "Kommentointikierroksen nimi"
+
+#, fuzzy
+#~| msgid "Suomi.fi Controlled Vocabularies"
+#~ msgid "Get concept from Controlled Vocabularies"
+#~ msgstr "Suomi.fi-sanastot"

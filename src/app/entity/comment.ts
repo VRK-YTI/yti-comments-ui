@@ -50,8 +50,8 @@ export class Comment extends AbstractResource implements EditableEntity {
     return [
       {
         localizationKey: 'Comment',
-        label: {},
-        value: this.content,
+        label: undefined,
+        value: undefined,
         route: this.route
       }
     ];

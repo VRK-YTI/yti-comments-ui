@@ -45,8 +45,8 @@ export class CommentSimple extends AbstractResource {
     return [
       {
         localizationKey: 'Comment',
-        label: {},
-        value: this.content,
+        label: undefined,
+        value: undefined,
         route: this.route
       }
     ];

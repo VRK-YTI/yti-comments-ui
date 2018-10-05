@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
-import { Comment } from '../../entity/comment';
 import { CommentRound } from '../../entity/commentround';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthorizationManager } from '../../services/authorization-manager';
@@ -14,6 +13,7 @@ import { CommentThread } from '../../entity/commentthread';
 import { IntegrationResource } from '../../entity/integration-resource';
 import { LocationService } from '../../services/location.service';
 import { CommentSimple } from '../../entity/comment-simple';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 @Component({
   selector: 'app-comment-thread',
@@ -28,6 +28,7 @@ export class CommentThreadComponent implements OnInit {
   comments: CommentSimple[];
 
   cancelSubscription: Subscription;
+  resourceChangeSubscription: Subscription;
 
   commentThreadForm = new FormGroup({
     label: new FormControl({}),
@@ -45,6 +46,9 @@ export class CommentThreadComponent implements OnInit {
               private location: Location,
               private locationService: LocationService) {
     this.cancelSubscription = editableService.cancel$.subscribe(() => this.reset());
+
+    this.resourceChangeSubscription = this.commentThreadForm.controls['resource'].valueChanges
+      .subscribe(data => this.updateResourceData(data));
 
     editableService.onSave = (formValue: any) => this.save(formValue);
   }
@@ -95,15 +99,54 @@ export class CommentThreadComponent implements OnInit {
     );
   }
 
-  viewComment(comment: Comment) {
-    this.router.navigate([
-      'comment',
-      {
-        commentRoundId: this.commentRound.id,
-        commentThreadId: this.commentThread.id,
-        commentId: comment.id
-      }
-    ]);
+  get allowInput(): boolean {
+
+    return this.getResource == null && this.commentRound.openThreads;
+  }
+
+  updateResourceData(integrationResource: IntegrationResource) {
+
+    const resource = this.commentThreadForm.controls['resource'].value;
+    if (resource) {
+      this.commentThreadForm.patchValue({ label : resource.prefLabel });
+      this.commentThreadForm.patchValue({ description : resource.description });
+    } else {
+      this.commentThreadForm.patchValue({ label : {} });
+      this.commentThreadForm.patchValue({ description : {} });
+    }
+  }
+
+  get getLabel(): Localizable {
+
+    const label = this.commentThreadForm.controls['label'].value;
+    if (label) {
+      return label;
+    }
+    return {};
+  }
+
+  get getDescription(): Localizable {
+
+    const description = this.commentThreadForm.controls['description'].value;
+    if (description) {
+      return description;
+    }
+    return {};
+  }
+
+  get hasResourceUri(): boolean {
+
+    return !!this.commentThreadForm.controls['resource'].value;
+  }
+
+  get getResourceUri(): string {
+
+    return this.commentThreadForm.controls['resource'].value ? this.commentThreadForm.controls['resource'].value.uri : '-';
+  }
+
+  get getResource(): IntegrationResource {
+
+    return this.commentThreadForm.controls['resource'].value;
   }
 
   private reset() {
@@ -112,7 +155,9 @@ export class CommentThreadComponent implements OnInit {
       = this.commentThread;
 
     const integrationResource: IntegrationReourceType = <IntegrationReourceType> {
-      uri: resourceUri
+      uri: resourceUri,
+      prefLabel: label,
+      description: description
     };
 
     const resource: IntegrationResource = new IntegrationResource(integrationResource);
@@ -128,7 +173,10 @@ export class CommentThreadComponent implements OnInit {
 
   save(formData: any): Observable<any> {
 
-    const { label, proposedText, proposedStatus, description, resource } = formData;
+    const { label, description, proposedText, proposedStatus, resource } = formData;
+
+    console.log('label: ' + label.fi);
+    console.log('description: ' + description.fi);
 
     const thisCommentThread = this.commentThread.clone();
 
@@ -146,6 +194,9 @@ export class CommentThreadComponent implements OnInit {
     };
 
     const updatedCommentThread: CommentThread = new CommentThread(updatedCommentThreadType);
+
+    console.log('label 2: ' + updatedCommentThread.label.fi);
+    console.log('description 2: ' + updatedCommentThread.description.fi);
 
     const save = () => {
       return this.dataService.updateCommentThread(updatedCommentThread.serialize()).pipe(tap(() => this.ngOnInit()));

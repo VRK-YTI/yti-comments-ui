@@ -86,7 +86,12 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
 
   canCreateCommentThread() {
 
-    return this.authorizationManager.canCreateCommentThread();
+    if (this.commentRound.status === 'AWAIT') {
+      return this.authorizationManager.user.email === this.commentRound.user.email;
+    } else if (this.commentRound.status === 'INPROGRESS' && !this.commentRound.fixedThreads) {
+      return this.authorizationManager.canCreateCommentThread();
+    }
+    return false;
   }
 
   createNewCommentThread() {

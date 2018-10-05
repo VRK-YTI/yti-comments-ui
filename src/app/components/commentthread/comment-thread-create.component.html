@@ -30,21 +30,43 @@
                      [label]="'Comment round name' | translate"
                      [value]="commentRound.label"></app-literal>
 
-        <app-localizable-input [id]="'commentthread_name_input'"
-                               [label]="'Comment thread name' | translate"
+        <app-localizable-literal *ngIf="!allowInput"
+                                 [id]="'commentthread_label_input'"
+                                 [label]="'Resource name' | translate"
+                                 [infoText]="'INFO_TEXT_COMMENTTHREAD_NAME'"
+                                 [value]="getLabel"></app-localizable-literal>
+
+        <app-localizable-input *ngIf="allowInput"
+                               [id]="'commentthread_label_input'"
+                               [label]="'Resource name' | translate"
                                [required]="true"
                                [infoText]="'INFO_TEXT_COMMENTTHREAD_NAME'"
                                [formControlName]="'label'"></app-localizable-input>
 
-        <app-localizable-textarea [id]="'commentthread_description_input'"
-                                  [label]="'Description' | translate"
+        <app-localizable-textarea *ngIf="!allowInput"
+                                  [id]="'commentthread_description_input'"
+                                  [label]="'Resource description' | translate"
                                   [required]="true"
                                   [infoText]="'INFO_TEXT_COMMENTTHREAD_DESCRIPTION'"
                                   [formControlName]="'description'"></app-localizable-textarea>
 
+        <app-localizable-textarea-input *ngIf="allowInput"
+                                        [id]="'commentthread_description_input'"
+                                        [label]="'Resource description' | translate"
+                                        [required]="true"
+                                        [infoText]="'INFO_TEXT_COMMENTTHREAD_DESCRIPTION'"
+                                        [formControlName]="'description'"></app-localizable-textarea-input>
+
+        <app-clipboard *ngIf="hasResourceUri"
+                       [id]="'integration_resource_containeruri'"
+                       [label]="'Resource URI' | translate"
+                       [value]="getResourceUri"
+                       [showAsLink]="false"
+                       [infoText]="'INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCEURI'"></app-clipboard>
+
         <app-source-input id="integration_resource_input"
                           [label]="'Resource' | translate"
-                          [required]="true"
+                          [required]="!commentRound.openThreads"
                           [containerUri]="commentRound.source.containerUri"
                           [infoText]="'INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE'"
                           [formControlName]="'resource'"></app-source-input>

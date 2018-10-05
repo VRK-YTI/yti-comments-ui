@@ -23,7 +23,7 @@ export class User {
     };
   }
 
-  getDisplayName() {
-    return this.firstName + ' ' + this.lastName;
+  getDisplayName(): string {
+    return this.firstName + ' ' + this.lastName + ' | ' + this.email;
   }
 }

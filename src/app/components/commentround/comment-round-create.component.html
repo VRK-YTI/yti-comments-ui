@@ -45,10 +45,11 @@
                                  [infoText]="'INFO_TEXT_COMMENTROUND_ORGANIZATION'"
                                  [formControlName]="'organizations'"></app-organizations-input>
 
-        <app-literal id="integration_resource_containeruri"
-                     [label]="'Source URI' | translate"
-                     [infoText]="'INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCEURI'"
-                     [value]="getResourceUri"></app-literal>
+        <app-clipboard [id]="'integration_resource_containeruri'"
+                       [label]="'Source URI' | translate"
+                       [value]="getResourceUri"
+                       [showAsLink]="false"
+                       [infoText]="'INFO_TEXT_INTEGRATION_RESOURCEURI'"></app-clipboard>
 
         <app-source-input id="integration_resource_input"
                           [label]="'Source' | translate"

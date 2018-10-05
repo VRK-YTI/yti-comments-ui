@@ -58,7 +58,7 @@ export class CommentThread extends AbstractResource implements EditableEntity {
       ...this.commentRound.location,
       {
         localizationKey: 'Comment thread',
-        label: this.label,
+        label: undefined,
         value: undefined,
         route: this.route
       }

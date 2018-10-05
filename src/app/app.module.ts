@@ -28,7 +28,7 @@ import { EditableButtonsComponent } from './components/form/editable-buttons.com
 import { ErrorMessagesComponent } from './components/form/error-messages.component';
 import { OrganizationsInputComponent } from './components/form/organizations-input.compontent';
 import { LocalizableLiteralComponent } from './components/form/localizable-literal';
-import { LocalizableTextareaComponent } from './components/form/localizable-textarea';
+import { LocalizableTextareaInputComponent } from './components/form/localizable-textarea-input';
 import { LiteralComponent } from './components/form/literal';
 import { LiteralInputComponent } from './components/form/literal-input';
 import { LinkComponent } from './components/form/link';
@@ -64,6 +64,9 @@ import { ProposedStatusInputComponent } from './components/form/proposed-status-
 import { ProposedStatusDropdownComponent } from './components/form/proposedstatus-dropdown-component';
 import { CommentRoundStatusComponent } from './components/form/comment-round-status.component';
 import { LiteralTextareaComponent } from './components/form/literal-textarea';
+import { LocalizableTextareaComponent } from './components/form/localizable-textarea';
+import { ClipboardComponent } from './components/form/clipboard';
+import { ClipboardModule } from 'ngx-clipboard';
 
 declare var require: any;
 
@@ -154,7 +157,9 @@ const appRoutes: Routes = [
     ErrorMessagesComponent,
     OrganizationsInputComponent,
     LocalizableLiteralComponent,
+    LocalizableTextareaInputComponent,
     LocalizableTextareaComponent,
+    ClipboardComponent,
     LiteralInputComponent,
     LiteralComponent,
     LinkComponent,
@@ -194,6 +199,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes, { enableTracing: false }),
     NgbModule.forRoot(),
     YtiCommonModule,
+    ClipboardModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

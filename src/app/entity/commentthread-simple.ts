@@ -54,7 +54,7 @@ export class CommentThreadSimple extends AbstractResource {
     return [
       {
         localizationKey: 'Comment thread',
-        label: this.label,
+        label: undefined,
         value: undefined,
         route: this.route
       }

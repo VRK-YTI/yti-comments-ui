@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,6 +10,8 @@ import { LocationService } from '../../services/location.service';
 import { CommentThreadType } from '../../services/api-schema';
 import { tap } from 'rxjs/operators';
 import { CommentRound } from '../../entity/commentround';
+import { IntegrationResource } from '../../entity/integration-resource';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 @Component({
   selector: 'app-commentthread-create',
@@ -21,6 +23,8 @@ export class CommentThreadCreateComponent implements OnInit {
 
   env: string;
   commentRound: CommentRound;
+
+  resourceChangeSubscription: Subscription;
 
   commentThreadForm = new FormGroup({
     label: new FormControl({}),
@@ -38,6 +42,9 @@ export class CommentThreadCreateComponent implements OnInit {
               private languageService: LanguageService,
               private locationService: LocationService,
               private route: ActivatedRoute) {
+
+    this.resourceChangeSubscription = this.commentThreadForm.controls['resource'].valueChanges
+      .subscribe(data => this.updateResourceData(data));
 
     editableService.onSave = (formValue: any) => this.save(formValue);
     editableService.cancel$.subscribe(() => this.back());
@@ -62,8 +69,58 @@ export class CommentThreadCreateComponent implements OnInit {
     });
   }
 
+  get allowInput(): boolean {
+
+    return this.getResource == null && this.commentRound.openThreads;
+  }
+
   get loading(): boolean {
     return this.env == null || this.commentRound == null;
+  }
+
+  updateResourceData(integrationResource: IntegrationResource) {
+
+    const resource = this.commentThreadForm.controls['resource'].value;
+    if (resource) {
+      this.commentThreadForm.patchValue({ label : resource.prefLabel });
+      this.commentThreadForm.patchValue({ description : resource.description });
+    } else {
+      this.commentThreadForm.patchValue({ label : {} });
+      this.commentThreadForm.patchValue({ description : {} });
+    }
+  }
+
+  get getLabel(): Localizable {
+
+    const label = this.commentThreadForm.controls['label'].value;
+    if (label) {
+      return label;
+    }
+    return {};
+  }
+
+  get getDescription(): Localizable {
+
+    const description = this.commentThreadForm.controls['description'].value;
+    if (description) {
+      return description;
+    }
+    return {};
+  }
+
+  get hasResourceUri(): boolean {
+
+    return !!this.commentThreadForm.controls['resource'].value;
+  }
+
+  get getResourceUri(): string {
+
+    return this.commentThreadForm.controls['resource'].value ? this.commentThreadForm.controls['resource'].value.uri : '-';
+  }
+
+  get getResource(): IntegrationResource {
+
+    return this.commentThreadForm.controls['resource'].value;
   }
 
   back() {

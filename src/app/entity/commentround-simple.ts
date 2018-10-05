@@ -66,8 +66,8 @@ export class CommentRoundSimple extends AbstractResource {
     return [
       {
         localizationKey: 'Comment round',
-        label: {},
-        value: this.label,
+        label: undefined,
+        value: undefined,
         route: this.route
       }
     ];

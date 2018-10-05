@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-04 16:56+0300\n"
+"PO-Revision-Date: 2018-10-05 16:16+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -20,6 +20,12 @@ msgid "URI"
 msgstr ""
 
 msgid "enabled"
+msgstr ""
+
+msgid "Copy value to clipboard"
+msgstr ""
+
+msgid "Copied to clipboard"
 msgstr ""
 
 msgid "Status"
@@ -88,7 +94,7 @@ msgstr ""
 msgid "Comment thread name"
 msgstr ""
 
-msgid "Comment thread resource uri"
+msgid "Comment thread resource URI"
 msgstr ""
 
 msgid "Comment"
@@ -134,6 +140,22 @@ msgid "Add comment thread"
 msgstr ""
 
 msgid "Comment threads"
+msgstr ""
+
+msgid "Resource name"
+msgstr ""
+
+#, fuzzy
+#| msgid "Frontpage long description"
+msgid "Resource description"
+msgstr ""
+"In Interoperabilityplatforms Comment Round Tool users can create comment "
+"rounds for Controlled Vocabularies-, Reference Data- and Data Vocabulary- "
+"Tool content. In addition, the Comment Round Tool is used for commenting "
+"information content added for commenting in a comment round, and read "
+"comments sent by others."
+
+msgid "Resource URI"
 msgstr ""
 
 msgid "Resource"

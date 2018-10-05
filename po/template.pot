@@ -13,6 +13,12 @@ msgstr ""
 msgid "enabled"
 msgstr ""
 
+msgid "Copy value to clipboard"
+msgstr ""
+
+msgid "Copied to clipboard"
+msgstr ""
+
 msgid "Status"
 msgstr ""
 
@@ -79,7 +85,7 @@ msgstr ""
 msgid "Comment thread name"
 msgstr ""
 
-msgid "Comment thread resource uri"
+msgid "Comment thread resource URI"
 msgstr ""
 
 msgid "Comment"
@@ -125,6 +131,15 @@ msgid "Add comment thread"
 msgstr ""
 
 msgid "Comment threads"
+msgstr ""
+
+msgid "Resource name"
+msgstr ""
+
+msgid "Resource description"
+msgstr ""
+
+msgid "Resource URI"
 msgstr ""
 
 msgid "Resource"

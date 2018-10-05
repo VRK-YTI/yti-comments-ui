@@ -72,8 +72,8 @@ export class CommentRound extends AbstractResource implements EditableEntity {
     return [
       {
         localizationKey: 'Comment round',
-        label: {},
-        value: this.label,
+        label: undefined,
+        value: undefined,
         route: this.route
       }
     ];

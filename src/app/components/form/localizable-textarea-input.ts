@@ -1,11 +1,11 @@
 import { Component, Input, Optional, Self } from '@angular/core';
-import { EditableService } from '../../services/editable.service';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { LanguageService } from '../../services/language.service';
 import { Localizable } from 'yti-common-ui/types/localization';
+import { EditableService } from '../../services/editable.service';
+import { LanguageService } from '../../services/language.service';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-localizable-input',
+  selector: 'app-localizable-textarea-input',
   template: `
     <dl *ngIf="show">
       <dt>
@@ -15,12 +15,12 @@ import { Localizable } from 'yti-common-ui/types/localization';
       </dt>
       <dd>
         <div *ngIf="editing" class="form-group">
-          <input [id]="id"
-                 type="text"
-                 class="form-control"
-                 [ngClass]="{'is-invalid': !valid}"
-                 [ngModel]="value[contentLanguage]"
-                 (ngModelChange)="onChange($event)"/>
+          <textarea [id]="id"
+                    rows="3"
+                    class="form-control"
+                    [ngClass]="{'is-invalid': !valid}"
+                    [ngModel]="value[contentLanguage]"
+                    (ngModelChange)="onChange($event)"></textarea>
           <app-error-messages [id]="id + '_error_messages'" [control]="parentControl"></app-error-messages>
         </div>
         <div class="text-content-wrap" *ngIf="!editing">{{value | translateValue}}</div>
@@ -28,7 +28,7 @@ import { Localizable } from 'yti-common-ui/types/localization';
     </dl>
   `
 })
-export class LocalizableInputComponent implements ControlValueAccessor {
+export class LocalizableTextareaInputComponent implements ControlValueAccessor {
 
   @Input() label: string;
   @Input() restrict = false;

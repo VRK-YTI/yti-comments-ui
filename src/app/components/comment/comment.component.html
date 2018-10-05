@@ -37,10 +37,11 @@
                      [infoText]="'INFO_TEXT_COMMENT_COMMENTTHREAD_NAME'"
                      [value]="commentThread.label | translateValue"></app-literal>
 
-        <app-literal [id]="'commentthread_resourceuri'"
-                     [label]="'Comment thread resource uri' | translate"
-                     [infoText]="'INFO_TEXT_COMMENT_COMMENTTHREAD_RESOURCEURI'"
-                     [value]="commentThread.resourceUri"></app-literal>
+        <app-clipboard [id]="'commentthread_resourceuri'"
+                       [label]="'Comment thread resource URI' | translate"
+                       [value]="commentThread.resourceUri"
+                       [showAsLink]="false"
+                       [infoText]="'INFO_TEXT_COMMENT_COMMENTTHREAD_RESOURCEURI'"></app-clipboard>
 
         <app-literal-textarea [id]="'comment_content_input'"
                               [label]="'Comment' | translate"
