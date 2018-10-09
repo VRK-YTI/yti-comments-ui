@@ -4,9 +4,9 @@ import { Moment } from 'moment';
 import { AbstractResource } from './abstract-resource';
 import { CommentSimple } from './comment-simple';
 import { Location } from 'yti-common-ui/types/location';
-import { CommentThreadSimple } from './commentthread-simple';
 import { User } from './user';
 import { EditableEntity } from './editable-entity';
+import { CommentThread } from './commentthread';
 
 export class Comment extends AbstractResource implements EditableEntity {
 
@@ -14,7 +14,7 @@ export class Comment extends AbstractResource implements EditableEntity {
   content: string;
   proposedStatus: string;
   created: Moment | null = null;
-  commentThread: CommentThreadSimple;
+  commentThread: CommentThread;
   parentComment: CommentSimple;
 
   constructor(data: CommentType) {
@@ -27,18 +27,18 @@ export class Comment extends AbstractResource implements EditableEntity {
     if (data.created) {
       this.created = parseDateTime(data.created);
     }
-    this.commentThread = new CommentThreadSimple(data.commentThread);
+    this.commentThread = new CommentThread(data.commentThread);
     if (data.parentComment) {
       this.parentComment = new CommentSimple(data.parentComment);
     }
   }
 
-  // TODO: fix this to work with proper routing, needs round
   get route(): any[] {
     return [
       ...this.commentThread.location,
       'comment',
       {
+        commentRoundId: this.commentThread.commentRound.id,
         commentThreadId: this.commentThread.id,
         commentId: this.id
       }
@@ -48,6 +48,7 @@ export class Comment extends AbstractResource implements EditableEntity {
   get location(): Location[] {
 
     return [
+      ...this.commentThread.location,
       {
         localizationKey: 'Comment',
         label: undefined,

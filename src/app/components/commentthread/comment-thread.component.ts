@@ -48,7 +48,7 @@ export class CommentThreadComponent implements OnInit {
     this.cancelSubscription = editableService.cancel$.subscribe(() => this.reset());
 
     this.resourceChangeSubscription = this.commentThreadForm.controls['resource'].valueChanges
-      .subscribe(data => this.updateResourceData(data));
+      .subscribe(data => this.updateResourceData());
 
     editableService.onSave = (formValue: any) => this.save(formValue);
   }
@@ -104,16 +104,16 @@ export class CommentThreadComponent implements OnInit {
     return this.getResource == null && this.commentRound.openThreads;
   }
 
-  updateResourceData(integrationResource: IntegrationResource) {
+  updateResourceData() {
 
     const resource = this.commentThreadForm.controls['resource'].value;
     if (resource) {
-      this.commentThreadForm.patchValue({ label : resource.prefLabel });
-      this.commentThreadForm.patchValue({ description : resource.description });
+      this.commentThreadForm.patchValue({ label: resource.prefLabel });
+      this.commentThreadForm.patchValue({ description: resource.description });
       this.commentThread.currentStatus = resource.status;
     } else {
-      this.commentThreadForm.patchValue({ label : {} });
-      this.commentThreadForm.patchValue({ description : {} });
+      this.commentThreadForm.patchValue({ label: {} });
+      this.commentThreadForm.patchValue({ description: {} });
       this.commentThread.currentStatus = undefined;
     }
   }
@@ -212,4 +212,20 @@ export class CommentThreadComponent implements OnInit {
 
     this.location.back();
   }
+
+  get hasComments(): boolean {
+    return this.comments && this.comments.length > 0;
+  }
+
+  viewComment(comment: CommentSimple) {
+    this.router.navigate([
+      'comment',
+      {
+        commentRoundId: this.commentThread.commentRound.id,
+        commentThreadId: this.commentThread.id,
+        commentId: comment.id
+      }
+    ]);
+  }
+
 }

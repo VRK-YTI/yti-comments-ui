@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-05 18:48+0300\n"
+"PO-Revision-Date: 2018-10-09 16:23+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -12,15 +12,6 @@ msgstr ""
 "X-Generator: Poedit 2.1.1\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-msgid "User"
-msgstr ""
-
-msgid "URI"
-msgstr ""
-
-msgid "enabled"
-msgstr ""
 
 msgid "Copy value to clipboard"
 msgstr ""
@@ -64,10 +55,13 @@ msgstr ""
 msgid "Search comment"
 msgstr ""
 
+msgid "{{ status }}"
+msgstr ""
+
 msgid "Proposed status"
 msgstr ""
 
-msgid "{{option}}"
+msgid "{{ option }}"
 msgstr ""
 
 msgid "Filter results"
@@ -88,7 +82,7 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-msgid "Comment round name"
+msgid "Round name"
 msgstr ""
 
 msgid "Comment thread name"
@@ -106,19 +100,25 @@ msgstr ""
 msgid "Create comment"
 msgstr ""
 
+msgid "Commenter"
+msgstr ""
+
+msgid "Thread resource URI"
+msgstr ""
+
 msgid "Created"
 msgstr ""
 
 msgid "Add comment"
 msgstr ""
 
+msgid "Tool"
+msgstr ""
+
+msgid "Commenting period"
+msgstr ""
+
 msgid "Description"
-msgstr ""
-
-msgid "Organization"
-msgstr ""
-
-msgid "Source URI"
 msgstr ""
 
 msgid "Source"
@@ -130,19 +130,57 @@ msgstr ""
 msgid "Allow new comment threads"
 msgstr ""
 
-msgid "Validity"
+msgid "Source URI"
 msgstr ""
 
-msgid "Create comment round"
+msgid "Organization"
+msgstr ""
+
+msgid "Comment round information"
+msgstr ""
+
+msgid "Editor"
 msgstr ""
 
 msgid "Last modification"
 msgstr ""
 
-msgid "Add comment thread"
+msgid "Start comment round"
 msgstr ""
 
-msgid "Comment threads"
+msgid "Close comment round"
+msgstr ""
+
+msgid "Resources for commenting"
+msgstr ""
+
+msgid "Add new resource"
+msgstr ""
+
+msgid "There are no resources to comment."
+msgstr ""
+
+msgid "Resource"
+msgstr ""
+
+msgid "Current status"
+msgstr ""
+
+msgid "Editors comment"
+msgstr ""
+
+msgid "{{ commentThread.currentStatus }}"
+msgstr ""
+
+msgid "{{ editing ? 'Propose status' : 'Commenters proposal for status'}}"
+msgstr ""
+
+msgid "{{ editing ? 'Your comment' : 'Commenters comment'}}"
+msgstr ""
+
+msgid ""
+"{{ commentThread.proposedStatus ? commentThread.proposedStatus : "
+"'NOSTATUS' }}"
 msgstr ""
 
 msgid "Resource name"
@@ -154,16 +192,13 @@ msgstr ""
 msgid "Resource URI"
 msgstr ""
 
-msgid "Resource"
-msgstr ""
-
 msgid "Proposed action"
 msgstr ""
 
-msgid "Current status"
+msgid "Create comment thread"
 msgstr ""
 
-msgid "Create comment thread"
+msgid "There are no comments yet."
 msgstr ""
 
 msgid "comment round"
@@ -180,7 +215,7 @@ msgstr ""
 "information content added for commenting in a comment round, and read "
 "comments sent by others."
 
-msgid "Add comment round"
+msgid "Add new comment round"
 msgstr ""
 
 msgid "Did not find any comment rounds."
@@ -316,6 +351,9 @@ msgstr "Status proposed by this comment for the resource"
 msgid "INFO_TEXT_COMMENT_CREATED"
 msgstr "Comment creation time"
 
+msgid "INFO_TEXT_INTEGRATION_RESOURCEURI"
+msgstr "Comment round integration resource URI address"
+
 msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr ""
 "Results can be filtered by organization, status and tool using dropdown"
@@ -323,8 +361,8 @@ msgstr ""
 msgid "INFO_TEXT_SOURCE_FILTER_RESULTS"
 msgstr "Tool selection from which container resources are fetched"
 
-msgid "ERR_MSG_USER_END_BEFORE_START_DATE"
-msgstr "The enddate is before the startdate."
+msgid "TERMINOLOGY_EDITOR"
+msgstr "Terminology editor"
 
 msgid "Front page"
 msgstr ""
@@ -374,8 +412,8 @@ msgstr "Erroneous data"
 msgid "ERR_MSG_USER_500"
 msgstr "Unexpected error"
 
-msgid "NOSTATUS"
-msgstr "No selected status"
+msgid "ERR_MSG_USER_END_BEFORE_START_DATE"
+msgstr "The enddate is before the startdate."
 
 msgid "Submit error"
 msgstr ""
@@ -389,8 +427,8 @@ msgstr "Admin"
 msgid "DATA_MODEL_EDITOR"
 msgstr "Data model editor"
 
-msgid "TERMINOLOGY_EDITOR"
-msgstr "Terminology editor"
+msgid "NOSTATUS"
+msgstr "No selected status"
 
 msgid "CODE_LIST_EDITOR"
 msgstr "Code list editor"
@@ -407,6 +445,15 @@ msgstr "Suomi.fi Controlled Vocabularies"
 msgid "datamodel"
 msgstr "Suomi.fi Data Vocabularies"
 
+msgid "codelist-type"
+msgstr "Code list"
+
+msgid "terminology-type"
+msgstr "Vocabulary"
+
+msgid "datamodel-type"
+msgstr "Datamodel"
+
 msgid "All statuses"
 msgstr ""
 
@@ -420,4 +467,22 @@ msgid "Comment thread"
 msgstr ""
 
 msgid "Select tool"
+msgstr ""
+
+msgid "Commenters proposal for status"
+msgstr ""
+
+msgid "Commenters comment"
+msgstr ""
+
+msgid "Your comment"
+msgstr "Comment"
+
+msgid "Propose status"
+msgstr ""
+
+msgid "Create comment round"
+msgstr ""
+
+msgid "-"
 msgstr ""

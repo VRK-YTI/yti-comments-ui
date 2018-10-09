@@ -16,6 +16,10 @@ import { Option } from 'yti-common-ui/components/dropdown.component';
 import { OrganizationSimple } from '../../entity/organization-simple';
 import { flatMap, tap } from 'rxjs/operators';
 import { containerTypes } from '../common/containertypes';
+import { SearchLinkedIntegrationResourceModalService } from '../form/search-linked-integration-resource-modal.component';
+import { ignoreModalClose } from 'yti-common-ui/utils/modal';
+import { IntegrationResource } from '../../entity/integration-resource';
+import { IntegrationResourceService } from '../../services/integrationresource.service';
 
 @Component({
   selector: 'app-frontpage',
@@ -41,11 +45,13 @@ export class FrontpageComponent implements OnInit, OnDestroy {
   fullDescription: { [key: string]: boolean } = {};
 
   constructor(private dataService: DataService,
+              private integrationResourceService: IntegrationResourceService,
               private locationService: LocationService,
               private authorizationManager: AuthorizationManager,
               private router: Router,
               private translateService: TranslateService,
-              private languageService: LanguageService) {
+              private languageService: LanguageService,
+              private searchLinkedIntegrationResourceModalService: SearchLinkedIntegrationResourceModalService) {
 
     locationService.atFrontPage();
   }
@@ -100,16 +106,36 @@ export class FrontpageComponent implements OnInit, OnDestroy {
     return this.authorizationManager.canCreateCommentRound();
   }
 
+  storeSourceAndNavigateToCreateCommentRound(integrationResource: IntegrationResource) {
+
+    this.integrationResourceService.addIntegrationResource(integrationResource);
+
+    this.router.navigate([
+      'createcommentround',
+      {
+        integrationResourceUri: integrationResource.uri
+      }
+    ]);
+
+  }
+
   createNewCommentRound() {
 
-    this.router.navigate(['createcommentround']);
+    const titleLabel = this.translateService.instant('Choose source');
+    const searchlabel = this.translateService.instant('Search term');
+
+    this.searchLinkedIntegrationResourceModalService
+      .open(null, null, titleLabel, searchlabel, [], true)
+      .then(source => this.storeSourceAndNavigateToCreateCommentRound(source), ignoreModalClose);
   }
 
   ngOnDestroy(): void {
+
     this.subscriptionToClean.forEach(s => s.unsubscribe());
   }
 
   toggleFullDescription(commentRoundId: string) {
+
     if (this.fullDescription[commentRoundId]) {
       delete this.fullDescription[commentRoundId];
     } else {

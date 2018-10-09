@@ -13,6 +13,8 @@ import { LocationService } from '../../services/location.service';
 import { Organization } from '../../entity/organization';
 import { CommentRoundType, SourceType } from '../../services/api-schema';
 import { tap } from 'rxjs/operators';
+import { IntegrationResourceService } from '../../services/integrationresource.service';
+import { IntegrationResource } from '../../entity/integration-resource';
 
 @Component({
   selector: 'app-commentround-create',
@@ -22,6 +24,7 @@ import { tap } from 'rxjs/operators';
 })
 export class CommentRoundCreateComponent implements OnInit {
 
+  integrationResource: IntegrationResource;
   env: string;
 
   commentRoundForm = new FormGroup({
@@ -36,7 +39,9 @@ export class CommentRoundCreateComponent implements OnInit {
   }, null);
 
   constructor(private router: Router,
+              private route: ActivatedRoute,
               private dataService: DataService,
+              private integrationResourceService: IntegrationResourceService,
               private editableService: EditableService,
               private activatedRoute: ActivatedRoute,
               private location: Location,
@@ -50,11 +55,29 @@ export class CommentRoundCreateComponent implements OnInit {
 
   ngOnInit() {
 
+    const integrationResourceUri = this.route.snapshot.params.integrationResourceUri;
+
+    if (integrationResourceUri) {
+      this.integrationResource = this.integrationResourceService.getIntegrationResource(integrationResourceUri);
+
+      if (this.integrationResource) {
+        this.commentRoundForm.patchValue( { resource : this.integrationResource });
+      }
+    }
+
     this.dataService.getServiceConfiguration().subscribe(configuration => {
       this.env = configuration.env;
     });
 
     this.locationService.atCommentRoundCreatePage();
+  }
+
+  get toolType(): string {
+    const integrationResource: IntegrationResource = this.commentRoundForm.controls['resource'].value;
+    if (integrationResource && integrationResource.type) {
+      return integrationResource.type;
+    }
+    return '-';
   }
 
   get loading(): boolean {
@@ -97,8 +120,8 @@ export class CommentRoundCreateComponent implements OnInit {
     return save();
   }
 
-  get getResourceUri(): string {
+  get getResourceUri(): string | null {
 
-    return this.commentRoundForm.controls['resource'].value ? this.commentRoundForm.controls['resource'].value.uri : '-';
+    return this.commentRoundForm.controls['resource'].value ? this.commentRoundForm.controls['resource'].value.uri : null;
   }
 }

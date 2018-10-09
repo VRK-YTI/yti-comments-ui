@@ -4,15 +4,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "User"
-msgstr ""
-
-msgid "URI"
-msgstr ""
-
-msgid "enabled"
-msgstr ""
-
 msgid "Copy value to clipboard"
 msgstr ""
 
@@ -55,10 +46,13 @@ msgstr ""
 msgid "Search comment"
 msgstr ""
 
+msgid "{{ status }}"
+msgstr ""
+
 msgid "Proposed status"
 msgstr ""
 
-msgid "{{option}}"
+msgid "{{ option }}"
 msgstr ""
 
 msgid "Filter results"
@@ -79,7 +73,7 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-msgid "Comment round name"
+msgid "Round name"
 msgstr ""
 
 msgid "Comment thread name"
@@ -97,19 +91,25 @@ msgstr ""
 msgid "Create comment"
 msgstr ""
 
+msgid "Commenter"
+msgstr ""
+
+msgid "Thread resource URI"
+msgstr ""
+
 msgid "Created"
 msgstr ""
 
 msgid "Add comment"
 msgstr ""
 
+msgid "Tool"
+msgstr ""
+
+msgid "Commenting period"
+msgstr ""
+
 msgid "Description"
-msgstr ""
-
-msgid "Organization"
-msgstr ""
-
-msgid "Source URI"
 msgstr ""
 
 msgid "Source"
@@ -121,19 +121,57 @@ msgstr ""
 msgid "Allow new comment threads"
 msgstr ""
 
-msgid "Validity"
+msgid "Source URI"
 msgstr ""
 
-msgid "Create comment round"
+msgid "Organization"
+msgstr ""
+
+msgid "Comment round information"
+msgstr ""
+
+msgid "Editor"
 msgstr ""
 
 msgid "Last modification"
 msgstr ""
 
-msgid "Add comment thread"
+msgid "Start comment round"
 msgstr ""
 
-msgid "Comment threads"
+msgid "Close comment round"
+msgstr ""
+
+msgid "Resources for commenting"
+msgstr ""
+
+msgid "Add new resource"
+msgstr ""
+
+msgid "There are no resources to comment."
+msgstr ""
+
+msgid "Resource"
+msgstr ""
+
+msgid "Current status"
+msgstr ""
+
+msgid "Editors comment"
+msgstr ""
+
+msgid "{{ commentThread.currentStatus }}"
+msgstr ""
+
+msgid "{{ editing ? 'Propose status' : 'Commenters proposal for status'}}"
+msgstr ""
+
+msgid "{{ editing ? 'Your comment' : 'Commenters comment'}}"
+msgstr ""
+
+msgid ""
+"{{ commentThread.proposedStatus ? commentThread.proposedStatus : 'NOSTATUS' "
+"}}"
 msgstr ""
 
 msgid "Resource name"
@@ -145,16 +183,13 @@ msgstr ""
 msgid "Resource URI"
 msgstr ""
 
-msgid "Resource"
-msgstr ""
-
 msgid "Proposed action"
 msgstr ""
 
-msgid "Current status"
+msgid "Create comment thread"
 msgstr ""
 
-msgid "Create comment thread"
+msgid "There are no comments yet."
 msgstr ""
 
 msgid "comment round"
@@ -166,7 +201,7 @@ msgstr ""
 msgid "Frontpage long description"
 msgstr ""
 
-msgid "Add comment round"
+msgid "Add new comment round"
 msgstr ""
 
 msgid "Did not find any comment rounds."
@@ -298,13 +333,16 @@ msgstr ""
 msgid "INFO_TEXT_COMMENT_CREATED"
 msgstr ""
 
+msgid "INFO_TEXT_INTEGRATION_RESOURCEURI"
+msgstr ""
+
 msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr ""
 
 msgid "INFO_TEXT_SOURCE_FILTER_RESULTS"
 msgstr ""
 
-msgid "ERR_MSG_USER_END_BEFORE_START_DATE"
+msgid "CODE_LIST_EDITOR"
 msgstr ""
 
 msgid "Front page"
@@ -355,7 +393,7 @@ msgstr ""
 msgid "ERR_MSG_USER_500"
 msgstr ""
 
-msgid "NOSTATUS"
+msgid "ERR_MSG_USER_END_BEFORE_START_DATE"
 msgstr ""
 
 msgid "Submit error"
@@ -373,7 +411,7 @@ msgstr ""
 msgid "TERMINOLOGY_EDITOR"
 msgstr ""
 
-msgid "CODE_LIST_EDITOR"
+msgid "NOSTATUS"
 msgstr ""
 
 msgid "required"
@@ -386,6 +424,15 @@ msgid "terminology"
 msgstr ""
 
 msgid "datamodel"
+msgstr ""
+
+msgid "codelist-type"
+msgstr ""
+
+msgid "terminology-type"
+msgstr ""
+
+msgid "datamodel-type"
 msgstr ""
 
 msgid "All statuses"
@@ -401,4 +448,28 @@ msgid "Comment thread"
 msgstr ""
 
 msgid "Select tool"
+msgstr ""
+
+msgid "Commenters proposal for status"
+msgstr ""
+
+msgid "Commenters comment"
+msgstr ""
+
+msgid "Your comment"
+msgstr ""
+
+msgid "Propose status"
+msgstr ""
+
+msgid "Create comment round"
+msgstr ""
+
+msgid "-"
+msgstr ""
+
+msgid "START COMMENT ROUND?"
+msgstr ""
+
+msgid "CLOSE COMMENT ROUND?"
 msgstr ""

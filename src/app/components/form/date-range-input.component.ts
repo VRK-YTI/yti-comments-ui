@@ -19,6 +19,7 @@ import { combineLatest } from 'rxjs';
           <div class="row">
             <div class="col-md-6">
               <app-date-input [id]="'start_date_input'"
+                              [showLabel]="showLabel"
                               [label]="'Valid from' | translate"
                               [infoText]="startDateInfoText"
                               [formControl]="startControl"></app-date-input>
@@ -27,6 +28,7 @@ import { combineLatest } from 'rxjs';
             <div class="col-md-6">
               <app-date-input [id]="'end_date_input'"
                               [label]="'Valid to' | translate"
+                              [showLabel]="showLabel"
                               [infoText]="endDateInfoText"
                               [formControl]="endControl"></app-date-input>
             </div>
@@ -46,6 +48,7 @@ export class DateRangeInputComponent {
   @Input() infoText: string;
   @Input() restrict = false;
   @Input() required = false;
+  @Input() showLabel = true;
 
   startControl = new FormControl(null, validDate);
   endControl = new FormControl(null, validDate);

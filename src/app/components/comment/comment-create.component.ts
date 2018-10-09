@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
@@ -7,7 +7,7 @@ import { DataService } from '../../services/data.service';
 import { EditableService } from '../../services/editable.service';
 import { LanguageService } from '../../services/language.service';
 import { LocationService } from '../../services/location.service';
-import { CommentSimpleType, CommentType } from '../../services/api-schema';
+import { CommentType } from '../../services/api-schema';
 import { tap } from 'rxjs/operators';
 import { CommentRound } from '../../entity/commentround';
 import { CommentThread } from '../../entity/commentthread';
@@ -99,7 +99,7 @@ export class CommentCreateComponent implements OnInit {
       url: url,
       content: content,
       proposedStatus: proposedStatus !== 'NOSTATUS' ? proposedStatus : null,
-      parentComment: parentComment.serialize(),
+      parentComment: parentComment ? parentComment.serialize() : undefined,
       commentThread: this.commentThread.serialize()
     };
 

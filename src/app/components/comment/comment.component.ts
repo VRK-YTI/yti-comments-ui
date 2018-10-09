@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { CommentRound } from '../../entity/commentround';
 import { FormControl, FormGroup } from '@angular/forms';
-import { CommentSimple } from '../../entity/comment-simple';
 import { EditableService } from '../../services/editable.service';
 import { LocationService } from '../../services/location.service';
 import { Location } from '@angular/common';
@@ -22,7 +21,7 @@ import { AuthorizationManager } from '../../services/authorization-manager';
 })
 export class CommentComponent implements OnInit, OnChanges, OnDestroy {
 
-  comment: CommentSimple;
+  comment: Comment;
   commentRound: CommentRound;
   commentThread: CommentThread;
 

@@ -78,7 +78,7 @@ import { regularStatuses, Status } from 'yti-common-ui/entities/status';
               type="button"
               class="btn btn-link cancel"
               (click)="cancel()">
-        <span>Cancel</span>
+        <span translate>Cancel</span>
       </button>
     </div>
   `
@@ -92,7 +92,7 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
   @Input() searchLabel: string;
   @Input() useUILanguage: boolean;
   @Input() containerUri: string | null;
-  @Input() containerType: string;
+  @Input() containerType: string | null;
 
   statusOptions: FilterOptions<Status>;
   containerTypeOptions: FilterOptions<string>;
@@ -114,6 +114,7 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
   }
 
   ngOnInit() {
+
     this.containerTypeOptions = [null, ...containerTypes].map(containerType => ({
       value: containerType,
       name: () => this.translateService.instant(containerType ? containerType : 'Select tool'),
@@ -126,7 +127,7 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
       idIdentifier: () => status ? status : 'all_selected'
     }));
 
-    if (this.containerUri) {
+    if (this.containerUri && this.containerType) {
       this.resources$ = this.dataService.getResources(this.containerType, this.containerUri, this.languageService.language);
       this.filterResources();
     } else {
@@ -140,6 +141,7 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
   }
 
   filterResources() {
+
     const initialSearch = this.search$.pipe(take(1));
     const debouncedSearch = this.search$.pipe(skip(1), debounceTime(500));
 
@@ -159,22 +161,28 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
   }
 
   select(resource: IntegrationResource) {
+
+    resource.type = this.containerType$.value ? this.containerType$.value : undefined;
     this.modal.close(resource);
   }
 
   ngAfterViewInit() {
+
     this.searchInput.nativeElement.focus();
   }
 
   get search() {
+
     return this.search$.getValue();
   }
 
   set search(value: string) {
+
     this.search$.next(value);
   }
 
   cancel() {
+
     this.modal.dismiss('cancel');
   }
 }
@@ -185,8 +193,8 @@ export class SearchLinkedIntegrationResourceModalService {
   constructor(private modalService: ModalService) {
   }
 
-  open(containerType: string,
-       containerUri: string,
+  open(containerType: string | null,
+       containerUri: string | null,
        titleLabel: string,
        searchLabel: string,
        restrictResourceIds: string[],

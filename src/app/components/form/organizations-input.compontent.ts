@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { SearchLinkedOrganizationModalService } from './search-linked-organization-modal.component';
 import { LanguageService } from '../../services/language.service';
-import { Organization } from '../../entity/organization';
 import { OrganizationSimple } from '../../entity/organization-simple';
 
 function addToControl<T>(control: FormControl, itemToAdd: T) {

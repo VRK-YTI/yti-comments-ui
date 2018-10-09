@@ -1,21 +1,18 @@
-import { Component, forwardRef, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
 import { Placement as NgbPlacement } from '@ng-bootstrap/ng-bootstrap';
+import { Status } from 'yti-common-ui/entities/status';
+import { EditableService } from '../../services/editable.service';
 import { ProposedStatus, selectableProposedStatuses } from '../../entity/proposed-status';
 
 export type Placement = NgbPlacement;
 
 @Component({
-  selector: 'app-proposedstatus-dropdown',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => ProposedStatusDropdownComponent),
-    multi: true
-  }],
+  selector: 'app-proposed-status-table-dropdown',
   template: `
-    <div ngbDropdown [placement]="placement">
+    <div *ngIf="editing" ngbDropdown [placement]="placement">
       <button [id]="'selected_' + id" class="btn btn-dropdown" ngbDropdownToggle>
-        <span>{{ selection | translate }}</span>
+        <span>{{ status | translate }}</span>
       </button>
 
       <div ngbDropdownMenu>
@@ -24,37 +21,46 @@ export type Placement = NgbPlacement;
                 (click)="select(option)"
                 class="dropdown-item"
                 [class.active]="isSelected(option)">
-          <span translate>{{ option }}</span>
+          {{option | translate}}
         </button>
       </div>
     </div>
+    <div *ngIf="!editing">
+      <span translate>{{ status }}</span>
+    </div>
   `
 })
-export class ProposedStatusDropdownComponent implements ControlValueAccessor {
+export class ProposedStatusTableDropdownComponent implements ControlValueAccessor {
 
   @Input() id: string;
   @Input() placement: Placement = 'bottom-left';
-
-  selection: ProposedStatus;
+  @Input() status: ProposedStatus;
 
   private propagateChange: (fn: any) => void = () => {};
   private propagateTouched: (fn: any) => void = () => {};
+
+  constructor(private editableService: EditableService) {
+  }
 
   get options(): ProposedStatus[] {
     return selectableProposedStatuses;
   }
 
-  isSelected(option: ProposedStatus) {
-    return this.selection === option;
+  get editing() {
+    return this.editableService.editing;
   }
 
-  select(option: ProposedStatus) {
-    this.selection = option;
+  isSelected(option: Status) {
+    return this.status === option;
+  }
+
+  select(option: Status) {
+    this.status = option;
     this.propagateChange(option);
   }
 
   writeValue(obj: any): void {
-    this.selection = obj;
+    this.status = obj;
   }
 
   registerOnChange(fn: any): void {

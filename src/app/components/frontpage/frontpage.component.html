@@ -6,16 +6,16 @@
 
   <div class="yti-tool-front-page" *ngIf="!loading">
     <div class="row mb-12">
-      <div class="col-md-10">
+      <div class="col-md-9">
         <p translate>Frontpage long description</p>
       </div>
 
-      <div *ngIf="canCreateCommentRound()" class="col-md-2 float-right mb-4 d-inline-block">
+      <div *ngIf="canCreateCommentRound()" class="col-md-3 float-right mb-4 d-inline-block">
         <button id="create_commentround_button"
                 type="button"
                 class="btn btn-action float-right"
                 (click)="createNewCommentRound()">
-          <span translate>Add comment round</span>
+          <span translate>Add new comment round</span>
         </button>
       </div>
 
@@ -34,6 +34,11 @@
               <app-information-symbol [infoText]="'INFO_TEXT_FRONTPAGE_FILTER_RESULTS'"></app-information-symbol>
 
               <app-filter-dropdown class="d-inline-block"
+                                   id="integration_filter_dropdown"
+                                   [filterSubject]="containerType$"
+                                   [options]="containerTypeOptions"></app-filter-dropdown>
+
+              <app-filter-dropdown class="d-inline-block"
                                    id="organization_filter_dropdown"
                                    [filterSubject]="organization$"
                                    [options]="organizationOptions"></app-filter-dropdown>
@@ -42,11 +47,6 @@
                                    id="status_filter_dropdown"
                                    [filterSubject]="status$"
                                    [options]="statusOptions"></app-filter-dropdown>
-
-              <app-filter-dropdown class="d-inline-block"
-                                   id="integration_filter_dropdown"
-                                   [filterSubject]="containerType$"
-                                   [options]="containerTypeOptions"></app-filter-dropdown>
             </div>
           </div>
 

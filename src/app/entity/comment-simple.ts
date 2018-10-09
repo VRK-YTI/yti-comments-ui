@@ -1,7 +1,7 @@
 import { formatDateTime, formatDisplayDateTime, parseDateTime } from '../utils/date';
 import { Moment } from 'moment';
 import { AbstractResource } from './abstract-resource';
-import { CommentSimpleType, CommentType } from '../services/api-schema';
+import { CommentSimpleType } from '../services/api-schema';
 import { Location } from 'yti-common-ui/types/location';
 import { User } from './user';
 

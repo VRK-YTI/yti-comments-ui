@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Location } from 'yti-common-ui/types/location';
 import { CommentRound } from '../entity/commentround';
-import { CommentThreadSimple } from '../entity/commentthread-simple';
-import { CommentSimple } from '../entity/comment-simple';
+import { Comment } from '../entity/comment';
 import { CommentThread } from '../entity/commentthread';
 
 const frontPage = { localizationKey: 'Front page', route: [''] };
@@ -34,7 +33,7 @@ export class LocationService {
     this.changeLocation(commentThread.location);
   }
 
-  atCommentPage(comment: CommentSimple): void {
+  atCommentPage(comment: Comment): void {
     this.changeLocation(comment.location);
   }
 

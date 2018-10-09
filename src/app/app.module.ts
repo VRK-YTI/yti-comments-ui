@@ -49,8 +49,6 @@ import { ContentLanguageComponent } from './components/common/content-language-c
 import { AuthorizationManager } from './services/authorization-manager';
 import { CommentRoundStatusDropdownComponent } from './components/form/comment-round-status-dropdown.component';
 import { CommentRoundListitemComponent } from './components/commentround/comment-round-listitem.component';
-import { CommentThreadListitemComponent } from './components/commentthread/comment-thread-listitem.component';
-import { CommentListitemComponent } from './components/comment/comment-listitem.component';
 import { BooleanInputComponent } from './components/form/boolean-input-component';
 import { CommentThreadCreateComponent } from './components/commentthread/comment-thread-create.component';
 import { LocalizableInputComponent } from './components/form/localizable-input';
@@ -68,6 +66,9 @@ import { LocalizableTextareaComponent } from './components/form/localizable-text
 import { ClipboardComponent } from './components/form/clipboard';
 import { ClipboardModule } from 'ngx-clipboard';
 import { CurrentStatusComponent } from './components/form/current-status';
+import { ProposedStatusTableDropdownComponent } from './components/form/proposed-status-dropdown';
+import { IntegrationResourceService } from './services/integrationresource.service';
+import { CommentsConfirmationModalService } from './components/common/confirmation-modal.service';
 
 declare var require: any;
 
@@ -173,10 +174,8 @@ const appRoutes: Routes = [
     ContentLanguageComponent,
     CommentRoundStatusDropdownComponent,
     CommentRoundListitemComponent,
-    CommentThreadListitemComponent,
     CommentThreadCreateComponent,
     CommentCreateComponent,
-    CommentListitemComponent,
     BooleanInputComponent,
     LocalizableInputComponent,
     CommentInputComponent,
@@ -185,9 +184,10 @@ const appRoutes: Routes = [
     ProposedStatusDropdownComponent,
     CommentRoundStatusComponent,
     LiteralTextareaComponent,
-    CurrentStatusComponent
+    CurrentStatusComponent,
+    ProposedStatusTableDropdownComponent
   ],
-  entryComponents: [ // needed for modal components
+  entryComponents: [
     SearchLinkedIntegrationResourceModalComponent,
     SearchLinkedOrganizationModalComponent,
     SearchLinkedCommentModalComponent
@@ -217,6 +217,8 @@ const appRoutes: Routes = [
     LocationService,
     AuthorizationManager,
     DataService,
+    IntegrationResourceService,
+    CommentsConfirmationModalService,
     ModalService,
     SearchLinkedIntegrationResourceModalService,
     SearchLinkedOrganizationModalService,

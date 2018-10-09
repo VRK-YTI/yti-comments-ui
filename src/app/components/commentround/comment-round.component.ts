@@ -10,13 +10,13 @@ import { CommentRoundStatus } from '../../entity/comment-round-status';
 import { requiredList } from 'yti-common-ui/utils/validator';
 import { Location } from '@angular/common';
 import { Observable, Subscription } from 'rxjs';
-import { IntegrationReourceType, SourceType } from '../../services/api-schema';
 import { tap } from 'rxjs/operators';
-import { IntegrationResource } from '../../entity/integration-resource';
-import { Source } from '../../entity/source';
 import { LocationService } from '../../services/location.service';
 import { AuthorizationManager } from '../../services/authorization-manager';
 import { CommentThreadSimple } from '../../entity/commentthread-simple';
+import { CommentsConfirmationModalService } from '../common/confirmation-modal.service';
+import { ErrorModalService } from 'yti-common-ui/components/error-modal.component';
+import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 
 @Component({
   selector: 'app-commentround',
@@ -38,8 +38,7 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     openThreads: new FormControl(),
     validity: new FormControl({ start: null, end: null }, validDateRange),
     status: new FormControl('AWAIT' as CommentRoundStatus),
-    organizations: new FormControl([], [requiredList]),
-    resource: new FormControl(null)
+    organizations: new FormControl([], [requiredList])
   }, null);
 
   constructor(private router: Router,
@@ -48,7 +47,9 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
               private editableService: EditableService,
               private locationService: LocationService,
               private location: Location,
-              private authorizationManager: AuthorizationManager) {
+              private authorizationManager: AuthorizationManager,
+              private confirmationModalService: CommentsConfirmationModalService,
+              private errorModalService: ErrorModalService) {
 
     this.cancelSubscription = editableService.cancel$.subscribe(() => this.reset());
 
@@ -94,6 +95,32 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     return false;
   }
 
+  startCommentRound() {
+
+    this.confirmationModalService.startCommentRound()
+      .then(() => {
+        this.commentRound.status = 'INPROGRESS';
+        this.dataService.updateCommentRound(this.commentRound.serialize()).subscribe(commentRound => {
+          this.ngOnInit();
+        }, error => {
+          this.errorModalService.openSubmitError(error);
+        });
+      }, ignoreModalClose);
+  }
+
+  closeCommentRound() {
+
+    this.confirmationModalService.startCommentRound()
+      .then(() => {
+        this.commentRound.status = 'CLOSED';
+        this.dataService.updateCommentRound(this.commentRound.serialize()).subscribe(commentRound => {
+          this.ngOnInit();
+        }, error => {
+          this.errorModalService.openSubmitError(error);
+        });
+      }, ignoreModalClose);
+  }
+
   createNewCommentThread() {
 
     this.router.navigate(
@@ -107,15 +134,8 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
 
   private reset() {
 
-    const { label, description, fixedThreads, openThreads, startDate, endDate, organizations, source, sourceLabel, status }
+    const { label, description, fixedThreads, openThreads, startDate, endDate, organizations, status }
       = this.commentRound;
-
-    const integrationResource: IntegrationReourceType = <IntegrationReourceType> {
-      uri: source.containerUri,
-      prefLabel: sourceLabel
-    };
-
-    const resource: IntegrationResource = new IntegrationResource(integrationResource);
 
     this.commentRoundForm.reset({
       label: label,
@@ -124,23 +144,13 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
       openThreads: openThreads,
       validity: { start: startDate, end: endDate },
       organizations: organizations.map(organization => organization.clone()),
-      resource: resource,
       status: status
     });
   }
 
   save(formData: any): Observable<any> {
 
-    const { label, description, fixedThreads, openThreads, validity, organizations, resource, status } = formData;
-
-    const sourceType: SourceType = <SourceType> {
-      'id': undefined,
-      'url': undefined,
-      'containerType': 'codelist',
-      'containerUri': resource.uri
-    };
-
-    const source: Source = new Source(sourceType);
+    const { label, description, fixedThreads, openThreads, validity, organizations, status } = formData;
 
     const updatedCommentRound = this.commentRound.clone();
 
@@ -152,8 +162,8 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
       startDate: validity.start,
       endDate: validity.end,
       organizations: organizations,
-      source: source,
-      sourceLabel: resource.prefLabel,
+      source: this.commentRound.source,
+      sourceLabel: this.commentRound.sourceLabel,
       status: status
     });
 
@@ -176,7 +186,21 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
 
   get getResourceUri(): string {
 
-    return this.commentRoundForm.controls['resource'].value ? this.commentRoundForm.controls['resource'].value.uri : '-';
+    return this.commentRound.source.containerUri;
+  }
+
+  get hasCommentThreads(): boolean {
+
+    return this.commentThreads && this.commentThreads.length > 0;
+  }
+
+  get isEditor(): boolean {
+
+    return this.commentRound.user.email === this.authorizationManager.user.email;
+  }
+
+  get toolType(): string {
+    return this.commentRound.source.containerType;
   }
 
   viewCommentThread(commentThread: CommentThread) {

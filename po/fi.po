@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-05 18:48+0300\n"
+"PO-Revision-Date: 2018-10-09 16:34+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -12,15 +12,6 @@ msgstr ""
 "X-Generator: Poedit 2.1.1\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-msgid "User"
-msgstr "Käyttäjä"
-
-msgid "URI"
-msgstr "URI"
-
-msgid "enabled"
-msgstr "valittu"
 
 msgid "Copy value to clipboard"
 msgstr "Kopioi {{value}} leikepöydälle"
@@ -64,10 +55,13 @@ msgstr "Valitse kommentti"
 msgid "Search comment"
 msgstr "Etsi kommentti"
 
+msgid "{{ status }}"
+msgstr ""
+
 msgid "Proposed status"
 msgstr "Ehdotettu tila"
 
-msgid "{{option}}"
+msgid "{{ option }}"
 msgstr ""
 
 msgid "Filter results"
@@ -88,8 +82,8 @@ msgstr "Kaikki organisaatiot"
 msgid "Comments"
 msgstr "Kommentit"
 
-msgid "Comment round name"
-msgstr "Kommentointikierroksen nimi"
+msgid "Round name"
+msgstr "Kierroksen nimi"
 
 msgid "Comment thread name"
 msgstr "Kommentointiketjun nimi"
@@ -106,20 +100,26 @@ msgstr "Ylätason kommentti"
 msgid "Create comment"
 msgstr "Luo kommentti"
 
+msgid "Commenter"
+msgstr "Kommentoija"
+
+msgid "Thread resource URI"
+msgstr "Kommentointiketju resurssin URI"
+
 msgid "Created"
 msgstr "Luontiajankohta"
 
 msgid "Add comment"
 msgstr "Luo kommentti"
 
+msgid "Tool"
+msgstr "Työkalu"
+
+msgid "Commenting period"
+msgstr "Kommentointiaika"
+
 msgid "Description"
 msgstr "Kuvaus"
-
-msgid "Organization"
-msgstr "Organisaatio"
-
-msgid "Source URI"
-msgstr "Lähde URI"
 
 msgid "Source"
 msgstr "Lähde"
@@ -130,20 +130,58 @@ msgstr "Vain valitut kohteet"
 msgid "Allow new comment threads"
 msgstr "Salli uudet ehdotukset"
 
-msgid "Validity"
-msgstr "Voimassaolo"
+msgid "Source URI"
+msgstr "Lähde URI"
 
-msgid "Create comment round"
-msgstr "Luo kommentointikierros"
+msgid "Organization"
+msgstr "Organisaatio"
+
+msgid "Comment round information"
+msgstr "Kommentointikierroksen tiedot"
+
+msgid "Editor"
+msgstr "Editori"
 
 msgid "Last modification"
 msgstr "Viimeisin muokkaus"
 
-msgid "Add comment thread"
-msgstr "Luo kommenttiketju"
+msgid "Start comment round"
+msgstr "Aloita kommentointi"
 
-msgid "Comment threads"
-msgstr "Kommentointiketjut"
+msgid "Close comment round"
+msgstr "Lopeta kommentointi"
+
+msgid "Resources for commenting"
+msgstr "Kommentoitavat resurssit"
+
+msgid "Add new resource"
+msgstr "Lisää uusi resurssi"
+
+msgid "There are no resources to comment."
+msgstr "Kommentoitavia resursseja ei ole."
+
+msgid "Resource"
+msgstr "Resurssi"
+
+msgid "Current status"
+msgstr "Nykyinen tila"
+
+msgid "Editors comment"
+msgstr "Editorin kommentti"
+
+msgid "{{ commentThread.currentStatus }}"
+msgstr ""
+
+msgid "{{ editing ? 'Propose status' : 'Commenters proposal for status'}}"
+msgstr ""
+
+msgid "{{ editing ? 'Your comment' : 'Commenters comment'}}"
+msgstr ""
+
+msgid ""
+"{{ commentThread.proposedStatus ? commentThread.proposedStatus : "
+"'NOSTATUS' }}"
+msgstr ""
 
 msgid "Resource name"
 msgstr "Resurssin nimi"
@@ -154,17 +192,14 @@ msgstr "Resurssin kuvaus"
 msgid "Resource URI"
 msgstr "Resurssin URI"
 
-msgid "Resource"
-msgstr "Resurssi"
-
 msgid "Proposed action"
 msgstr "Ehdotettu toiminto"
 
-msgid "Current status"
-msgstr "Nykyinen tila"
-
 msgid "Create comment thread"
 msgstr "Luo kommenttiketju"
+
+msgid "There are no comments yet."
+msgstr "Kommentteja ei vielä ole."
 
 msgid "comment round"
 msgstr "kommentointikierros"
@@ -180,8 +215,8 @@ msgstr ""
 "kommentointikierrokselle lähetettyjä tietosisältöjä sekä lukea muiden "
 "antamia kommentteja."
 
-msgid "Add comment round"
-msgstr "Luo kommentointikierros"
+msgid "Add new comment round"
+msgstr "Luo uusi kommentointikierros"
 
 msgid "Did not find any comment rounds."
 msgstr "Kommentointikierroksia ei löytynyt."
@@ -319,6 +354,9 @@ msgstr "Ehdotettu tila kommentoidulle resurssille"
 msgid "INFO_TEXT_COMMENT_CREATED"
 msgstr "Kommentin luontiajankohta"
 
+msgid "INFO_TEXT_INTEGRATION_RESOURCEURI"
+msgstr "Kommentointikierroksen resurssin URI-osoite"
+
 msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr ""
 "Hakutuloksia voi rajatalla organisaatio-, tila- ja työkalukohtaisesti "
@@ -327,8 +365,8 @@ msgstr ""
 msgid "INFO_TEXT_SOURCE_FILTER_RESULTS"
 msgstr "Työkalun valinta, josta kommentoitava resurssi noudetaan"
 
-msgid "ERR_MSG_USER_END_BEFORE_START_DATE"
-msgstr "Loppupäivä ennen alkupäivää"
+msgid "CODE_LIST_EDITOR"
+msgstr "Koodistotyöntekijä"
 
 msgid "Front page"
 msgstr "Etusivu"
@@ -378,8 +416,8 @@ msgstr "Epäsopivaa data"
 msgid "ERR_MSG_USER_500"
 msgstr "Tapahtui odottamaton virhe"
 
-msgid "NOSTATUS"
-msgstr "Ei valittua tilaa"
+msgid "ERR_MSG_USER_END_BEFORE_START_DATE"
+msgstr "Loppupäivä ennen alkupäivää"
 
 msgid "Submit error"
 msgstr "Toiminnossa tapahtui virhe"
@@ -396,8 +434,8 @@ msgstr "Tietomallintaja"
 msgid "TERMINOLOGY_EDITOR"
 msgstr "Tietomallintaja"
 
-msgid "CODE_LIST_EDITOR"
-msgstr "Koodistotyöntekijä"
+msgid "NOSTATUS"
+msgstr "Ei valittua tilaa"
 
 msgid "required"
 msgstr "vaadittu"
@@ -410,6 +448,15 @@ msgstr "Suomi.fi-sanastot"
 
 msgid "datamodel"
 msgstr "Suomi.fi-tietomallit"
+
+msgid "codelist-type"
+msgstr "Koodisto"
+
+msgid "terminology-type"
+msgstr "Sanasto"
+
+msgid "datamodel-type"
+msgstr "Tietomalli"
 
 msgid "All statuses"
 msgstr "Kaikki tilat"
@@ -425,3 +472,111 @@ msgstr "Kommentointiketju"
 
 msgid "Select tool"
 msgstr "Valitse työkalu"
+
+msgid "Commenters proposal for status"
+msgstr "Kommentoijan ehdotus"
+
+msgid "Commenters comment"
+msgstr "Kommentoijan kommentti"
+
+msgid "Your comment"
+msgstr "Kommentoi"
+
+msgid "Propose status"
+msgstr "Ehdota tilaa"
+
+msgid "Create comment round"
+msgstr "Luo kommentointikierros"
+
+msgid "-"
+msgstr "-"
+
+msgid "START COMMENT ROUND?"
+msgstr "ALOITA KOMMENTOINTIKIERROS?"
+
+msgid "CLOSE COMMENT ROUND?"
+msgstr "SULJE KOMMENTOINTIKIERROS?"
+
+#~ msgid "There are no comment threads yet."
+#~ msgstr "Kommenttiketjuja ei vielä ole lisätty."
+
+#~ msgid "End comment round"
+#~ msgstr "Lopeta kommentointi"
+
+#~ msgid "User"
+#~ msgstr "Käyttäjä"
+
+#~ msgid "Comment round name"
+#~ msgstr "Kommentointikierroksen nimi"
+
+#, fuzzy
+#~| msgid "comment round"
+#~ msgid "commentRound"
+#~ msgstr "kommentointikierros"
+
+#~ msgid "Validity"
+#~ msgstr "Voimassaolo"
+
+#~ msgid "Add comment thread"
+#~ msgstr "Luo kommenttiketju"
+
+#~ msgid "Comment threads"
+#~ msgstr "Kommentointiketjut"
+
+#~ msgid "enabled"
+#~ msgstr "valittu"
+
+#~ msgid "URI"
+#~ msgstr "URI"
+
+#~ msgid "All integrations"
+#~ msgstr "Kaikki sovellukset"
+
+#~ msgid "Select interoperability tool"
+#~ msgstr "Valitse yhteentoimivuusalustan työkalu"
+
+#~ msgid "Comment thread label"
+#~ msgstr "Kommentointiketjun nimi"
+
+#, fuzzy
+#~| msgid "Select resource"
+#~ msgid "Only selected sources"
+#~ msgstr "Valitse resurssi"
+
+#, fuzzy
+#~| msgid "All integrations"
+#~ msgid "Allow new suggestions"
+#~ msgstr "Kaikki sovellukset"
+
+#~ msgid "Fixed threads"
+#~ msgstr "Avoin kommentoitavien resurssien lisäys"
+
+#~ msgid "Open threads"
+#~ msgstr "Avoin kommentointi päätason containeriin"
+
+#~ msgid "Proposed text"
+#~ msgstr "Ehdotettu teksti"
+
+#~ msgid "Definition"
+#~ msgstr "Määritelmä"
+
+#, fuzzy
+#~| msgid "Comment"
+#~ msgid "Comment/div>"
+#~ msgstr "Kommentti"
+
+#~ msgid "No resources found."
+#~ msgstr "Ei hakutuloksia."
+
+#, fuzzy
+#~| msgid "Comment Round"
+#~ msgid "CommentRoundStatus"
+#~ msgstr "Kommentointikierros"
+
+#~ msgid "Comment round label"
+#~ msgstr "Kommentointikierroksen nimi"
+
+#, fuzzy
+#~| msgid "Suomi.fi Controlled Vocabularies"
+#~ msgid "Get concept from Controlled Vocabularies"
+#~ msgstr "Suomi.fi-sanastot"

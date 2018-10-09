@@ -10,8 +10,8 @@ import { Moment } from 'moment';
   template: `
     <dl *ngIf="show">
       <dt>
-        <label>{{label}}</label>
-        <app-information-symbol [infoText]="infoText"></app-information-symbol>
+        <label *ngIf="showLabel">{{label}}</label>
+        <app-information-symbol *ngIf="showLabel" [infoText]="infoText"></app-information-symbol>
         <app-required-symbol *ngIf="required && editing"></app-required-symbol>
       </dt>
       <dd>
@@ -40,6 +40,7 @@ export class DateInputComponent {
   @ViewChild('date') date: NgbInputDatepicker;
 
   @Input() label: string;
+  @Input() showLabel: boolean;
   @Input() restrict = false;
   @Input() required = false;
   @Input() id: string;

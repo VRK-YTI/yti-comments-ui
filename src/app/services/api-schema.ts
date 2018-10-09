@@ -73,7 +73,7 @@ export interface CommentType extends BaseResourceType {
   proposedStatus: string;
   created?: string | null;
   modified?: string;
-  commentThread: CommentThreadSimpleType;
+  commentThread: CommentThreadType;
   parentComment?: CommentSimpleType;
 }
 

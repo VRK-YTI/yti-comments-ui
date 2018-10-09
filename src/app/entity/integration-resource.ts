@@ -1,4 +1,4 @@
-import { IntegrationReourceType, SourceType } from '../services/api-schema';
+import { IntegrationReourceType } from '../services/api-schema';
 import { Status } from 'yti-common-ui/entities/status';
 import { Localizable, Localizer } from 'yti-common-ui/types/localization';
 
@@ -9,6 +9,7 @@ export class IntegrationResource {
   prefLabel: Localizable = {};
   description: Localizable = {};
   status: Status;
+  type?: string;
 
   constructor(data: IntegrationReourceType) {
 

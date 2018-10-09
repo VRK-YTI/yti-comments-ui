@@ -4,29 +4,27 @@ import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 
 @Component({
   selector: 'app-boolean-input',
+  styleUrls: ['./boolean-input-component.scss'],
   template: `
     <dl>
       <dt>
-        <label>{{label}}</label>
-        <app-information-symbol [infoText]="infoText"></app-information-symbol>
-        <app-required-symbol *ngIf="required && editing"></app-required-symbol>
-      </dt>
-      <dd>
         <div *ngIf="editing" class="checkbox">
           <input [id]="id"
                  type="checkbox"
                  [formControl]="control"/>
-          <label for="id" translate>enabled</label>
-          <app-error-messages [id]="id + '_error_messages'" [control]="parentControl"></app-error-messages>
+          <label for="id">{{ label }}</label>
+          <app-information-symbol [infoText]="infoText"></app-information-symbol>
+          <app-required-symbol *ngIf="required && editing"></app-required-symbol>
         </div>
         <div *ngIf="!editing" class="checkbox">
           <input [id]="id"
                  type="checkbox"
                  disabled
                  [checked]="control.value"/>
-          <label [for]="id" translate>enabled</label>
+          <label [for]="id">{{ label }}</label>
+          <app-information-symbol [infoText]="infoText"></app-information-symbol>
         </div>
-      </dd>
+      </dt>
     </dl>
   `
 })

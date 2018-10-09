@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Comment } from '../entity/comment';
 import { CommentRound } from '../entity/commentround';
-import { CommentRoundType, CommentSimpleType, CommentThreadSimpleType, CommentThreadType, CommentType } from './api-schema';
+import { CommentRoundType, CommentSimpleType, CommentThreadSimpleType, CommentThreadType, CommentType, SourceType } from './api-schema';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/internal/operators';
 import { ServiceConfiguration } from '../entity/service-configuration';
@@ -12,10 +12,12 @@ import { OrganizationSimple } from '../entity/organization-simple';
 import { IntegrationResource } from '../entity/integration-resource';
 import { CommentThreadSimple } from '../entity/commentthread-simple';
 import { CommentSimple } from '../entity/comment-simple';
+import { Source } from '../entity/source';
 
 const apiContext = 'comments-api';
 const api = 'api';
 const version = 'v1';
+const sources = 'sources';
 const commentRounds = 'commentrounds';
 const commentThreads = 'commentthreads';
 const configuration = 'configuration';
@@ -33,8 +35,8 @@ const terminology = 'terminology';
 const datamodel = 'datamodel';
 
 const baseApiPath = `/${apiContext}/${api}/${version}`;
-const commentsApiPath = `${baseApiPath}/${comments}`;
 const commentRoundsApiPath = `${baseApiPath}/${commentRounds}`;
+const sourcesApiPath = `${baseApiPath}/${sources}`;
 const fakeableUsersPath = `/${apiContext}/${api}/${fakeableUsers}`;
 const configurationPath = `/${apiContext}/${api}/${configuration}`;
 const organizationsBasePath = `${baseApiPath}/${organizations}`;
@@ -148,7 +150,7 @@ export class DataService {
     const params = new HttpParams()
       .set('expand', 'comment');
 
-    return this.http.get(commentRoundsApiPath + '/' + commentRoundId + '/' + commentThreads, { responseType: 'json' })
+    return this.http.get(commentRoundsApiPath + '/' + commentRoundId + '/' + commentThreads, { params: params, responseType: 'json' })
       .pipe(map((res: any) => {
         return res.results.map(
           (data: CommentThreadSimpleType) => new CommentThreadSimple(data));
@@ -161,24 +163,42 @@ export class DataService {
       .set('expand', 'commentThread');
 
     return this.http.get(commentRoundsApiPath + '/' + commentRoundId + '/' + commentThreads + '/' + commentThreadId + '/' + comments,
-      { responseType: 'json' })
+      { params: params, responseType: 'json' })
       .pipe(map((res: any) => {
         return res.results.map(
           (data: CommentSimpleType) => new CommentSimple(data));
       }));
   }
 
-  getCommentRoundCommentThreadComment(commentRoundId: string, commentThreadId: string, commentId: string): Observable<CommentSimple> {
+  getCommentRoundCommentThreadComment(commentRoundId: string, commentThreadId: string, commentId: string): Observable<Comment> {
 
     const params = new HttpParams()
-      .set('expand', 'commentThread');
+      .set('expand', 'commentThread,commentRound');
 
     return this.http.get(
       commentRoundsApiPath + '/' + commentRoundId + '/' + commentThreads + '/' + commentThreadId + '/' + comments + '/' + commentId,
       { params: params, responseType: 'json' })
       .pipe(map((res: any) => {
-        return new CommentSimple(res as CommentSimpleType);
+        return new Comment(res as CommentType);
       }));
+  }
+
+  createSource(sourceToCreate: SourceType): Observable<Source> {
+
+    return this.createSources([sourceToCreate]).pipe(map(createdSources => {
+      if (createdSources.length !== 1) {
+        throw new Error('Exactly one comment source needs to be created');
+      } else {
+        return createdSources[0];
+      }
+    }));
+  }
+
+  createSources(sourcesList: SourceType[]): Observable<Source[]> {
+
+    return this.http.post<WithResults<SourceType>>(`${sourcesApiPath}/`,
+      sourcesList)
+      .pipe(map(res => res.results.map(data => new Source(data))));
   }
 
   createCommentRound(commentRoundToCreate: CommentRoundType): Observable<CommentRound> {

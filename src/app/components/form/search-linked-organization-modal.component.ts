@@ -53,7 +53,7 @@ import { OrganizationSimple } from '../../entity/organization-simple';
               type="button"
               class="btn btn-link cancel"
               (click)="cancel()">
-        <span>Cancel</span>
+        <span translate>Cancel</span>
       </button>
     </div>
   `

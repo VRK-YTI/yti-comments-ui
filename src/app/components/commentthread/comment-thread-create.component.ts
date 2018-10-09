@@ -45,7 +45,7 @@ export class CommentThreadCreateComponent implements OnInit {
               private route: ActivatedRoute) {
 
     this.resourceChangeSubscription = this.commentThreadForm.controls['resource'].valueChanges
-      .subscribe(data => this.updateResourceData(data));
+      .subscribe(data => this.updateResourceData());
 
     editableService.onSave = (formValue: any) => this.save(formValue);
     editableService.cancel$.subscribe(() => this.back());
@@ -76,19 +76,20 @@ export class CommentThreadCreateComponent implements OnInit {
   }
 
   get loading(): boolean {
+
     return this.env == null || this.commentRound == null;
   }
 
-  updateResourceData(integrationResource: IntegrationResource) {
+  updateResourceData() {
 
     const resource = this.commentThreadForm.controls['resource'].value;
     if (resource) {
-      this.commentThreadForm.patchValue({ label : resource.prefLabel });
-      this.commentThreadForm.patchValue({ description : resource.description });
+      this.commentThreadForm.patchValue({ label: resource.prefLabel });
+      this.commentThreadForm.patchValue({ description: resource.description });
       this.commentThreadForm.patchValue({ currentStatus: resource.status });
     } else {
-      this.commentThreadForm.patchValue({ label : {} });
-      this.commentThreadForm.patchValue({ description : {} });
+      this.commentThreadForm.patchValue({ label: {} });
+      this.commentThreadForm.patchValue({ description: {} });
       this.commentThreadForm.patchValue({ currentStatus: null });
     }
   }

@@ -1,4 +1,4 @@
-import { CommentRoundType, OrganizationType } from '../services/api-schema';
+import { CommentRoundType } from '../services/api-schema';
 import { formatDate, formatDateTime, formatDisplayDateTime, parseDate, parseDateTime } from '../utils/date';
 import { Moment } from 'moment';
 import { AbstractResource } from './abstract-resource';
@@ -102,7 +102,7 @@ export class CommentRound extends AbstractResource implements EditableEntity {
       endDate: formatDate(this.endDate),
       label: this.label,
       description: this.description,
-      sourceLabel: {...this.sourceLabel},
+      sourceLabel: { ...this.sourceLabel },
       fixedThreads: this.fixedThreads,
       openThreads: this.openThreads,
       source: this.source.serialize(),

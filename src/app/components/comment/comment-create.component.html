@@ -6,24 +6,23 @@
 
   <app-back-button [id]="'comment_create_back_button'" (back)="back()"></app-back-button>
 
-  <h1 class="float-left" translate>Create comment</h1>
-
   <div class="row">
-    <div class="col-12">
+    <div class="col-md-12">
+      <h1 class="float-left" translate>Create comment</h1>
       <app-editable-buttons [form]="form"></app-editable-buttons>
       <app-content-language></app-content-language>
     </div>
   </div>
 
-  <form [formGroup]="commentForm" #form="ngForm">
-    <div class="row">
-      <div class="col-lg-8 col-md-10">
+  <div class="row">
+    <div class="col-md-11">
+      <form [formGroup]="commentForm" #form="ngForm">
         <div class="form-group">
           <app-error-messages id="commentthread_form_error_messages" [control]="commentForm"></app-error-messages>
         </div>
 
         <app-literal [id]="'commentround_name'"
-                     [label]="'Comment round name' | translate"
+                     [label]="'Round name' | translate"
                      [value]="commentRound.label"></app-literal>
 
         <app-literal [id]="'commentthread_name'"
@@ -52,7 +51,7 @@
                            [commentThread]="commentThread"
                            [infoText]="'INFO_TEXT_COMMENT_PARENT_COMMENT'"
                            [formControlName]="'parentComment'"></app-comment-input>
-      </div>
+      </form>
     </div>
-  </form>
+  </div>
 </div>

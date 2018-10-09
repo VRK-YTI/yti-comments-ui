@@ -1,5 +1,4 @@
 import { Component, Input, Optional, Self } from '@angular/core';
-import { EditableService } from '../../services/editable.service';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 
 @Component({
@@ -28,8 +27,7 @@ export class LocalizableTextareaComponent implements ControlValueAccessor {
   private propagateChange: (fn: any) => void = () => {};
   private propagateTouched: (fn: any) => void = () => {};
 
-  constructor(@Self() @Optional() public parentControl: NgControl,
-              private editableService: EditableService) {
+  constructor(@Self() @Optional() public parentControl: NgControl) {
 
     this.control.valueChanges.subscribe(x => this.propagateChange(x));
 

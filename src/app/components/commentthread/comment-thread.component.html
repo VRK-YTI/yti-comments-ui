@@ -13,29 +13,19 @@
       <app-editable-buttons [form]="form"
                             [entity]="commentRound"></app-editable-buttons>
 
-      <div *ngIf="canCreateComment()" class="col-md-2 float-right d-inline-block">
-        <button id="create_comment_button"
-                type="button"
-                class="btn btn-action float-right"
-                (click)="createNewComment()">
-          <span translate>Add comment</span>
-        </button>
-      </div>
-
       <app-content-language></app-content-language>
-
     </div>
   </div>
 
   <form [formGroup]="commentThreadForm" #form="ngForm">
 
     <app-literal id="commentthread_user_name"
-                 [label]="'User' | translate"
+                 [label]="'Editor' | translate"
                  [infoText]="'INFO_TEXT_COMMENTTHREAD_USER'"
                  [value]="commentThread.user.getDisplayName()"></app-literal>
 
     <app-literal [id]="'commentround_name'"
-                 [label]="'Comment round name' | translate"
+                 [label]="'Round name' | translate"
                  [value]="commentRound.label"></app-literal>
 
     <app-localizable-literal *ngIf="!allowInput"
@@ -99,12 +89,42 @@
                  [infoText]="'INFO_TEXT_COMMENTTHREAD_CREATED'"></app-literal>
   </form>
 
-  <h4 class="strong" translate>Comments</h4>
+  <div class="row pt-4">
+    <h4 class="strong d-inline-block col-md-10" translate>Comments</h4>
 
-  <div *ngFor="let comment of comments">
-    <app-comment-listitem [commentRound]="commentRound"
-                          [commentThread]="commentThread"
-                          [comment]="comment"></app-comment-listitem>
+    <div *ngIf="canCreateComment()" class="col-md-2 float-right d-inline-block">
+      <button id="create_comment_button"
+              type="button"
+              class="btn btn-action float-right"
+              (click)="createNewComment()">
+        <span translate>Add comment</span>
+      </button>
+    </div>
   </div>
 
+  <span *ngIf="!hasComments || comments.length === 0" translate>There are no comments yet.</span>
+
+  <table *ngIf="hasComments" class="table table-borderless" width="100%">
+    <thead>
+      <tr>
+        <th style="width: 15%" translate>Commenter</th>
+        <th style="width: 15%" translate>Comment</th>
+        <th style="width: 15%" translate>Current status</th>
+        <th style="width: 15%" translate>Proposed status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let comment of comments">
+        <td>{{ comment.user.firstName }} {{ comment.user.lastName }}</td>
+        <td style="width: 15%">
+          <span class="btn-link" (click)="viewComment(comment)">{{ comment.content }}</span>
+        </td>
+        <td style="width: 10%" translate>{{ commentThread.currentStatus }}</td>
+        <td style="width: 15%" translate>
+          <app-proposed-status-table-dropdown
+            [status]="comment.proposedStatus ? comment.proposedStatus : 'NOSTATUS'"></app-proposed-status-table-dropdown>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

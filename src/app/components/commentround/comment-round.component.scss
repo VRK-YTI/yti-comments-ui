@@ -1,0 +1,38 @@
+@import '../../../../node_modules/yti-common-ui/theme/variables';
+
+.main {
+  display: flex;
+}
+
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+
+table {
+  border: 0;
+  border-style: none;
+
+  thead {
+    font-style: normal;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px;
+    border-left: 0;
+    border-style: solid;
+    border-color: $gray-400;
+  }
+
+  th {
+    color: $gray-600;
+  }
+}
+
+.bottom {
+  margin-top: auto;
+  display: inline-block;
+  vertical-align: bottom;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
