@@ -72,7 +72,7 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
 
   canCreateComment() {
 
-    return this.authorizationManager.canCreateComment();
+    return this.authorizationManager.canCreateComment(this.commentRound);
   }
 
   createNewComment() {
