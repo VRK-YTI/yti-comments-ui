@@ -1,5 +1,5 @@
 # Comments base
-FROM yti-comments-ui-base
+FROM yti-comments-ui-base:dev
 
 # Add nginx config
 ADD nginx.conf /etc/nginx/nginx.conf
