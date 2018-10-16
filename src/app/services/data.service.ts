@@ -133,6 +133,18 @@ export class DataService {
       }));
   }
 
+  getCommentRoundCommenterComments(commentRoundId: string): Observable<Comment[]> {
+
+    const params = new HttpParams()
+      .set('expand', 'source,organization,comment,commentThread');
+
+    return this.http.get(commentRoundsApiPath + '/' + commentRoundId + '/' + 'mycomments', { params: params, responseType: 'json' })
+      .pipe(map((res: any) => {
+        return res.results.map(
+          (data: CommentType) => new Comment(data));
+      }));
+  }
+
   getCommentRoundCommentThread(commentRoundId: string, commentThreadId: string): Observable<CommentThread> {
 
     const params = new HttpParams()
@@ -259,7 +271,7 @@ export class DataService {
 
     const commentThreadId: string = commentToCreate.commentThread.id;
 
-    return this.createComments(commentRoundId, commentThreadId, [commentToCreate]).pipe(map(createdComments => {
+    return this.createCommentToCommentThread(commentRoundId, commentThreadId, [commentToCreate]).pipe(map(createdComments => {
       if (createdComments.length !== 1) {
         throw new Error('Exactly one comment needs to be created');
       } else {
@@ -268,12 +280,19 @@ export class DataService {
     }));
   }
 
-  createComments(commentRoundId: string, commentThreadId: string, commentsList: CommentType[]): Observable<Comment[]> {
+  createCommentToCommentThread(commentRoundId: string, commentThreadId: string, commentsList: CommentType[]): Observable<Comment[]> {
 
     return this.http.post<WithResults<CommentType>>(
       `${commentRoundsApiPath}/${commentRoundId}/${commentThreads}/${commentThreadId}/${comments}`,
       commentsList)
       .pipe(map(res => res.results.map(data => new Comment(data))));
+  }
+
+  createCommentsToCommentRound(commentRoundId: string, commentsList: CommentType[]): Observable<CommentSimple[]> {
+
+    return this.http.post<WithResults<CommentType>>(
+      `${commentRoundsApiPath}/${commentRoundId}/${comments}`, commentsList)
+      .pipe(map(res => res.results.map(data => new CommentSimple(data))));
   }
 
   updateComment(commentRoundId: string, commentToUpdate: CommentType): Observable<CommentSimpleType> {

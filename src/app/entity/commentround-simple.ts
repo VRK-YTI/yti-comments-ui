@@ -3,7 +3,6 @@ import { formatDate, formatDateTime, formatDisplayDateTime, parseDate, parseDate
 import { Moment } from 'moment';
 import { AbstractResource } from './abstract-resource';
 import { Source } from './source';
-import { Location } from 'yti-common-ui/types/location';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { User } from './user';
 
@@ -59,28 +58,6 @@ export class CommentRoundSimple extends AbstractResource {
   get modifiedDisplayValue(): string {
 
     return formatDisplayDateTime(this.modified);
-  }
-
-  get location(): Location[] {
-
-    return [
-      {
-        localizationKey: 'Comment round',
-        label: undefined,
-        value: undefined,
-        route: this.route
-      }
-    ];
-  }
-
-  get route(): any[] {
-
-    return [
-      'commentround',
-      {
-        commentRoundId: this.id
-      }
-    ];
   }
 
   serialize(): CommentRoundSimpleType {

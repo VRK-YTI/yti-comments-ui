@@ -4,6 +4,12 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+msgid "Choose source"
+msgstr ""
+
+msgid "Search term"
+msgstr ""
+
 msgid "Copy value to clipboard"
 msgstr ""
 
@@ -46,7 +52,7 @@ msgstr ""
 msgid "Search comment"
 msgstr ""
 
-msgid "{{ status }}"
+msgid "{{ selectedStatus }}"
 msgstr ""
 
 msgid "Proposed status"
@@ -58,13 +64,10 @@ msgstr ""
 msgid "Filter results"
 msgstr ""
 
+msgid "Create empty resource"
+msgstr ""
+
 msgid "Select resource"
-msgstr ""
-
-msgid "Choose source"
-msgstr ""
-
-msgid "Search term"
 msgstr ""
 
 msgid "All organizations"
@@ -142,6 +145,12 @@ msgstr ""
 msgid "Close comment round"
 msgstr ""
 
+msgid "Comment to round"
+msgstr ""
+
+msgid "Send comments"
+msgstr ""
+
 msgid "Resources for commenting"
 msgstr ""
 
@@ -160,18 +169,33 @@ msgstr ""
 msgid "Editors comment"
 msgstr ""
 
-msgid "{{ commentThread.currentStatus }}"
-msgstr ""
-
-msgid "{{ editing ? 'Propose status' : 'Commenters proposal for status'}}"
-msgstr ""
-
-msgid "{{ editing ? 'Your comment' : 'Commenters comment'}}"
+msgid "Actions"
 msgstr ""
 
 msgid ""
-"{{ commentThread.proposedStatus ? commentThread.proposedStatus : 'NOSTATUS' "
-"}}"
+"{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : "
+"'-' }}"
+msgstr ""
+
+msgid ""
+"{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus "
+": 'NOSTATUS' }}"
+msgstr ""
+
+msgid "{{ commenting ? 'Propose status' : 'Commenters proposal for status' }}"
+msgstr ""
+
+msgid "{{ commenting ? 'Your comment' : 'Commenters comment' }}"
+msgstr ""
+
+msgid ""
+"{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : "
+"'NOSTATUS' }}"
+msgstr ""
+
+msgid ""
+"{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus "
+": '-'}}"
 msgstr ""
 
 msgid "Resource name"
@@ -190,6 +214,9 @@ msgid "Create comment thread"
 msgstr ""
 
 msgid "There are no comments yet."
+msgstr ""
+
+msgid "{{ commentThread.currentStatus }}"
 msgstr ""
 
 msgid "comment round"

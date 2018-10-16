@@ -38,6 +38,7 @@ export interface CommentRoundType extends BaseResourceType {
   endDate?: string;
   source: SourceType;
   organizations: OrganizationSimpleType[];
+  commentThreads: CommentThreadSimpleType[];
 }
 
 export interface SourceType {
@@ -90,14 +91,16 @@ export interface CommentThreadType extends BaseResourceType {
   commentRound: CommentRoundType;
 }
 
-export interface CommentThreadSimpleType extends BaseResourceType {
+export interface CommentThreadSimpleType {
 
-  resourceUri: string;
-  label: Localizable;
-  description: Localizable;
-  proposedText: string;
+  id?: string;
+  url?: string;
+  resourceUri?: string;
+  label?: Localizable;
+  description?: Localizable;
+  proposedText?: string;
   currentStatus?: string;
-  proposedStatus: string;
+  proposedStatus?: string;
   user?: UserType;
   created?: string | null;
 }
@@ -126,4 +129,5 @@ export interface IntegrationReourceType {
   prefLabel: Localizable;
   description: Localizable;
   status: Status;
+  type?: string;
 }

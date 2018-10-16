@@ -69,6 +69,7 @@ import { CurrentStatusComponent } from './components/form/current-status';
 import { ProposedStatusTableDropdownComponent } from './components/form/proposed-status-dropdown';
 import { IntegrationResourceService } from './services/integrationresource.service';
 import { CommentsConfirmationModalService } from './components/common/confirmation-modal.service';
+import { DiscussionModalComponent, DiscussionModalService } from './components/common/discussion-modal.service';
 
 declare var require: any;
 
@@ -171,6 +172,7 @@ const appRoutes: Routes = [
     SourceInputComponent,
     SearchLinkedIntegrationResourceModalComponent,
     SearchLinkedOrganizationModalComponent,
+    DiscussionModalComponent,
     ContentLanguageComponent,
     CommentRoundStatusDropdownComponent,
     CommentRoundListitemComponent,
@@ -190,7 +192,8 @@ const appRoutes: Routes = [
   entryComponents: [
     SearchLinkedIntegrationResourceModalComponent,
     SearchLinkedOrganizationModalComponent,
-    SearchLinkedCommentModalComponent
+    SearchLinkedCommentModalComponent,
+    DiscussionModalComponent
   ],
   imports: [
     YtiCommonModule,
@@ -223,6 +226,7 @@ const appRoutes: Routes = [
     SearchLinkedIntegrationResourceModalService,
     SearchLinkedOrganizationModalService,
     SearchLinkedCommentModalService,
+    DiscussionModalService,
     CommentRoundErrorModalService
   ],
   bootstrap: [AppComponent]

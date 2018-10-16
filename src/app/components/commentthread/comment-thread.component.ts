@@ -14,6 +14,7 @@ import { IntegrationResource } from '../../entity/integration-resource';
 import { LocationService } from '../../services/location.service';
 import { CommentSimple } from '../../entity/comment-simple';
 import { Localizable } from 'yti-common-ui/types/localization';
+import { DiscussionModalService } from '../common/discussion-modal.service';
 
 @Component({
   selector: 'app-comment-thread',
@@ -44,7 +45,8 @@ export class CommentThreadComponent implements OnInit {
               private authorizationManager: AuthorizationManager,
               private editableService: EditableService,
               private location: Location,
-              private locationService: LocationService) {
+              private locationService: LocationService,
+              private discussionModalService: DiscussionModalService) {
     this.cancelSubscription = editableService.cancel$.subscribe(() => this.reset());
 
     this.resourceChangeSubscription = this.commentThreadForm.controls['resource'].valueChanges
@@ -84,19 +86,43 @@ export class CommentThreadComponent implements OnInit {
 
   canCreateComment() {
 
-    return this.authorizationManager.canCreateComment();
+    return this.authorizationManager.canCreateComment(this.commentRound);
   }
 
-  createNewComment() {
+  createNewComment(parentCommentId: string) {
 
     this.router.navigate(
       ['createcomment',
         {
           commentRoundId: this.commentRound.id,
-          commentThreadId: this.commentThread.id
+          commentThreadId: this.commentThread.id,
+          parentCommentId: parentCommentId
         }
       ]
     );
+  }
+
+  hasChildComments(parentCommentId: string): boolean {
+    const childComments = this.childComments(parentCommentId);
+    return childComments != null && childComments.length > 0;
+  }
+
+  childComments(parentCommentId: string): CommentSimple[] {
+    return this.comments.filter(comment => comment.parentComment != null && comment.parentComment.id === parentCommentId);
+  }
+
+  childCommentsWithParent(parentCommentId: string): CommentSimple[] {
+    return this.comments.filter(comment => comment.id === parentCommentId ||
+      comment.parentComment != null && comment.parentComment.id === parentCommentId);
+  }
+
+  showChildComments(parentCommentId: string) {
+    const titleLabel = 'Discussion';
+    this.discussionModalService.open(this.childCommentsWithParent(parentCommentId), titleLabel);
+  }
+
+  get baseLevelComments(): CommentSimple[] {
+    return this.comments.filter(comment => comment.parentComment == null);
   }
 
   get allowInput(): boolean {

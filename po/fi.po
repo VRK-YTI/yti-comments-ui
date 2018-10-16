@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-09 16:34+0300\n"
+"PO-Revision-Date: 2018-10-15 13:38+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -12,6 +12,12 @@ msgstr ""
 "X-Generator: Poedit 2.1.1\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Choose source"
+msgstr "Valitse lähde"
+
+msgid "Search term"
+msgstr "Hakutermi"
 
 msgid "Copy value to clipboard"
 msgstr "Kopioi {{value}} leikepöydälle"
@@ -55,7 +61,7 @@ msgstr "Valitse kommentti"
 msgid "Search comment"
 msgstr "Etsi kommentti"
 
-msgid "{{ status }}"
+msgid "{{ selectedStatus }}"
 msgstr ""
 
 msgid "Proposed status"
@@ -67,14 +73,11 @@ msgstr ""
 msgid "Filter results"
 msgstr "Suodata hakutuloksia"
 
+msgid "Create empty resource"
+msgstr "Luo tyhjä resurssi"
+
 msgid "Select resource"
 msgstr "Valitse resurssi"
-
-msgid "Choose source"
-msgstr "Valitse lähde"
-
-msgid "Search term"
-msgstr "Hakutermi"
 
 msgid "All organizations"
 msgstr "Kaikki organisaatiot"
@@ -140,7 +143,7 @@ msgid "Comment round information"
 msgstr "Kommentointikierroksen tiedot"
 
 msgid "Editor"
-msgstr "Editori"
+msgstr "Ylläpitäjä"
 
 msgid "Last modification"
 msgstr "Viimeisin muokkaus"
@@ -151,46 +154,67 @@ msgstr "Aloita kommentointi"
 msgid "Close comment round"
 msgstr "Lopeta kommentointi"
 
+msgid "Comment to round"
+msgstr "Kommentoi"
+
+msgid "Send comments"
+msgstr "Lähetä kommentit"
+
 msgid "Resources for commenting"
-msgstr "Kommentoitavat resurssit"
+msgstr "Kommentoitavat tietosisällöt"
 
 msgid "Add new resource"
-msgstr "Lisää uusi resurssi"
+msgstr "Lisää uusi tietosisältö"
 
 msgid "There are no resources to comment."
 msgstr "Kommentoitavia resursseja ei ole."
 
 msgid "Resource"
-msgstr "Resurssi"
+msgstr "Tietosisältö"
 
 msgid "Current status"
 msgstr "Nykyinen tila"
 
 msgid "Editors comment"
-msgstr "Editorin kommentti"
+msgstr "Ylläpitäjän kommentti"
 
-msgid "{{ commentThread.currentStatus }}"
-msgstr ""
+msgid "Actions"
+msgstr "Toiminnot"
 
-msgid "{{ editing ? 'Propose status' : 'Commenters proposal for status'}}"
-msgstr ""
-
-msgid "{{ editing ? 'Your comment' : 'Commenters comment'}}"
+msgid ""
+"{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : "
+"'-' }}"
 msgstr ""
 
 msgid ""
-"{{ commentThread.proposedStatus ? commentThread.proposedStatus : "
+"{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : "
 "'NOSTATUS' }}"
 msgstr ""
 
+msgid "{{ commenting ? 'Propose status' : 'Commenters proposal for status' }}"
+msgstr ""
+
+msgid "{{ commenting ? 'Your comment' : 'Commenters comment' }}"
+msgstr ""
+
+msgid ""
+"{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : "
+"'NOSTATUS' }}"
+msgstr ""
+
+msgid ""
+"{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : "
+"'-'}}"
+msgstr ""
+
 msgid "Resource name"
-msgstr "Resurssin nimi"
+msgstr "Tietosisällön nimi"
 
 msgid "Resource description"
-msgstr "Resurssin kuvaus"
+msgstr "Tietosisällön kuvaus"
 
 msgid "Resource URI"
-msgstr "Resurssin URI"
+msgstr "Tietosisällön URI"
 
 msgid "Proposed action"
 msgstr "Ehdotettu toiminto"
@@ -200,6 +224,9 @@ msgstr "Luo kommenttiketju"
 
 msgid "There are no comments yet."
 msgstr "Kommentteja ei vielä ole."
+
+msgid "{{ commentThread.currentStatus }}"
+msgstr ""
 
 msgid "comment round"
 msgstr "kommentointikierros"

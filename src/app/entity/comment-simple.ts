@@ -2,7 +2,6 @@ import { formatDateTime, formatDisplayDateTime, parseDateTime } from '../utils/d
 import { Moment } from 'moment';
 import { AbstractResource } from './abstract-resource';
 import { CommentSimpleType } from '../services/api-schema';
-import { Location } from 'yti-common-ui/types/location';
 import { User } from './user';
 
 export class CommentSimple extends AbstractResource {
@@ -27,29 +26,6 @@ export class CommentSimple extends AbstractResource {
     if (data.parentComment) {
       this.parentComment = new CommentSimple(data.parentComment);
     }
-  }
-
-  // TODO: fix this to work with proper routing, needs round and thread ids
-  get route(): any[] {
-
-    return [
-      'comment',
-      {
-        commentRoundId: this.id
-      }
-    ];
-  }
-
-  get location(): Location[] {
-
-    return [
-      {
-        localizationKey: 'Comment',
-        label: undefined,
-        value: undefined,
-        route: this.route
-      }
-    ];
   }
 
   get createdDisplayValue(): string {

@@ -11,6 +11,7 @@ import { containerTypes } from '../common/containertypes';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
 import { TranslateService } from '@ngx-translate/core';
 import { regularStatuses, Status } from 'yti-common-ui/entities/status';
+import { IntegrationReourceType } from '../../services/api-schema';
 
 @Component({
   selector: 'app-search-linked-source-modal',
@@ -22,12 +23,20 @@ import { regularStatuses, Status } from 'yti-common-ui/entities/status';
         <span>{{titleLabel}}</span>
       </h4>
     </div>
-    <div class="modal-body full-height">
 
+    <div class="modal-body full-height">
       <div>
         <div class="filter-info">
           <span class="search-label search-label with-info" translate>Filter results</span>
           <app-information-symbol [infoText]="'INFO_TEXT_SOURCE_FILTER_RESULTS'"></app-information-symbol>
+        </div>
+
+        <div class=" d-inline-block mb-3">
+          <div class="input-group input-group-lg input-group-search">
+            <input #searchInput id="search_linked_source_input" type="text" class="form-control"
+                   [placeholder]="searchLabel"
+                   [(ngModel)]="search"/>
+          </div>
         </div>
 
         <app-filter-dropdown *ngIf="!containerUri"
@@ -42,29 +51,27 @@ import { regularStatuses, Status } from 'yti-common-ui/entities/status';
                              [options]="statusOptions"></app-filter-dropdown>
       </div>
 
-      <div class="row mb-2">
-        <div class="col-12">
-          <div class="input-group input-group-lg input-group-search">
-            <input #searchInput id="search_linked_source_input" type="text" class="form-control"
-                   [placeholder]="searchLabel"
-                   [(ngModel)]="search"/>
-          </div>
-        </div>
-      </div>
-
       <div class="row full-height">
         <div class="col-12">
           <div class="content-box">
             <div class="search-results">
               <div *ngFor="let resource of searchResults$ | async; let last = last"
-                   id="{{resource.id + '_coment_round_link'}}"
+                   id="{{resource.id + '_resource_link'}}"
                    class="search-result"
                    (click)="select(resource)">
                 <div class="content" [class.last]="last">
-                  <span class="title" [innerHTML]="resource.getDisplayName(languageService, useUILanguage)"></span>
-                  <app-status [status]="resource.status"></app-status>
-                  <span class="body" [innerHTML]="resource.getDescription(languageService, useUILanguage)"></span>
-                  <span class="body" [innerHTML]="resource.uri"></span>
+                  <app-status class="status" [status]="resource.status"></app-status>
+                  <span class="title">{{ resource.getDisplayName(languageService, useUILanguage) }}</span>
+                  <div class="description-container"
+                       style="width: calc(100%);"
+                       [ngClass]="{ 'expand': false }">
+                    <span class="description">{{ resource.getDescription(languageService, useUILanguage) }}</span>
+                    <div class="limiter-container">
+                      <div class="description-limiter"></div>
+                    </div>
+                  </div>
+
+                  <span class="body">{{ resource.uri }}</span>
                 </div>
               </div>
             </div>
@@ -72,13 +79,21 @@ import { regularStatuses, Status } from 'yti-common-ui/entities/status';
         </div>
       </div>
     </div>
-    <div class="modal-footer">
 
+    <div class="modal-footer">
       <button id="cancel_modal_button"
               type="button"
               class="btn btn-link cancel"
               (click)="cancel()">
         <span translate>Cancel</span>
+      </button>
+
+      <button *ngIf="openThreads"
+              id="cancel_modal_button"
+              type="button"
+              class="btn btn-secondary-action"
+              (click)="createEmptyResource()">
+        <span translate>Create empty resource</span>
       </button>
     </div>
   `
@@ -93,6 +108,8 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
   @Input() useUILanguage: boolean;
   @Input() containerUri: string | null;
   @Input() containerType: string | null;
+  @Input() restrictResourceUris: string[];
+  @Input() openThreads: boolean | null;
 
   statusOptions: FilterOptions<Status>;
   containerTypeOptions: FilterOptions<string>;
@@ -152,7 +169,7 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
           return integrationResources.filter(integrationResource => {
             const label = this.languageService.translate(integrationResource.prefLabel, true);
             const searchMatches = !search || label.toLowerCase().indexOf(search.toLowerCase()) !== -1;
-            const isNotRestricted = !contains(this.restricts, integrationResource.id);
+            const isNotRestricted = !contains(this.restricts, integrationResource.uri);
             const statusMatches = !status || integrationResource.status === status;
             return searchMatches && isNotRestricted && statusMatches;
           });
@@ -185,6 +202,15 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
 
     this.modal.dismiss('cancel');
   }
+
+  createEmptyResource() {
+
+    const integrationResourceType: IntegrationReourceType = <IntegrationReourceType> {
+      type: this.containerType
+    };
+    const resource: IntegrationResource = new IntegrationResource(integrationResourceType);
+    this.modal.close(resource);
+  }
 }
 
 @Injectable()
@@ -195,18 +221,20 @@ export class SearchLinkedIntegrationResourceModalService {
 
   open(containerType: string | null,
        containerUri: string | null,
+       openThreads: boolean | null,
        titleLabel: string,
        searchLabel: string,
-       restrictResourceIds: string[],
+       restrictResourceUris: string[],
        useUILanguage: boolean = false): Promise<IntegrationResource> {
 
-    const modalRef = this.modalService.open(SearchLinkedIntegrationResourceModalComponent, { size: 'sm' });
+    const modalRef = this.modalService.open(SearchLinkedIntegrationResourceModalComponent, { size: 'lg' });
     const instance = modalRef.componentInstance as SearchLinkedIntegrationResourceModalComponent;
     instance.containerType = containerType;
     instance.containerUri = containerUri;
+    instance.openThreads = openThreads;
     instance.titleLabel = titleLabel;
     instance.searchLabel = searchLabel;
-    instance.restricts = restrictResourceIds;
+    instance.restricts = restrictResourceUris;
     instance.useUILanguage = useUILanguage;
     return modalRef.result;
   }

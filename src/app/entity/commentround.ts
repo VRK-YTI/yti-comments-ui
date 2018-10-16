@@ -8,6 +8,7 @@ import { Localizable } from 'yti-common-ui/types/localization';
 import { OrganizationSimple } from './organization-simple';
 import { User } from './user';
 import { EditableEntity } from './editable-entity';
+import { CommentThreadSimple } from './commentthread-simple';
 
 export class CommentRound extends AbstractResource implements EditableEntity {
 
@@ -24,6 +25,7 @@ export class CommentRound extends AbstractResource implements EditableEntity {
   startDate: Moment | null = null;
   endDate: Moment | null = null;
   organizations: OrganizationSimple[] = [];
+  commentThreads: CommentThreadSimple[] = [];
 
   constructor(data: CommentRoundType) {
 
@@ -54,6 +56,9 @@ export class CommentRound extends AbstractResource implements EditableEntity {
     }
     if (data.organizations) {
       this.organizations = (data.organizations || []).map(org => new OrganizationSimple(org));
+    }
+    if (data.commentThreads) {
+      this.commentThreads = (data.commentThreads || []).map(commentThread => new CommentThreadSimple(commentThread));
     }
   }
 
@@ -107,6 +112,7 @@ export class CommentRound extends AbstractResource implements EditableEntity {
       openThreads: this.openThreads,
       source: this.source.serialize(),
       organizations: this.organizations.map(org => org.serialize()),
+      commentThreads: this.commentThreads.map(commentThread => commentThread.serialize())
     };
   }
 

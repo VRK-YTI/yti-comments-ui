@@ -125,7 +125,7 @@ export class FrontpageComponent implements OnInit, OnDestroy {
     const searchlabel = this.translateService.instant('Search term');
 
     this.searchLinkedIntegrationResourceModalService
-      .open(null, null, titleLabel, searchlabel, [], true)
+      .open(null, null, null, titleLabel, searchlabel, [], true)
       .then(source => this.storeSourceAndNavigateToCreateCommentRound(source), ignoreModalClose);
   }
 

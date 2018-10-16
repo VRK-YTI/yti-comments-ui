@@ -90,7 +90,7 @@ export class SourceInputComponent implements ControlValueAccessor {
     const searchlabel = this.translateService.instant('Search term');
 
     this.searchLinkedIntegrationResourceModalService
-      .open(this.containerType, this.containerUri, titleLabel, searchlabel, this.restricts, true)
+      .open(this.containerType, this.containerUri, null, titleLabel, searchlabel, this.restricts, true)
       .then(source => addToControl(this.control, source), ignoreModalClose);
   }
 

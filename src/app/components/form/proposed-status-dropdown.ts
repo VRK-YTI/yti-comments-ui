@@ -1,18 +1,22 @@
-import { Component, Input } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import { Component, forwardRef, Input } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Placement as NgbPlacement } from '@ng-bootstrap/ng-bootstrap';
-import { Status } from 'yti-common-ui/entities/status';
-import { EditableService } from '../../services/editable.service';
 import { ProposedStatus, selectableProposedStatuses } from '../../entity/proposed-status';
+import { EditableService } from '../../services/editable.service';
 
 export type Placement = NgbPlacement;
 
 @Component({
   selector: 'app-proposed-status-table-dropdown',
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => ProposedStatusTableDropdownComponent),
+    multi: true
+  }],
   template: `
     <div *ngIf="editing" ngbDropdown [placement]="placement">
       <button [id]="'selected_' + id" class="btn btn-dropdown" ngbDropdownToggle>
-        <span>{{ status | translate }}</span>
+        <span>{{ selectedStatus | translate }}</span>
       </button>
 
       <div ngbDropdownMenu>
@@ -26,7 +30,7 @@ export type Placement = NgbPlacement;
       </div>
     </div>
     <div *ngIf="!editing">
-      <span translate>{{ status }}</span>
+      <span translate>{{ selectedStatus }}</span>
     </div>
   `
 })
@@ -34,7 +38,10 @@ export class ProposedStatusTableDropdownComponent implements ControlValueAccesso
 
   @Input() id: string;
   @Input() placement: Placement = 'bottom-left';
-  @Input() status: ProposedStatus;
+  @Input() isEditing: boolean | null;
+  @Input() restrict = false;
+
+  selectedStatus: ProposedStatus;
 
   private propagateChange: (fn: any) => void = () => {};
   private propagateTouched: (fn: any) => void = () => {};
@@ -42,25 +49,27 @@ export class ProposedStatusTableDropdownComponent implements ControlValueAccesso
   constructor(private editableService: EditableService) {
   }
 
+  get editing() {
+
+    return this.editableService.editing && !this.restrict;
+  }
+
   get options(): ProposedStatus[] {
+
     return selectableProposedStatuses;
   }
 
-  get editing() {
-    return this.editableService.editing;
+  isSelected(option: ProposedStatus) {
+    return this.selectedStatus === option;
   }
 
-  isSelected(option: Status) {
-    return this.status === option;
-  }
-
-  select(option: Status) {
-    this.status = option;
+  select(option: ProposedStatus) {
+    this.selectedStatus = option;
     this.propagateChange(option);
   }
 
   writeValue(obj: any): void {
-    this.status = obj;
+    this.selectedStatus = obj;
   }
 
   registerOnChange(fn: any): void {

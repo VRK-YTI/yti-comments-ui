@@ -34,8 +34,15 @@ export class AuthorizationManager {
     return this.user.superuser || (this.user.isInRoleInAnyOrganization(['ADMIN']));
   }
 
-  canCreateComment() {
+  canCreateComment(editableEntity: EditableEntity) {
 
-    return this.user.superuser || (this.user.isInRoleInAnyOrganization(['ADMIN']));
+    if (this.user.superuser) {
+      return true;
+    }
+    if (editableEntity.allowOrganizationEdit()) {
+      return this.user.isInOrganization(editableEntity.getOwningOrganizationIds(),
+        ['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR']);
+    }
+    return false;
   }
 }

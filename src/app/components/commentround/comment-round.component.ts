@@ -4,12 +4,12 @@ import { CommentRound } from '../../entity/commentround';
 import { DataService } from '../../services/data.service';
 import { CommentThread } from '../../entity/commentthread';
 import { EditableService } from '../../services/editable.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { validDateRange } from '../../utils/date';
 import { CommentRoundStatus } from '../../entity/comment-round-status';
 import { requiredList } from 'yti-common-ui/utils/validator';
 import { Location } from '@angular/common';
-import { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { LocationService } from '../../services/location.service';
 import { AuthorizationManager } from '../../services/authorization-manager';
@@ -17,6 +17,23 @@ import { CommentThreadSimple } from '../../entity/commentthread-simple';
 import { CommentsConfirmationModalService } from '../common/confirmation-modal.service';
 import { ErrorModalService } from 'yti-common-ui/components/error-modal.component';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
+import { TranslateService } from '@ngx-translate/core';
+import { SearchLinkedIntegrationResourceModalService } from '../form/search-linked-integration-resource-modal.component';
+import { CommentThreadSimpleType, CommentThreadType, CommentType } from '../../services/api-schema';
+import { IntegrationResource } from '../../entity/integration-resource';
+import { Comment } from '../../entity/comment';
+
+function addToControl<T>(control: FormControl, itemToAdd: T) {
+
+  const previous = control.value ? control.value as T[] : [];
+  control.setValue([...previous, itemToAdd]);
+}
+
+function removeFromControl<T>(control: FormControl, itemToRemove: T) {
+
+  const previous = control.value as T[];
+  control.setValue(previous.filter(item => item !== itemToRemove));
+}
 
 @Component({
   selector: 'app-commentround',
@@ -27,7 +44,8 @@ import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
 
   commentRound: CommentRound;
-  commentThreads: CommentThreadSimple[];
+  myComments: Comment[];
+  commenting$ = new BehaviorSubject<boolean>(false);
 
   cancelSubscription: Subscription;
 
@@ -38,7 +56,8 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     openThreads: new FormControl(),
     validity: new FormControl({ start: null, end: null }, validDateRange),
     status: new FormControl('AWAIT' as CommentRoundStatus),
-    organizations: new FormControl([], [requiredList])
+    organizations: new FormControl([], [requiredList]),
+    commentThreads: new FormArray([])
   }, null);
 
   constructor(private router: Router,
@@ -49,7 +68,9 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
               private location: Location,
               private authorizationManager: AuthorizationManager,
               private confirmationModalService: CommentsConfirmationModalService,
-              private errorModalService: ErrorModalService) {
+              private errorModalService: ErrorModalService,
+              private searchLinkedIntegrationResourceModalService: SearchLinkedIntegrationResourceModalService,
+              private translateService: TranslateService) {
 
     this.cancelSubscription = editableService.cancel$.subscribe(() => this.reset());
 
@@ -57,6 +78,8 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
+
+    console.log('ngOnInit');
 
     const commentRoundId = this.route.snapshot.params.commentRoundId;
 
@@ -67,11 +90,10 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     this.dataService.getCommentRound(commentRoundId).subscribe(commentRound => {
       this.commentRound = commentRound;
       this.locationService.atCommentRoundPage(commentRound);
-      this.reset();
-    });
-
-    this.dataService.getCommentRoundCommentThreads(commentRoundId).subscribe(commentThreads => {
-      this.commentThreads = commentThreads;
+      this.dataService.getCommentRoundCommenterComments(commentRoundId).subscribe(comments => {
+        this.myComments = comments;
+        this.reset();
+      });
     });
   }
 
@@ -85,10 +107,10 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     this.reset();
   }
 
-  canCreateCommentThread() {
+  get canCreateCommentThread(): boolean {
 
     if (this.commentRound.status === 'AWAIT') {
-      return this.authorizationManager.user.email === this.commentRound.user.email;
+      return this.authorizationManager.user.email === this.commentRound.user.email && this.editing;
     } else if (this.commentRound.status === 'INPROGRESS' && !this.commentRound.fixedThreads) {
       return this.authorizationManager.canCreateCommentThread();
     }
@@ -110,7 +132,7 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
 
   closeCommentRound() {
 
-    this.confirmationModalService.startCommentRound()
+    this.confirmationModalService.closeCommentRound()
       .then(() => {
         this.commentRound.status = 'CLOSED';
         this.dataService.updateCommentRound(this.commentRound.serialize()).subscribe(commentRound => {
@@ -121,20 +143,67 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
       }, ignoreModalClose);
   }
 
-  createNewCommentThread() {
+  addCommentThreadToCommentRound() {
 
-    this.router.navigate(
-      ['createcommentthread',
-        {
-          commentRoundId: this.commentRound.id
+    const titleLabel = this.translateService.instant('Choose source');
+    const searchlabel = this.translateService.instant('Search term');
+
+    this.searchLinkedIntegrationResourceModalService
+      .open(this.commentRound.source.containerType, this.commentRound.source.containerUri, this.openThreads,
+        titleLabel, searchlabel, this.restrictedThreads, true)
+      .then(source => this.createNewCommentThreadWithSource(source), ignoreModalClose);
+  }
+
+  createNewCommentThreadWithSource(integrationResource: IntegrationResource) {
+
+    const commentThreadFormGroup: FormGroup = new FormGroup({
+      resourceUri: new FormControl(integrationResource.uri),
+      resourceType: new FormControl(integrationResource.type),
+      label: new FormControl(integrationResource.prefLabel),
+      description: new FormControl(integrationResource.description),
+      currentStatus: new FormControl(integrationResource.status),
+      proposedStatus: new FormControl('NOSTATUS'),
+      proposedText: new FormControl('')
+    });
+
+    this.commentThreadForms.push(commentThreadFormGroup);
+  }
+
+  removeCommentThread(i: any) {
+    this.commentThreadForms.removeAt(i);
+  }
+
+  get restrictedThreads(): string[] {
+
+    const restrictedIds: string[] = [];
+    const threads: FormArray = this.commentThreadForms;
+
+    if (threads) {
+      threads.controls.forEach(thread => {
+        const threadValue: CommentThreadSimple = thread.value;
+        if (threadValue.resourceUri) {
+          console.log('restricted uri: ' + threadValue.resourceUri);
+          restrictedIds.push(threadValue.resourceUri);
         }
-      ]
-    );
+      });
+    }
+
+    return restrictedIds;
+  }
+
+  get commentThreadForms(): FormArray {
+
+    return this.commentRoundForm.get('commentThreads') as FormArray;
+  }
+
+  get openThreads(): boolean {
+
+    return this.commentRoundForm.controls['openThreads'].value;
   }
 
   private reset() {
 
-    const { label, description, fixedThreads, openThreads, startDate, endDate, organizations, status }
+    const { label, description, fixedThreads, openThreads, startDate, endDate, organizations, status, commentThreads }
       = this.commentRound;
 
     this.commentRoundForm.reset({
@@ -146,11 +215,79 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
       organizations: organizations.map(organization => organization.clone()),
       status: status
     });
+
+    this.commentThreadForms.controls = [];
+
+    commentThreads.forEach(commentThread => {
+      const commentThreadFormGroup: FormGroup = new FormGroup({
+        id: new FormControl(commentThread.id),
+        resourceUri: new FormControl(commentThread.resourceUri),
+        label: new FormControl(commentThread.label),
+        description: new FormControl(commentThread.description),
+        currentStatus: new FormControl(commentThread.currentStatus),
+        proposedStatus: new FormControl(commentThread.proposedStatus),
+        proposedText: new FormControl(commentThread.proposedText),
+        commentersProposedStatus: new FormControl(this.getMyProposedStatusForCommentThread(commentThread.id)),
+        commentersProposedText: new FormControl(this.getMyCommentForCommentThread(commentThread.id))
+      });
+      this.commentThreadForms.push(commentThreadFormGroup);
+    });
+  }
+
+  getMyCommentForCommentThread(commentThreadId: string): string {
+    let content = '';
+    if (this.myComments) {
+      this.myComments.forEach(comment => {
+        if (comment.commentThread.id === commentThreadId) {
+          content = comment.content;
+        }
+      });
+    }
+    return content;
+  }
+
+  getMyProposedStatusForCommentThread(commentThreadId: string): string {
+    let proposedStatus = 'NOSTATUS';
+    if (this.myComments) {
+      this.myComments.forEach(comment => {
+        if (comment.commentThread.id === commentThreadId) {
+          proposedStatus = comment.proposedStatus;
+        }
+      });
+    }
+    return proposedStatus;
+  }
+
+  mapCommentThreads(commentThreadsFormArray: FormArray): CommentThreadSimple[] {
+    const commentThreads: CommentThreadSimple[] = [];
+
+    if (commentThreadsFormArray) {
+      commentThreadsFormArray.controls.forEach(commentThreadInput => {
+        const commentThreadInputValue = commentThreadInput.value;
+        const commentThreadFromFormInput: CommentThreadSimpleType = <CommentThreadSimpleType> {
+          id: commentThreadInputValue.id,
+          resourceUri: commentThreadInputValue.resourceUri,
+          label: commentThreadInputValue.label,
+          description: commentThreadInputValue.description,
+          currentStatus: commentThreadInputValue.currentStatus,
+          proposedStatus: commentThreadInputValue.proposedStatus,
+          proposedText: commentThreadInputValue.proposedText,
+          commentersProposedStatus: commentThreadInputValue.commentersProposedStatus,
+          commentersProposedText: commentThreadInputValue.commentersProposedText
+        };
+        const commentThread: CommentThreadSimple = new CommentThreadSimple(commentThreadFromFormInput);
+        commentThreads.push(commentThread);
+      });
+    }
+
+    return commentThreads;
   }
 
   save(formData: any): Observable<any> {
 
     const { label, description, fixedThreads, openThreads, validity, organizations, status } = formData;
+
+    const commentThreadsToBeUpdated: CommentThreadSimple[] = this.mapCommentThreads(this.commentThreadForms);
 
     const updatedCommentRound = this.commentRound.clone();
 
@@ -164,7 +301,8 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
       organizations: organizations,
       source: this.commentRound.source,
       sourceLabel: this.commentRound.sourceLabel,
-      status: status
+      status: status,
+      commentThreads: commentThreadsToBeUpdated
     });
 
     const save = () => {
@@ -179,9 +317,45 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     return this.editableService.editing;
   }
 
+  startCommenting() {
+
+    this.commenting$.next(true);
+  }
+
+  endCommenting() {
+
+    this.reset();
+    this.commenting$.next(false);
+  }
+
+  sendComments() {
+
+    const comments: CommentType[] = [];
+
+    this.commentThreadForms.controls.forEach(commentThreadInput => {
+      const commentThreadInputValue = commentThreadInput.value;
+      const commentType: CommentType = <CommentType> {
+        commentThread: <CommentThreadType> { id: commentThreadInputValue.id },
+        proposedStatus: commentThreadInputValue.commentersProposedStatus,
+        content: commentThreadInputValue.commentersProposedText
+      };
+      comments.push(commentType);
+    });
+
+    this.dataService.createCommentsToCommentRound(this.commentRound.id, comments).subscribe(myComments => {
+      this.endCommenting();
+      this.ngOnInit();
+    });
+  }
+
+  get commenting(): boolean {
+
+    return this.commenting$.getValue();
+  }
+
   get loading() {
 
-    return this.commentRound == null || this.commentThreads == null;
+    return this.commentRound == null || this.myComments == null;
   }
 
   get getResourceUri(): string {
@@ -191,7 +365,9 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
 
   get hasCommentThreads(): boolean {
 
-    return this.commentThreads && this.commentThreads.length > 0;
+    const threads: FormArray = this.commentThreadForms;
+
+    return threads && threads.length > 0;
   }
 
   get isEditor(): boolean {
@@ -217,5 +393,20 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
   back() {
 
     this.location.back();
+  }
+
+  get canComment(): boolean {
+    return !this.isEditor && this.authorizationManager.canCreateComment(this.commentRound) && this.commentRound.status === 'INPROGRESS';
+  }
+
+  get canStartCommenting(): boolean {
+
+    return this.commentRound.status === 'AWAIT' && !this.editing && this.authorizationManager.user.email === this.commentRound.user.email;
+  }
+
+  get canEndCommenting(): boolean {
+
+    return this.commentRound.status === 'INPROGRESS' && !this.editing &&
+      this.authorizationManager.user.email === this.commentRound.user.email;
   }
 }

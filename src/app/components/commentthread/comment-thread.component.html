@@ -102,28 +102,32 @@
     </div>
   </div>
 
+  <!-- Refactor this comment table logic to a separate isolated component -->
+
   <span *ngIf="!hasComments || comments.length === 0" translate>There are no comments yet.</span>
 
   <table *ngIf="hasComments" class="table table-borderless" width="100%">
     <thead>
       <tr>
-        <th style="width: 15%" translate>Commenter</th>
-        <th style="width: 15%" translate>Comment</th>
-        <th style="width: 15%" translate>Current status</th>
-        <th style="width: 15%" translate>Proposed status</th>
+        <th style="width: 20%" translate>Commenter</th>
+        <th style="width: 30%" translate>Comment</th>
+        <th style="width: 10%" translate>Current status</th>
+        <th style="width: 10%" translate>Proposed status</th>
+        <th style="width: 10%" translate>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let comment of comments">
-        <td>{{ comment.user.firstName }} {{ comment.user.lastName }}</td>
-        <td style="width: 15%">
+      <tr *ngFor="let comment of baseLevelComments">
+        <td style="width: 20%">{{ comment.user.firstName }} {{ comment.user.lastName }}</td>
+        <td style="width: 50%">
           <span class="btn-link" (click)="viewComment(comment)">{{ comment.content }}</span>
         </td>
-        <td style="width: 10%" translate>{{ commentThread.currentStatus }}</td>
-        <td style="width: 15%" translate>
-          <app-proposed-status-table-dropdown
-            [status]="comment.proposedStatus ? comment.proposedStatus : 'NOSTATUS'"></app-proposed-status-table-dropdown>
-        </td>
+        <td style="width: 15%" translate>{{ commentThread.currentStatus }}</td>
+        <td style="width: 15%" translate>{{ comment.proposedStatus ? comment.proposedStatus : 'NOSTATUS' }}</td>
+        <button *ngIf=canCreateComment() [id]="'comment_to_parentcomment_' + comment.id + '_button'" type="button" class="icon icon-pencil"
+                (click)="createNewComment(comment.id)"></button>
+        <button *ngIf="hasChildComments(comment.id)" [id]="'comment_to_parentcomment_' + comment.id + '_button'" type="button" class="icon icon-bubble"
+                (click)="showChildComments(comment.id)"></button>
       </tr>
     </tbody>
   </table>
