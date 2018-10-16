@@ -10,6 +10,9 @@ msgstr ""
 msgid "Search term"
 msgstr ""
 
+msgid "Cancel"
+msgstr ""
+
 msgid "Copy value to clipboard"
 msgstr ""
 
@@ -26,9 +29,6 @@ msgid "Valid to"
 msgstr ""
 
 msgid "Save"
-msgstr ""
-
-msgid "Cancel"
 msgstr ""
 
 msgid "Edit"
@@ -177,11 +177,6 @@ msgid ""
 "'-' }}"
 msgstr ""
 
-msgid ""
-"{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus "
-": 'NOSTATUS' }}"
-msgstr ""
-
 msgid "{{ commenting ? 'Propose status' : 'Commenters proposal for status' }}"
 msgstr ""
 
@@ -195,7 +190,7 @@ msgstr ""
 
 msgid ""
 "{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus "
-": '-'}}"
+": 'NOSTATUS' }}"
 msgstr ""
 
 msgid "Resource name"
@@ -217,6 +212,9 @@ msgid "There are no comments yet."
 msgstr ""
 
 msgid "{{ commentThread.currentStatus }}"
+msgstr ""
+
+msgid "{{ comment.proposedStatus ? comment.proposedStatus : 'NOSTATUS' }}"
 msgstr ""
 
 msgid "comment round"
@@ -499,4 +497,10 @@ msgid "START COMMENT ROUND?"
 msgstr ""
 
 msgid "CLOSE COMMENT ROUND?"
+msgstr ""
+
+msgid "invalidDate"
+msgstr ""
+
+msgid "invalidDateRange"
 msgstr ""

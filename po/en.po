@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-15 13:38+0300\n"
+"PO-Revision-Date: 2018-10-16 12:40+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.2\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -17,6 +17,9 @@ msgid "Choose source"
 msgstr ""
 
 msgid "Search term"
+msgstr ""
+
+msgid "Cancel"
 msgstr ""
 
 msgid "Copy value to clipboard"
@@ -35,9 +38,6 @@ msgid "Valid to"
 msgstr ""
 
 msgid "Save"
-msgstr ""
-
-msgid "Cancel"
 msgstr ""
 
 msgid "Edit"
@@ -186,11 +186,6 @@ msgid ""
 "'-' }}"
 msgstr ""
 
-msgid ""
-"{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : "
-"'NOSTATUS' }}"
-msgstr ""
-
 msgid "{{ commenting ? 'Propose status' : 'Commenters proposal for status' }}"
 msgstr ""
 
@@ -204,7 +199,7 @@ msgstr ""
 
 msgid ""
 "{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : "
-"'-'}}"
+"'NOSTATUS' }}"
 msgstr ""
 
 msgid "Resource name"
@@ -226,6 +221,9 @@ msgid "There are no comments yet."
 msgstr ""
 
 msgid "{{ commentThread.currentStatus }}"
+msgstr ""
+
+msgid "{{ comment.proposedStatus ? comment.proposedStatus : 'NOSTATUS' }}"
 msgstr ""
 
 msgid "comment round"
@@ -461,7 +459,7 @@ msgid "NOSTATUS"
 msgstr "No selected status"
 
 msgid "required"
-msgstr ""
+msgstr "Required"
 
 msgid "codelist"
 msgstr "Suomi.fi Reference Data"
@@ -519,3 +517,9 @@ msgstr ""
 
 msgid "CLOSE COMMENT ROUND?"
 msgstr ""
+
+msgid "invalidDate"
+msgstr "Invalid date"
+
+msgid "invalidDateRange"
+msgstr "Invalid date range"

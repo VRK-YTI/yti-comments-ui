@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-15 13:38+0300\n"
+"PO-Revision-Date: 2018-10-16 12:40+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.2\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -18,6 +18,9 @@ msgstr "Valitse lähde"
 
 msgid "Search term"
 msgstr "Hakutermi"
+
+msgid "Cancel"
+msgstr "Peruuta"
 
 msgid "Copy value to clipboard"
 msgstr "Kopioi {{value}} leikepöydälle"
@@ -36,9 +39,6 @@ msgstr "Päättymispäivä"
 
 msgid "Save"
 msgstr "Tallenna"
-
-msgid "Cancel"
-msgstr "Peruuta"
 
 msgid "Edit"
 msgstr "Muokkaa"
@@ -186,11 +186,6 @@ msgid ""
 "'-' }}"
 msgstr ""
 
-msgid ""
-"{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : "
-"'NOSTATUS' }}"
-msgstr ""
-
 msgid "{{ commenting ? 'Propose status' : 'Commenters proposal for status' }}"
 msgstr ""
 
@@ -204,7 +199,7 @@ msgstr ""
 
 msgid ""
 "{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : "
-"'-'}}"
+"'NOSTATUS' }}"
 msgstr ""
 
 msgid "Resource name"
@@ -226,6 +221,9 @@ msgid "There are no comments yet."
 msgstr "Kommentteja ei vielä ole."
 
 msgid "{{ commentThread.currentStatus }}"
+msgstr ""
+
+msgid "{{ comment.proposedStatus ? comment.proposedStatus : 'NOSTATUS' }}"
 msgstr ""
 
 msgid "comment round"
@@ -465,7 +463,7 @@ msgid "NOSTATUS"
 msgstr "Ei valittua tilaa"
 
 msgid "required"
-msgstr "vaadittu"
+msgstr "Vaadittu syöte"
 
 msgid "codelist"
 msgstr "Suomi.fi-koodistot"
@@ -523,6 +521,12 @@ msgstr "ALOITA KOMMENTOINTIKIERROS?"
 
 msgid "CLOSE COMMENT ROUND?"
 msgstr "SULJE KOMMENTOINTIKIERROS?"
+
+msgid "invalidDate"
+msgstr "Virheellinen päivämäärä"
+
+msgid "invalidDateRange"
+msgstr "Virheellinen päivämääräväli"
 
 #~ msgid "There are no comment threads yet."
 #~ msgstr "Kommenttiketjuja ei vielä ole lisätty."
