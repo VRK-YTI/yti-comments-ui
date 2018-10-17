@@ -32,6 +32,7 @@ export class LiteralInputComponent implements ControlValueAccessor {
   @Input() id: string;
   @Input() required = false;
   @Input() infoText: string;
+  @Input() isEditing = false;
 
   control = new FormControl();
 
@@ -65,7 +66,7 @@ export class LiteralInputComponent implements ControlValueAccessor {
 
   get editing() {
 
-    return this.editableService.editing && !this.restrict;
+    return (this.editableService.editing || this.isEditing) && !this.restrict;
   }
 
   writeValue(obj: any): void {

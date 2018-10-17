@@ -10,5 +10,6 @@ export type ProposedStatus = 'NOSTATUS'
 
 export const allProposedStatuses =
   ['NOSTATUS', 'INCOMPLETE', 'DRAFT', 'SUGGESTED', 'SUBMITTED', 'VALID', 'SUPERSEDED', 'RETIRED', 'INVALID'] as ProposedStatus[];
+
 export const selectableProposedStatuses =
-  ['NOSTATUS', 'INCOMPLETE', 'DRAFT', 'SUBMITTED', 'VALID', 'SUPERSEDED', 'RETIRED', 'INVALID'] as ProposedStatus[];
+  ['NOSTATUS', 'DRAFT', 'SUBMITTED', 'VALID', 'SUPERSEDED', 'RETIRED', 'INVALID'] as ProposedStatus[];

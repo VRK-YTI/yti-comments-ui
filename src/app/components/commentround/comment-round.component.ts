@@ -22,6 +22,7 @@ import { SearchLinkedIntegrationResourceModalService } from '../form/search-link
 import { CommentThreadSimpleType, CommentThreadType, CommentType } from '../../services/api-schema';
 import { IntegrationResource } from '../../entity/integration-resource';
 import { Comment } from '../../entity/comment';
+import { v4 as uuid } from 'uuid';
 
 function addToControl<T>(control: FormControl, itemToAdd: T) {
 
@@ -46,6 +47,7 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
   commentRound: CommentRound;
   myComments: Comment[];
   commenting$ = new BehaviorSubject<boolean>(false);
+  newIds: string[] = [];
 
   cancelSubscription: Subscription;
 
@@ -79,7 +81,7 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
 
-    console.log('ngOnInit');
+    this.newIds = [];
 
     const commentRoundId = this.route.snapshot.params.commentRoundId;
 
@@ -111,7 +113,7 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
 
     if (this.commentRound.status === 'AWAIT') {
       return this.authorizationManager.user.email === this.commentRound.user.email && this.editing;
-    } else if (this.commentRound.status === 'INPROGRESS' && !this.commentRound.fixedThreads) {
+    } else if (this.commentRound.status === 'INPROGRESS' && !this.commentRound.fixedThreads && (this.editing || this.commenting)) {
       return this.authorizationManager.canCreateCommentThread();
     }
     return false;
@@ -156,20 +158,27 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
 
   createNewCommentThreadWithSource(integrationResource: IntegrationResource) {
 
+    const id: string = uuid();
+    this.newIds.push(id);
     const commentThreadFormGroup: FormGroup = new FormGroup({
+      id: new FormControl(id),
       resourceUri: new FormControl(integrationResource.uri),
       resourceType: new FormControl(integrationResource.type),
       label: new FormControl(integrationResource.prefLabel),
       description: new FormControl(integrationResource.description),
       currentStatus: new FormControl(integrationResource.status),
       proposedStatus: new FormControl('NOSTATUS'),
-      proposedText: new FormControl('')
+      proposedText: new FormControl(''),
+      commentersProposedStatus: new FormControl('NOSTATUS'),
+      commentersProposedText: new FormControl('')
+
     });
 
     this.commentThreadForms.push(commentThreadFormGroup);
   }
 
   removeCommentThread(i: any) {
+
     this.commentThreadForms.removeAt(i);
   }
 
@@ -182,7 +191,6 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
       threads.controls.forEach(thread => {
         const threadValue: CommentThreadSimple = thread.value;
         if (threadValue.resourceUri) {
-          console.log('restricted uri: ' + threadValue.resourceUri);
           restrictedIds.push(threadValue.resourceUri);
         }
       });
@@ -235,6 +243,7 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getMyCommentForCommentThread(commentThreadId: string): string {
+
     let content = '';
     if (this.myComments) {
       this.myComments.forEach(comment => {
@@ -247,6 +256,7 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getMyProposedStatusForCommentThread(commentThreadId: string): string {
+
     let proposedStatus = 'NOSTATUS';
     if (this.myComments) {
       this.myComments.forEach(comment => {
@@ -259,6 +269,7 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   mapCommentThreads(commentThreadsFormArray: FormArray): CommentThreadSimple[] {
+
     const commentThreads: CommentThreadSimple[] = [];
 
     if (commentThreadsFormArray) {
@@ -312,6 +323,10 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     return save();
   }
 
+  isNewResource(id: string): boolean {
+    return this.newIds.includes(id);
+  }
+
   get editing() {
 
     return this.editableService.editing;
@@ -326,6 +341,22 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
 
     this.reset();
     this.commenting$.next(false);
+  }
+
+  sendCommentsAndAddResources() {
+
+    const commentThreadsToBeAdded: CommentThreadSimple[] =
+      this.mapCommentThreads(this.commentThreadForms).filter(commentThread => this.isNewResource(commentThread.id));
+
+    if (commentThreadsToBeAdded.length > 0) {
+      this.dataService.createCommentThreads(this.commentRound.id,
+        commentThreadsToBeAdded.map(thread => thread.serialize())).subscribe(commentThreads => {
+        this.newIds = [];
+        this.sendComments();
+      });
+    } else {
+      this.sendComments();
+    }
   }
 
   sendComments() {
@@ -376,6 +407,7 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   get toolType(): string {
+
     return this.commentRound.source.containerType;
   }
 
@@ -396,6 +428,7 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   get canComment(): boolean {
+
     return !this.isEditor && this.authorizationManager.canCreateComment(this.commentRound) && this.commentRound.status === 'INPROGRESS';
   }
 

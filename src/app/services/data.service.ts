@@ -238,7 +238,7 @@ export class DataService {
     return this.http.post<CommentRoundType>(`${commentRoundsApiPath}/${commentRoundId}/`, commentRoundToUpdate);
   }
 
-  createCommentThread(commentThreadToCreate: CommentThreadType): Observable<CommentThreadSimple> {
+  createCommentThread(commentThreadToCreate: CommentThreadType): Observable<CommentThread> {
 
     const commentRoundId: string = commentThreadToCreate.commentRound.id;
 
@@ -251,11 +251,11 @@ export class DataService {
     }));
   }
 
-  createCommentThreads(commentRoundId: string, commentThreadList: CommentThreadType[]): Observable<CommentThreadSimple[]> {
+  createCommentThreads(commentRoundId: string, commentThreadList: CommentThreadSimpleType[]): Observable<CommentThread[]> {
 
     return this.http.post<WithResults<CommentThreadType>>(`${commentRoundsApiPath}/${commentRoundId}/${commentThreads}/`,
       commentThreadList)
-      .pipe(map(res => res.results.map(data => new CommentThreadSimple(data))));
+      .pipe(map(res => res.results.map(data => new CommentThread(data))));
   }
 
   updateCommentThread(commentThreadToUpdate: CommentThreadType): Observable<CommentThreadSimpleType> {

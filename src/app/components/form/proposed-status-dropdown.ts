@@ -51,7 +51,7 @@ export class ProposedStatusTableDropdownComponent implements ControlValueAccesso
 
   get editing() {
 
-    return this.editableService.editing && !this.restrict;
+    return (this.editableService.editing || this.isEditing) && !this.restrict;
   }
 
   get options(): ProposedStatus[] {

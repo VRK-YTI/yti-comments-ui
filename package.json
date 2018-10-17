@@ -36,7 +36,8 @@
     "simple-line-icons": "^2.4.1",
     "yti-common-ui": "https://github.com/VRK-YTI/yti-common-ui.git/#d89816d7b75f9d69690f54b07f626761a34ce109",
     "rxjs": "^6.0.0",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "uuid": "3.0.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.7.0",
@@ -48,6 +49,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^8.9.5",
     "@types/webpack-env": "^1.13.6",
+    "@types/uuid": "2.0.29",
     "codelyzer": "~4.2.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",

@@ -41,27 +41,33 @@ export class ProposedStatusDropdownComponent implements ControlValueAccessor {
   private propagateTouched: (fn: any) => void = () => {};
 
   get options(): ProposedStatus[] {
+
     return selectableProposedStatuses;
   }
 
   isSelected(option: ProposedStatus) {
+
     return this.selection === option;
   }
 
   select(option: ProposedStatus) {
+
     this.selection = option;
     this.propagateChange(option);
   }
 
   writeValue(obj: any): void {
+
     this.selection = obj;
   }
 
   registerOnChange(fn: any): void {
+
     this.propagateChange = fn;
   }
 
   registerOnTouched(fn: any): void {
+
     this.propagateTouched = fn;
   }
 }

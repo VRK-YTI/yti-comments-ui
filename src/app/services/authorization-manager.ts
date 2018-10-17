@@ -26,12 +26,14 @@ export class AuthorizationManager {
 
   canCreateCommentRound() {
 
-    return this.user.superuser || (this.user.isInRoleInAnyOrganization(['ADMIN']));
+    return this.user.superuser ||
+      (this.user.isInRoleInAnyOrganization(['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR']));
   }
 
   canCreateCommentThread() {
 
-    return this.user.superuser || (this.user.isInRoleInAnyOrganization(['ADMIN']));
+    return this.user.superuser ||
+      (this.user.isInRoleInAnyOrganization(['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR']));
   }
 
   canCreateComment(editableEntity: EditableEntity) {
