@@ -359,6 +359,17 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  isEmpty(obj: any) {
+
+    for (const prop in obj) {
+      if (obj.hasOwnProperty(prop)) {
+        return false;
+      }
+    }
+
+    return JSON.stringify(obj) === JSON.stringify({});
+  }
+
   sendComments() {
 
     const comments: CommentType[] = [];

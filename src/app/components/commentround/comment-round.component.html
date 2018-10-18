@@ -184,12 +184,14 @@
         <tbody>
         <tr *ngFor="let commentThread of commentThreadForms.controls; let i = index" [formGroupName]="i">
           <td style="width: 15%">
-            <a *ngIf="commentThread.value.label && commentThread.value.resourceUri" [href]="commentThread.value.resourceUri" target="_blank">{{ commentThread.value.label | translateValue }}</a>
+            <a *ngIf="commentThread.value.label && commentThread.value.resourceUri"
+               [href]="commentThread.value.resourceUri"
+               target="_blank">{{ commentThread.value.label | translateValue }}</a>
             <span *ngIf="!commentThread.value.resourceUri">-</span>
           </td>
-          <td style="width: 15%; white-space: nowrap">
-            <span *ngIf="commentThread.value.description && commentThread.value.description.size > 0">{{ commentThread.value.description | translateValue }}</span>
-            <span *ngIf="!commentThread.value.description || commentThread.value.description.size === 0">-</span>
+          <td style="width: 15%;">
+            <span class="wrap" *ngIf="commentThread.value.description && !isEmpty(commentThread.value.description)">{{ commentThread.value.description | translateValue }}</span>
+            <span *ngIf="!commentThread.value.description || isEmpty(commentThread.value.description)">-</span>
           </td>
           <td style="width: 10%">
             <span translate>{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : '-' }}</span>
@@ -234,8 +236,10 @@
         <tbody>
         <tr *ngFor="let commentThread of commentThreadForms.controls; let i = index;" [formGroupName]="i">
           <td style="width: 15%">
-            <a [href]="commentThread.value.resourceUri"
+            <a *ngIf="commentThread.value.resourceUri"
+               [href]="commentThread.value.resourceUri"
                target="_blank">{{ commentThread.value.label | translateValue }}</a>
+            <span *ngIf="!commentThread.value.resourceUri">-</span>
           </td>
           <td style="width: 15%">
             <span translate>{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : 'NOSTATUS' }}</span>
