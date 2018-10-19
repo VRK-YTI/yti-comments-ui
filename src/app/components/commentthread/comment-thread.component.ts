@@ -103,25 +103,30 @@ export class CommentThreadComponent implements OnInit {
   }
 
   hasChildComments(parentCommentId: string): boolean {
+
     const childComments = this.childComments(parentCommentId);
     return childComments != null && childComments.length > 0;
   }
 
   childComments(parentCommentId: string): CommentSimple[] {
+
     return this.comments.filter(comment => comment.parentComment != null && comment.parentComment.id === parentCommentId);
   }
 
   childCommentsWithParent(parentCommentId: string): CommentSimple[] {
+
     return this.comments.filter(comment => comment.id === parentCommentId ||
       comment.parentComment != null && comment.parentComment.id === parentCommentId);
   }
 
   showChildComments(parentCommentId: string) {
+
     const titleLabel = 'Discussion';
     this.discussionModalService.open(this.childCommentsWithParent(parentCommentId), titleLabel);
   }
 
   get baseLevelComments(): CommentSimple[] {
+
     return this.comments.filter(comment => comment.parentComment == null);
   }
 
@@ -240,10 +245,12 @@ export class CommentThreadComponent implements OnInit {
   }
 
   get hasComments(): boolean {
+
     return this.comments && this.comments.length > 0;
   }
 
   viewComment(comment: CommentSimple) {
+
     this.router.navigate([
       'comment',
       {
