@@ -171,11 +171,8 @@ export class DataService {
 
   getCommentRoundCommentThreadComments(commentRoundId: string, commentThreadId: string): Observable<CommentSimple[]> {
 
-    const params = new HttpParams()
-      .set('expand', 'commentThread');
-
     return this.http.get(commentRoundsApiPath + '/' + commentRoundId + '/' + commentThreads + '/' + commentThreadId + '/' + comments,
-      { params: params, responseType: 'json' })
+      { responseType: 'json' })
       .pipe(map((res: any) => {
         return res.results.map(
           (data: CommentSimpleType) => new CommentSimple(data));

@@ -1,7 +1,6 @@
 import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
-import { CommentRound } from '../../entity/commentround';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EditableService } from '../../services/editable.service';
 import { LocationService } from '../../services/location.service';
@@ -10,7 +9,6 @@ import { Observable, Subscription } from 'rxjs';
 import { CommentType } from '../../services/api-schema';
 import { tap } from 'rxjs/operators';
 import { Comment } from '../../entity/comment';
-import { CommentThread } from '../../entity/commentthread';
 import { AuthorizationManager } from '../../services/authorization-manager';
 
 @Component({
@@ -22,8 +20,6 @@ import { AuthorizationManager } from '../../services/authorization-manager';
 export class CommentComponent implements OnInit, OnChanges, OnDestroy {
 
   comment: Comment;
-  commentRound: CommentRound;
-  commentThread: CommentThread;
 
   cancelSubscription: Subscription;
 
@@ -55,14 +51,6 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
       throw new Error(`Illegal route, commentRound: '${commentRoundId}', commentThread: '${commentThreadId}', comment: '${commentId}'`);
     }
 
-    this.dataService.getCommentRound(commentRoundId).subscribe(commentRound => {
-      this.commentRound = commentRound;
-    });
-
-    this.dataService.getCommentRoundCommentThread(commentRoundId, commentThreadId).subscribe(commentThread => {
-      this.commentThread = commentThread;
-    });
-
     this.dataService.getCommentRoundCommentThreadComment(commentRoundId, commentThreadId, commentId).subscribe(comment => {
       this.comment = comment;
       this.locationService.atCommentPage(comment);
@@ -72,7 +60,7 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
 
   canCreateComment() {
 
-    return this.authorizationManager.canCreateComment(this.commentRound);
+    return this.authorizationManager.canCreateComment(this.comment.commentThread.commentRound);
   }
 
   createNewComment() {
@@ -80,8 +68,8 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
     this.router.navigate(
       ['createcomment',
         {
-          commentRoundId: this.commentRound.id,
-          commentThreadId: this.commentThread.id,
+          commentRoundId: this.comment.commentThread.commentRound.id,
+          commentThreadId: this.comment.commentThread.id,
           parentCommentId: this.comment.id
         }
       ]
@@ -107,7 +95,7 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
       content: content,
       proposedStatus: proposedStatus == null ? 'NOSTATUS' : proposedStatus,
       parentComment: parentComment,
-      commentThread: this.commentThread
+      commentThread: this.comment.commentThread
     });
   }
 
@@ -124,20 +112,21 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
       content: content,
       proposedStatus: proposedStatus !== 'NOSTATUS' ? proposedStatus : null,
       parentComment: parentComment,
-      commentThread: this.commentThread.serialize()
+      commentThread: this.comment.commentThread.serialize()
     };
 
     const updatedComment: Comment = new Comment(updatedCommentType);
 
     const save = () => {
-      return this.dataService.updateComment(this.commentRound.id, updatedComment.serialize()).pipe(tap(() => this.ngOnInit()));
+      return this.dataService.updateComment(this.comment.commentThread.commentRound.id,
+        updatedComment.serialize()).pipe(tap(() => this.ngOnInit()));
     };
 
     return save();
   }
 
   get loading(): boolean {
-    return this.commentRound == null || this.commentThread == null || this.comment == null;
+    return this.comment == null;
   }
 
   back() {

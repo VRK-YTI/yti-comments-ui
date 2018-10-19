@@ -70,6 +70,7 @@ import { ProposedStatusTableDropdownComponent } from './components/form/proposed
 import { IntegrationResourceService } from './services/integrationresource.service';
 import { CommentsConfirmationModalService } from './components/common/confirmation-modal.service';
 import { DiscussionModalComponent, DiscussionModalService } from './components/common/discussion-modal.service';
+import { HierarchicalCommentListitemComponent } from './components/common/hierarchical-comment-listitem.component';
 
 declare var require: any;
 
@@ -187,7 +188,8 @@ const appRoutes: Routes = [
     CommentRoundStatusComponent,
     LiteralTextareaComponent,
     CurrentStatusComponent,
-    ProposedStatusTableDropdownComponent
+    ProposedStatusTableDropdownComponent,
+    HierarchicalCommentListitemComponent
   ],
   entryComponents: [
     SearchLinkedIntegrationResourceModalComponent,

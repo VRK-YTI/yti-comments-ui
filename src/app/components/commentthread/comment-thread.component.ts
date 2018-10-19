@@ -91,15 +91,26 @@ export class CommentThreadComponent implements OnInit {
 
   createNewComment(parentCommentId: string) {
 
-    this.router.navigate(
-      ['createcomment',
-        {
-          commentRoundId: this.commentRound.id,
-          commentThreadId: this.commentThread.id,
-          parentCommentId: parentCommentId
-        }
-      ]
-    );
+    if (parentCommentId) {
+      this.router.navigate(
+        ['createcomment',
+          {
+            commentRoundId: this.commentRound.id,
+            commentThreadId: this.commentThread.id,
+            parentCommentId: parentCommentId
+          }
+        ]
+      );
+    } else {
+      this.router.navigate(
+        ['createcomment',
+          {
+            commentRoundId: this.commentRound.id,
+            commentThreadId: this.commentThread.id
+          }
+        ]
+      );
+    }
   }
 
   hasChildComments(parentCommentId: string): boolean {
@@ -113,16 +124,33 @@ export class CommentThreadComponent implements OnInit {
     return this.comments.filter(comment => comment.parentComment != null && comment.parentComment.id === parentCommentId);
   }
 
-  childCommentsWithParent(parentCommentId: string): CommentSimple[] {
+  resolveAllChildComments(comments: CommentSimple[], parentCommentId: string) {
 
-    return this.comments.filter(comment => comment.id === parentCommentId ||
-      comment.parentComment != null && comment.parentComment.id === parentCommentId);
+    this.comments.filter(comment => {
+      if (comment.parentComment != null && comment.parentComment.id === parentCommentId) {
+        comments.push(comment);
+        this.resolveAllChildComments(comments, comment.id);
+      }
+    });
   }
 
-  showChildComments(parentCommentId: string) {
+  resolveCommentChain(parentCommentId: string): CommentSimple[] {
 
-    const titleLabel = 'Discussion';
-    this.discussionModalService.open(this.childCommentsWithParent(parentCommentId), titleLabel);
+    const comments: CommentSimple[] = [];
+    const commentParents: CommentSimple[] = this.comments.filter(comment => comment.id === parentCommentId);
+    if (commentParents) {
+      commentParents.forEach(comment => {
+        comments.push(comment);
+        this.resolveAllChildComments(comments, comment.id);
+      });
+    }
+    return comments;
+  }
+
+  showComments(parentCommentId: string) {
+
+    const titleLabel = 'Comments';
+    this.discussionModalService.open(this.resolveCommentChain(parentCommentId), titleLabel);
   }
 
   get baseLevelComments(): CommentSimple[] {

@@ -18,7 +18,7 @@ import { TranslateService } from '@ngx-translate/core';
       <a class="name" [routerLink]="commentRound.route">{{ commentRound.label }}</a>
 
       <div>
-        <span>Commenting period: {{ commentingPeriod }}</span>
+        <span translate>Commenting period</span><span>: {{ commentingPeriod }}</span>
       </div>
 
       <span class="information-domains">

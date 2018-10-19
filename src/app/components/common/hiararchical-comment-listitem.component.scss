@@ -1,0 +1,35 @@
+.name {
+  color: black;
+  font-weight: bold;
+}
+
+.created {
+  padding-left: 10px;
+  color: gray;
+}
+
+.proposedStatus {
+  color: gray;
+}
+
+.content {
+  color: black;
+}
+
+ul {
+  padding-left: 15px;
+
+  li {
+    list-style: none;
+
+    i {
+      cursor: pointer;
+      margin-left: -15px;
+      font-size: 14px;
+    }
+  }
+
+  li.child-comment {
+    padding-left: 15px;
+  }
+}

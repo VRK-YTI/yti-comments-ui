@@ -190,8 +190,8 @@
             <span *ngIf="!commentThread.value.resourceUri">-</span>
           </td>
           <td style="width: 15%;">
-            <span class="wrap" *ngIf="commentThread.value.description && !isEmpty(commentThread.value.description)">{{ commentThread.value.description | translateValue }}</span>
-            <span *ngIf="!commentThread.value.description || isEmpty(commentThread.value.description)">-</span>
+            <span class="wrap" *ngIf="!languageService.isLocalizableEmpty(commentThread.value.description)">{{ commentThread.value.description | translateValue }}</span>
+            <span *ngIf="languageService.isLocalizableEmpty(commentThread.value.description)">-</span>
           </td>
           <td style="width: 10%">
             <span translate>{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : '-' }}</span>

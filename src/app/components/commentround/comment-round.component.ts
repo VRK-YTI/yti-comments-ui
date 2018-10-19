@@ -23,6 +23,7 @@ import { CommentThreadSimpleType, CommentThreadType, CommentType } from '../../s
 import { IntegrationResource } from '../../entity/integration-resource';
 import { Comment } from '../../entity/comment';
 import { v4 as uuid } from 'uuid';
+import { LanguageService } from '../../services/language.service';
 
 function addToControl<T>(control: FormControl, itemToAdd: T) {
 
@@ -72,7 +73,8 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
               private confirmationModalService: CommentsConfirmationModalService,
               private errorModalService: ErrorModalService,
               private searchLinkedIntegrationResourceModalService: SearchLinkedIntegrationResourceModalService,
-              private translateService: TranslateService) {
+              private translateService: TranslateService,
+              public languageService: LanguageService) {
 
     this.cancelSubscription = editableService.cancel$.subscribe(() => this.reset());
 
@@ -357,17 +359,6 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     } else {
       this.sendComments();
     }
-  }
-
-  isEmpty(obj: any) {
-
-    for (const prop in obj) {
-      if (obj.hasOwnProperty(prop)) {
-        return false;
-      }
-    }
-
-    return JSON.stringify(obj) === JSON.stringify({});
   }
 
   sendComments() {

@@ -29,7 +29,8 @@
                      [label]="'Comment thread name' | translate"
                      [value]="commentThread.label | translateValue"></app-literal>
 
-        <app-clipboard [id]="'commentthread_resourceuri'"
+        <app-clipboard *ngIf="commentThread.resourceUri"
+                       [id]="'commentthread_resourceuri'"
                        [label]="'Comment thread resource URI' | translate"
                        [value]="commentThread.resourceUri"
                        [showAsLink]="false"

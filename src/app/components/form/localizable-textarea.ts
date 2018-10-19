@@ -1,5 +1,6 @@
 import { Component, Input, Optional, Self } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-localizable-textarea',
@@ -10,7 +11,10 @@ import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
         <app-information-symbol [infoText]="infoText"></app-information-symbol>
       </dt>
       <dd>
-        <div class="text-content-wrap" *ngIf="!editing">{{control.value | translateValue}}</div>
+        <div class="text-content-wrap">
+          <span *ngIf="!languageService.isLocalizableEmpty(control.value)">{{control.value | translateValue}}</span>
+          <span *ngIf="languageService.isLocalizableEmpty(control.value)">-</span>
+        </div>
       </dd>
     </dl>
   `
@@ -27,7 +31,8 @@ export class LocalizableTextareaComponent implements ControlValueAccessor {
   private propagateChange: (fn: any) => void = () => {};
   private propagateTouched: (fn: any) => void = () => {};
 
-  constructor(@Self() @Optional() public parentControl: NgControl) {
+  constructor(@Self() @Optional() public parentControl: NgControl,
+              public languageService: LanguageService) {
 
     this.control.valueChanges.subscribe(x => this.propagateChange(x));
 

@@ -124,10 +124,10 @@
         </td>
         <td style="width: 15%" translate>{{ commentThread.currentStatus }}</td>
         <td style="width: 15%" translate>{{ comment.proposedStatus ? comment.proposedStatus : 'NOSTATUS' }}</td>
-        <button *ngIf=canCreateComment() [id]="'comment_to_parentcomment_' + comment.id + '_button'" type="button" class="icon icon-pencil"
+        <button *ngIf=canCreateComment() [id]="'comment_to_parentcomment_' + comment.id + '_button'" type="button" class="icon icon-bubble"
                 (click)="createNewComment(comment.id)"></button>
-        <button *ngIf="hasChildComments(comment.id)" [id]="'comment_to_parentcomment_' + comment.id + '_button'" type="button" class="icon icon-bubble"
-                (click)="showChildComments(comment.id)"></button>
+        <button *ngIf="hasChildComments(comment.id)" [id]="'show_comments_' + comment.id + '_button'" type="button" class="icon icon-bubbles"
+                (click)="showComments(comment.id)"></button>
       </tr>
     </tbody>
   </table>

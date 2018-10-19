@@ -66,7 +66,7 @@ export class CommentCreateComponent implements OnInit {
       this.commentRound = commentRound;
     });
 
-    if (parentCommentId != null) {
+    if (parentCommentId !== undefined) {
       this.hasParentComment = true;
       this.dataService.getCommentRoundCommentThreadComment(commentRoundId, commentThreadId, parentCommentId).subscribe(parentComment => {
         this.parentComment = parentComment;
