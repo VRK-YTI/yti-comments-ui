@@ -104,3 +104,34 @@ img.svg-icon {
     display: inline-block;
   }
 }
+
+div.localized {
+
+  display: inline-block;
+  width: 100%;
+
+  div.language {
+
+    font-weight: bold;
+    border-radius: 2px;
+    float: left;
+    color: $white;
+    background-color: $primary;
+    width: $language-width;
+    height: $language-height;
+    display: inline-block;
+    text-align: center;
+    line-height: $language-height;
+  }
+
+  div.localization {
+
+    float: left;
+    width: calc(100% - #{$language-width});
+    min-height: $language-height;
+    padding-left: 10px;
+    padding-right: 10px;
+    white-space: normal;
+  }
+}
+

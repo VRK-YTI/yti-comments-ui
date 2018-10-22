@@ -444,4 +444,11 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     return this.commentRound.status === 'INPROGRESS' && !this.editing &&
       this.authorizationManager.user.email === this.commentRound.user.email;
   }
+
+  get commentRoundCountTranslateParams() {
+
+    return {
+      value: this.commentRound.commentThreads.length
+    };
+  }
 }

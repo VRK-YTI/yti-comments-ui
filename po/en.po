@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-16 12:40+0300\n"
+"PO-Revision-Date: 2018-10-22 14:02+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -13,10 +13,16 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+msgid "Commenting period"
+msgstr ""
+
 msgid "Choose source"
 msgstr ""
 
 msgid "Search term"
+msgstr ""
+
+msgid "{{titleLabel}}"
 msgstr ""
 
 msgid "Cancel"
@@ -118,9 +124,6 @@ msgstr ""
 msgid "Tool"
 msgstr ""
 
-msgid "Commenting period"
-msgstr ""
-
 msgid "Description"
 msgstr ""
 
@@ -148,25 +151,33 @@ msgstr ""
 msgid "Last modification"
 msgstr ""
 
+msgid "Commenting subject"
+msgstr ""
+
+msgid "Commentable resources"
+msgstr "Commentable resources {{ value }}."
+
 msgid "Start comment round"
 msgstr ""
 
 msgid "Close comment round"
 msgstr ""
 
-msgid "Comment to round"
-msgstr ""
+#, fuzzy
+#| msgid "Your comment"
+msgid "Start commenting"
+msgstr "Comment"
 
 msgid "Send comments"
+msgstr ""
+
+msgid "There are no resources to comment."
 msgstr ""
 
 msgid "Resources for commenting"
 msgstr ""
 
 msgid "Add new resource"
-msgstr ""
-
-msgid "There are no resources to comment."
 msgstr ""
 
 msgid "Resource"

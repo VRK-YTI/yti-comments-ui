@@ -71,6 +71,7 @@ import { IntegrationResourceService } from './services/integrationresource.servi
 import { CommentsConfirmationModalService } from './components/common/confirmation-modal.service';
 import { DiscussionModalComponent, DiscussionModalService } from './components/common/discussion-modal.service';
 import { HierarchicalCommentListitemComponent } from './components/common/hierarchical-comment-listitem.component';
+import { LiteralMultilanguageComponent } from './components/form/app-literal-multilanguage';
 
 declare var require: any;
 
@@ -189,7 +190,8 @@ const appRoutes: Routes = [
     LiteralTextareaComponent,
     CurrentStatusComponent,
     ProposedStatusTableDropdownComponent,
-    HierarchicalCommentListitemComponent
+    HierarchicalCommentListitemComponent,
+    LiteralMultilanguageComponent
   ],
   entryComponents: [
     SearchLinkedIntegrationResourceModalComponent,
