@@ -15,6 +15,7 @@ import { LocationService } from '../../services/location.service';
 import { CommentSimple } from '../../entity/comment-simple';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { DiscussionModalService } from '../common/discussion-modal.service';
+import { ConfigurationService } from '../../services/configuration.service';
 
 @Component({
   selector: 'app-comment-thread',
@@ -46,7 +47,8 @@ export class CommentThreadComponent implements OnInit {
               private editableService: EditableService,
               private location: Location,
               private locationService: LocationService,
-              private discussionModalService: DiscussionModalService) {
+              private discussionModalService: DiscussionModalService,
+              private configurationService: ConfigurationService) {
     this.cancelSubscription = editableService.cancel$.subscribe(() => this.reset());
 
     this.resourceChangeSubscription = this.commentThreadForm.controls['resource'].valueChanges
@@ -200,9 +202,12 @@ export class CommentThreadComponent implements OnInit {
     return !!this.commentThreadForm.controls['resource'].value;
   }
 
-  get getResourceUri(): string {
+  get getResourceUri(): string | null {
 
-    return this.commentThreadForm.controls['resource'].value ? this.commentThreadForm.controls['resource'].value.uri : '-';
+    if (this.commentThreadForm.controls['resource'].value) {
+      return this.configurationService.getUriWithEnv(this.commentThreadForm.controls['resource'].value.uri);
+    }
+    return null;
   }
 
   get getResource(): IntegrationResource {
@@ -288,5 +293,4 @@ export class CommentThreadComponent implements OnInit {
       }
     ]);
   }
-
 }

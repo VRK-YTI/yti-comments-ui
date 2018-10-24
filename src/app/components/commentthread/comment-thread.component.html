@@ -12,8 +12,6 @@
     <div class="col-12">
       <app-editable-buttons [form]="form"
                             [entity]="commentRound"></app-editable-buttons>
-
-      <app-content-language></app-content-language>
     </div>
   </div>
 
@@ -28,25 +26,11 @@
                  [label]="'Round name' | translate"
                  [value]="commentRound.label"></app-literal>
 
-    <app-localizable-literal *ngIf="!allowInput"
-                             [id]="'commentthread_label_input'"
-                             [label]="'Resource name' | translate"
-                             [infoText]="'INFO_TEXT_COMMENTTHREAD_NAME'"
-                             [value]="getLabel"></app-localizable-literal>
-
-    <app-localizable-input *ngIf="allowInput"
-                           [id]="'commentthread_label_input'"
-                           [label]="'Resource name' | translate"
-                           [required]="true"
-                           [infoText]="'INFO_TEXT_COMMENTTHREAD_NAME'"
-                           [formControlName]="'label'"></app-localizable-input>
-
-    <app-localizable-textarea *ngIf="!allowInput"
-                              [id]="'commentthread_description_input'"
-                              [label]="'Resource description' | translate"
-                              [required]="true"
-                              [infoText]="'INFO_TEXT_COMMENTTHREAD_DESCRIPTION'"
-                              [formControlName]="'description'"></app-localizable-textarea>
+    <app-literal-multilanguage *ngIf="!allowInput"
+                               [id]="'commentthread_description'"
+                               [label]="'Resource description' | translate"
+                               [infoText]="'INFO_TEXT_COMMENTTHREAD_DESCRIPTION'"
+                               [value]="getDescription"></app-literal-multilanguage>
 
     <app-localizable-textarea-input *ngIf="allowInput"
                                     [id]="'commentthread_description_input'"
@@ -108,27 +92,29 @@
 
   <table *ngIf="hasComments" class="table table-borderless" width="100%">
     <thead>
-      <tr>
-        <th style="width: 20%" translate>Commenter</th>
-        <th style="width: 30%" translate>Comment</th>
-        <th style="width: 10%" translate>Current status</th>
-        <th style="width: 10%" translate>Proposed status</th>
-        <th style="width: 10%" translate>Actions</th>
-      </tr>
+    <tr>
+      <th style="width: 20%" translate>Commenter</th>
+      <th style="width: 30%" translate>Comment</th>
+      <th style="width: 10%" translate>Current status</th>
+      <th style="width: 10%" translate>Proposed status</th>
+      <th style="width: 10%" translate>Actions</th>
+    </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let comment of baseLevelComments">
-        <td style="width: 20%">{{ comment.user.firstName }} {{ comment.user.lastName }}</td>
-        <td style="width: 50%">
-          <span class="btn-link" (click)="viewComment(comment)">{{ comment.content }}</span>
-        </td>
-        <td style="width: 15%" translate>{{ commentThread.currentStatus }}</td>
-        <td style="width: 15%" translate>{{ comment.proposedStatus ? comment.proposedStatus : 'NOSTATUS' }}</td>
-        <button *ngIf=canCreateComment() [id]="'comment_to_parentcomment_' + comment.id + '_button'" type="button" class="icon icon-bubble"
-                (click)="createNewComment(comment.id)"></button>
-        <button *ngIf="hasChildComments(comment.id)" [id]="'show_comments_' + comment.id + '_button'" type="button" class="icon icon-bubbles"
-                (click)="showComments(comment.id)"></button>
-      </tr>
+    <tr *ngFor="let comment of baseLevelComments">
+      <td style="width: 20%">{{ comment.user.firstName }} {{ comment.user.lastName }}</td>
+      <td style="width: 50%">
+        <span class="btn-link" (click)="viewComment(comment)">{{ comment.content }}</span>
+      </td>
+      <td style="width: 15%" translate>{{ commentThread.currentStatus }}</td>
+      <td style="width: 15%" translate>{{ comment.proposedStatus ? comment.proposedStatus : 'NOSTATUS' }}</td>
+      <button [id]="'show_coment_' + comment.id + '_button'" type="button" class="icon icon-pencil"
+              (click)="viewComment(comment)"></button>
+      <button *ngIf=canCreateComment() [id]="'comment_to_parentcomment_' + comment.id + '_button'" type="button" class="icon icon-bubble"
+              (click)="createNewComment(comment.id)"></button>
+      <button *ngIf="hasChildComments(comment.id)" [id]="'show_comments_' + comment.id + '_button'" type="button" class="icon icon-bubbles"
+              (click)="showComments(comment.id)"></button>
+    </tr>
     </tbody>
   </table>
 </div>

@@ -103,6 +103,9 @@ msgstr ""
 msgid "Commenter"
 msgstr ""
 
+msgid "Thread resource name"
+msgstr ""
+
 msgid "Thread resource URI"
 msgstr ""
 
@@ -139,10 +142,10 @@ msgstr ""
 msgid "Editor"
 msgstr ""
 
-msgid "Last modification"
+msgid "Commenting subject"
 msgstr ""
 
-msgid "Commenting subject"
+msgid "Last modification"
 msgstr ""
 
 msgid "Commentable resources"

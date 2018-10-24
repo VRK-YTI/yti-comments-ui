@@ -12,6 +12,7 @@ import { tap } from 'rxjs/operators';
 import { CommentRound } from '../../entity/commentround';
 import { CommentThread } from '../../entity/commentthread';
 import { CommentSimple } from '../../entity/comment-simple';
+import { ConfigurationService } from '../../services/configuration.service';
 
 @Component({
   selector: 'app-comment-create',
@@ -21,7 +22,6 @@ import { CommentSimple } from '../../entity/comment-simple';
 })
 export class CommentCreateComponent implements OnInit {
 
-  env: string;
   commentThread: CommentThread;
   commentRound: CommentRound;
   parentComment: CommentSimple;
@@ -40,7 +40,8 @@ export class CommentCreateComponent implements OnInit {
               private location: Location,
               private languageService: LanguageService,
               private locationService: LocationService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private configurationService: ConfigurationService) {
 
     editableService.onSave = (formValue: any) => this.save(formValue);
     editableService.cancel$.subscribe(() => this.back());
@@ -73,17 +74,10 @@ export class CommentCreateComponent implements OnInit {
         this.commentForm.controls['parentComment'].setValue(parentComment);
       });
     }
-
-    this.dataService.getServiceConfiguration().subscribe(configuration => {
-      this.env = configuration.env;
-    });
   }
 
   get loading(): boolean {
-    return this.env == null ||
-      this.commentRound == null ||
-      this.commentThread == null ||
-      (this.parentComment == null && this.hasParentComment);
+    return this.commentRound == null || this.commentThread == null || (this.parentComment == null && this.hasParentComment);
   }
 
   back() {
@@ -118,5 +112,10 @@ export class CommentCreateComponent implements OnInit {
     };
 
     return save();
+  }
+
+  get resourceUri() {
+
+    return this.configurationService.getUriWithEnv(this.commentThread.resourceUri);
   }
 }

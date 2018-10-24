@@ -29,7 +29,7 @@ function removeFromControl<T>(control: FormControl) {
       </dt>
       <dd>
         <div *ngIf="!editing && resource">
-          <span>{{resource.getDisplayName(languageService, false)}}</span>
+          <app-literal-multilanguage [value]="resource.prefLabel"></app-literal-multilanguage>
         </div>
         <div *ngIf="editing && resource">
           <a class="removal-X">

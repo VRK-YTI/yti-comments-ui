@@ -10,7 +10,6 @@
     <div class="col-md-12">
       <h1 class="float-left" translate>Create comment</h1>
       <app-editable-buttons [form]="form"></app-editable-buttons>
-      <app-content-language></app-content-language>
     </div>
   </div>
 
@@ -32,7 +31,7 @@
         <app-clipboard *ngIf="commentThread.resourceUri"
                        [id]="'commentthread_resourceuri'"
                        [label]="'Comment thread resource URI' | translate"
-                       [value]="commentThread.resourceUri"
+                       [value]="resourceUri"
                        [showAsLink]="false"
                        [infoText]="'INFO_TEXT_COMMENT_COMMENTTHREAD_RESOURCEURI'"></app-clipboard>
 

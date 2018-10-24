@@ -72,6 +72,7 @@ import { CommentsConfirmationModalService } from './components/common/confirmati
 import { DiscussionModalComponent, DiscussionModalService } from './components/common/discussion-modal.service';
 import { HierarchicalCommentListitemComponent } from './components/common/hierarchical-comment-listitem.component';
 import { LiteralMultilanguageComponent } from './components/form/app-literal-multilanguage';
+import { ConfigurationService } from './services/configuration.service';
 
 declare var require: any;
 
@@ -231,7 +232,8 @@ const appRoutes: Routes = [
     SearchLinkedOrganizationModalService,
     SearchLinkedCommentModalService,
     DiscussionModalService,
-    CommentRoundErrorModalService
+    CommentRoundErrorModalService,
+    ConfigurationService
   ],
   bootstrap: [AppComponent]
 })

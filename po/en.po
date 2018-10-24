@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-22 14:02+0300\n"
+"PO-Revision-Date: 2018-10-24 12:57+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -112,6 +112,9 @@ msgstr ""
 msgid "Commenter"
 msgstr ""
 
+msgid "Thread resource name"
+msgstr ""
+
 msgid "Thread resource URI"
 msgstr ""
 
@@ -148,10 +151,10 @@ msgstr ""
 msgid "Editor"
 msgstr ""
 
-msgid "Last modification"
+msgid "Commenting subject"
 msgstr ""
 
-msgid "Commenting subject"
+msgid "Last modification"
 msgstr ""
 
 msgid "Commentable resources"
@@ -163,8 +166,6 @@ msgstr ""
 msgid "Close comment round"
 msgstr ""
 
-#, fuzzy
-#| msgid "Your comment"
 msgid "Start commenting"
 msgstr "Comment"
 

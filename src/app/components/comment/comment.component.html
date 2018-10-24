@@ -20,10 +20,6 @@
           <span translate>Add comment</span>
         </button>
       </div>
-
-      <div class="float-right d-inline-block">
-        <app-content-language></app-content-language>
-      </div>
     </div>
   </div>
 
@@ -44,15 +40,15 @@
                      [infoText]="'INFO_TEXT_COMMENT_COMMENTROUND_NAME'"
                      [value]="comment.commentThread.commentRound.label"></app-literal>
 
-        <app-literal [id]="'commentthread_name'"
-                     [label]="'Thread name'"
-                     [infoText]="'INFO_TEXT_COMMENT_COMMENTTHREAD_NAME'"
-                     [value]="comment.commentThread.label | translateValue"></app-literal>
+        <app-literal-multilanguage [id]="'commentthread_name'"
+                                   [label]="'Thread resource name' | translate"
+                                   [infoText]="'INFO_TEXT_COMMENT_COMMENTTHREAD_NAME'"
+                                   [value]="comment.commentThread.label"></app-literal-multilanguage>
 
         <app-clipboard *ngIf="comment.commentThread.resourceUri"
                        [id]="'commentthread_resourceuri'"
                        [label]="'Thread resource URI' | translate"
-                       [value]="comment.commentThread.resourceUri"
+                       [value]="resourceUri"
                        [showAsLink]="false"
                        [infoText]="'INFO_TEXT_COMMENT_COMMENTTHREAD_RESOURCEURI'"></app-clipboard>
 

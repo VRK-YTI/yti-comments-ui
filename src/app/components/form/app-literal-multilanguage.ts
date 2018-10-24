@@ -11,11 +11,14 @@ import { LanguageService } from '../../services/language.service';
         <label *ngIf="label">{{label}}</label>
         <app-information-symbol *ngIf="infoText" [infoText]="infoText"></app-information-symbol>
       </dt>
-      <dd>
+      <dd *ngIf="valueLanguages.length > 0">
         <div class="localized" *ngFor="let language of valueLanguages">
           <div class="language">{{ language.toUpperCase()}}</div>
           <div class="localization">{{ value[language] }}</div>
         </div>
+      </dd>
+      <dd *ngIf="valueLanguages.length === 0">
+        <span>-</span>
       </dd>
     </dl>
   `
@@ -30,7 +33,7 @@ export class LiteralMultilanguageComponent {
               public languageService: LanguageService) {
   }
 
-  get valueLanguages() {
+  get valueLanguages(): string[] {
     return Object.keys(this.value);
   }
 }

@@ -24,6 +24,7 @@ import { IntegrationResource } from '../../entity/integration-resource';
 import { Comment } from '../../entity/comment';
 import { v4 as uuid } from 'uuid';
 import { LanguageService } from '../../services/language.service';
+import { ConfigurationService } from '../../services/configuration.service';
 
 function addToControl<T>(control: FormControl, itemToAdd: T) {
 
@@ -74,7 +75,8 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
               private errorModalService: ErrorModalService,
               private searchLinkedIntegrationResourceModalService: SearchLinkedIntegrationResourceModalService,
               private translateService: TranslateService,
-              public languageService: LanguageService) {
+              public languageService: LanguageService,
+              public configurationService: ConfigurationService) {
 
     this.cancelSubscription = editableService.cancel$.subscribe(() => this.reset());
 
@@ -391,9 +393,9 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     return this.commentRound == null || this.myComments == null;
   }
 
-  get getResourceUri(): string {
+  get getResourceUri(): string | null {
 
-    return this.commentRound.source.containerUri;
+    return this.configurationService.getUriWithEnv(this.commentRound.source.containerUri);
   }
 
   get hasCommentThreads(): boolean {

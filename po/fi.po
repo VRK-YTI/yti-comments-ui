@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-22 14:10+0300\n"
+"PO-Revision-Date: 2018-10-24 12:57+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -112,6 +112,9 @@ msgstr "Luo kommentti"
 msgid "Commenter"
 msgstr "Kommentoija"
 
+msgid "Thread resource name"
+msgstr "Kommentointiketju tietosisällön nimi"
+
 msgid "Thread resource URI"
 msgstr "Kommentointiketju tietosisällön URI"
 
@@ -148,11 +151,11 @@ msgstr "Kommentointikierroksen tiedot"
 msgid "Editor"
 msgstr "Ylläpitäjä"
 
-msgid "Last modification"
-msgstr "Viimeisin muokkaus"
-
 msgid "Commenting subject"
 msgstr "Kommentoinnin kohde"
+
+msgid "Last modification"
+msgstr "Viimeisin muokkaus"
 
 msgid "Commentable resources"
 msgstr "Kommentoitavia tietosisältöjä {{ value }} kpl"
@@ -537,3 +540,6 @@ msgstr "Virheellinen päivämäärä"
 
 msgid "invalidDateRange"
 msgstr "Virheellinen päivämääräväli"
+
+#~ msgid "Thread name"
+#~ msgstr "Kommentointiketjun nimi"

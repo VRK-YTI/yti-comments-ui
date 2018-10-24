@@ -46,7 +46,6 @@ const datamodelBasePath = `${baseApiPath}/${datamodel}`;
 const groupManagementRequestBasePath = `${baseApiPath}/${groupmanagement}/${request}`;
 const groupManagementRequestsBasePath = `${baseApiPath}/${groupmanagement}/${requests}`;
 
-
 interface FakeableUser {
   email: string;
   firstName: string;

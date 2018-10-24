@@ -10,6 +10,7 @@ import { CommentType } from '../../services/api-schema';
 import { tap } from 'rxjs/operators';
 import { Comment } from '../../entity/comment';
 import { AuthorizationManager } from '../../services/authorization-manager';
+import { ConfigurationService } from '../../services/configuration.service';
 
 @Component({
   selector: 'app-comment',
@@ -35,7 +36,8 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
               private editableService: EditableService,
               private locationService: LocationService,
               private location: Location,
-              private authorizationManager: AuthorizationManager) {
+              private authorizationManager: AuthorizationManager,
+              private configurationService: ConfigurationService) {
 
     this.cancelSubscription = editableService.cancel$.subscribe(() => this.reset());
 
@@ -126,10 +128,17 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   get loading(): boolean {
+
     return this.comment == null;
   }
 
   back() {
+
     this.location.back();
+  }
+
+  get resourceUri(): string | null {
+
+    return this.configurationService.getUriWithEnv(this.comment.commentThread.resourceUri);
   }
 }

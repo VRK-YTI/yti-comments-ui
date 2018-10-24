@@ -12,6 +12,7 @@ import { tap } from 'rxjs/operators';
 import { CommentRound } from '../../entity/commentround';
 import { IntegrationResource } from '../../entity/integration-resource';
 import { Localizable } from 'yti-common-ui/types/localization';
+import { ConfigurationService } from '../../services/configuration.service';
 
 @Component({
   selector: 'app-commentthread-create',
@@ -21,7 +22,6 @@ import { Localizable } from 'yti-common-ui/types/localization';
 })
 export class CommentThreadCreateComponent implements OnInit {
 
-  env: string;
   commentRound: CommentRound;
 
   resourceChangeSubscription: Subscription;
@@ -42,7 +42,8 @@ export class CommentThreadCreateComponent implements OnInit {
               private location: Location,
               private languageService: LanguageService,
               private locationService: LocationService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private configurationService: ConfigurationService) {
 
     this.resourceChangeSubscription = this.commentThreadForm.controls['resource'].valueChanges
       .subscribe(data => this.updateResourceData());
@@ -64,10 +65,6 @@ export class CommentThreadCreateComponent implements OnInit {
       this.commentRound = commentRound;
       this.locationService.atCommentThreadCreatePage(this.commentRound);
     });
-
-    this.dataService.getServiceConfiguration().subscribe(configuration => {
-      this.env = configuration.env;
-    });
   }
 
   get allowInput(): boolean {
@@ -77,7 +74,7 @@ export class CommentThreadCreateComponent implements OnInit {
 
   get loading(): boolean {
 
-    return this.env == null || this.commentRound == null;
+    return this.commentRound == null;
   }
 
   updateResourceData() {
@@ -161,5 +158,10 @@ export class CommentThreadCreateComponent implements OnInit {
     };
 
     return save();
+  }
+
+  get containerUri() {
+
+    return this.configurationService.getUriWithEnv(this.commentRound.source.containerUri);
   }
 }
