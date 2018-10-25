@@ -34,15 +34,17 @@
           <app-literal class="col-md-2"
                        [id]="'commentround_container_type'"
                        [label]="'Tool' | translate"
-                       [infoText]="'INFO_TEXT_COMMENTROUND_NAME'"
+                       [infoText]="'INFO_TEXT_COMMENTROUND_TOOL_TYPE'"
                        [value]="toolType | translate"></app-literal>
 
-          <app-date-range-input class="col-md-6"
-                                id="commentround_validity_input"
-                                [showLabel]="false"
-                                [label]="'Commenting period' | translate"
-                                [infoText]="'INFO_TEXT_COMMENTROUND_VALIDITY'"
-                                [formControlName]="'validity'"></app-date-range-input>
+          <app-comment-round-date-range-input class="col-md-6"
+                                              [id]="'commentround_validity_input'"
+                                              [label]="'Commenting period' | translate"
+                                              [showLabel]="true"
+                                              [startLabel]="'Start of commenting' | translate"
+                                              [endLabel]="'End of commenting' | translate"
+                                              [infoText]="'INFO_TEXT_COMMENTROUND_VALIDITY'"
+                                              [formControlName]="'validity'"></app-comment-round-date-range-input>
         </div>
 
         <app-literal-textarea [id]="'commentround_description_input'"
@@ -77,7 +79,7 @@
                        [label]="'Source URI' | translate"
                        [value]="getResourceUri"
                        [showAsLink]="false"
-                       [infoText]="'INFO_TEXT_INTEGRATION_RESOURCEURI'"></app-clipboard>
+                       [infoText]="'INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE_URI'"></app-clipboard>
 
         <app-organizations-input id="commentround_organizations_input"
                                  [label]="'Organization' | translate"

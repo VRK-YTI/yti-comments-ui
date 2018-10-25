@@ -73,6 +73,7 @@ import { DiscussionModalComponent, DiscussionModalService } from './components/c
 import { HierarchicalCommentListitemComponent } from './components/common/hierarchical-comment-listitem.component';
 import { LiteralMultilanguageComponent } from './components/form/app-literal-multilanguage';
 import { ConfigurationService } from './services/configuration.service';
+import { CommentRoundDateRangeInputComponent } from './components/form/app-comment-round-date-range.component';
 
 declare var require: any;
 
@@ -192,7 +193,8 @@ const appRoutes: Routes = [
     CurrentStatusComponent,
     ProposedStatusTableDropdownComponent,
     HierarchicalCommentListitemComponent,
-    LiteralMultilanguageComponent
+    LiteralMultilanguageComponent,
+    CommentRoundDateRangeInputComponent
   ],
   entryComponents: [
     SearchLinkedIntegrationResourceModalComponent,

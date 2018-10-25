@@ -118,6 +118,12 @@ msgstr ""
 msgid "Tool"
 msgstr ""
 
+msgid "Start of commenting"
+msgstr ""
+
+msgid "End of commenting"
+msgstr ""
+
 msgid "Description"
 msgstr ""
 
@@ -286,7 +292,7 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
+msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
 msgstr ""
 
 msgid "INFO_TEXT_COMMENTROUND_USER"
@@ -296,6 +302,9 @@ msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE_URI"
 msgstr ""
 
 msgid "INFO_TEXT_COMMENTROUND_NAME"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_TOOL_TYPE"
 msgstr ""
 
 msgid "INFO_TEXT_COMMENTROUND_DESCRIPTION"
@@ -316,6 +325,12 @@ msgstr ""
 msgid "INFO_TEXT_COMMENTROUND_VALIDITY"
 msgstr ""
 
+msgid "INFO_TEXT_COMMENTROUND_VALIDITY_START_DATE"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_VALIDITY_END_DATE"
+msgstr ""
+
 msgid "INFO_TEXT_COMMENTROUND_CREATED"
 msgstr ""
 
@@ -328,10 +343,10 @@ msgstr ""
 msgid "INFO_TEXT_COMMENTTHREAD_NAME"
 msgstr ""
 
-msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
+msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE"
 msgstr ""
 
-msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE"
+msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
 msgstr ""
 
 msgid "INFO_TEXT_COMMENTTHREAD_PROPOSEDTEXT"

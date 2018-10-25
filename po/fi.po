@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-24 12:57+0300\n"
+"PO-Revision-Date: 2018-10-25 11:11+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -126,6 +126,12 @@ msgstr "Luo kommentti"
 
 msgid "Tool"
 msgstr "Työkalu"
+
+msgid "Start of commenting"
+msgstr "Kommentointi alkaa"
+
+msgid "End of commenting"
+msgstr "Kommentointi päättyy"
 
 msgid "Description"
 msgstr "Kuvaus"
@@ -300,17 +306,22 @@ msgstr "Odottaa hyväksymistä"
 msgid "Send"
 msgstr "Lähetä"
 
-msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
-msgstr "Kommenttiketjun kommentoitava tietosisältö"
+msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
+msgstr "Kommenttiketjun kuvaus"
 
 msgid "INFO_TEXT_COMMENTROUND_USER"
 msgstr "Kommentointikierroksen perustanut käyttäjä"
 
 msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE_URI"
-msgstr "Kommentointikierroksen tietosisällön URI-osoite"
+msgstr "Kommentointikierroksen päätason tietosisällön URI-osoite"
 
 msgid "INFO_TEXT_COMMENTROUND_NAME"
 msgstr "Kommentointikierroksen nimi, joka näkyy otsikossa ja hakutuloksissa"
+
+msgid "INFO_TEXT_COMMENTROUND_TOOL_TYPE"
+msgstr ""
+"Yhteentoimivuusalustan työkalu, jonka tietosisältöjä tässä "
+"kommentointikierroksessa kommentoidaan"
 
 msgid "INFO_TEXT_COMMENTROUND_DESCRIPTION"
 msgstr "Kommentointikierrosta kuvaava teksti"
@@ -337,6 +348,16 @@ msgstr "Kommentointikierroksen tile"
 msgid "INFO_TEXT_COMMENTROUND_VALIDITY"
 msgstr "Ajanjakso, jolloin kommentointikierrokseen voi kommentoida"
 
+msgid "INFO_TEXT_COMMENTROUND_VALIDITY_START_DATE"
+msgstr ""
+"Kommentointikierroksen alkupäivämäärä, jonka jälkeen kommentointi on "
+"mahdollista"
+
+msgid "INFO_TEXT_COMMENTROUND_VALIDITY_END_DATE"
+msgstr ""
+"Kommentointikierroksen päättymispäivämäärä. Tämän päivämäärän jälkeen "
+"kommentointikierros suljetaan automaattisesti, ja kommentointi päättyy"
+
 msgid "INFO_TEXT_COMMENTROUND_CREATED"
 msgstr "Kommentointikierroksen luontiajankohta"
 
@@ -349,12 +370,11 @@ msgstr "Kommenttiketjun perustanut käyttäjä"
 msgid "INFO_TEXT_COMMENTTHREAD_NAME"
 msgstr "Kommenttiketjun nimi"
 
-msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
-msgstr "Kommenttiketjun kuvaus"
-
 msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE"
-msgstr ""
-"Kommentointikierroksen container-tietosisältö, jota aletaan kommentoimaan"
+msgstr "Kommentointikierroksen päätason tietosisältö, jota kommentoidaan"
+
+msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
+msgstr "Kommenttiketjun kommentoitava tietosisältö"
 
 msgid "INFO_TEXT_COMMENTTHREAD_PROPOSEDTEXT"
 msgstr "Ehdotettu toiminto"

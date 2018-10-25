@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-24 12:57+0300\n"
+"PO-Revision-Date: 2018-10-25 11:11+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -125,6 +125,12 @@ msgid "Add comment"
 msgstr ""
 
 msgid "Tool"
+msgstr ""
+
+msgid "Start of commenting"
+msgstr ""
+
+msgid "End of commenting"
 msgstr ""
 
 msgid "Description"
@@ -300,17 +306,22 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
-msgstr "Comment thread integration resource URI address"
+msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
+msgstr "Comment thread description"
 
 msgid "INFO_TEXT_COMMENTROUND_USER"
 msgstr "User that created this comment round"
 
 msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE_URI"
-msgstr "Comment round integration resource URI address"
+msgstr "Comment round top level resource URI address"
 
 msgid "INFO_TEXT_COMMENTROUND_NAME"
 msgstr "Comment round name that is shown on the front page"
+
+msgid "INFO_TEXT_COMMENTROUND_TOOL_TYPE"
+msgstr ""
+"The interoperability tool from which the comment round resources are being "
+"commented"
 
 msgid "INFO_TEXT_COMMENTROUND_DESCRIPTION"
 msgstr "Comment round description text"
@@ -334,6 +345,14 @@ msgstr "Comment round status"
 msgid "INFO_TEXT_COMMENTROUND_VALIDITY"
 msgstr "Time period when this comment round allows commenting"
 
+msgid "INFO_TEXT_COMMENTROUND_VALIDITY_START_DATE"
+msgstr "Start time of when this comment round starts allowing comments"
+
+msgid "INFO_TEXT_COMMENTROUND_VALIDITY_END_DATE"
+msgstr ""
+"End time of this comment round, comments are no longer accepted after this "
+"and comment round is ended automatically"
+
 msgid "INFO_TEXT_COMMENTROUND_CREATED"
 msgstr "Comment round creation time"
 
@@ -346,11 +365,11 @@ msgstr "User that created this comment thread"
 msgid "INFO_TEXT_COMMENTTHREAD_NAME"
 msgstr "Comment thread name"
 
-msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
-msgstr "Comment thread description"
-
 msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE"
-msgstr "Comment round container preflabel localized text"
+msgstr "Comment round top level resource"
+
+msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
+msgstr "Comment thread integration resource URI address"
 
 msgid "INFO_TEXT_COMMENTTHREAD_PROPOSEDTEXT"
 msgstr "Proposed action"
