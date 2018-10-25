@@ -194,7 +194,7 @@
     </div>
 
     <div class="mt-4">
-      <span>{{ 'Commentable resources' |translate:commentRoundCountTranslateParams}}</span>
+      <span *ngIf="hasCommentThreads">{{ 'Commentable resources' |translate:commentRoundCountTranslateParams}}</span>
       <span *ngIf="!hasCommentThreads" translate>There are no resources to comment.</span>
     </div>
 
