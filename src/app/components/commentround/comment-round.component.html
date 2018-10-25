@@ -224,6 +224,7 @@
           <th style="width: 15%" translate>Proposed status</th>
           <th style="width: 20%" translate>Editors comment</th>
           <th style="width: 5%" translate>Actions</th>
+          <th *ngIf="showResults" style="width: 15%"><span translate>Proposed statuses</span></th>
         </tr>
         </thead>
         <tbody>
@@ -264,6 +265,16 @@
                     class="icon icon-trash"
                     (click)="removeCommentThread(i)"></button>
           </td>
+          <td *ngIf="showResults && commentThread.value.results && commentThread.value.results.length > 0">
+            <div *ngFor="let result of commentThread.value.results">
+              <div>
+                <span>{{ result.status | translate }}</span>: <span>{{ result.count }}</span> (<span>{{ result.percentage }}</span> %)
+              </div>
+            </div>
+          </td>
+          <td *ngIf="showResults && (!commentThread.value.results || commentThread.value.results.length === 0)">
+            <span>-</span>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -278,6 +289,7 @@
           <th style="width: 15%" translate>{{ commenting ? 'Propose status' : 'Commenters proposal for status' }}</th>
           <th style="width: 20%" translate>{{ commenting ? 'Your comment' : 'Commenters comment' }}</th>
           <th style="width: 5%" translate>Actions</th>
+          <th *ngIf="showResults" style="width: 15%"><span translate>Proposed statuses</span></th>
         </tr>
         </thead>
         <tbody>
@@ -319,6 +331,16 @@
                     type="button"
                     class="icon icon-trash"
                     (click)="removeCommentThread(i)"></button>
+          </td>
+          <td *ngIf="showResults && commentThread.value.results && commentThread.value.results.length > 0">
+            <div *ngFor="let result of commentThread.value.results">
+              <div>
+                <span>{{ result.status | translate }}</span>: <span>{{ result.count }}</span> (<span>{{ result.percentage }}</span> %)
+              </div>
+            </div>
+          </td>
+          <td *ngIf="showResults && (!commentThread.value.results || commentThread.value.results.length === 0)">
+            <span>-</span>
           </td>
         </tr>
         </tbody>

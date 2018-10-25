@@ -3,6 +3,7 @@ import { Localizable } from 'yti-common-ui/types/localization';
 import { formatDateTime, formatDisplayDateTime, parseDateTime } from '../utils/date';
 import { Moment } from 'moment';
 import { User } from './user';
+import { CommentThreadResult } from './commentthreadresult';
 
 export class CommentThreadSimple {
 
@@ -16,6 +17,7 @@ export class CommentThreadSimple {
   proposedStatus: string;
   user: User;
   created: Moment | null = null;
+  results: CommentThreadResult[];
 
   constructor(data: CommentThreadSimpleType) {
 
@@ -45,6 +47,9 @@ export class CommentThreadSimple {
     if (data.created) {
       this.created = parseDateTime(data.created);
     }
+    if (data.results) {
+      this.results = (data.results || []).map(result => new CommentThreadResult(result));
+    }
   }
 
   get createdDisplayValue(): string {
@@ -53,6 +58,7 @@ export class CommentThreadSimple {
   }
 
   serialize(): CommentThreadSimpleType {
+
     return {
       id: this.id ? this.id : undefined,
       url: this.url ? this.url : undefined,
@@ -63,11 +69,13 @@ export class CommentThreadSimple {
       created: formatDateTime(this.created),
       proposedText: this.proposedText,
       currentStatus: this.currentStatus,
-      proposedStatus: this.proposedStatus
+      proposedStatus: this.proposedStatus,
+      results: this.results.map(result => result.serialize())
     };
   }
 
   clone(): CommentThreadSimple {
+
     return new CommentThreadSimple(this.serialize());
   }
 }

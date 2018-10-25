@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-25 11:11+0300\n"
+"PO-Revision-Date: 2018-10-25 13:15+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -197,6 +197,9 @@ msgid "Editors comment"
 msgstr ""
 
 msgid "Actions"
+msgstr ""
+
+msgid "Proposed statuses"
 msgstr ""
 
 msgid ""

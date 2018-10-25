@@ -190,6 +190,9 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
+msgid "Proposed statuses"
+msgstr ""
+
 msgid ""
 "{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : "
 "'-' }}"

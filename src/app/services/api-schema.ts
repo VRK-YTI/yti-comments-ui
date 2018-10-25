@@ -89,6 +89,7 @@ export interface CommentThreadType extends BaseResourceType {
   user?: UserType;
   created?: string | null;
   commentRound: CommentRoundType;
+  results?: CommentThreadResultType[];
 }
 
 export interface CommentThreadSimpleType {
@@ -103,6 +104,14 @@ export interface CommentThreadSimpleType {
   proposedStatus?: string;
   user?: UserType;
   created?: string | null;
+  results?: CommentThreadResultType[];
+}
+
+export interface CommentThreadResultType {
+
+  status: string;
+  count: number;
+  percentage: number;
 }
 
 export interface OrganizationType {

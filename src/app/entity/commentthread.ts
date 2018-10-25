@@ -7,6 +7,7 @@ import { Moment } from 'moment';
 import { Location } from 'yti-common-ui/types/location';
 import { User } from './user';
 import { EditableEntity } from './editable-entity';
+import { CommentThreadResult } from './commentthreadresult';
 
 export class CommentThread extends AbstractResource implements EditableEntity {
 
@@ -19,6 +20,7 @@ export class CommentThread extends AbstractResource implements EditableEntity {
   user: User;
   created: Moment | null = null;
   commentRound: CommentRound;
+  results: CommentThreadResult[];
 
   constructor(data: CommentThreadType) {
 
@@ -34,6 +36,9 @@ export class CommentThread extends AbstractResource implements EditableEntity {
     }
     if (data.created) {
       this.created = parseDateTime(data.created);
+    }
+    if (data.results) {
+      this.results = (data.results || []).map(result => new CommentThreadResult(result));
     }
     this.commentRound = new CommentRound(data.commentRound);
   }
@@ -79,7 +84,8 @@ export class CommentThread extends AbstractResource implements EditableEntity {
       proposedText: this.proposedText,
       currentStatus: this.currentStatus,
       proposedStatus: this.proposedStatus,
-      commentRound: this.commentRound.serialize()
+      commentRound: this.commentRound.serialize(),
+      results: this.results.map(result => result.serialize())
     };
   }
 

@@ -174,8 +174,8 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
       proposedStatus: new FormControl('NOSTATUS'),
       proposedText: new FormControl(''),
       commentersProposedStatus: new FormControl('NOSTATUS'),
-      commentersProposedText: new FormControl('')
-
+      commentersProposedText: new FormControl(''),
+      results: new FormControl([])
     });
 
     this.commentThreadForms.push(commentThreadFormGroup);
@@ -240,7 +240,8 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
         proposedStatus: new FormControl(commentThread.proposedStatus),
         proposedText: new FormControl(commentThread.proposedText),
         commentersProposedStatus: new FormControl(this.getMyProposedStatusForCommentThread(commentThread.id)),
-        commentersProposedText: new FormControl(this.getMyCommentForCommentThread(commentThread.id))
+        commentersProposedText: new FormControl(this.getMyCommentForCommentThread(commentThread.id)),
+        results: new FormControl(commentThread.results)
       });
       this.commentThreadForms.push(commentThreadFormGroup);
     });
@@ -288,7 +289,8 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
           proposedStatus: commentThreadInputValue.proposedStatus,
           proposedText: commentThreadInputValue.proposedText,
           commentersProposedStatus: commentThreadInputValue.commentersProposedStatus,
-          commentersProposedText: commentThreadInputValue.commentersProposedText
+          commentersProposedText: commentThreadInputValue.commentersProposedText,
+          results: commentThreadInputValue.results
         };
         const commentThread: CommentThreadSimple = new CommentThreadSimple(commentThreadFromFormInput);
         commentThreads.push(commentThread);
@@ -452,5 +454,10 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     return {
       value: this.commentRound.commentThreads.length
     };
+  }
+
+  get showResults(): boolean {
+
+    return this.commentRound.status === 'ENDED' || this.commentRound.status === 'CLOSED';
   }
 }
