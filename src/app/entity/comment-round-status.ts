@@ -1,6 +1,7 @@
-export type CommentRoundStatus = 'AWAIT'
+export type CommentRoundStatus = 'INCOMPLETE'
+  | 'AWAIT'
   | 'INPROGRESS'
   | 'ENDED'
   | 'CLOSED';
 
-export const allCommentRoundStatuses = ['AWAIT', 'INPROGRESS', 'ENDED', 'CLOSED'] as CommentRoundStatus[];
+export const allCommentRoundStatuses = ['INCOMPLETE', 'AWAIT', 'INPROGRESS', 'ENDED', 'CLOSED'] as CommentRoundStatus[];

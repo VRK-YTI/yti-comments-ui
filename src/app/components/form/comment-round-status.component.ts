@@ -6,7 +6,7 @@ import { CommentRoundStatus } from '../../entity/comment-round-status';
   styleUrls: ['./comment-round-status.component.scss'],
   template: `
     <span [class.bg-danger]="danger"
-          [class.bg-pending]="await"
+          [class.bg-pending]="awaitOrIncomplete"
           [class.bg-warning]="warning"
           [class.bg-success]="success">{{status | translate}}</span>
   `
@@ -15,8 +15,12 @@ export class CommentRoundStatusComponent {
 
   @Input() status: string;
 
-  get await() {
-    return this.status === 'AWAIT' as CommentRoundStatus;
+  get incomplete() {
+    return this.status === 'INCOMPLETE' as CommentRoundStatus;
+  }
+
+  get awaitOrIncomplete() {
+    return this.status === 'AWAIT' || this.status === 'INCOMPLETE' as CommentRoundStatus;
   }
 
   get danger() {

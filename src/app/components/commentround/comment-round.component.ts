@@ -59,7 +59,7 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     fixedThreads: new FormControl(),
     openThreads: new FormControl(),
     validity: new FormControl({ start: null, end: null }, validDateRange),
-    status: new FormControl('AWAIT' as CommentRoundStatus),
+    status: new FormControl('INCOMPLETE' as CommentRoundStatus),
     organizations: new FormControl([], [requiredList]),
     commentThreads: new FormArray([])
   }, null);
@@ -115,7 +115,7 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
 
   get canCreateCommentThread(): boolean {
 
-    if (this.commentRound.status === 'AWAIT') {
+    if (this.commentRound.status === 'INCOMPLETE') {
       return this.authorizationManager.user.email === this.commentRound.user.email && this.editing;
     } else if (this.commentRound.status === 'INPROGRESS' && !this.commentRound.fixedThreads && (this.editing || this.commenting)) {
       return this.authorizationManager.canCreateCommentThread();
@@ -438,9 +438,11 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     return !this.isEditor && this.authorizationManager.canCreateComment(this.commentRound) && this.commentRound.status === 'INPROGRESS';
   }
 
-  get canStartCommenting(): boolean {
+  get canStartCommentRound(): boolean {
 
-    return this.commentRound.status === 'AWAIT' && !this.editing && this.authorizationManager.user.email === this.commentRound.user.email;
+    return this.commentRound.status === 'INCOMPLETE' &&
+      !this.editing &&
+      this.authorizationManager.user.email === this.commentRound.user.email;
   }
 
   get canEndCommenting(): boolean {
@@ -459,5 +461,14 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
   get showResults(): boolean {
 
     return this.commentRound.status === 'ENDED' || this.commentRound.status === 'CLOSED';
+  }
+
+  get showExcelExport(): boolean {
+
+    return this.commentRound.status === 'ENDED' || this.commentRound.status === 'CLOSED';
+  }
+
+  get exportUrl(): string {
+    return this.commentRound.url + '/?format=excel';
   }
 }

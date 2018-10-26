@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-25 13:14+0300\n"
+"PO-Revision-Date: 2018-10-26 10:01+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -79,8 +79,8 @@ msgstr ""
 msgid "Filter results"
 msgstr "Suodata hakutuloksia"
 
-msgid "Create empty resource"
-msgstr "Luo tyhjä tietosisältö"
+msgid "Create new suggestion"
+msgstr "Luo uusi ehdotus"
 
 msgid "Select resource"
 msgstr "Valitse tietosisältö"
@@ -167,10 +167,13 @@ msgid "Commentable resources"
 msgstr "Kommentoitavia tietosisältöjä {{ value }} kpl"
 
 msgid "Start comment round"
-msgstr "Aloita kommentointi"
+msgstr "Aloita kommentointikierros"
 
 msgid "Close comment round"
-msgstr "Lopeta kommentointi"
+msgstr "Lopeta kommentointikierros"
+
+msgid "Export Excel"
+msgstr "Vie Exceliin"
 
 msgid "Start commenting"
 msgstr "Aloita kommentointi"
@@ -193,8 +196,8 @@ msgstr "Tietosisältö"
 msgid "Current status"
 msgstr "Nykyinen tila"
 
-msgid "Editors comment"
-msgstr "Ylläpitäjän kommentti"
+msgid "Proposers comment"
+msgstr "Ehdottajan kommentti"
 
 msgid "Actions"
 msgstr "Toiminnot"
@@ -454,7 +457,7 @@ msgid "INCOMPLETE"
 msgstr "Keskeneräinen"
 
 msgid "AWAIT"
-msgstr "Kesken"
+msgstr "Odottaa"
 
 msgid "INPROGRESS"
 msgstr "Käynnissä"
@@ -563,6 +566,12 @@ msgstr "Virheellinen päivämäärä"
 
 msgid "invalidDateRange"
 msgstr "Virheellinen päivämääräväli"
+
+#~ msgid "Create empty resource"
+#~ msgstr "Luo tyhjä tietosisältö"
+
+#~ msgid "Editors comment"
+#~ msgstr "Ylläpitäjän kommentti"
 
 #~ msgid "Thread name"
 #~ msgstr "Kommentointiketjun nimi"

@@ -16,10 +16,11 @@
       <app-editable-buttons [form]="form"
                             [entity]="commentRound"></app-editable-buttons>
 
-      <div *ngIf="canStartCommenting" class="ml-3 float-right d-inline-block">
+      <div *ngIf="canStartCommentRound" class="ml-3 float-right d-inline-block">
         <button id="start_commentround_button"
                 type="button"
                 class="btn btn-secondary-action float-right"
+                [disabled]="commentRound.commentThreads.length === 0"
                 (click)="startCommentRound()">
           <span translate>Start comment round</span>
         </button>
@@ -32,6 +33,18 @@
                 (click)="closeCommentRound()">
           <span translate>Close comment round</span>
         </button>
+      </div>
+
+      <div *ngIf="showExcelExport" class="ml-3 float-right d-inline-block">
+        <a id="commentround_export_excel_link"
+           [href]="exportUrl"
+           target="_blank" translate>
+          <button id="export_commentround_button"
+                  type="button"
+                  class="float-right btn btn-action">
+            <span translate>Export Excel</span>
+          </button>
+        </a>
       </div>
 
       <div *ngIf="canComment && commenting" class="ml-3 float-right d-inline-block">
@@ -222,7 +235,7 @@
           <th style="width: 15%" translate>Description</th>
           <th style="width: 15%" translate>Current status</th>
           <th style="width: 15%" translate>Proposed status</th>
-          <th style="width: 20%" translate>Editors comment</th>
+          <th style="width: 20%" translate>Proposers comment</th>
           <th style="width: 5%" translate>Actions</th>
           <th *ngIf="showResults" style="width: 15%"><span translate>Proposed statuses</span></th>
         </tr>
@@ -259,7 +272,7 @@
                     type="button"
                     class="icon icon-pencil"
                     (click)="viewCommentThread(commentThread.value)"></button>
-            <button *ngIf="editing && (commentRound.status === 'AWAIT' || isNewResource(commentThread.value.id))"
+            <button *ngIf="editing && (commentRound.status === 'INCOMPLETE' || isNewResource(commentThread.value.id))"
                     [id]="'remove_commentthread_' + i + '_button'"
                     type="button"
                     class="icon icon-trash"
@@ -279,13 +292,13 @@
         </tbody>
       </table>
 
-      <table *ngIf="!isEditor && hasCommentThreads && commenting" class="table table-borderless" width="100%">
+      <table *ngIf="!isEditor && hasCommentThreads" class="table table-borderless" width="100%">
         <thead>
         <tr>
           <th style="width: 15%" translate>Resource</th>
           <th style="width: 15%" translate>Current status</th>
           <th style="width: 15%" translate>Proposed status</th>
-          <th style="width: 15%" translate>Editors comment</th>
+          <th style="width: 15%" translate>Proposers comment</th>
           <th style="width: 15%" translate>{{ commenting ? 'Propose status' : 'Commenters proposal for status' }}</th>
           <th style="width: 20%" translate>{{ commenting ? 'Your comment' : 'Commenters comment' }}</th>
           <th style="width: 5%" translate>Actions</th>

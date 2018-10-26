@@ -33,7 +33,7 @@ export class CommentRoundCreateComponent implements OnInit {
     fixedThreads: new FormControl(true),
     openThreads: new FormControl(false),
     validity: new FormControl({ start: null, end: null }, validDateRange),
-    status: new FormControl('AWAIT' as CommentRoundStatus),
+    status: new FormControl('INCOMPLETE' as CommentRoundStatus),
     organizations: new FormControl([], [requiredList]),
     resource: new FormControl(null)
   }, null);

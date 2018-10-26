@@ -93,7 +93,7 @@ import { IntegrationReourceType } from '../../services/api-schema';
               type="button"
               class="btn btn-secondary-action"
               (click)="createEmptyResource()">
-        <span translate>Create empty resource</span>
+        <span translate>Create new suggestion</span>
       </button>
     </div>
   `
