@@ -18,6 +18,9 @@ export class AuthorizationManager {
     if (this.user.superuser) {
       return true;
     }
+    if (editableEntity.allowUserEdit()) {
+      return this.user.email === editableEntity.getUser().email;
+    }
     if (editableEntity.allowOrganizationEdit()) {
       return this.user.isInOrganization(editableEntity.getOwningOrganizationIds(), ['ADMIN']);
     }

@@ -1,4 +1,5 @@
 <div *ngIf="loading">
+  <ngb-tabset #tabSet="ngbTabset"></ngb-tabset>
   <app-ajax-loading-indicator></app-ajax-loading-indicator>
 </div>
 
@@ -13,13 +14,42 @@
 
   <div class="row">
     <div class="col-12">
-      <app-editable-buttons [form]="form"
+      <app-editable-buttons *ngIf="currentTab$.value === 'commentround_resources_tab'"
+                            [form]="form"
                             [entity]="commentRound"></app-editable-buttons>
+
+      <div *ngIf="canComment && !commenting && currentTab$.value === 'commentround_comments_tab'" class="ml-3 float-right d-inline-block">
+        <button id="start_commenting_button"
+                type="button"
+                class="btn btn-action"
+                (click)="startCommenting()">
+          <span translate>Start commenting</span>
+        </button>
+      </div>
+
+      <div *ngIf="canComment && commenting && currentTab$.value === 'commentround_comments_tab'" class="ml-3 float-right d-inline-block">
+        <button id="send_comments_button"
+                type="button"
+                class="btn btn-action"
+                [disabled]="commentRoundForm.invalid"
+                (click)="sendCommentsAndAddResources()">
+          <span translate>Send comments</span>
+        </button>
+      </div>
+
+      <div *ngIf="canComment && commenting && currentTab$.value === 'commentround_comments_tab'" class="ml-3 float-right d-inline-block">
+        <button id="cancel_commenting_button"
+                type="button"
+                class="btn btn-link"
+                (click)="cancelCommenting()">
+          <span translate>Cancel</span>
+        </button>
+      </div>
 
       <div *ngIf="canStartCommentRound" class="ml-3 float-right d-inline-block">
         <button id="start_commentround_button"
                 type="button"
-                class="btn btn-secondary-action float-right"
+                class="btn btn-secondary-action"
                 [disabled]="commentRound.commentThreads.length === 0"
                 (click)="startCommentRound()">
           <span translate>Start comment round</span>
@@ -29,7 +59,7 @@
       <div *ngIf="canEndCommenting" class="ml-3 float-right d-inline-block">
         <button id="end_commentround_button"
                 type="button"
-                class="btn btn-secondary-action float-right"
+                class="btn btn-secondary-action"
                 (click)="closeCommentRound()">
           <span translate>Close comment round</span>
         </button>
@@ -41,44 +71,16 @@
            target="_blank" translate>
           <button id="export_commentround_button"
                   type="button"
-                  class="float-right btn btn-action">
+                  class="btn btn-action">
             <span translate>Export Excel</span>
           </button>
         </a>
-      </div>
-
-      <div *ngIf="canComment && commenting" class="ml-3 float-right d-inline-block">
-        <button id="cancel_commenting_button"
-                type="button"
-                class="btn btn-link float-right"
-                (click)="endCommenting()">
-          <span translate>Cancel</span>
-        </button>
-      </div>
-
-      <div *ngIf="canComment && !commenting" class="ml-3 float-right d-inline-block">
-        <button id="start_commenting_button"
-                type="button"
-                class="btn btn-action float-right"
-                (click)="startCommenting()">
-          <span translate>Start commenting</span>
-        </button>
-      </div>
-
-      <div *ngIf="canComment && commenting" class="ml-3 float-right d-inline-block">
-        <button id="send_comments_button"
-                type="button"
-                class="btn btn-action float-right"
-                [disabled]="commentRoundForm.invalid"
-                (click)="sendCommentsAndAddResources()">
-          <span translate>Send comments</span>
-        </button>
       </div>
     </div>
   </div>
 
   <form [formGroup]="commentRoundForm" #form="ngForm">
-    <div *ngIf="isEditor">
+    <div *ngIf="isEditorOrSuperUser">
       <app-literal [id]="'commentround_user_name'"
                    [label]="'Editor' | translate"
                    [infoText]="'INFO_TEXT_COMMENTROUND_USER'"
@@ -166,7 +168,7 @@
       </div>
     </div>
 
-    <div *ngIf="!isEditor">
+    <div *ngIf="!isEditorOrSuperUser">
       <app-literal [id]="'commentround_user_name'"
                    [label]="'Editor' | translate"
                    [infoText]="'INFO_TEXT_COMMENTROUND_USER'"
@@ -211,11 +213,9 @@
       <span *ngIf="!hasCommentThreads" translate>There are no resources to comment.</span>
     </div>
 
-    <div *ngIf="isEditor || (!isEditor && commenting)">
-      <h4 class="strong d-inline-block col-md-10 mt-4" translate>Resources for commenting</h4>
-
+    <div *ngIf="isEditorOrSuperUser || (!isEditor && commenting)">
       <div *ngIf="canCreateCommentThread" class="col-md-2 float-right d-inline-block">
-        <button id="create_commentround_button"
+        <button id="create_commentthread_button"
                 type="button"
                 class="btn btn-secondary-action float-right"
                 (click)="addCommentThreadToCommentRound()">
@@ -225,139 +225,177 @@
       </div>
     </div>
 
-    <!-- TODO: Refactor the comment thread table logic to a separate isolated component -->
+    <ngb-tabset #tabSet="ngbTabset" (tabChange)="onTabChange($event)">
+      <ngb-tab *ngIf="isEditorOrSuperUser"
+               id="commentround_resources_tab">
+        <ng-template ngbTabTitle>
+          <span translate>RESOURCES</span>
+        </ng-template>
 
-    <div formArrayName="commentThreads">
-      <table *ngIf="isEditor && hasCommentThreads" class="table table-borderless" width="100%">
-        <thead>
-        <tr>
-          <th style="width: 15%" translate>Resource</th>
-          <th style="width: 15%" translate>Description</th>
-          <th style="width: 15%" translate>Current status</th>
-          <th style="width: 15%" translate>Proposed status</th>
-          <th style="width: 20%" translate>Proposers comment</th>
-          <th style="width: 5%" translate>Actions</th>
-          <th *ngIf="showResults" style="width: 15%"><span translate>Proposed statuses</span></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let commentThread of commentThreadForms.controls; let i = index" [formGroupName]="i">
-          <td style="width: 15%">
-            <a *ngIf="commentThread.value.label && commentThread.value.resourceUri"
-               [href]="configurationService.getUriWithEnv(commentThread.value.resourceUri)"
-               target="_blank">
-              <app-literal-multilanguage [value]="commentThread.value.label"></app-literal-multilanguage>
-            </a>
-            <span *ngIf="!commentThread.value.resourceUri">-</span>
-          </td>
-          <td style="width: 15%;">
-            <span class="wrap" *ngIf="!languageService.isLocalizableEmpty(commentThread.value.description)">{{ commentThread.value.description | translateValue }}</span>
-            <span *ngIf="languageService.isLocalizableEmpty(commentThread.value.description)">-</span>
-          </td>
-          <td style="width: 10%">
-            <span translate>{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : '-' }}</span>
-          </td>
-          <td style="width: 15%">
-            <app-proposed-status-table-dropdown [restrict]="commentRound.status === 'INPROGRESS' && isNewResource(commentThread.value.id)"
-                                                [formControlName]="'proposedStatus'"></app-proposed-status-table-dropdown>
-          </td>
-          <td style="width: 20%">
-            <app-literal-input [required]="true"
-                               [restrict]="commentRound.status === 'INPROGRESS' && isNewResource(commentThread.value.id)"
-                               [formControlName]="'proposedText'"></app-literal-input>
-          </td>
-          <td>
-            <button *ngIf="!isNewResource(commentThread.value.id)"
-                    [id]="'view_commentthread_' + i + '_button'"
-                    type="button"
-                    class="icon icon-pencil"
-                    (click)="viewCommentThread(commentThread.value)"></button>
-            <button *ngIf="editing && (commentRound.status === 'INCOMPLETE' || isNewResource(commentThread.value.id))"
-                    [id]="'remove_commentthread_' + i + '_button'"
-                    type="button"
-                    class="icon icon-trash"
-                    (click)="removeCommentThread(i)"></button>
-          </td>
-          <td *ngIf="showResults && commentThread.value.results && commentThread.value.results.length > 0">
-            <div *ngFor="let result of commentThread.value.results">
-              <div>
-                <span>{{ result.status | translate }}</span>: <span>{{ result.count }}</span> (<span>{{ result.percentage }}</span> %)
-              </div>
-            </div>
-          </td>
-          <td *ngIf="showResults && (!commentThread.value.results || commentThread.value.results.length === 0)">
-            <span>-</span>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+        <ng-template ngbTabContent>
+          <div formArrayName="commentThreads">
+            <table *ngIf="isEditorOrSuperUser && hasCommentThreads" class="table table-borderless" width="100%">
+              <thead>
+              <tr>
+                <th style="width: 15%" translate>Resource</th>
+                <th style="width: 15%" translate>Description</th>
+                <th style="width: 15%" translate>Current status</th>
+                <th style="width: 15%" translate>Proposed status</th>
+                <th style="width: 20%" translate>Proposers comment</th>
+                <th style="width: 5%" translate>Actions</th>
+                <th *ngIf="showResults" style="width: 15%"><span translate>Proposed statuses</span></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let commentThread of commentThreadForms.controls; let i = index" [formGroupName]="i">
+                <td style="width: 15%">
+                  <a *ngIf="commentThread.value.label && commentThread.value.resourceUri"
+                     id="commenthread_uri_link"
+                     [href]="configurationService.getUriWithEnv(commentThread.value.resourceUri)"
+                     target="_blank">
+                    <app-literal-multilanguage [value]="commentThread.value.label"></app-literal-multilanguage>
+                  </a>
+                  <app-localizable-undefined-textarea *ngIf="!commentThread.value.resourceUri"
+                                                      [required]=true
+                                                      [showRequired]=false
+                                                      [id]="'commenthread_' + commentThread.value.id + '_label_text_input'"
+                                                      [formControlName]="'label'"></app-localizable-undefined-textarea>
+                </td>
+                <td style="width: 15%;">
+                  <span class="wrap" *ngIf="commentThread.value.resourceUri && !languageService.isLocalizableEmpty(commentThread.value.description)">{{ commentThread.value.description | translateValue }}</span>
+                  <span *ngIf="commentThread.value.resourceUri && languageService.isLocalizableEmpty(commentThread.value.description)">-</span>
+                  <app-localizable-undefined-textarea *ngIf="!commentThread.value.resourceUri"
+                                                      [required]=true
+                                                      [showRequired]=false
+                                                      [id]="'commenthread_' + commentThread.value.id + '_description_text_input'"
+                                                      [formControlName]="'description'"></app-localizable-undefined-textarea>
+                </td>
+                <td style="width: 10%">
+                  <span translate>{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : '-' }}</span>
+                </td>
+                <td style="width: 15%">
+                  <app-proposed-status-table-dropdown *ngIf="commentThread.value.resourceUri"
+                                                      [restrict]="commentRound.status === 'INPROGRESS' && isNewResource(commentThread.value.id)"
+                                                      [formControlName]="'proposedStatus'"></app-proposed-status-table-dropdown>
+                  <app-literal-input *ngIf="!commentThread.value.resourceUri"
+                                     [restrict]="true"
+                                     [translate]="true"
+                                     [formControlName]="'proposedStatus'"></app-literal-input>
+                </td>
+                <td style="width: 20%">
+                  <app-literal-textarea [required]=true
+                                        [showRequired]=false
+                                        [id]="'commentthread_proposed_text_input'"
+                                        [formControlName]="'proposedText'"></app-literal-textarea>
+                </td>
+                <td>
+                  <button *ngIf="!isNewResource(commentThread.value.id)"
+                          [id]="'view_commentthread_' + i + '_button'"
+                          type="button"
+                          class="icon icon-pencil"
+                          (click)="viewCommentThread(commentThread.value)"></button>
+                  <button *ngIf="editing && (commentRound.status === 'INCOMPLETE' || isNewResource(commentThread.value.id))"
+                          [id]="'remove_commentthread_' + i + '_button'"
+                          type="button"
+                          class="icon icon-trash"
+                          (click)="removeCommentThread(i)"></button>
+                </td>
+                <td *ngIf="showResults && commentThread.value.results && commentThread.value.results.length > 0">
+                  <div *ngFor="let result of commentThread.value.results">
+                    <div>
+                      <span>{{ result.status | translate }}</span>: <span>{{ result.count }}</span> (<span>{{ result.percentage }}</span> %)
+                    </div>
+                  </div>
+                </td>
+                <td *ngIf="showResults && (!commentThread.value.results || commentThread.value.results.length === 0)">
+                  <span>-</span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </ng-template>
+      </ngb-tab>
 
-      <table *ngIf="!isEditor && hasCommentThreads" class="table table-borderless" width="100%">
-        <thead>
-        <tr>
-          <th style="width: 15%" translate>Resource</th>
-          <th style="width: 15%" translate>Current status</th>
-          <th style="width: 15%" translate>Proposed status</th>
-          <th style="width: 15%" translate>Proposers comment</th>
-          <th style="width: 15%" translate>{{ commenting ? 'Propose status' : 'Commenters proposal for status' }}</th>
-          <th style="width: 20%" translate>{{ commenting ? 'Your comment' : 'Commenters comment' }}</th>
-          <th style="width: 5%" translate>Actions</th>
-          <th *ngIf="showResults" style="width: 15%"><span translate>Proposed statuses</span></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let commentThread of commentThreadForms.controls; let i = index;" [formGroupName]="i">
-          <td style="width: 15%">
-            <a *ngIf="commentThread.value.resourceUri"
-               [href]="configurationService.getUriWithEnv(commentThread.value.resourceUri)"
-               target="_blank">
-              <app-literal-multilanguage [value]="commentThread.value.label"></app-literal-multilanguage>
-            </a>
-            <span *ngIf="!commentThread.value.resourceUri">-</span>
-          </td>
-          <td style="width: 15%">
-            <span translate>{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : 'NOSTATUS' }}</span>
-          </td>
-          <td style="width: 15%">
-            <span translate>{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : 'NOSTATUS' }}</span>
-          </td>
-          <td style="width: 15%">
-            <span>{{ commentThread.value.proposedText ? commentThread.value.proposedText : '-'}}</span>
-          </td>
-          <td style="width: 20%">
-            <app-proposed-status-table-dropdown [isEditing]="commenting"
-                                                [formControlName]="'commentersProposedStatus'"></app-proposed-status-table-dropdown>
-          </td>
-          <td style="width: 20%">
-            <app-literal-input [isEditing]="commenting"
-                               [required]="true"
-                               [formControlName]="'commentersProposedText'"></app-literal-input>
-          </td>
-          <td style="width: 5%">
-            <button *ngIf="!isNewResource(commentThread.value.id)"
-                    [id]="'view_commentthread_' + i + '_button'"
-                    type="button"
-                    class="icon icon-pencil"
-                    (click)="viewCommentThread(commentThread.value)"></button>
-            <button *ngIf="editing && ((commentRound.status === 'INPROGRESS' && !commentRound.fixedThreads) && isNewResource(commentThread.value.id))"
-                    [id]="'remove_commentthread_' + i + '_button'"
-                    type="button"
-                    class="icon icon-trash"
-                    (click)="removeCommentThread(i)"></button>
-          </td>
-          <td *ngIf="showResults && commentThread.value.results && commentThread.value.results.length > 0">
-            <div *ngFor="let result of commentThread.value.results">
-              <div>
-                <span>{{ result.status | translate }}</span>: <span>{{ result.count }}</span> (<span>{{ result.percentage }}</span> %)
-              </div>
-            </div>
-          </td>
-          <td *ngIf="showResults && (!commentThread.value.results || commentThread.value.results.length === 0)">
-            <span>-</span>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+      <ngb-tab id="commentround_comments_tab">
+        <ng-template ngbTabTitle>
+          <span translate>COMMENTS</span>
+        </ng-template>
+
+        <ng-template ngbTabContent>
+          <div formArrayName="commentThreads">
+            <table *ngIf="hasCommentThreads" class="table table-borderless" width="100%">
+              <thead>
+              <tr>
+                <th style="width: 15%" translate>Resource</th>
+                <th style="width: 15%" translate>Current status</th>
+                <th style="width: 15%" translate>Proposed status</th>
+                <th style="width: 15%" translate>Proposers comment</th>
+                <th style="width: 15%" translate>{{ commenting ? 'Propose status' : 'Commenters proposal for status' }}</th>
+                <th style="width: 20%" translate>{{ commenting ? 'Your comment' : 'Commenters comment' }}</th>
+                <th style="width: 5%" translate>Actions</th>
+                <th *ngIf="showResults" style="width: 15%"><span translate>Proposed statuses</span></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let commentThread of commentThreadForms.controls; let i = index;" [formGroupName]="i">
+                <td style="width: 15%">
+                  <a *ngIf="commentThread.value.resourceUri"
+                     [href]="configurationService.getUriWithEnv(commentThread.value.resourceUri)"
+                     target="_blank">
+                    <app-literal-multilanguage [value]="commentThread.value.label"></app-literal-multilanguage>
+                  </a>
+                  <app-literal-multilanguage *ngIf="!commentThread.value.resourceUri"
+                                             [value]="commentThread.value.label"></app-literal-multilanguage>
+                </td>
+                <td style="width: 15%">
+                  <span translate>{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : 'NOSTATUS' }}</span>
+                </td>
+                <td style="width: 15%">
+                  <span translate>{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : 'NOSTATUS' }}</span>
+                </td>
+                <td style="width: 15%">
+                  <span>{{ commentThread.value.proposedText ? commentThread.value.proposedText : '-'}}</span>
+                </td>
+                <td style="width: 20%">
+                  <app-proposed-status-table-dropdown [isEditing]="commenting"
+                                                      [formControlName]="'commentersProposedStatus'"></app-proposed-status-table-dropdown>
+                </td>
+                <td style="width: 20%">
+                  <app-literal-textarea [required]=requireComments
+                                        [showRequired]=false
+                                        [isEditing]="commenting"
+                                        [id]="'commentthread_proposed_text_input'"
+                                        [formControlName]="'commentersProposedText'"></app-literal-textarea>
+                </td>
+                <td style="width: 5%">
+                  <button *ngIf="!isNewResource(commentThread.value.id)"
+                          [id]="'view_commentthread_' + i + '_button'"
+                          type="button"
+                          class="icon icon-pencil"
+                          (click)="viewCommentThread(commentThread.value)"></button>
+                  <button *ngIf="editing && ((commentRound.status === 'INPROGRESS' && !commentRound.fixedThreads) && isNewResource(commentThread.value.id))"
+                          [id]="'remove_commentthread_' + i + '_button'"
+                          type="button"
+                          class="icon icon-trash"
+                          (click)="removeCommentThread(i)"></button>
+                </td>
+                <td *ngIf="showResults && commentThread.value.results && commentThread.value.results.length > 0">
+                  <div *ngFor="let result of commentThread.value.results">
+                    <div>
+                      <span>{{ result.status | translate }}</span>: <span>{{ result.count }}</span> (<span>{{ result.percentage }}</span> %)
+                    </div>
+                  </div>
+                </td>
+                <td *ngIf="showResults && (!commentThread.value.results || commentThread.value.results.length === 0)">
+                  <span>-</span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
   </form>
 </div>

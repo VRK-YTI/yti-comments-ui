@@ -18,7 +18,7 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
           <textarea [id]="id"
                     rows="3"
                     class="form-control"
-                    [ngClass]="{'is-invalid': !valid}"
+                    [ngClass]="{ 'is-invalid': !valid }"
                     [ngModel]="value[contentLanguage]"
                     (ngModelChange)="onChange($event)"></textarea>
           <app-error-messages [id]="id + '_error_messages'" [control]="parentControl"></app-error-messages>

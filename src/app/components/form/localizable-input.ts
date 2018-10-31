@@ -9,7 +9,7 @@ import { Localizable } from 'yti-common-ui/types/localization';
   template: `
     <dl *ngIf="show">
       <dt>
-        <label>{{label}}</label>
+        <label>{{ label }}</label>
         <app-information-symbol [infoText]="infoText"></app-information-symbol>
         <app-required-symbol *ngIf="required && editing"></app-required-symbol>
       </dt>
@@ -18,12 +18,12 @@ import { Localizable } from 'yti-common-ui/types/localization';
           <input [id]="id"
                  type="text"
                  class="form-control"
-                 [ngClass]="{'is-invalid': !valid}"
+                 [ngClass]="{ 'is-invalid': !valid && !pending }"
                  [ngModel]="value[contentLanguage]"
                  (ngModelChange)="onChange($event)"/>
           <app-error-messages [id]="id + '_error_messages'" [control]="parentControl"></app-error-messages>
         </div>
-        <div class="text-content-wrap" *ngIf="!editing">{{value | translateValue}}</div>
+        <div class="text-content-wrap" *ngIf="!editing">{{ value | translateValue }}</div>
       </dd>
     </dl>
   `

@@ -73,6 +73,7 @@ export class CommentThread extends AbstractResource implements EditableEntity {
   }
 
   serialize(): CommentThreadType {
+
     return {
       id: this.id,
       url: this.url,
@@ -90,7 +91,18 @@ export class CommentThread extends AbstractResource implements EditableEntity {
   }
 
   clone(): CommentThread {
+
     return new CommentThread(this.serialize());
+  }
+
+  allowUserEdit(): boolean {
+
+    return true;
+  }
+
+  getUser(): User {
+
+    return this.user;
   }
 
   allowOrganizationEdit(): boolean {

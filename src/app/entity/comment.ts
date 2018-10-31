@@ -18,6 +18,7 @@ export class Comment extends AbstractResource implements EditableEntity {
   parentComment: CommentSimple;
 
   constructor(data: CommentType) {
+
     super(data);
     if (data.user) {
       this.user = new User(data.user);
@@ -34,6 +35,7 @@ export class Comment extends AbstractResource implements EditableEntity {
   }
 
   get route(): any[] {
+
     return [
       ...this.commentThread.location,
       'comment',
@@ -59,10 +61,12 @@ export class Comment extends AbstractResource implements EditableEntity {
   }
 
   get createdDisplayValue(): string {
+
     return formatDisplayDateTime(this.created);
   }
 
   serialize(): CommentType {
+
     return {
       id: this.id,
       url: this.url,
@@ -76,16 +80,29 @@ export class Comment extends AbstractResource implements EditableEntity {
   }
 
   clone(): Comment {
+
     return new Comment(this.serialize());
   }
 
+  allowUserEdit(): boolean {
+
+    return true;
+  }
+
+  getUser(): User {
+
+    return this.user;
+  }
+
   allowOrganizationEdit(): boolean {
+
     // TODO: Implement backend support for comment commentthread commentround, returning true for now.
     // return this.commentThread.commentRound.organizations.map(org => org.id);
     return true;
   }
 
   getOwningOrganizationIds(): string[] {
+
     return [];
   }
 }

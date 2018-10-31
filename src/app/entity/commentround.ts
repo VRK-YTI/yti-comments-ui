@@ -121,6 +121,16 @@ export class CommentRound extends AbstractResource implements EditableEntity {
     return new CommentRound(this.serialize());
   }
 
+  allowUserEdit(): boolean {
+
+    return true;
+  }
+
+  getUser(): User {
+
+    return this.user;
+  }
+
   allowOrganizationEdit(): boolean {
 
     return true;

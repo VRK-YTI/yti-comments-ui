@@ -71,9 +71,11 @@ import { IntegrationResourceService } from './services/integrationresource.servi
 import { CommentsConfirmationModalService } from './components/common/confirmation-modal.service';
 import { DiscussionModalComponent, DiscussionModalService } from './components/common/discussion-modal.service';
 import { HierarchicalCommentListitemComponent } from './components/common/hierarchical-comment-listitem.component';
-import { LiteralMultilanguageComponent } from './components/form/app-literal-multilanguage';
+import { LiteralMultilanguageComponent } from './components/form/literal-multilanguage';
 import { ConfigurationService } from './services/configuration.service';
 import { CommentRoundDateRangeInputComponent } from './components/form/app-comment-round-date-range.component';
+import { AutosizeModule } from 'ngx-autosize';
+import { LocalizableUndefinedTextareaComponent } from './components/form/literal-und-textarea';
 
 declare var require: any;
 
@@ -194,7 +196,8 @@ const appRoutes: Routes = [
     ProposedStatusTableDropdownComponent,
     HierarchicalCommentListitemComponent,
     LiteralMultilanguageComponent,
-    CommentRoundDateRangeInputComponent
+    CommentRoundDateRangeInputComponent,
+    LocalizableUndefinedTextareaComponent
   ],
   entryComponents: [
     SearchLinkedIntegrationResourceModalComponent,
@@ -210,8 +213,8 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes, { enableTracing: false }),
     NgbModule.forRoot(),
-    YtiCommonModule,
     ClipboardModule,
+    AutosizeModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

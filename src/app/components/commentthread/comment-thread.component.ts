@@ -199,7 +199,7 @@ export class CommentThreadComponent implements OnInit {
 
   get hasResource(): boolean {
 
-    return !!this.commentThreadForm.controls['resource'].value;
+    return !!this.commentThreadForm.controls['resource'].value && !!this.commentThreadForm.controls['resource'].value.uri;
   }
 
   get getResourceUri(): string | null {

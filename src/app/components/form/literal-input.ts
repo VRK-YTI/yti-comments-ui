@@ -7,7 +7,7 @@ import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
   template: `
     <dl *ngIf="show">
       <dt>
-        <label *ngIf="label">{{label}}</label>
+        <label *ngIf="label">{{ label }}</label>
         <app-information-symbol *ngIf="label" [infoText]="infoText"></app-information-symbol>
         <app-required-symbol *ngIf="label && required && editing"></app-required-symbol>
       </dt>
@@ -16,11 +16,12 @@ import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
           <input [id]="id"
                  type="text"
                  class="form-control"
-                 [ngClass]="{'is-invalid': !valid && !pending}"
+                 [ngClass]="{ 'is-invalid': !valid && !pending }"
                  [formControl]="control"/>
           <app-error-messages [id]="id + '_error_messages'" [control]="parentControl"></app-error-messages>
         </div>
-        <div class="text-content-wrap" *ngIf="!editing">{{control.value}}</div>
+        <div class="text-content-wrap" *ngIf="!editing && translate" translate>{{ control.value }}</div>
+        <div class="text-content-wrap" *ngIf="!editing && !translate">{{ control.value }}</div>
       </dd>
     </dl>
   `
@@ -33,6 +34,7 @@ export class LiteralInputComponent implements ControlValueAccessor {
   @Input() required = false;
   @Input() infoText: string;
   @Input() isEditing = false;
+  @Input() translate = false;
 
   control = new FormControl();
 

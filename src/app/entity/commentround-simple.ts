@@ -1,5 +1,5 @@
 import { CommentRoundSimpleType } from '../services/api-schema';
-import { formatDate, formatDateTime, formatDisplayDateTime, parseDate, parseDateTime } from '../utils/date';
+import { formatDate, formatDateTime, parseDate, parseDateTime } from '../utils/date';
 import { Moment } from 'moment';
 import { AbstractResource } from './abstract-resource';
 import { Source } from './source';
@@ -48,16 +48,6 @@ export class CommentRoundSimple extends AbstractResource {
     if (data.endDate) {
       this.endDate = parseDate(data.endDate);
     }
-  }
-
-  get createdDisplayValue(): string {
-
-    return formatDisplayDateTime(this.created);
-  }
-
-  get modifiedDisplayValue(): string {
-
-    return formatDisplayDateTime(this.modified);
   }
 
   serialize(): CommentRoundSimpleType {

@@ -1,11 +1,13 @@
 import { Component, Input, Optional, Self } from '@angular/core';
 import { EditableService } from '../../services/editable.service';
-import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { LanguageService } from '../../services/language.service';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 @Component({
-  selector: 'app-literal-textarea',
+  selector: 'app-localizable-undefined-textarea',
   template: `
-    <dl *ngIf="show">
+    <dl>
       <dt>
         <label>{{ label }}</label>
         <app-information-symbol [infoText]="infoText"></app-information-symbol>
@@ -16,34 +18,35 @@ import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
           <textarea [id]="id"
                     autosize
                     class="form-control"
-                    [ngClass]="{ 'is-invalid': !valid && !pending}"
-                    [formControl]="control"></textarea>
+                    [ngClass]="{ 'is-invalid': !valid && !pending }"
+                    [ngModel]="value[contentLanguage]"
+                    (ngModelChange)="onChange($event)"></textarea>
           <app-error-messages [id]="id + '_error_messages'" [control]="parentControl"></app-error-messages>
         </div>
-        <div class="text-content-wrap" *ngIf="!editing">{{ control.value }}</div>
+        <app-literal-multilanguage *ngIf="!editing && value[contentLanguage] && value[contentLanguage].length > 0"
+                                   [value]="value"></app-literal-multilanguage>
+        <span *ngIf="!editing && (!value[contentLanguage] || value[contentLanguage].length === 0)">-</span>
       </dd>
     </dl>
   `
 })
-export class LiteralTextareaComponent implements ControlValueAccessor {
+export class LocalizableUndefinedTextareaComponent implements ControlValueAccessor {
 
   @Input() label: string;
   @Input() restrict = false;
-  @Input() showRequired = true;
   @Input() required = false;
+  @Input() showRequired = true;
   @Input() id: string;
   @Input() infoText: string;
-  @Input() isEditing = false;
 
-  control = new FormControl();
+  value: Localizable = {};
 
   private propagateChange: (fn: any) => void = () => {};
   private propagateTouched: (fn: any) => void = () => {};
 
   constructor(@Self() @Optional() public parentControl: NgControl,
-              private editableService: EditableService) {
-
-    this.control.valueChanges.subscribe(x => this.propagateChange(x));
+              private editableService: EditableService,
+              private languageService: LanguageService) {
 
     if (parentControl) {
       parentControl.valueAccessor = this;
@@ -55,19 +58,25 @@ export class LiteralTextareaComponent implements ControlValueAccessor {
     return !this.parentControl || this.parentControl.valid;
   }
 
-  get show() {
+  onChange(value: string) {
 
-    return this.editing || this.control.value;
+    this.value[this.contentLanguage] = value;
+    this.propagateChange(this.value);
   }
 
   get editing() {
 
-    return (this.editableService.editing || this.isEditing) && !this.restrict;
+    return this.editableService.editing && !this.restrict;
+  }
+
+  get contentLanguage() {
+
+    return 'und';
   }
 
   writeValue(obj: any): void {
 
-    this.control.setValue(obj);
+    this.value = Object.assign({}, obj);
   }
 
   registerOnChange(fn: any): void {

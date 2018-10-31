@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-26 10:01+0300\n"
+"PO-Revision-Date: 2018-10-30 17:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -190,6 +190,9 @@ msgstr "Kommentoitavat tietosisällöt"
 msgid "Add new resource"
 msgstr "Lisää uusi tietosisältö"
 
+msgid "RESOURCES"
+msgstr "TIETOSISÄLLÖT"
+
 msgid "Resource"
 msgstr "Tietosisältö"
 
@@ -210,6 +213,9 @@ msgid ""
 "'-' }}"
 msgstr ""
 
+msgid "COMMENTS"
+msgstr "KOMMENTIT"
+
 msgid "{{ commenting ? 'Propose status' : 'Commenters proposal for status' }}"
 msgstr ""
 
@@ -225,6 +231,9 @@ msgid ""
 "{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : "
 "'NOSTATUS' }}"
 msgstr ""
+
+msgid "SUGGESTION"
+msgstr "Ehdotus"
 
 msgid "Resource name"
 msgstr "Tietosisällön nimi"

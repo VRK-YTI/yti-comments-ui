@@ -7,6 +7,10 @@ export class CommentsConfirmationModalService {
   constructor(private confirmationModalService: ConfirmationModalService) {
   }
 
+  openEditInProgress() {
+    return this.confirmationModalService.openEditInProgress();
+  }
+
   startCommentRound() {
     return this.confirmationModalService.open('START COMMENT ROUND?', '');
   }

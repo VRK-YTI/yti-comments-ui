@@ -181,6 +181,9 @@ msgstr ""
 msgid "Add new resource"
 msgstr ""
 
+msgid "RESOURCES"
+msgstr ""
+
 msgid "Resource"
 msgstr ""
 
@@ -201,6 +204,9 @@ msgid ""
 "'-' }}"
 msgstr ""
 
+msgid "COMMENTS"
+msgstr ""
+
 msgid "{{ commenting ? 'Propose status' : 'Commenters proposal for status' }}"
 msgstr ""
 
@@ -215,6 +221,9 @@ msgstr ""
 msgid ""
 "{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus "
 ": 'NOSTATUS' }}"
+msgstr ""
+
+msgid "SUGGESTION"
 msgstr ""
 
 msgid "Resource name"

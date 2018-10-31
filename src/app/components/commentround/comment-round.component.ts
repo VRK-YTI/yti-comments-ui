@@ -1,10 +1,10 @@
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnDestroy, SimpleChanges, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommentRound } from '../../entity/commentround';
 import { DataService } from '../../services/data.service';
 import { CommentThread } from '../../entity/commentthread';
 import { EditableService } from '../../services/editable.service';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { validDateRange } from '../../utils/date';
 import { CommentRoundStatus } from '../../entity/comment-round-status';
 import { requiredList } from 'yti-common-ui/utils/validator';
@@ -25,6 +25,7 @@ import { Comment } from '../../entity/comment';
 import { v4 as uuid } from 'uuid';
 import { LanguageService } from '../../services/language.service';
 import { ConfigurationService } from '../../services/configuration.service';
+import { NgbTabChangeEvent, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 
 function addToControl<T>(control: FormControl, itemToAdd: T) {
 
@@ -44,12 +45,16 @@ function removeFromControl<T>(control: FormControl, itemToRemove: T) {
   styleUrls: ['./comment-round.component.scss'],
   providers: [EditableService]
 })
-export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
+export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewInit {
+
+  @ViewChild('tabSet') tabSet: NgbTabset;
 
   commentRound: CommentRound;
   myComments: Comment[];
   commenting$ = new BehaviorSubject<boolean>(false);
   newIds: string[] = [];
+
+  currentTab$ = new BehaviorSubject<string>('');
 
   cancelSubscription: Subscription;
 
@@ -83,7 +88,11 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     editableService.onSave = (formValue: any) => this.save(formValue);
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    this.initialize();
+  }
+
+  initialize() {
 
     this.newIds = [];
 
@@ -99,8 +108,22 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
       this.dataService.getCommentRoundCommenterComments(commentRoundId).subscribe(comments => {
         this.myComments = comments;
         this.reset();
+        this.activateCurrentTab();
       });
     });
+  }
+
+  activateCurrentTab() {
+
+    if (!this.currentTab$.value) {
+      if (this.isEditorOrSuperUser) {
+        this.currentTab$.next('commentround_resources_tab');
+        this.tabSet.activeId = 'commentround_resources_tab';
+      } else {
+        this.currentTab$.next('commentround_comments_tab');
+        this.tabSet.activeId = 'commentround_comments_tab';
+      }
+    }
   }
 
   ngOnDestroy() {
@@ -116,8 +139,12 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
   get canCreateCommentThread(): boolean {
 
     if (this.commentRound.status === 'INCOMPLETE') {
-      return this.authorizationManager.user.email === this.commentRound.user.email && this.editing;
-    } else if (this.commentRound.status === 'INPROGRESS' && !this.commentRound.fixedThreads && (this.editing || this.commenting)) {
+      return this.authorizationManager.user.email === this.commentRound.user.email &&
+        this.editing && this.resourcesTabActive;
+    } else if (this.commentRound.status === 'INPROGRESS' &&
+      !this.commentRound.fixedThreads &&
+      (this.editing || this.commenting) &&
+      this.resourcesTabActive) {
       return this.authorizationManager.canCreateCommentThread();
     }
     return false;
@@ -129,7 +156,7 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
       .then(() => {
         this.commentRound.status = 'INPROGRESS';
         this.dataService.updateCommentRound(this.commentRound.serialize()).subscribe(commentRound => {
-          this.ngOnInit();
+          this.initialize();
         }, error => {
           this.errorModalService.openSubmitError(error);
         });
@@ -142,7 +169,7 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
       .then(() => {
         this.commentRound.status = 'CLOSED';
         this.dataService.updateCommentRound(this.commentRound.serialize()).subscribe(commentRound => {
-          this.ngOnInit();
+          this.initialize();
         }, error => {
           this.errorModalService.openSubmitError(error);
         });
@@ -171,7 +198,7 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
       label: new FormControl(integrationResource.prefLabel),
       description: new FormControl(integrationResource.description),
       currentStatus: new FormControl(integrationResource.status),
-      proposedStatus: new FormControl('NOSTATUS'),
+      proposedStatus: new FormControl('SUGGESTION'),
       proposedText: new FormControl(''),
       commentersProposedStatus: new FormControl('NOSTATUS'),
       commentersProposedText: new FormControl(''),
@@ -234,8 +261,8 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
       const commentThreadFormGroup: FormGroup = new FormGroup({
         id: new FormControl(commentThread.id),
         resourceUri: new FormControl(commentThread.resourceUri),
-        label: new FormControl(commentThread.label),
-        description: new FormControl(commentThread.description),
+        label: new FormControl(commentThread.label, Validators.required),
+        description: new FormControl(commentThread.description, Validators.required),
         currentStatus: new FormControl(commentThread.currentStatus),
         proposedStatus: new FormControl(commentThread.proposedStatus),
         proposedText: new FormControl(commentThread.proposedText),
@@ -265,7 +292,7 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     let proposedStatus = 'NOSTATUS';
     if (this.myComments) {
       this.myComments.forEach(comment => {
-        if (comment.commentThread.id === commentThreadId) {
+        if (comment.commentThread.id === commentThreadId && comment.proposedStatus != null) {
           proposedStatus = comment.proposedStatus;
         }
       });
@@ -323,7 +350,8 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     });
 
     const save = () => {
-      return this.dataService.updateCommentRound(updatedCommentRound.serialize()).pipe(tap(() => this.ngOnInit()));
+
+      return this.dataService.updateCommentRound(updatedCommentRound.serialize()).pipe(tap(() => this.initialize()));
     };
 
     return save();
@@ -340,10 +368,11 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
 
   startCommenting() {
 
+    this.editableService.cancel();
     this.commenting$.next(true);
   }
 
-  endCommenting() {
+  cancelCommenting() {
 
     this.reset();
     this.commenting$.next(false);
@@ -380,8 +409,8 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     });
 
     this.dataService.createCommentsToCommentRound(this.commentRound.id, comments).subscribe(myComments => {
-      this.endCommenting();
-      this.ngOnInit();
+      this.cancelCommenting();
+      this.initialize();
     });
   }
 
@@ -407,6 +436,11 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     return threads && threads.length > 0;
   }
 
+  get isEditorOrSuperUser(): boolean {
+
+    return this.authorizationManager.user.superuser || this.commentRound.user.email === this.authorizationManager.user.email;
+  }
+
   get isEditor(): boolean {
 
     return this.commentRound.user.email === this.authorizationManager.user.email;
@@ -428,6 +462,31 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
     ]);
   }
 
+  onTabChange(event: NgbTabChangeEvent) {
+
+    if (this.isEditing()) {
+      event.preventDefault();
+
+      this.confirmationModalService.openEditInProgress()
+        .then(() => {
+          this.cancelEditing();
+          this.tabSet.activeId = event.nextId;
+          this.currentTab$.next(event.nextId);
+        }, ignoreModalClose);
+    } else {
+      this.tabSet.activeId = event.nextId;
+      this.currentTab$.next(event.nextId);
+    }
+  }
+
+  cancelEditing(): void {
+    this.editableService.cancel();
+  }
+
+  isEditing(): boolean {
+    return this.editableService.editing;
+  }
+
   back() {
 
     this.location.back();
@@ -435,7 +494,29 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
 
   get canComment(): boolean {
 
-    return !this.isEditor && this.authorizationManager.canCreateComment(this.commentRound) && this.commentRound.status === 'INPROGRESS';
+    return this.commentsTabActive &&
+      this.authorizationManager.canCreateComment(this.commentRound) &&
+      this.commentRound.status === 'INPROGRESS';
+  }
+
+  get commentsTabActive(): boolean {
+
+    if (this.currentTab$) {
+      if (this.currentTab$.value === 'commentround_comments_tab') {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  get resourcesTabActive(): boolean {
+
+    if (this.currentTab$) {
+      if (this.currentTab$.value === 'commentround_resources_tab') {
+        return true;
+      }
+    }
+    return false;
   }
 
   get canStartCommentRound(): boolean {
@@ -469,6 +550,12 @@ export class CommentRoundComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   get exportUrl(): string {
+
     return this.commentRound.url + '/?format=excel';
+  }
+
+  get requireComments(): boolean {
+
+    return this.commentRound.fixedThreads;
   }
 }
