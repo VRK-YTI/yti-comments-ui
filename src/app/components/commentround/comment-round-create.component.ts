@@ -79,6 +79,7 @@ export class CommentRoundCreateComponent implements OnInit {
   }
 
   back() {
+
     this.location.back();
   }
 

@@ -125,6 +125,7 @@ export class CommentThreadCreateComponent implements OnInit {
   }
 
   back() {
+
     this.location.back();
   }
 

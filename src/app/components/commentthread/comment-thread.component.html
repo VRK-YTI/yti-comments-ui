@@ -4,12 +4,13 @@
 
 <div *ngIf="!loading" class="content-box">
 
-  <app-back-button [id]="'commentround_create_back_button'" (back)="back()"></app-back-button>
+  <div class="main">
 
-  <h1 class="text-content-wrap">{{ commentThread.label | translateValue:true }}</h1>
+    <div>
+      <h1 class="text-content-wrap">{{ commentThread.label | translateValue:true }}</h1>
+    </div>
 
-  <div class="row">
-    <div class="col-12">
+    <div class="float-right">
       <app-editable-buttons [form]="form"
                             [entity]="commentRound"></app-editable-buttons>
     </div>

@@ -480,16 +480,13 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   }
 
   cancelEditing(): void {
+
     this.editableService.cancel();
   }
 
   isEditing(): boolean {
+
     return this.editableService.editing;
-  }
-
-  back() {
-
-    this.location.back();
   }
 
   get canComment(): boolean {

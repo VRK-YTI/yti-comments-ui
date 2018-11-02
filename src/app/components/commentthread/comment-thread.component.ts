@@ -272,11 +272,6 @@ export class CommentThreadComponent implements OnInit {
     return this.editableService.editing;
   }
 
-  back() {
-
-    this.location.back();
-  }
-
   get hasComments(): boolean {
 
     return this.comments && this.comments.length > 0;

@@ -77,10 +77,12 @@ export class CommentCreateComponent implements OnInit {
   }
 
   get loading(): boolean {
+
     return this.commentRound == null || this.commentThread == null || (this.parentComment == null && this.hasParentComment);
   }
 
   back() {
+
     this.location.back();
   }
 

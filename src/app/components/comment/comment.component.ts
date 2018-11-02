@@ -132,11 +132,6 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
     return this.comment == null;
   }
 
-  back() {
-
-    this.location.back();
-  }
-
   get resourceUri(): string | null {
 
     return this.configurationService.getUriWithEnv(this.comment.commentThread.resourceUri);

@@ -5,15 +5,15 @@
 
 <div *ngIf="!loading" class="content-box">
 
-  <app-back-button [id]="'commentround_create_back_button'" (back)="back()"></app-back-button>
-
   <div class="main">
-    <h1 class="text-content-wrap">{{ commentRound.label }}</h1>
-    <app-commentround-status class="d-inline-block ml-5 mt-3 align-top" [status]="commentRound.status"></app-commentround-status>
-  </div>
+    <div>
+      <div class="d-inline-block">
+        <h1 class="text-content-wrap">{{ commentRound.label }}</h1>
+      </div>
+      <app-commentround-status class="d-inline-block align-top mt-3 ml-5" [status]="commentRound.status"></app-commentround-status>
+    </div>
 
-  <div class="row">
-    <div class="col-12">
+    <div>
       <app-editable-buttons *ngIf="currentTab$.value === 'commentround_resources_tab'"
                             [form]="form"
                             [entity]="commentRound"></app-editable-buttons>

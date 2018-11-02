@@ -4,12 +4,12 @@
 
 <div *ngIf="!loading" class="content-box">
 
-  <app-back-button [id]="'comment_create_back_button'" (back)="back()"></app-back-button>
+  <div class="main">
+    <div>
+      <h1 class="text-content-wrap">{{ comment.content }}</h1>
+    </div>
 
-  <h1 class="text-content-wrap">{{ comment.content }}</h1>
-
-  <div class="row">
-    <div class="col-12">
+    <div class="float-right">
       <app-editable-buttons [form]="form"></app-editable-buttons>
 
       <div *ngIf="canCreateComment()" class="ml-3 float-right d-inline-block">

@@ -1,20 +1,15 @@
 <div class="content-box">
 
-  <app-back-button [id]="'commentround_create_back_button'" (back)="back()"></app-back-button>
-
-  <div class="row">
-    <div class="col-12">
+  <div class="main">
+    <div>
       <h1 class="float-left" translate>Comment round information</h1>
+    </div>
+    <div>
+      <app-editable-buttons [form]="form"></app-editable-buttons>
     </div>
   </div>
 
   <form [formGroup]="commentRoundForm" #form="ngForm">
-
-    <div class="row">
-      <div class="col-12">
-        <app-editable-buttons [form]="form"></app-editable-buttons>
-      </div>
-    </div>
 
     <div class="row">
       <div class="col-md-11">
