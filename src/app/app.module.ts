@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { FrontpageComponent } from './components/frontpage/frontpage.component';
@@ -114,6 +114,10 @@ export function refreshRouteMatcher(segments: UrlSegment[], group: UrlSegmentGro
   };
 }
 
+export function initApp(configurationService: ConfigurationService) {
+  return () => configurationService.fetchConfiguration();
+}
+
 export function resolveAuthenticatedUserEndpoint() {
   return '/comments-api/api/authenticated-user';
 }
@@ -224,6 +228,7 @@ const appRoutes: Routes = [
     })
   ],
   providers: [
+    { provide: APP_INITIALIZER, useFactory: initApp, deps: [ConfigurationService], multi: true },
     { provide: AUTHENTICATED_USER_ENDPOINT, useFactory: resolveAuthenticatedUserEndpoint },
     { provide: LOCALIZER, useExisting: LanguageService },
     LanguageService,
@@ -237,8 +242,7 @@ const appRoutes: Routes = [
     SearchLinkedOrganizationModalService,
     SearchLinkedCommentModalService,
     DiscussionModalService,
-    CommentRoundErrorModalService,
-    ConfigurationService
+    CommentRoundErrorModalService
   ],
   bootstrap: [AppComponent]
 })

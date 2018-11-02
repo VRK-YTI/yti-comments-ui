@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { LocationService } from './services/location.service';
 import { Router } from '@angular/router';
-import { ConfigurationService } from './services/configuration.service';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +10,7 @@ import { ConfigurationService } from './services/configuration.service';
 export class AppComponent {
 
   constructor(private locationService: LocationService,
-              private router: Router,
-              private configurationService: ConfigurationService) {
+              private router: Router) {
   }
 
   get location() {
@@ -23,10 +21,5 @@ export class AppComponent {
   navigateToInformation() {
 
     this.router.navigate(['/information']);
-  }
-
-  get loading() {
-
-    return this.configurationService.loading;
   }
 }
