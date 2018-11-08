@@ -1,6 +1,8 @@
 import { IntegrationReourceType } from '../services/api-schema';
 import { Status } from 'yti-common-ui/entities/status';
 import { Localizable, Localizer } from 'yti-common-ui/types/localization';
+import { formatDisplayDateTime, parseDateTime } from '../utils/date';
+import { Moment } from 'moment';
 
 export class IntegrationResource {
 
@@ -10,6 +12,7 @@ export class IntegrationResource {
   description: Localizable = {};
   status: Status;
   type?: string;
+  modified: Moment | null = null;
 
   constructor(data: IntegrationReourceType) {
 
@@ -18,6 +21,9 @@ export class IntegrationResource {
     this.prefLabel = data.prefLabel;
     this.description = data.description;
     this.status = data.status;
+    if (data.modified) {
+      this.modified = parseDateTime(data.modified);
+    }
   }
 
   serialize(): IntegrationReourceType {
@@ -32,6 +38,7 @@ export class IntegrationResource {
   }
 
   getDisplayName(localizer: Localizer, useUILanguage: boolean = false): string {
+
     if (this.prefLabel) {
       return localizer.translate(this.prefLabel, useUILanguage);
     }
@@ -39,6 +46,12 @@ export class IntegrationResource {
   }
 
   getDescription(localizer: Localizer, useUILanguage: boolean = false): string {
+
     return localizer.translate(this.description, useUILanguage);
+  }
+
+  get modifiedDisplayValue(): string {
+
+    return formatDisplayDateTime(this.modified);
   }
 }

@@ -40,6 +40,9 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+msgid "{{ control.value }}"
+msgstr ""
+
 msgid "Add organization"
 msgstr ""
 
@@ -68,6 +71,9 @@ msgid "{{ option }}"
 msgstr ""
 
 msgid "Filter results"
+msgstr ""
+
+msgid "Last modification"
 msgstr ""
 
 msgid "Create new suggestion"
@@ -151,10 +157,13 @@ msgstr ""
 msgid "Commenting subject"
 msgstr ""
 
-msgid "Last modification"
+msgid "Commentable resources"
 msgstr ""
 
-msgid "Commentable resources"
+msgid "Start commenting"
+msgstr ""
+
+msgid "Send comments"
 msgstr ""
 
 msgid "Start comment round"
@@ -166,16 +175,7 @@ msgstr ""
 msgid "Export Excel"
 msgstr ""
 
-msgid "Start commenting"
-msgstr ""
-
-msgid "Send comments"
-msgstr ""
-
 msgid "There are no resources to comment."
-msgstr ""
-
-msgid "Resources for commenting"
 msgstr ""
 
 msgid "Add new resource"
@@ -221,9 +221,6 @@ msgstr ""
 msgid ""
 "{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus "
 ": 'NOSTATUS' }}"
-msgstr ""
-
-msgid "SUGGESTION"
 msgstr ""
 
 msgid "Resource name"

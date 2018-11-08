@@ -139,4 +139,5 @@ export interface IntegrationReourceType {
   description: Localizable;
   status: Status;
   type?: string;
+  modified?: string;
 }

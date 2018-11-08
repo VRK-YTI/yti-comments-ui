@@ -71,6 +71,7 @@ import { IntegrationReourceType } from '../../services/api-schema';
                     </div>
                   </div>
 
+                  <span translate>Last modification</span><span>: {{ resource.modifiedDisplayValue }}</span>
                   <span class="body">{{ resource.uri }}</span>
                 </div>
               </div>
