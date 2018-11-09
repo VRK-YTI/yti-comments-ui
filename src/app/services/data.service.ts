@@ -2,7 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Comment } from '../entity/comment';
 import { CommentRound } from '../entity/commentround';
-import { CommentRoundType, CommentSimpleType, CommentThreadSimpleType, CommentThreadType, CommentType, SourceType } from './api-schema';
+import {
+  CommentRoundType,
+  CommentSimpleType,
+  CommentThreadSimpleType,
+  CommentThreadType,
+  CommentType,
+  IntegrationResourceType,
+  SourceType
+} from './api-schema';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/internal/operators';
 import { ServiceConfiguration } from '../entity/service-configuration';
@@ -338,21 +346,21 @@ export class DataService {
 
     const containerPath = DataService.resolveIntegrationApiPathForContainerType(containerType) + '/' + containers;
 
-    return this.http.get<WithResults<IntegrationResource>>(containerPath, { params: params })
-      .pipe(map(res => res.results.map(data => new IntegrationResource(data))));
+    return this.http.get<WithResults<IntegrationResourceType>>(containerPath, { params: params, responseType: 'json' })
+      .pipe(map(res => res.results.map((data: IntegrationResourceType) => new IntegrationResource(data))));
   }
 
   getResources(containerType: string, uri: string, language: string): Observable<IntegrationResource[]> {
 
     let params = new HttpParams()
-      .set('uri', uri);
+      .set('container', uri);
     if (language) {
       params = params.append('language', language);
     }
 
     const resourcePath = DataService.resolveIntegrationApiPathForContainerType(containerType) + '/' + resources;
 
-    return this.http.get<WithResults<IntegrationResource>>(resourcePath, { params: params })
-      .pipe(map(res => res.results.map(data => new IntegrationResource(data))));
+    return this.http.get<WithResults<IntegrationResourceType>>(resourcePath, { params: params, responseType: 'json' })
+      .pipe(map(res => res.results.map((data: IntegrationResourceType) => new IntegrationResource(data))));
   }
 }

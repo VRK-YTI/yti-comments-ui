@@ -11,7 +11,7 @@ import { containerTypes } from '../common/containertypes';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
 import { TranslateService } from '@ngx-translate/core';
 import { regularStatuses, Status } from 'yti-common-ui/entities/status';
-import { IntegrationReourceType } from '../../services/api-schema';
+import { IntegrationResourceType } from '../../services/api-schema';
 
 @Component({
   selector: 'app-search-linked-source-modal',
@@ -206,7 +206,7 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
 
   createEmptyResource() {
 
-    const integrationResourceType: IntegrationReourceType = <IntegrationReourceType> {
+    const integrationResourceType: IntegrationResourceType = <IntegrationResourceType> {
       type: this.containerType
     };
     const resource: IntegrationResource = new IntegrationResource(integrationResourceType);

@@ -7,7 +7,7 @@ import { AuthorizationManager } from '../../services/authorization-manager';
 import { EditableService } from '../../services/editable.service';
 import { Location } from '@angular/common';
 import { Observable, Subscription } from 'rxjs';
-import { CommentThreadType, IntegrationReourceType } from '../../services/api-schema';
+import { CommentThreadType, IntegrationResourceType } from '../../services/api-schema';
 import { tap } from 'rxjs/operators';
 import { CommentThread } from '../../entity/commentthread';
 import { IntegrationResource } from '../../entity/integration-resource';
@@ -220,7 +220,7 @@ export class CommentThreadComponent implements OnInit {
     const { label, description, resourceUri, currentStatus, proposedStatus, proposedText }
       = this.commentThread;
 
-    const integrationResource: IntegrationReourceType = <IntegrationReourceType> {
+    const integrationResource: IntegrationResourceType = <IntegrationResourceType> {
       uri: resourceUri,
       prefLabel: label,
       description: description,

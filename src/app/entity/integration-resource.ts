@@ -1,7 +1,7 @@
-import { IntegrationReourceType } from '../services/api-schema';
+import { IntegrationResourceType } from '../services/api-schema';
 import { Status } from 'yti-common-ui/entities/status';
 import { Localizable, Localizer } from 'yti-common-ui/types/localization';
-import { formatDisplayDateTime, parseDateTime } from '../utils/date';
+import { formatDateTime, formatDisplayDateTime, parseDateTime } from '../utils/date';
 import { Moment } from 'moment';
 
 export class IntegrationResource {
@@ -14,26 +14,31 @@ export class IntegrationResource {
   type?: string;
   modified: Moment | null = null;
 
-  constructor(data: IntegrationReourceType) {
+  constructor(data: IntegrationResourceType) {
 
     this.id = data.id;
     this.uri = data.uri;
     this.prefLabel = data.prefLabel;
     this.description = data.description;
     this.status = data.status;
+    if (data.type) {
+      this.type = data.type;
+    }
     if (data.modified) {
       this.modified = parseDateTime(data.modified);
     }
   }
 
-  serialize(): IntegrationReourceType {
+  serialize(): IntegrationResourceType {
 
     return {
       id: this.id,
       uri: this.uri,
       prefLabel: this.prefLabel,
       description: this.description,
-      status: this.status
+      status: this.status,
+      modified: formatDateTime(this.modified),
+      type: this.type
     };
   }
 

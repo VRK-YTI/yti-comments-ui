@@ -131,7 +131,7 @@ export interface OrganizationSimpleType {
   url: string;
 }
 
-export interface IntegrationReourceType {
+export interface IntegrationResourceType {
 
   id: string;
   uri: string;
