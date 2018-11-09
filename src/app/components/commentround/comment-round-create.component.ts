@@ -88,7 +88,7 @@ export class CommentRoundCreateComponent implements OnInit {
     const { label, description, fixedThreads, openThreads, validity, organizations, resource, status } = formData;
 
     const source: SourceType = <SourceType> {
-      'containerType': 'codelist',
+      'containerType': resource.type,
       'containerUri': resource.uri
     };
 
