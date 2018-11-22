@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
 import { Location } from 'yti-common-ui/types/location';
 import { CommentRound } from '../entity/commentround';
 import { Comment } from '../entity/comment';
 import { CommentThread } from '../entity/commentthread';
+import { TranslateService } from '@ngx-translate/core';
+import { ConfigurationService } from './configuration.service';
+import { Title } from '@angular/platform-browser';
 
 const frontPage = { localizationKey: 'Front page', route: [''] };
 const informationAboutServicePage = { localizationKey: 'Information about the service', route: ['information'] };
@@ -12,9 +15,23 @@ const createCommentThreadPage = { localizationKey: 'Create comment thread', rout
 const createCommentPage = { localizationKey: 'Create comment', route: ['createcomment'] };
 
 @Injectable()
-export class LocationService {
+export class LocationService implements OnDestroy {
 
   location = new Subject<Location[]>();
+
+  private titleTranslationSubscription: Subscription;
+
+  constructor(private translateService: TranslateService,
+              private configurationService: ConfigurationService,
+              private titleService: Title) {
+    this.titleTranslationSubscription = this.translateService.stream('Comments').subscribe(value => {
+      this.titleService.setTitle(this.configurationService.getEnvironmentIdentifier('prefix') + value);
+    });
+  }
+
+  ngOnDestroy() {
+    this.titleTranslationSubscription.unsubscribe();
+  }
 
   private changeLocation(location: Location[]): void {
     location.unshift(frontPage);

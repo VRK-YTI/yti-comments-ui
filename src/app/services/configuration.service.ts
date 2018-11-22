@@ -58,4 +58,17 @@ export class ConfigurationService {
     return uri ? uri : null;
   }
 
+  getEnvironmentIdentifier(style?: 'prefix' | 'postfix'): string {
+    if (this.env !== 'prod') {
+      const identifier = this.env.toUpperCase();
+      if (!style) {
+        return identifier;
+      } else if (style === 'prefix') {
+        return identifier + ' - ';
+      } else if (style === 'postfix') {
+        return ' - ' + identifier;
+      }
+    }
+    return '';
+  }
 }
