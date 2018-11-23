@@ -13,6 +13,7 @@ export class ConfigurationService {
   }
 
   fetchConfiguration(): Promise<ServiceConfiguration> {
+
     const promise = this.dataService.getServiceConfiguration().toPromise().then(configuration => {
       this.configuration = configuration;
       return configuration;
@@ -53,12 +54,13 @@ export class ConfigurationService {
   getUriWithEnv(uri: string): string | null {
 
     if (uri && this.env !== 'prod') {
-      return uri + '?env=' + this.env;
+      return this.encodeUriAndEscapeHashTag(uri) + '?env=' + this.env;
     }
-    return uri ? uri : null;
+    return uri ? this.encodeUriAndEscapeHashTag(uri) : null;
   }
 
   getEnvironmentIdentifier(style?: 'prefix' | 'postfix'): string {
+
     if (this.env !== 'prod') {
       const identifier = this.env.toUpperCase();
       if (!style) {
@@ -70,5 +72,10 @@ export class ConfigurationService {
       }
     }
     return '';
+  }
+
+  encodeUriAndEscapeHashTag(uri: string): string {
+
+    return encodeURI(uri).replace('#', '%23');
   }
 }

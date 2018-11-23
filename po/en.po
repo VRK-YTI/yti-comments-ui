@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-11-23 08:43+0200\n"
+"PO-Revision-Date: 2018-11-23 08:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -429,8 +429,8 @@ msgstr ""
 msgid "INFO_TEXT_SOURCE_FILTER_RESULTS"
 msgstr "Tool selection from which container resources are fetched"
 
-msgid "CODE_LIST_EDITOR"
-msgstr "Code list editor"
+msgid "TERMINOLOGY_EDITOR"
+msgstr "Terminology editor"
 
 msgid "Front page"
 msgstr ""
@@ -455,6 +455,9 @@ msgstr "Draft"
 
 msgid "INCOMPLETE"
 msgstr "Incomplete"
+
+msgid "SUGGESTION"
+msgstr "Suggestion"
 
 msgid "AWAIT"
 msgstr "Await"
@@ -495,11 +498,11 @@ msgstr "Admin"
 msgid "DATA_MODEL_EDITOR"
 msgstr "Data model editor"
 
-msgid "TERMINOLOGY_EDITOR"
-msgstr "Terminology editor"
-
 msgid "NOSTATUS"
 msgstr "No selected status"
+
+msgid "CODE_LIST_EDITOR"
+msgstr "Code list editor"
 
 msgid "required"
 msgstr "Required"
@@ -566,6 +569,3 @@ msgstr "Invalid date"
 
 msgid "invalidDateRange"
 msgstr "Invalid date range"
-
-#~ msgid "SUGGESTION"
-#~ msgstr "Suggestion"

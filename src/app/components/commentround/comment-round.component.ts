@@ -555,4 +555,9 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
     return this.commentRound.fixedThreads;
   }
+
+  getCommentThreadResourceUri(commentThread: CommentThread): string | null {
+
+    return this.configurationService.getUriWithEnv(commentThread.resourceUri);
+  }
 }

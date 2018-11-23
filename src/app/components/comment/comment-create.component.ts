@@ -116,7 +116,7 @@ export class CommentCreateComponent implements OnInit {
     return save();
   }
 
-  get resourceUri() {
+  get resourceUri(): string | null {
 
     return this.configurationService.getUriWithEnv(this.commentThread.resourceUri);
   }

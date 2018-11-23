@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-11-23 08:43+0200\n"
+"PO-Revision-Date: 2018-11-23 08:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -435,8 +435,8 @@ msgstr ""
 msgid "INFO_TEXT_SOURCE_FILTER_RESULTS"
 msgstr "Työkalun valinta, josta kommentoitava tietosisältö noudetaan"
 
-msgid "CODE_LIST_EDITOR"
-msgstr "Koodistotyöntekijä"
+msgid "TERMINOLOGY_EDITOR"
+msgstr "Tietomallintaja"
 
 msgid "Front page"
 msgstr "Etusivu"
@@ -461,6 +461,9 @@ msgstr "Luonnos"
 
 msgid "INCOMPLETE"
 msgstr "Keskeneräinen"
+
+msgid "SUGGESTION"
+msgstr "Ehdotus"
 
 msgid "AWAIT"
 msgstr "Odottaa"
@@ -501,11 +504,11 @@ msgstr "Ylläpitäjä"
 msgid "DATA_MODEL_EDITOR"
 msgstr "Tietomallintaja"
 
-msgid "TERMINOLOGY_EDITOR"
-msgstr "Tietomallintaja"
-
 msgid "NOSTATUS"
 msgstr "Ei valittua tilaa"
+
+msgid "CODE_LIST_EDITOR"
+msgstr "Koodistotyöntekijä"
 
 msgid "required"
 msgstr "Vaadittu syöte"
@@ -572,18 +575,3 @@ msgstr "Virheellinen päivämäärä"
 
 msgid "invalidDateRange"
 msgstr "Virheellinen päivämääräväli"
-
-#~ msgid "Resources for commenting"
-#~ msgstr "Kommentoitavat tietosisällöt"
-
-#~ msgid "SUGGESTION"
-#~ msgstr "Ehdotus"
-
-#~ msgid "Create empty resource"
-#~ msgstr "Luo tyhjä tietosisältö"
-
-#~ msgid "Editors comment"
-#~ msgstr "Ylläpitäjän kommentti"
-
-#~ msgid "Thread name"
-#~ msgstr "Kommentointiketjun nimi"

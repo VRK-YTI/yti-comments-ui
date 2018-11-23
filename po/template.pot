@@ -406,7 +406,7 @@ msgstr ""
 msgid "INFO_TEXT_SOURCE_FILTER_RESULTS"
 msgstr ""
 
-msgid "CODE_LIST_EDITOR"
+msgid "TERMINOLOGY_EDITOR"
 msgstr ""
 
 msgid "Front page"
@@ -431,6 +431,9 @@ msgid "DRAFT"
 msgstr ""
 
 msgid "INCOMPLETE"
+msgstr ""
+
+msgid "SUGGESTION"
 msgstr ""
 
 msgid "AWAIT"
@@ -472,10 +475,10 @@ msgstr ""
 msgid "DATA_MODEL_EDITOR"
 msgstr ""
 
-msgid "TERMINOLOGY_EDITOR"
+msgid "NOSTATUS"
 msgstr ""
 
-msgid "NOSTATUS"
+msgid "CODE_LIST_EDITOR"
 msgstr ""
 
 msgid "required"

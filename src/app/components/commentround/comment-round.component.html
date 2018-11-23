@@ -251,7 +251,7 @@
                 <td style="width: 15%">
                   <a *ngIf="commentThread.value.label && commentThread.value.resourceUri"
                      id="commenthread_uri_link"
-                     [href]="configurationService.getUriWithEnv(commentThread.value.resourceUri)"
+                     [href]="getCommentThreadResourceUri(commentThread.value)"
                      target="_blank">
                     <app-literal-multilanguage [value]="commentThread.value.label"></app-literal-multilanguage>
                   </a>
@@ -341,7 +341,7 @@
               <tr *ngFor="let commentThread of commentThreadForms.controls; let i = index;" [formGroupName]="i">
                 <td style="width: 15%">
                   <a *ngIf="commentThread.value.resourceUri"
-                     [href]="configurationService.getUriWithEnv(commentThread.value.resourceUri)"
+                     [href]="getCommentThreadResourceUri(commentThread.value)"
                      target="_blank">
                     <app-literal-multilanguage [value]="commentThread.value.label"></app-literal-multilanguage>
                   </a>

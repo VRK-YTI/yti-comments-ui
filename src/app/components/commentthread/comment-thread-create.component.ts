@@ -116,7 +116,12 @@ export class CommentThreadCreateComponent implements OnInit {
 
   get getResourceUri(): string {
 
-    return this.commentThreadForm.controls['resource'].value ? this.commentThreadForm.controls['resource'].value.uri : '-';
+    const resource = this.commentThreadForm.controls['resource'].value;
+    let uri: string | null = null;
+    if (resource) {
+      uri = this.configurationService.getUriWithEnv(resource.uri);
+    }
+    return uri ? uri : '-';
   }
 
   get getResource(): IntegrationResource {
@@ -161,7 +166,7 @@ export class CommentThreadCreateComponent implements OnInit {
     return save();
   }
 
-  get containerUri() {
+  get containerUri(): string | null {
 
     return this.configurationService.getUriWithEnv(this.commentRound.source.containerUri);
   }
