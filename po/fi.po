@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-11-07 14:42+0200\n"
+"PO-Revision-Date: 2018-11-23 08:43+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -49,6 +49,9 @@ msgstr "Tallenna"
 msgid "Edit"
 msgstr "Muokkaa"
 
+msgid "{{ control.value }}"
+msgstr ""
+
 msgid "Add organization"
 msgstr "Valitse organisaatio"
 
@@ -78,6 +81,9 @@ msgstr ""
 
 msgid "Filter results"
 msgstr "Suodata hakutuloksia"
+
+msgid "Last modification"
+msgstr "Viimeisin muokkaus"
 
 msgid "Create new suggestion"
 msgstr "Luo uusi ehdotus"
@@ -160,11 +166,14 @@ msgstr "Ylläpitäjä"
 msgid "Commenting subject"
 msgstr "Kommentoinnin kohde"
 
-msgid "Last modification"
-msgstr "Viimeisin muokkaus"
-
 msgid "Commentable resources"
 msgstr "Kommentoitavia tietosisältöjä {{ value }} kpl"
+
+msgid "Start commenting"
+msgstr "Aloita kommentointi"
+
+msgid "Send comments"
+msgstr "Lähetä kommentit"
 
 msgid "Start comment round"
 msgstr "Aloita kommentointikierros"
@@ -175,17 +184,8 @@ msgstr "Lopeta kommentointikierros"
 msgid "Export Excel"
 msgstr "Vie Exceliin"
 
-msgid "Start commenting"
-msgstr "Aloita kommentointi"
-
-msgid "Send comments"
-msgstr "Lähetä kommentit"
-
 msgid "There are no resources to comment."
 msgstr "Kommentoitavia tietosisältöjä ei ole."
-
-msgid "Resources for commenting"
-msgstr "Kommentoitavat tietosisällöt"
 
 msgid "Add new resource"
 msgstr "Lisää uusi tietosisältö"
@@ -213,8 +213,8 @@ msgid ""
 "'-' }}"
 msgstr ""
 
-msgid "COMMENTS"
-msgstr "KOMMENTIT"
+msgid "OWN COMMENTS"
+msgstr "OMAT KOMMENTIT"
 
 msgid "{{ commenting ? 'Propose status' : 'Commenters proposal for status' }}"
 msgstr ""
@@ -231,9 +231,6 @@ msgid ""
 "{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : "
 "'NOSTATUS' }}"
 msgstr ""
-
-msgid "SUGGESTION"
-msgstr "Ehdotus"
 
 msgid "Resource name"
 msgstr "Tietosisällön nimi"
@@ -575,6 +572,12 @@ msgstr "Virheellinen päivämäärä"
 
 msgid "invalidDateRange"
 msgstr "Virheellinen päivämääräväli"
+
+#~ msgid "Resources for commenting"
+#~ msgstr "Kommentoitavat tietosisällöt"
+
+#~ msgid "SUGGESTION"
+#~ msgstr "Ehdotus"
 
 #~ msgid "Create empty resource"
 #~ msgstr "Luo tyhjä tietosisältö"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-30 17:50+0200\n"
+"PO-Revision-Date: 2018-11-23 08:43+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -49,6 +49,9 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+msgid "{{ control.value }}"
+msgstr ""
+
 msgid "Add organization"
 msgstr ""
 
@@ -77,6 +80,9 @@ msgid "{{ option }}"
 msgstr ""
 
 msgid "Filter results"
+msgstr ""
+
+msgid "Last modification"
 msgstr ""
 
 msgid "Create new suggestion"
@@ -160,11 +166,14 @@ msgstr ""
 msgid "Commenting subject"
 msgstr ""
 
-msgid "Last modification"
-msgstr ""
-
 msgid "Commentable resources"
 msgstr "Commentable resources {{ value }}."
+
+msgid "Start commenting"
+msgstr "Comment"
+
+msgid "Send comments"
+msgstr ""
 
 msgid "Start comment round"
 msgstr ""
@@ -175,16 +184,7 @@ msgstr ""
 msgid "Export Excel"
 msgstr ""
 
-msgid "Start commenting"
-msgstr "Comment"
-
-msgid "Send comments"
-msgstr ""
-
 msgid "There are no resources to comment."
-msgstr ""
-
-msgid "Resources for commenting"
 msgstr ""
 
 msgid "Add new resource"
@@ -213,7 +213,7 @@ msgid ""
 "'-' }}"
 msgstr ""
 
-msgid "COMMENTS"
+msgid "OWN COMMENTS"
 msgstr ""
 
 msgid "{{ commenting ? 'Propose status' : 'Commenters proposal for status' }}"
@@ -231,9 +231,6 @@ msgid ""
 "{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : "
 "'NOSTATUS' }}"
 msgstr ""
-
-msgid "SUGGESTION"
-msgstr "Suggestion"
 
 msgid "Resource name"
 msgstr ""
@@ -569,3 +566,6 @@ msgstr "Invalid date"
 
 msgid "invalidDateRange"
 msgstr "Invalid date range"
+
+#~ msgid "SUGGESTION"
+#~ msgstr "Suggestion"
