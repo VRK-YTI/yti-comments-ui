@@ -105,7 +105,10 @@ export class DataService {
     return this.http.get<ServiceConfiguration>(`${configurationPath}`);
   }
 
-  getCommentRounds(organizationId: string | null, status: string | null, containerType: string | null): Observable<CommentRound[]> {
+  getCommentRounds(organizationId: string | null,
+                   status: string | null,
+                   containerType: string | null,
+                   filterIncomplete: boolean): Observable<CommentRound[]> {
 
     let params = new HttpParams()
       .set('expand', 'source,organization');
@@ -120,6 +123,10 @@ export class DataService {
 
     if (status) {
       params = params.append('status', status);
+    }
+
+    if (filterIncomplete) {
+      params = params.append('filterIncomplete', String(filterIncomplete));
     }
 
     return this.http.get(commentRoundsApiPath, { params: params, responseType: 'json' })
