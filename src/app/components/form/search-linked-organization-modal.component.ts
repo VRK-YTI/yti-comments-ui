@@ -6,6 +6,8 @@ import { contains } from 'yti-common-ui/utils/array';
 import { ModalService } from '../../services/modal.service';
 import { debounceTime, map, skip, take, tap } from 'rxjs/operators';
 import { OrganizationSimple } from '../../entity/organization-simple';
+import { Organization } from '../../entity/organization';
+import { comparingLocalizable } from 'yti-common-ui/utils/comparator';
 
 @Component({
   selector: 'app-search-linked-organizatione-modal',
@@ -90,7 +92,8 @@ export class SearchLinkedOrganizationModalComponent implements AfterViewInit, On
             const searchMatches = !search || label.toLowerCase().indexOf(search.toLowerCase()) !== -1;
             const isNotRestricted = !contains(this.restricts, organization.id);
             return searchMatches && isNotRestricted;
-          });
+          }).sort(comparingLocalizable<Organization>(this.languageService,
+            organization => organization.prefLabel ? organization.prefLabel : {}));
         })
       );
   }
