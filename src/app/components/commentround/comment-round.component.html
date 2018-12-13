@@ -18,7 +18,7 @@
                             [form]="form"
                             [entity]="commentRound"></app-editable-buttons>
 
-      <div *ngIf="canComment && !commenting && currentTab$.value === 'commentround_comments_tab'" class="ml-3 float-right d-inline-block">
+      <div *ngIf="canComment && !commenting" class="ml-3 float-right d-inline-block">
         <button id="start_commenting_button"
                 type="button"
                 class="btn btn-action"
@@ -27,7 +27,7 @@
         </button>
       </div>
 
-      <div *ngIf="canComment && commenting && currentTab$.value === 'commentround_comments_tab'" class="ml-3 float-right d-inline-block">
+      <div *ngIf="canComment && commenting" class="ml-3 float-right d-inline-block">
         <button id="send_comments_button"
                 type="button"
                 class="btn btn-action"
@@ -37,7 +37,7 @@
         </button>
       </div>
 
-      <div *ngIf="canComment && commenting && currentTab$.value === 'commentround_comments_tab'" class="ml-3 float-right d-inline-block">
+      <div *ngIf="canComment && commenting" class="ml-3 float-right d-inline-block">
         <button id="cancel_commenting_button"
                 type="button"
                 class="btn btn-link"
@@ -394,6 +394,15 @@
               </tr>
               </tbody>
             </table>
+            <div *ngIf="canComment && commenting" class="d-flex justify-content-end">
+              <button id="send_comments_button_bottom"
+                      type="button"
+                      class="btn btn-action"
+                      [disabled]="commentRoundForm.invalid"
+                      (click)="sendCommentsAndAddResources()">
+                <span translate>Send comments</span>
+              </button>
+            </div>
           </div>
         </ng-template>
       </ngb-tab>
