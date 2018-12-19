@@ -68,12 +68,12 @@
                              [formControlName]="'openThreads'"></app-boolean-input>
         </div>
 
-        <app-clipboard *ngIf="getResourceUri"
+        <app-inline-clipboard *ngIf="getResourceUri"
                        [id]="'integration_resource_containeruri'"
                        [label]="'Source URI' | translate"
                        [value]="getResourceUri"
                        [showAsLink]="false"
-                       [infoText]="'INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE_URI'"></app-clipboard>
+                       [infoText]="'INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE_URI'"></app-inline-clipboard>
 
         <app-organizations-input id="commentround_organizations_input"
                                  [label]="'Organization' | translate"

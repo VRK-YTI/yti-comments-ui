@@ -55,12 +55,12 @@
                                         [infoText]="'INFO_TEXT_COMMENTTHREAD_DESCRIPTION'"
                                         [formControlName]="'description'"></app-localizable-textarea-input>
 
-        <app-clipboard *ngIf="hasResource"
+        <app-inline-clipboard *ngIf="hasResource"
                        [id]="'integration_resource_containeruri'"
                        [label]="'Resource URI' | translate"
                        [value]="getResourceUri"
                        [showAsLink]="false"
-                       [infoText]="'INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCEURI'"></app-clipboard>
+                       [infoText]="'INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCEURI'"></app-inline-clipboard>
 
         <app-source-input id="integration_resource_input"
                           [label]="'Resource' | translate"

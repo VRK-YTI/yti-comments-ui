@@ -45,12 +45,12 @@
                                    [infoText]="'INFO_TEXT_COMMENT_COMMENTTHREAD_NAME'"
                                    [value]="comment.commentThread.label"></app-literal-multilanguage>
 
-        <app-clipboard *ngIf="comment.commentThread.resourceUri"
+        <app-inline-clipboard *ngIf="comment.commentThread.resourceUri"
                        [id]="'commentthread_resourceuri'"
                        [label]="'Thread resource URI' | translate"
                        [value]="resourceUri"
                        [showAsLink]="false"
-                       [infoText]="'INFO_TEXT_COMMENT_COMMENTTHREAD_RESOURCEURI'"></app-clipboard>
+                       [infoText]="'INFO_TEXT_COMMENT_COMMENTTHREAD_RESOURCEURI'"></app-inline-clipboard>
 
         <app-literal-textarea [id]="'comment_content_input'"
                               [label]="'Comment' | translate"

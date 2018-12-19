@@ -136,12 +136,12 @@
                            [formControlName]="'openThreads'"></app-boolean-input>
       </div>
 
-      <app-clipboard *ngIf="getResourceUri"
+      <app-inline-clipboard *ngIf="getResourceUri"
                      [id]="'integration_resource_containeruri'"
                      [label]="'Source URI' | translate"
                      [value]="getResourceUri"
                      [showAsLink]="false"
-                     [infoText]="'INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE_URI'"></app-clipboard>
+                     [infoText]="'INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE_URI'"></app-inline-clipboard>
 
       <div class="row">
         <app-organizations-input class="col-md-4"
@@ -194,12 +194,12 @@
                                  [value]="commentRound.sourceLabel"
                                  [infoText]="'INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE'"></app-literal-multilanguage>
 
-      <app-clipboard *ngIf="getResourceUri"
+      <app-inline-clipboard *ngIf="getResourceUri"
                      [id]="'integration_resource_containeruri'"
                      [label]="'Source URI' | translate"
                      [value]="getResourceUri"
                      [showAsLink]="false"
-                     [infoText]="'INFO_TEXT_INTEGRATION_RESOURCEURI'"></app-clipboard>
+                     [infoText]="'INFO_TEXT_INTEGRATION_RESOURCEURI'"></app-inline-clipboard>
 
       <app-literal-textarea [id]="'commentround_description_input'"
                             [label]="'Description' | translate"
