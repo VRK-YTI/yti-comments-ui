@@ -63,7 +63,7 @@ import { ProposedStatusDropdownComponent } from './components/form/proposedstatu
 import { CommentRoundStatusComponent } from './components/form/comment-round-status.component';
 import { LiteralTextareaComponent } from './components/form/literal-textarea';
 import { LocalizableTextareaComponent } from './components/form/localizable-textarea';
-import { ClipboardComponent } from './components/form/clipboard';
+import { InlineClipboardComponent } from './components/form/inline-clipboard';
 import { ClipboardModule } from 'ngx-clipboard';
 import { CurrentStatusComponent } from './components/form/current-status';
 import { ProposedStatusTableDropdownComponent } from './components/form/proposed-status-dropdown';
@@ -172,7 +172,7 @@ const appRoutes: Routes = [
     LocalizableLiteralComponent,
     LocalizableTextareaInputComponent,
     LocalizableTextareaComponent,
-    ClipboardComponent,
+    InlineClipboardComponent,
     LiteralInputComponent,
     LiteralComponent,
     LinkComponent,
