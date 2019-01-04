@@ -55,25 +55,40 @@ import { IntegrationResourceType } from '../../services/api-schema';
         <div class="col-12">
           <div class="content-box">
             <div class="search-results">
-              <div *ngFor="let resource of searchResults$ | async; let last = last"
-                   id="{{resource.id + '_resource_link'}}"
-                   class="search-result"
-                   (click)="select(resource)">
-                <div class="content" [class.last]="last">
-                  <app-status class="status" [status]="resource.status"></app-status>
-                  <span class="title">{{ resource.getDisplayName(languageService, useUILanguage) }}</span>
-                  <div class="description-container"
-                       style="width: calc(100%);"
-                       [ngClass]="{ 'expand': false }">
-                    <span class="description">{{ resource.getDescription(languageService, useUILanguage) }}</span>
-                    <div class="limiter-container">
-                      <div class="description-limiter"></div>
+              <div *ngIf="hasContainerType">
+                <div *ngIf="!loading">
+                  <div *ngIf="hasContent">
+                    <div *ngFor="let resource of searchResults$ | async; let last = last"
+                         id="{{resource.id + '_resource_link'}}"
+                         class="search-result"
+                         (click)="select(resource)">
+                      <div class="content" [class.last]="last">
+                        <app-status class="status" [status]="resource.status"></app-status>
+                        <span class="title">{{ resource.getDisplayName(languageService, useUILanguage) }}</span>
+                        <div class="description-container"
+                             style="width: calc(100%);"
+                             [ngClass]="{ 'expand': false }">
+                          <span class="description">{{ resource.getDescription(languageService, useUILanguage) }}</span>
+                          <div class="limiter-container">
+                            <div class="description-limiter"></div>
+                          </div>
+                        </div>
+
+                        <span translate>Last modification</span><span>: {{ resource.modifiedDisplayValue }}</span>
+                        <span class="body">{{ resource.uri }}</span>
+                      </div>
                     </div>
                   </div>
-
-                  <span translate>Last modification</span><span>: {{ resource.modifiedDisplayValue }}</span>
-                  <span class="body">{{ resource.uri }}</span>
+                  <div *ngIf="!hasContent">
+                    <span class="infoText" translate>Search did not find in any resources for commenting.</span>
+                  </div>
                 </div>
+                <div *ngIf="loading">
+                  <app-ajax-loading-indicator></app-ajax-loading-indicator>
+                </div>
+              </div>
+              <div *ngIf="!hasContainerType">
+                <span class="infoText" translate>Please select tool to get container resources for commenting.</span>
               </div>
             </div>
           </div>
@@ -117,11 +132,11 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
 
   resources$: Observable<IntegrationResource[]>;
   resources: IntegrationResource[];
-  searchResults$: Observable<IntegrationResource[]>;
 
   status$ = new BehaviorSubject<Status | null>(null);
   containerType$ = new BehaviorSubject<string | null>(null);
   search$ = new BehaviorSubject('');
+  searchResults$ = new BehaviorSubject<IntegrationResource[]>([]);
 
   loading = false;
 
@@ -158,12 +173,26 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
     }
   }
 
+  get hasContent(): boolean {
+
+    return this.searchResults$.getValue().length > 0;
+  }
+
+  get hasContainerType(): boolean {
+
+    return this.containerType$.getValue() != null || this.containerType != null;
+  }
+
   filterResources() {
+
+    this.loading = true;
+
+    this.searchResults$.next([]);
 
     const initialSearch = this.search$.pipe(take(1));
     const debouncedSearch = this.search$.pipe(skip(1), debounceTime(500));
 
-    this.searchResults$ = combineLatest(this.resources$, this.status$, concat(initialSearch, debouncedSearch))
+    combineLatest(this.resources$, this.status$, concat(initialSearch, debouncedSearch))
       .pipe(
         tap(() => this.loading = false),
         map(([integrationResources, status, search]) => {
@@ -175,7 +204,9 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
             return searchMatches && isNotRestricted && statusMatches;
           });
         })
-      );
+      ).subscribe(results => {
+      this.searchResults$.next(results);
+    });
   }
 
   select(resource: IntegrationResource) {

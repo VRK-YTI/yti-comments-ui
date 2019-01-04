@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-11-23 08:50+0200\n"
+"PO-Revision-Date: 2019-01-04 13:21+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -28,12 +28,6 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-msgid "Copy value to clipboard"
-msgstr ""
-
-msgid "Copied to clipboard"
-msgstr ""
-
 msgid "Status"
 msgstr ""
 
@@ -47,6 +41,12 @@ msgid "Save"
 msgstr ""
 
 msgid "Edit"
+msgstr ""
+
+msgid "Copy value to clipboard"
+msgstr ""
+
+msgid "Copied to clipboard"
 msgstr ""
 
 msgid "{{ control.value }}"
@@ -83,6 +83,12 @@ msgid "Filter results"
 msgstr ""
 
 msgid "Last modification"
+msgstr ""
+
+msgid "Search did not find in any resources for commenting."
+msgstr ""
+
+msgid "Please select tool to get container resources for commenting."
 msgstr ""
 
 msgid "Create new suggestion"
