@@ -26,6 +26,8 @@ import { v4 as uuid } from 'uuid';
 import { LanguageService } from '../../services/language.service';
 import { ConfigurationService } from '../../services/configuration.service';
 import { NgbTabChangeEvent, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
+import { hasLocalization } from 'yti-common-ui/utils/localization';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 function addToControl<T>(control: FormControl, itemToAdd: T) {
 
@@ -554,6 +556,10 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   get requireComments(): boolean {
 
     return this.commentRound.fixedThreads;
+  }
+
+  hasLocalization(localizable: Localizable) {
+    return hasLocalization(localizable);
   }
 
   getCommentThreadResourceUri(commentThread: CommentThread): string | null {

@@ -253,7 +253,8 @@
                      id="commenthread_uri_link"
                      [href]="getCommentThreadResourceUri(commentThread.value)"
                      target="_blank">
-                    <app-literal-multilanguage [value]="commentThread.value.label"></app-literal-multilanguage>
+                    <app-literal-multilanguage *ngIf="hasLocalization(commentThread.value.label)" [value]="commentThread.value.label"></app-literal-multilanguage>
+                    <app-literal *ngIf="!hasLocalization(commentThread.value.label)" [value]="commentThread.value.resourceUri"></app-literal>
                   </a>
                   <app-localizable-undefined-textarea *ngIf="!commentThread.value.resourceUri"
                                                       [required]=true
@@ -344,7 +345,8 @@
                   <a *ngIf="commentThread.value.resourceUri"
                      [href]="getCommentThreadResourceUri(commentThread.value)"
                      target="_blank">
-                    <app-literal-multilanguage [value]="commentThread.value.label"></app-literal-multilanguage>
+                    <app-literal-multilanguage *ngIf="hasLocalization(commentThread.value.label)" [value]="commentThread.value.label"></app-literal-multilanguage>
+                    <app-literal *ngIf="!hasLocalization(commentThread.value.label)" [value]="commentThread.value.resourceUri"></app-literal>
                   </a>
                   <app-literal-multilanguage *ngIf="!commentThread.value.resourceUri"
                                              [value]="commentThread.value.label"></app-literal-multilanguage>
