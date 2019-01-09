@@ -412,7 +412,7 @@ msgstr ""
 msgid "INFO_TEXT_SOURCE_FILTER_RESULTS"
 msgstr ""
 
-msgid "TERMINOLOGY_EDITOR"
+msgid "Submit error"
 msgstr ""
 
 msgid "Front page"
@@ -469,7 +469,34 @@ msgstr ""
 msgid "ERR_MSG_USER_END_BEFORE_START_DATE"
 msgstr ""
 
-msgid "Submit error"
+msgid "ERR_MSG_USER_CANNOT_MODIFY_EXISTING_COMMENT"
+msgstr ""
+
+msgid "ERR_MSG_USER_CANNOT_MODIFY_EXISTING_COMMENTTHREAD"
+msgstr ""
+
+msgid "ERR_MSG_USER_INVALID_PARENTCOMMENT"
+msgstr ""
+
+msgid "ERR_MSG_USER_NOT_ALLOWED_TO_MODIFY_CONTENT_FROM_ANOTHER_USER"
+msgstr ""
+
+msgid "ERR_MSG_COMMENT_HAS_INVALID_COMMENTTHREAD_ID"
+msgstr ""
+
+msgid "ERR_MSG_COMMENT_DOES_NOT_HAVE_COMMENTTHREAD"
+msgstr ""
+
+msgid "ERR_MSG_NO_RESOURCES_TO_COMMENT_STATUS_CHANGE_NOT_ALLOWED"
+msgstr ""
+
+msgid "ERR_MSG_USER_COMMENTTHREAD_HAS_INVALID_COMMENTROUND_ID"
+msgstr ""
+
+msgid "ERR_MSG_INVALID_SOURCE_DATA"
+msgstr ""
+
+msgid "NOSTATUS"
 msgstr ""
 
 msgid "Unexpected error"
@@ -481,7 +508,7 @@ msgstr ""
 msgid "DATA_MODEL_EDITOR"
 msgstr ""
 
-msgid "NOSTATUS"
+msgid "TERMINOLOGY_EDITOR"
 msgstr ""
 
 msgid "CODE_LIST_EDITOR"

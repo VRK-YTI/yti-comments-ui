@@ -15,7 +15,6 @@ import { LocationService } from '../../services/location.service';
 import { AuthorizationManager } from '../../services/authorization-manager';
 import { CommentThreadSimple } from '../../entity/commentthread-simple';
 import { CommentsConfirmationModalService } from '../common/confirmation-modal.service';
-import { ErrorModalService } from 'yti-common-ui/components/error-modal.component';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { TranslateService } from '@ngx-translate/core';
 import { SearchLinkedIntegrationResourceModalService } from '../form/search-linked-integration-resource-modal.component';
@@ -28,6 +27,7 @@ import { ConfigurationService } from '../../services/configuration.service';
 import { NgbTabChangeEvent, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { hasLocalization } from 'yti-common-ui/utils/localization';
 import { Localizable } from 'yti-common-ui/types/localization';
+import { CommentRoundErrorModalService } from '../common/error-modal.service';
 
 function addToControl<T>(control: FormControl, itemToAdd: T) {
 
@@ -79,7 +79,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
               private location: Location,
               private authorizationManager: AuthorizationManager,
               private confirmationModalService: CommentsConfirmationModalService,
-              private errorModalService: ErrorModalService,
+              private errorModalService: CommentRoundErrorModalService,
               private searchLinkedIntegrationResourceModalService: SearchLinkedIntegrationResourceModalService,
               private translateService: TranslateService,
               public languageService: LanguageService,
@@ -200,7 +200,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
       label: new FormControl(integrationResource.prefLabel),
       description: new FormControl(integrationResource.description),
       currentStatus: new FormControl(integrationResource.status),
-      proposedStatus: new FormControl('SUGGESTION'),
+      proposedStatus: new FormControl(integrationResource.uri != null ? 'NOSTATUS' : 'SUGGESTION'),
       proposedText: new FormControl(''),
       commentersProposedStatus: new FormControl('NOSTATUS'),
       commentersProposedText: new FormControl(''),
@@ -208,6 +208,11 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     });
 
     this.commentThreadForms.push(commentThreadFormGroup);
+  }
+
+  canModifyComment(commentThreadId: string): boolean {
+
+    return this.getMyCommentForCommentThread(commentThreadId) == null;
   }
 
   removeCommentThread(i: any) {
@@ -269,14 +274,27 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
         proposedStatus: new FormControl(commentThread.proposedStatus),
         proposedText: new FormControl(commentThread.proposedText),
         commentersProposedStatus: new FormControl(this.getMyProposedStatusForCommentThread(commentThread.id)),
-        commentersProposedText: new FormControl(this.getMyCommentForCommentThread(commentThread.id)),
+        commentersProposedText: new FormControl(this.getMyCommentContentForCommentThread(commentThread.id)),
         results: new FormControl(commentThread.results)
       });
       this.commentThreadForms.push(commentThreadFormGroup);
     });
   }
 
-  getMyCommentForCommentThread(commentThreadId: string): string {
+  getMyCommentForCommentThread(commentThreadId: string): string | null {
+
+    let myComment = null;
+    if (this.myComments) {
+      this.myComments.forEach(comment => {
+        if (comment.commentThread.id === commentThreadId) {
+          myComment = comment;
+        }
+      });
+    }
+    return myComment;
+  }
+
+  getMyCommentContentForCommentThread(commentThreadId: string): string {
 
     let content = '';
     if (this.myComments) {
@@ -413,6 +431,9 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     this.dataService.createCommentsToCommentRound(this.commentRound.id, comments).subscribe(myComments => {
       this.cancelCommenting();
       this.initialize();
+    }, error => {
+      this.cancelCommenting();
+      this.errorModalService.openSubmitError(error);
     });
   }
 

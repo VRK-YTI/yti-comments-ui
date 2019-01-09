@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-01-04 13:21+0200\n"
+"PO-Revision-Date: 2019-01-09 17:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -435,8 +435,8 @@ msgstr ""
 msgid "INFO_TEXT_SOURCE_FILTER_RESULTS"
 msgstr "Tool selection from which container resources are fetched"
 
-msgid "TERMINOLOGY_EDITOR"
-msgstr "Terminology editor"
+msgid "Submit error"
+msgstr ""
 
 msgid "Front page"
 msgstr ""
@@ -492,8 +492,35 @@ msgstr "Unexpected error"
 msgid "ERR_MSG_USER_END_BEFORE_START_DATE"
 msgstr "The enddate is before the startdate."
 
-msgid "Submit error"
-msgstr ""
+msgid "ERR_MSG_USER_CANNOT_MODIFY_EXISTING_COMMENT"
+msgstr "Cannot modify existing comment."
+
+msgid "ERR_MSG_USER_CANNOT_MODIFY_EXISTING_COMMENTTHREAD"
+msgstr "Cannot modify existing comment thread."
+
+msgid "ERR_MSG_USER_INVALID_PARENTCOMMENT"
+msgstr "Comment is linked to invalid parent comment."
+
+msgid "ERR_MSG_USER_NOT_ALLOWED_TO_MODIFY_CONTENT_FROM_ANOTHER_USER"
+msgstr "User is not allowed to modify existing content from another user."
+
+msgid "ERR_MSG_COMMENT_HAS_INVALID_COMMENTTHREAD_ID"
+msgstr "Comment data has invalid comment thread id."
+
+msgid "ERR_MSG_COMMENT_DOES_NOT_HAVE_COMMENTTHREAD"
+msgstr "Comment does not have a comment thread."
+
+msgid "ERR_MSG_NO_RESOURCES_TO_COMMENT_STATUS_CHANGE_NOT_ALLOWED"
+msgstr "There are no resources to comment, status change not allowed."
+
+msgid "ERR_MSG_USER_COMMENTTHREAD_HAS_INVALID_COMMENTROUND_ID"
+msgstr "Comment thread data has invalid comment round id."
+
+msgid "ERR_MSG_INVALID_SOURCE_DATA"
+msgstr "Invalid source data."
+
+msgid "NOSTATUS"
+msgstr "No selected status"
 
 msgid "Unexpected error"
 msgstr ""
@@ -504,8 +531,8 @@ msgstr "Admin"
 msgid "DATA_MODEL_EDITOR"
 msgstr "Data model editor"
 
-msgid "NOSTATUS"
-msgstr "No selected status"
+msgid "TERMINOLOGY_EDITOR"
+msgstr "Terminology editor"
 
 msgid "CODE_LIST_EDITOR"
 msgstr "Code list editor"

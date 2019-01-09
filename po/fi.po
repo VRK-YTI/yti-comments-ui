@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-01-04 13:21+0200\n"
+"PO-Revision-Date: 2019-01-09 17:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -441,8 +441,8 @@ msgstr ""
 msgid "INFO_TEXT_SOURCE_FILTER_RESULTS"
 msgstr "Työkalun valinta, josta kommentoitava tietosisältö noudetaan"
 
-msgid "TERMINOLOGY_EDITOR"
-msgstr "Tietomallintaja"
+msgid "Submit error"
+msgstr "Toiminnossa tapahtui virhe"
 
 msgid "Front page"
 msgstr "Etusivu"
@@ -498,8 +498,35 @@ msgstr "Tapahtui odottamaton virhe"
 msgid "ERR_MSG_USER_END_BEFORE_START_DATE"
 msgstr "Loppupäivä ennen alkupäivää"
 
-msgid "Submit error"
-msgstr "Toiminnossa tapahtui virhe"
+msgid "ERR_MSG_USER_CANNOT_MODIFY_EXISTING_COMMENT"
+msgstr "Olemassaolevaa kommenttia ei voi muokata."
+
+msgid "ERR_MSG_USER_CANNOT_MODIFY_EXISTING_COMMENTTHREAD"
+msgstr "Olemassaolevaa kommenttiketjua ei voi muokata."
+
+msgid "ERR_MSG_USER_INVALID_PARENTCOMMENT"
+msgstr "Kommentti on liitetty epäsopivaan päätason kommenttiin."
+
+msgid "ERR_MSG_USER_NOT_ALLOWED_TO_MODIFY_CONTENT_FROM_ANOTHER_USER"
+msgstr "Käyttäjä ei voi muokata toisen käyttäjän antamia arvoja."
+
+msgid "ERR_MSG_COMMENT_HAS_INVALID_COMMENTTHREAD_ID"
+msgstr "Kommentti on liitetty epäsopivaan kommenttiketjuun"
+
+msgid "ERR_MSG_COMMENT_DOES_NOT_HAVE_COMMENT_THREAD"
+msgstr "Kommentilla ei ole kommenttiketjua."
+
+msgid "ERR_MSG_NO_RESOURCES_TO_COMMENT_STATUS_CHANGE_NOT_ALLOWED"
+msgstr "Käyttäjä ei voi muokata toisen käyttäjän aineistoja."
+
+msgid "ERR_MSG_USER_COMMENTTHREAD_HAS_INVALID_COMMENTROUND_ID"
+msgstr "Kommenttiketjulla on epäsopiva kommentointikierros."
+
+msgid "ERR_MSG_INVALID_SOURCE_DATA"
+msgstr "VIallinen lähde data."
+
+msgid "NOSTATUS"
+msgstr "Ei valittua tilaa"
 
 msgid "Unexpected error"
 msgstr "Tapahtui odottamaton virhe"
@@ -510,8 +537,8 @@ msgstr "Ylläpitäjä"
 msgid "DATA_MODEL_EDITOR"
 msgstr "Tietomallintaja"
 
-msgid "NOSTATUS"
-msgstr "Ei valittua tilaa"
+msgid "TERMINOLOGY_EDITOR"
+msgstr "Tietomallintaja"
 
 msgid "CODE_LIST_EDITOR"
 msgstr "Koodistotyöntekijä"
