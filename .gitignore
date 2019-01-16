@@ -10,6 +10,7 @@
 
 # IDEs and editors
 /.idea
+/yti-comments-ui.iml
 .project
 .classpath
 .c9/

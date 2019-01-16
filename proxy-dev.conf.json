@@ -1,0 +1,7 @@
+{
+  "/comments-api/*": {
+    "target": "https://kommentit-dev.suomi.fi",
+    "changeOrigin": true,
+    "secure": false
+  }
+}
