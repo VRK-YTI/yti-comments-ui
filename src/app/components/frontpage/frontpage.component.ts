@@ -42,8 +42,6 @@ export class FrontpageComponent implements OnInit, OnDestroy {
 
   private subscriptionToClean: Subscription[] = [];
 
-  fullDescription: { [key: string]: boolean } = {};
-
   constructor(private dataService: DataService,
               private integrationResourceService: IntegrationResourceService,
               private locationService: LocationService,
@@ -132,14 +130,5 @@ export class FrontpageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
 
     this.subscriptionToClean.forEach(s => s.unsubscribe());
-  }
-
-  toggleFullDescription(commentRoundId: string) {
-
-    if (this.fullDescription[commentRoundId]) {
-      delete this.fullDescription[commentRoundId];
-    } else {
-      this.fullDescription[commentRoundId] = true;
-    }
   }
 }

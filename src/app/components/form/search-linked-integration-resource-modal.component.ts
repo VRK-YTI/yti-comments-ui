@@ -65,15 +65,9 @@ import { IntegrationResourceType } from '../../services/api-schema';
                       <div class="content" [class.last]="last">
                         <app-status class="status" [status]="resource.status"></app-status>
                         <span class="title">{{ resource.getDisplayName(languageService, useUILanguage) }}</span>
-                        <div class="description-container"
-                             style="width: calc(100%);"
-                             [ngClass]="{ 'expand': false }">
-                          <span class="description">{{ resource.getDescription(languageService, useUILanguage) }}</span>
-                          <div class="limiter-container">
-                            <div class="description-limiter"></div>
-                          </div>
+                        <div *ngIf="resource.getDescription(languageService, useUILanguage) as descriptionText" class="description-container">
+                          <app-expandable-text [text]="descriptionText" [rows]="2" [captureClick]="true"></app-expandable-text>
                         </div>
-
                         <span translate>Last modification</span><span>: {{ resource.modifiedDisplayValue }}</span>
                         <span class="body">{{ resource.uri }}</span>
                       </div>

@@ -27,15 +27,10 @@ import { TranslateService } from '@ngx-translate/core';
         </span>
       </span>
 
-      <div class="description-container"
-           style="width: calc(100% - 260px);"
-           [ngClass]="{ 'expand': fullDescription[commentRound.id] }">
-        <span class="description">{{ commentRound.description }}</span>
-        <div class="limiter-container">
-          <div class="description-limiter" (click)="toggleFullDescription(commentRound.id)"></div>
-        </div>
+      <div *ngIf="commentRound.description as descriptionText" class="description-component-container" style="width: calc(100% - 260px);">
+        <app-expandable-text [text]="descriptionText"></app-expandable-text>
       </div>
-
+      
       <ul class="organizations dot-separated-list">
         <li class="organization" *ngFor="let org of commentRound.organizations">
           {{org.prefLabel | translateValue:true}}
@@ -47,18 +42,11 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class CommentRoundListitemComponent {
 
-  @Output() toggleDescriptionFunction = new EventEmitter<string>();
   @Input() commentRound: CommentRound;
-  @Input() fullDescription: { [key: string]: boolean };
 
   constructor(private router: Router,
               public languageService: LanguageService,
               private translateService: TranslateService) {
-  }
-
-  toggleFullDescription(commentRoundId: string) {
-
-    this.toggleDescriptionFunction.emit(commentRoundId);
   }
 
   getIdIdentifier() {

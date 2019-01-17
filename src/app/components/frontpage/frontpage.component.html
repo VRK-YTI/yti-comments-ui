@@ -59,9 +59,7 @@
           <div class="row">
             <div class="col-md-12">
               <div *ngFor="let commentRound of commentRounds" class="result-list-item">
-                <app-comment-round-listitem [commentRound]="commentRound"
-                                            (toggleDescriptionFunction)="toggleFullDescription($event)"
-                                            [fullDescription]="fullDescription"></app-comment-round-listitem>
+                <app-comment-round-listitem [commentRound]="commentRound"></app-comment-round-listitem>
               </div>
             </div>
           </div>
