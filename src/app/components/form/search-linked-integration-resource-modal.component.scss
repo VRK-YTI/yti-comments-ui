@@ -39,7 +39,6 @@ app-filter-dropdown {
 }
 
 .description-container {
-  margin-top: 1em;
   margin-bottom: 0.3em;
 }
 
@@ -47,3 +46,52 @@ app-filter-dropdown {
   margin: 10px;
   display: block;
 }
+
+.resource-results {
+  overflow-y: auto;
+
+  .resource-result {
+    .content {
+      margin: 0 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid $gray;
+
+      &.last {
+        border-bottom: none;
+      }
+
+      .title {
+        display: block;
+        color: $primary;
+        font-size: $font-size-base;
+        width: 100%;
+        padding-bottom: 5px;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .uri {
+        display: block;
+        color: $gray-600;
+        font-size: $font-size-base;
+        width: 100%;
+        padding-bottom: 5px;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .body {
+        display: block;
+        width: 100%;
+        padding-bottom: 15px;
+      }
+    }
+  }
+}
+

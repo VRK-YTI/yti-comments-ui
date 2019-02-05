@@ -12,6 +12,7 @@ import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.componen
 import { TranslateService } from '@ngx-translate/core';
 import { regularStatuses, Status } from 'yti-common-ui/entities/status';
 import { IntegrationResourceType } from '../../services/api-schema';
+import { ConfigurationService } from '../../services/configuration.service';
 
 @Component({
   selector: 'app-search-linked-source-modal',
@@ -54,22 +55,29 @@ import { IntegrationResourceType } from '../../services/api-schema';
       <div class="row full-height">
         <div class="col-12">
           <div class="content-box">
-            <div class="search-results">
+            <div class="resource-results">
               <div *ngIf="hasContainerType">
                 <div *ngIf="!loading">
                   <div *ngIf="hasContent">
                     <div *ngFor="let resource of searchResults$ | async; let last = last"
                          id="{{resource.id + '_resource_link'}}"
-                         class="search-result"
-                         (click)="select(resource)">
+                         class="resource-result">
                       <div class="content" [class.last]="last">
                         <app-status class="status" [status]="resource.status"></app-status>
-                        <span class="title">{{ resource.getDisplayName(languageService, useUILanguage) }}</span>
-                        <div *ngIf="resource.getDescription(languageService, useUILanguage) as descriptionText" class="description-container">
+                        <span class="title" (click)="select(resource)">{{ resource.getDisplayName(languageService, useUILanguage) }}</span>
+                        <div *ngIf="resource.getDescription(languageService, useUILanguage) as descriptionText"
+                             class="description-container">
                           <app-expandable-text [text]="descriptionText" [rows]="2" [captureClick]="true"></app-expandable-text>
                         </div>
-                        <span translate>Last modification</span><span>: {{ resource.modifiedDisplayValue }}</span>
-                        <span class="body">{{ resource.uri }}</span>
+                        <div>
+                          <span translate>Last modification</span><span>: {{ resource.modifiedDisplayValue }}</span>
+                        </div>
+                        <div>
+                          <a class="uri"
+                             href="{{configurationService.getUriWithEnv(resource.uri)}}" target="_blank">
+                            {{ configurationService.getUriWithEnv(resource.uri) }}
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -134,7 +142,8 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
 
   loading = false;
 
-  constructor(public modal: NgbActiveModal,
+  constructor(public configurationService: ConfigurationService,
+              public modal: NgbActiveModal,
               public languageService: LanguageService,
               private dataService: DataService,
               private translateService: TranslateService) {
@@ -231,7 +240,7 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
 
   createEmptyResource() {
 
-    const integrationResourceType: IntegrationResourceType = <IntegrationResourceType> {
+    const integrationResourceType: IntegrationResourceType = <IntegrationResourceType>{
       type: this.containerType
     };
     const resource: IntegrationResource = new IntegrationResource(integrationResourceType);
