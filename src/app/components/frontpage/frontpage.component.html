@@ -29,24 +29,22 @@
 
           <div class="row mb-4">
             <div class="col-md-12 result-list-filter-row">
-            <span class="search-label search-label-inline with-info" style="padding-right: 0px"
-                  translate>Filter results</span>
+            <span class="search-label search-label-inline with-info" translate>Filter results</span>
               <app-information-symbol [infoText]="'INFO_TEXT_FRONTPAGE_FILTER_RESULTS'"></app-information-symbol>
 
-              <app-filter-dropdown class="d-inline-block"
-                                   id="integration_filter_dropdown"
-                                   [filterSubject]="containerType$"
-                                   [options]="containerTypeOptions"></app-filter-dropdown>
+              <div class="result-list-filter-dropdowns">
+                <app-filter-dropdown id="integration_filter_dropdown"
+                                     [filterSubject]="containerType$"
+                                     [options]="containerTypeOptions"></app-filter-dropdown>
 
-              <app-filter-dropdown class="d-inline-block"
-                                   id="organization_filter_dropdown"
-                                   [filterSubject]="organization$"
-                                   [options]="organizationOptions"></app-filter-dropdown>
+                <app-filter-dropdown id="organization_filter_dropdown"
+                                     [filterSubject]="organization$"
+                                     [options]="organizationOptions"></app-filter-dropdown>
 
-              <app-filter-dropdown class="d-inline-block"
-                                   id="status_filter_dropdown"
-                                   [filterSubject]="status$"
-                                   [options]="statusOptions"></app-filter-dropdown>
+                <app-filter-dropdown id="status_filter_dropdown"
+                                     [filterSubject]="status$"
+                                     [options]="statusOptions"></app-filter-dropdown>
+              </div>
             </div>
           </div>
 
