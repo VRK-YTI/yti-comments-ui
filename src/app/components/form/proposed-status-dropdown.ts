@@ -16,7 +16,7 @@ export type Placement = NgbPlacement;
   template: `
     <div *ngIf="editing" ngbDropdown [placement]="placement">
       <button [id]="'selected_' + id" class="btn btn-dropdown" ngbDropdownToggle>
-        <span>{{ selectedStatus | translate }}</span>
+        <span translate>{{ selectedStatus }}</span>
       </button>
 
       <div ngbDropdownMenu>
