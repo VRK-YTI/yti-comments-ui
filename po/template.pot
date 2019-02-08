@@ -291,7 +291,7 @@ msgstr ""
 msgid "Suomi.fi Reference Data"
 msgstr ""
 
-msgid "Suomi.fi Controlled Vocabularies"
+msgid "Suomi.fi Terminologies"
 msgstr ""
 
 msgid "Suomi.fi Data Vocabularies"

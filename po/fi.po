@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-02-08 16:03+0200\n"
+"PO-Revision-Date: 2019-02-08 16:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -305,7 +305,7 @@ msgstr "Käyttäjätiedot"
 msgid "Suomi.fi Reference Data"
 msgstr "Suomi.fi-koodistot"
 
-msgid "Suomi.fi Controlled Vocabularies"
+msgid "Suomi.fi Terminologies"
 msgstr "Suomi.fi-sanastot"
 
 msgid "Suomi.fi Data Vocabularies"
@@ -622,9 +622,3 @@ msgstr "Virheellinen päivämäärä"
 
 msgid "invalidDateRange"
 msgstr "Virheellinen päivämääräväli"
-
-#~ msgid "Delete"
-#~ msgstr "Poista"
-
-#~ msgid "There are no results!"
-#~ msgstr "Haulla ei löytynyt kommentoitavia resursseja."
