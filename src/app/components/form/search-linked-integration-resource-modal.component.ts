@@ -42,12 +42,12 @@ import { ConfigurationService } from '../../services/configuration.service';
 
         <app-filter-dropdown *ngIf="!containerUri"
                              class="d-inline-block mb-3"
-                             id="integration_filter_dropdown"
+                             id="integration_container_type_filter_dropdown"
                              [filterSubject]="containerType$"
                              [options]="containerTypeOptions"></app-filter-dropdown>
 
         <app-filter-dropdown class="d-inline-block mb-3"
-                             id="integration_filter_dropdown"
+                             id="integration_status_filter_dropdown"
                              [filterSubject]="status$"
                              [options]="statusOptions"></app-filter-dropdown>
       </div>
