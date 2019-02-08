@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-01-09 17:48+0200\n"
+"PO-Revision-Date: 2019-02-08 16:03+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -175,6 +175,9 @@ msgstr "Kommentoinnin kohde"
 msgid "Commentable resources"
 msgstr "Kommentoitavia tietosisältöjä {{ value }} kpl"
 
+msgid "Delete comment round"
+msgstr "Poista kommentointikierros"
+
 msgid "Start commenting"
 msgstr "Aloita kommentointi"
 
@@ -219,6 +222,11 @@ msgid ""
 "'-' }}"
 msgstr ""
 
+msgid ""
+"{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : "
+"'NOSTATUS' }}"
+msgstr ""
+
 msgid "OWN COMMENTS"
 msgstr "OMAT KOMMENTIT"
 
@@ -234,8 +242,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : "
-"'NOSTATUS' }}"
+"{{ commentThread.value.commentersProposedStatus ? commentThread.value."
+"commentersProposedStatus : 'NOSTATUS' }}"
 msgstr ""
 
 msgid "Resource name"
@@ -513,7 +521,7 @@ msgstr "Käyttäjä ei voi muokata toisen käyttäjän antamia arvoja."
 msgid "ERR_MSG_COMMENT_HAS_INVALID_COMMENTTHREAD_ID"
 msgstr "Kommentti on liitetty epäsopivaan kommenttiketjuun"
 
-msgid "ERR_MSG_COMMENT_DOES_NOT_HAVE_COMMENT_THREAD"
+msgid "ERR_MSG_COMMENT_DOES_NOT_HAVE_COMMENTTHREAD"
 msgstr "Kommentilla ei ole kommenttiketjua."
 
 msgid "ERR_MSG_NO_RESOURCES_TO_COMMENT_STATUS_CHANGE_NOT_ALLOWED"
@@ -523,7 +531,10 @@ msgid "ERR_MSG_USER_COMMENTTHREAD_HAS_INVALID_COMMENTROUND_ID"
 msgstr "Kommenttiketjulla on epäsopiva kommentointikierros."
 
 msgid "ERR_MSG_INVALID_SOURCE_DATA"
-msgstr "VIallinen lähde data."
+msgstr "Viallinen lähde data."
+
+msgid "ERR_MSG_INVALID_ID"
+msgstr "Viallinen ID datassa."
 
 msgid "NOSTATUS"
 msgstr "Ei valittua tilaa"
@@ -603,11 +614,17 @@ msgstr "ALOITA KOMMENTOINTIKIERROS?"
 msgid "CLOSE COMMENT ROUND?"
 msgstr "SULJE KOMMENTOINTIKIERROS?"
 
+msgid "DELETE COMMENT ROUND?"
+msgstr "POISTETAANKO KOMMENTOINTIKIERROS?"
+
 msgid "invalidDate"
 msgstr "Virheellinen päivämäärä"
 
 msgid "invalidDateRange"
 msgstr "Virheellinen päivämääräväli"
+
+#~ msgid "Delete"
+#~ msgstr "Poista"
 
 #~ msgid "There are no results!"
 #~ msgstr "Haulla ei löytynyt kommentoitavia resursseja."

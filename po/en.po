@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-01-09 17:48+0200\n"
+"PO-Revision-Date: 2019-02-08 16:02+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -175,6 +175,9 @@ msgstr ""
 msgid "Commentable resources"
 msgstr "Commentable resources {{ value }}."
 
+msgid "Delete comment round"
+msgstr ""
+
 msgid "Start commenting"
 msgstr "Comment"
 
@@ -219,6 +222,11 @@ msgid ""
 "'-' }}"
 msgstr ""
 
+msgid ""
+"{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : "
+"'NOSTATUS' }}"
+msgstr ""
+
 msgid "OWN COMMENTS"
 msgstr ""
 
@@ -234,8 +242,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : "
-"'NOSTATUS' }}"
+"{{ commentThread.value.commentersProposedStatus ? commentThread.value."
+"commentersProposedStatus : 'NOSTATUS' }}"
 msgstr ""
 
 msgid "Resource name"
@@ -519,6 +527,9 @@ msgstr "Comment thread data has invalid comment round id."
 msgid "ERR_MSG_INVALID_SOURCE_DATA"
 msgstr "Invalid source data."
 
+msgid "ERR_MSG_INVALID_ID"
+msgstr "Invalid ID in data."
+
 msgid "NOSTATUS"
 msgstr "No selected status"
 
@@ -595,6 +606,9 @@ msgid "START COMMENT ROUND?"
 msgstr ""
 
 msgid "CLOSE COMMENT ROUND?"
+msgstr ""
+
+msgid "DELETE COMMENT ROUND?"
 msgstr ""
 
 msgid "invalidDate"

@@ -7,6 +7,15 @@ export interface BaseResourceType {
   url: string;
 }
 
+export interface ApiResponseType {
+
+  meta: {
+    message: string,
+    code: number,
+    entityIdentifier?: string
+  };
+}
+
 export interface CommentRoundSimpleType extends BaseResourceType {
 
   user?: UserType;

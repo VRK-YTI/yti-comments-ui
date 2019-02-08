@@ -178,6 +178,18 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
       }, ignoreModalClose);
   }
 
+  deleteCommentRound() {
+
+    this.confirmationModalService.deleteCommentRound()
+      .then(() => {
+        this.dataService.deleteCommentRound(this.commentRound).subscribe(commentRound => {
+          this.router.navigate(['frontpage']);
+        }, error => {
+          this.errorModalService.openSubmitError(error);
+        });
+      }, ignoreModalClose);
+  }
+
   addCommentThreadToCommentRound() {
 
     const titleLabel = this.translateService.instant('Choose source');
@@ -327,7 +339,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     if (commentThreadsFormArray) {
       commentThreadsFormArray.controls.forEach(commentThreadInput => {
         const commentThreadInputValue = commentThreadInput.value;
-        const commentThreadFromFormInput: CommentThreadSimpleType = <CommentThreadSimpleType> {
+        const commentThreadFromFormInput: CommentThreadSimpleType = <CommentThreadSimpleType>{
           id: commentThreadInputValue.id,
           resourceUri: commentThreadInputValue.resourceUri,
           label: commentThreadInputValue.label,
@@ -420,8 +432,8 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
     this.commentThreadForms.controls.forEach(commentThreadInput => {
       const commentThreadInputValue = commentThreadInput.value;
-      const commentType: CommentType = <CommentType> {
-        commentThread: <CommentThreadType> { id: commentThreadInputValue.id },
+      const commentType: CommentType = <CommentType>{
+        commentThread: <CommentThreadType>{ id: commentThreadInputValue.id },
         proposedStatus: commentThreadInputValue.commentersProposedStatus,
         content: commentThreadInputValue.commentersProposedText
       };
@@ -550,6 +562,11 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
     return this.commentRound.status === 'INPROGRESS' && !this.editing &&
       this.authorizationManager.user.email === this.commentRound.user.email;
+  }
+
+  get canDeleteCommentRound(): boolean {
+
+    return this.authorizationManager.user.superuser;
   }
 
   get commentRoundCountTranslateParams() {

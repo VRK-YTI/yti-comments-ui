@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Comment } from '../entity/comment';
 import { CommentRound } from '../entity/commentround';
 import {
+  ApiResponseType,
   CommentRoundType,
   CommentSimpleType,
   CommentThreadSimpleType,
@@ -233,6 +234,13 @@ export class DataService {
         return createdCommentRounds[0];
       }
     }));
+  }
+
+  deleteCommentRound(commentRound: CommentRound): Observable<ApiResponseType> {
+
+    const commentRoundId: string = commentRound.id;
+
+    return this.http.delete<ApiResponseType>(`${commentRoundsApiPath}/${commentRoundId}`);
   }
 
   createCommentRounds(commentRoundList: CommentRoundType[]): Observable<CommentRound[]> {

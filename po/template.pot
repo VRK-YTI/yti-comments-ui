@@ -166,6 +166,9 @@ msgstr ""
 msgid "Commentable resources"
 msgstr ""
 
+msgid "Delete comment round"
+msgstr ""
+
 msgid "Start commenting"
 msgstr ""
 
@@ -210,6 +213,11 @@ msgid ""
 "'-' }}"
 msgstr ""
 
+msgid ""
+"{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus "
+": 'NOSTATUS' }}"
+msgstr ""
+
 msgid "OWN COMMENTS"
 msgstr ""
 
@@ -225,8 +233,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus "
-": 'NOSTATUS' }}"
+"{{ commentThread.value.commentersProposedStatus ? "
+"commentThread.value.commentersProposedStatus : 'NOSTATUS' }}"
 msgstr ""
 
 msgid "Resource name"
@@ -496,6 +504,9 @@ msgstr ""
 msgid "ERR_MSG_INVALID_SOURCE_DATA"
 msgstr ""
 
+msgid "ERR_MSG_INVALID_ID"
+msgstr ""
+
 msgid "NOSTATUS"
 msgstr ""
 
@@ -572,6 +583,9 @@ msgid "START COMMENT ROUND?"
 msgstr ""
 
 msgid "CLOSE COMMENT ROUND?"
+msgstr ""
+
+msgid "DELETE COMMENT ROUND?"
 msgstr ""
 
 msgid "invalidDate"

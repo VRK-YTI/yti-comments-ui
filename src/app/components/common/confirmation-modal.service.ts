@@ -18,4 +18,8 @@ export class CommentsConfirmationModalService {
   closeCommentRound() {
     return this.confirmationModalService.open('CLOSE COMMENT ROUND?', '');
   }
+
+  deleteCommentRound() {
+    return this.confirmationModalService.open('DELETE COMMENT ROUND?', '');
+  }
 }
