@@ -78,7 +78,7 @@ export class FrontpageComponent implements OnInit, OnDestroy {
     this.containerTypeOptions = [null, ...containerTypes].map(containerType => ({
       value: containerType,
       name: () => this.translateService.instant(containerType ? containerType : 'All tools'),
-      idIdentifier: () => status ? status : 'all_selected'
+      idIdentifier: () => containerType ? containerType : 'all_selected'
     }));
 
     combineLatest(this.status$, this.organization$, this.containerType$)
