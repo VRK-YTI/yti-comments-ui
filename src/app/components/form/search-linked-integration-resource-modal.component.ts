@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Injectable, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, combineLatest, concat, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, concat, Observable, of } from 'rxjs';
 import { LanguageService } from '../../services/language.service';
 import { contains } from 'yti-common-ui/utils/array';
 import { ModalService } from '../../services/modal.service';
@@ -154,7 +154,7 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
     this.containerTypeOptions = [null, ...containerTypes].map(containerType => ({
       value: containerType,
       name: () => this.translateService.instant(containerType ? containerType : 'Select tool'),
-      idIdentifier: () => status ? status : 'select_source_container_type'
+      idIdentifier: () => containerType ? containerType : 'select_source_container_type'
     }));
 
     this.statusOptions = [null, ...regularStatuses].map(status => ({
