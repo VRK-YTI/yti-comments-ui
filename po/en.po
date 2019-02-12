@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-02-12 11:45+0200\n"
+"PO-Revision-Date: 2019-02-12 13:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -77,21 +77,6 @@ msgid "Proposed status"
 msgstr ""
 
 msgid "{{ option }}"
-msgstr ""
-
-msgid "Filter results"
-msgstr ""
-
-msgid "Last modification"
-msgstr ""
-
-msgid "Search did not find in any resources for commenting."
-msgstr ""
-
-msgid "Please select tool to get container resources for commenting."
-msgstr ""
-
-msgid "Create new suggestion"
 msgstr ""
 
 msgid "Select resource"
@@ -172,16 +157,19 @@ msgstr ""
 msgid "Commenting subject"
 msgstr ""
 
+msgid "Last modification"
+msgstr ""
+
 msgid "Commentable resources"
 msgstr "Commentable resources {{ value }}."
 
-msgid "Choose action"
+msgid "Send comments"
 msgstr ""
 
 msgid "Start commenting"
 msgstr "Comment"
 
-msgid "Send comments"
+msgid "Choose action"
 msgstr ""
 
 msgid "Start comment round"
@@ -271,6 +259,18 @@ msgid "{{ commentThread.currentStatus }}"
 msgstr ""
 
 msgid "{{ comment.proposedStatus ? comment.proposedStatus : 'NOSTATUS' }}"
+msgstr ""
+
+msgid "Filter results"
+msgstr ""
+
+msgid "Search did not find in any resources for commenting."
+msgstr ""
+
+msgid "Please select tool to get container resources for commenting."
+msgstr ""
+
+msgid "Create new suggestion"
 msgstr ""
 
 msgid "comment round"
@@ -398,6 +398,9 @@ msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE"
 msgstr "Comment round top level resource"
 
 msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
+msgstr "Comment thread integration resource"
+
+msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCEURI"
 msgstr "Comment thread integration resource URI address"
 
 msgid "INFO_TEXT_COMMENTTHREAD_PROPOSEDTEXT"

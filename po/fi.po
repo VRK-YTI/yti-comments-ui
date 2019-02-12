@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-02-12 11:45+0200\n"
+"PO-Revision-Date: 2019-02-12 13:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -78,21 +78,6 @@ msgstr "Ehdotettu tila"
 
 msgid "{{ option }}"
 msgstr ""
-
-msgid "Filter results"
-msgstr "Rajaa hakutuloksia"
-
-msgid "Last modification"
-msgstr "Viimeisin muokkaus"
-
-msgid "Search did not find in any resources for commenting."
-msgstr "Haku ei löytänyt yhtään kommentoitavaa resurssia."
-
-msgid "Please select tool to get container resources for commenting."
-msgstr "Valitse työkalu, josta kommentoitavat resurssit noudetaan."
-
-msgid "Create new suggestion"
-msgstr "Luo uusi ehdotus"
 
 msgid "Select resource"
 msgstr "Valitse tietosisältö"
@@ -172,17 +157,20 @@ msgstr "Ylläpitäjä"
 msgid "Commenting subject"
 msgstr "Kommentoinnin kohde"
 
+msgid "Last modification"
+msgstr "Viimeisin muokkaus"
+
 msgid "Commentable resources"
 msgstr "Kommentoitavia tietosisältöjä {{ value }} kpl"
 
-msgid "Choose action"
-msgstr "Valitse toiminto"
+msgid "Send comments"
+msgstr "Lähetä kommentit"
 
 msgid "Start commenting"
 msgstr "Aloita kommentointi"
 
-msgid "Send comments"
-msgstr "Lähetä kommentit"
+msgid "Choose action"
+msgstr "Valitse toiminto"
 
 msgid "Start comment round"
 msgstr "Aloita kommentointikierros"
@@ -272,6 +260,18 @@ msgstr ""
 
 msgid "{{ comment.proposedStatus ? comment.proposedStatus : 'NOSTATUS' }}"
 msgstr ""
+
+msgid "Filter results"
+msgstr "Rajaa hakutuloksia"
+
+msgid "Search did not find in any resources for commenting."
+msgstr "Haku ei löytänyt yhtään kommentoitavaa resurssia."
+
+msgid "Please select tool to get container resources for commenting."
+msgstr "Valitse työkalu, josta kommentoitavat resurssit noudetaan."
+
+msgid "Create new suggestion"
+msgstr "Luo uusi ehdotus"
 
 msgid "comment round"
 msgstr "kommentointikierros"
@@ -404,6 +404,9 @@ msgstr "Kommentointikierroksen päätason tietosisältö, jota kommentoidaan"
 
 msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
 msgstr "Kommenttiketjun kommentoitava tietosisältö"
+
+msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCEURI"
+msgstr "Kommenttiketjun kommentoitava tietosisällön URI-osoite"
 
 msgid "INFO_TEXT_COMMENTTHREAD_PROPOSEDTEXT"
 msgstr "Ehdotettu toiminto"
