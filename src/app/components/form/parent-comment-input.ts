@@ -87,7 +87,7 @@ export class CommentInputComponent implements ControlValueAccessor {
   }
 
   selectComment() {
-    const titleLabel = this.translateService.instant('Choose comment');
+    const titleLabel = this.translateService.instant('Select comment');
     const searchlabel = this.translateService.instant('Search comment');
 
     this.searchLinkedParentCommentModalService.openWithCommentRoundAndCommentThread(

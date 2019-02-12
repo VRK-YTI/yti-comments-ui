@@ -119,11 +119,8 @@ export class FrontpageComponent implements OnInit, OnDestroy {
 
   createNewCommentRound() {
 
-    const titleLabel = this.translateService.instant('Choose source');
-    const searchlabel = this.translateService.instant('Search term');
-
     this.searchLinkedIntegrationResourceModalService
-      .open(null, null, null, titleLabel, searchlabel, [], true)
+      .open(null, null, null, [], true)
       .then(source => this.storeSourceAndNavigateToCreateCommentRound(source), ignoreModalClose);
   }
 

@@ -24,13 +24,15 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
   @ViewChild('searchInput') searchInput: ElementRef;
 
   @Input() restricts: string[];
-  @Input() titleLabel: string;
-  @Input() searchLabel: string;
   @Input() useUILanguage: boolean;
   @Input() containerUri: string | null;
   @Input() containerType: string | null;
   @Input() restrictResourceUris: string[];
   @Input() openThreads: boolean | null;
+
+  searchLabel: string;
+  instructionText: string;
+  titleLabel: string;
 
   statusOptions: FilterOptions<Status>;
   containerTypeOptions: FilterOptions<string>;
@@ -53,6 +55,7 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
   }
 
   ngOnInit() {
+    this.searchLabel = this.translateService.instant('Search term');
 
     this.containerTypeOptions = [null, ...containerTypes].map(containerType => ({
       value: containerType,
@@ -67,9 +70,13 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
     }));
 
     if (this.containerUri && this.containerType) {
+      this.titleLabel = this.translateService.instant('Select resource');
+      this.instructionText = this.translateService.instant('HELP_TEXT_COMMENTTHREAD_RESOURCE_MODAL_INSTRUCTION');
       this.resources$ = this.dataService.getResources(this.containerType, this.containerUri, this.languageService.language);
       this.filterResources();
     } else {
+      this.titleLabel = this.translateService.instant('Select source');
+      this.instructionText = this.translateService.instant('HELP_TEXT_COMMENTROUND_SOURCE_MODAL_INSTRUCTION');
       this.containerType$.subscribe(selectedContainerType => {
         if (selectedContainerType != null) {
           this.resources$ = this.dataService.getContainers(selectedContainerType, this.languageService.language);
@@ -160,8 +167,6 @@ export class SearchLinkedIntegrationResourceModalService {
   open(containerType: string | null,
        containerUri: string | null,
        openThreads: boolean | null,
-       titleLabel: string,
-       searchLabel: string,
        restrictResourceUris: string[],
        useUILanguage: boolean = false): Promise<IntegrationResource> {
 
@@ -170,8 +175,6 @@ export class SearchLinkedIntegrationResourceModalService {
     instance.containerType = containerType;
     instance.containerUri = containerUri;
     instance.openThreads = openThreads;
-    instance.titleLabel = titleLabel;
-    instance.searchLabel = searchLabel;
     instance.restricts = restrictResourceUris;
     instance.useUILanguage = useUILanguage;
     return modalRef.result;

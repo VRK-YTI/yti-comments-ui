@@ -11,9 +11,10 @@
   <div class="modal-sections">
 
     <div class="pb-2">
+      <p>{{instructionText}}</p>
+
       <div class="filter-info">
         <span class="search-label search-label with-info" translate>Filter results</span>
-        <app-information-symbol [infoText]="'INFO_TEXT_SOURCE_FILTER_RESULTS'"></app-information-symbol>
       </div>
 
       <div class="d-inline-block">
@@ -88,7 +89,7 @@
   </button>
 
   <button *ngIf="openThreads"
-          id="cancel_modal_button"
+          id="create_suggestion_button"
           type="button"
           class="btn btn-secondary-action"
           (click)="createEmptyResource()">

@@ -86,11 +86,8 @@ export class SourceInputComponent implements ControlValueAccessor {
   }
 
   selectSource() {
-    const titleLabel = this.translateService.instant('Choose source');
-    const searchlabel = this.translateService.instant('Search term');
-
     this.searchLinkedIntegrationResourceModalService
-      .open(this.containerType, this.containerUri, null, titleLabel, searchlabel, this.restricts, true)
+      .open(this.containerType, this.containerUri, null, this.restricts, true)
       .then(source => addToControl(this.control, source), ignoreModalClose);
   }
 

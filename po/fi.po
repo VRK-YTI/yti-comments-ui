@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-02-12 13:50+0200\n"
+"PO-Revision-Date: 2019-02-12 15:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -15,12 +15,6 @@ msgstr ""
 
 msgid "Commenting period"
 msgstr "Kommentointiaika"
-
-msgid "Choose source"
-msgstr "Valitse lähde"
-
-msgid "Search term"
-msgstr "Hakutermi"
 
 msgid "{{titleLabel}}"
 msgstr ""
@@ -55,16 +49,13 @@ msgstr ""
 msgid "Add organization"
 msgstr "Valitse organisaatio"
 
-msgid "Choose organization"
+msgid "Select organization"
 msgstr "Valitse organisaatio"
 
 msgid "Search organization"
 msgstr "Etsi organisaatio"
 
 msgid "Select comment"
-msgstr "Valitse kommentti"
-
-msgid "Choose comment"
 msgstr "Valitse kommentti"
 
 msgid "Search comment"
@@ -79,8 +70,27 @@ msgstr "Ehdotettu tila"
 msgid "{{ option }}"
 msgstr ""
 
+msgid "Search term"
+msgstr "Hakutermi"
+
 msgid "Select resource"
 msgstr "Valitse tietosisältö"
+
+msgid "HELP_TEXT_COMMENTTHREAD_RESOURCE_MODAL_INSTRUCTION"
+msgstr ""
+"Hae tietosisältö kommentoitavaksi. Valinta tehdään klikkaamalla "
+"tietosisällön nimeä. Tietosisältöjen tilaa voi rajata hakutermillä ja "
+"erillisellä alasvetovalikolla."
+
+msgid "Select source"
+msgstr "Valitse lähde"
+
+msgid "HELP_TEXT_COMMENTROUND_SOURCE_MODAL_INSTRUCTION"
+msgstr ""
+"Valitse kommentointikierrokselle lähde valitsemalla ensin "
+"Yhteentoimivuusalustan työkalu alasvetovalikosta. Lähde valitaan "
+"klikkaamalla sen nimeä. Lähteitä voi rajata antamalla hakukenttään termin ja "
+"tila-alasvetovalikolla."
 
 msgid "All organizations"
 msgstr "Kaikki organisaatiot"
@@ -451,9 +461,6 @@ msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr ""
 "Hakutuloksia voi rajata organisaatio-, tila- ja työkalukohtaisesti "
 "alasvetovalikoiden avulla"
-
-msgid "INFO_TEXT_SOURCE_FILTER_RESULTS"
-msgstr "Työkalun valinta, josta kommentoitava tietosisältö noudetaan"
 
 msgid "Submit error"
 msgstr "Toiminnossa tapahtui virhe"

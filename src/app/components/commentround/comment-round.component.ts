@@ -192,12 +192,8 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
   addCommentThreadToCommentRound() {
 
-    const titleLabel = this.translateService.instant('Choose source');
-    const searchlabel = this.translateService.instant('Search term');
-
     this.searchLinkedIntegrationResourceModalService
-      .open(this.commentRound.source.containerType, this.commentRound.source.containerUri, this.openThreads,
-        titleLabel, searchlabel, this.restrictedThreads, true)
+      .open(this.commentRound.source.containerType, this.commentRound.source.containerUri, this.openThreads, this.restrictedThreads, true)
       .then(source => this.createNewCommentThreadWithSource(source), ignoreModalClose);
   }
 
@@ -608,6 +604,6 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
   get showMenu(): boolean {
 
-    return this.authorizationManager.user.superuser || this.commentRound.user.email === this.authorizationManager.user.email;
+    return this.authorizationManager.user.superuser || this.commentRound.user.email === this.authorizationManager.user.email;
   }
 }

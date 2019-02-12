@@ -7,12 +7,6 @@ msgstr ""
 msgid "Commenting period"
 msgstr ""
 
-msgid "Choose source"
-msgstr ""
-
-msgid "Search term"
-msgstr ""
-
 msgid "{{titleLabel}}"
 msgstr ""
 
@@ -46,16 +40,13 @@ msgstr ""
 msgid "Add organization"
 msgstr ""
 
-msgid "Choose organization"
+msgid "Select organization"
 msgstr ""
 
 msgid "Search organization"
 msgstr ""
 
 msgid "Select comment"
-msgstr ""
-
-msgid "Choose comment"
 msgstr ""
 
 msgid "Search comment"
@@ -70,7 +61,19 @@ msgstr ""
 msgid "{{ option }}"
 msgstr ""
 
+msgid "Search term"
+msgstr ""
+
 msgid "Select resource"
+msgstr ""
+
+msgid "HELP_TEXT_COMMENTTHREAD_RESOURCE_MODAL_INSTRUCTION"
+msgstr ""
+
+msgid "Select source"
+msgstr ""
+
+msgid "HELP_TEXT_COMMENTROUND_SOURCE_MODAL_INSTRUCTION"
 msgstr ""
 
 msgid "All organizations"
@@ -421,9 +424,6 @@ msgid "INFO_TEXT_INTEGRATION_RESOURCEURI"
 msgstr ""
 
 msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
-msgstr ""
-
-msgid "INFO_TEXT_SOURCE_FILTER_RESULTS"
 msgstr ""
 
 msgid "Submit error"
