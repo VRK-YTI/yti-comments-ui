@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Injectable, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, combineLatest, concat, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, concat, Observable } from 'rxjs';
 import { LanguageService } from '../../services/language.service';
 import { contains } from 'yti-common-ui/utils/array';
 import { ModalService } from '../../services/modal.service';
@@ -16,105 +16,8 @@ import { ConfigurationService } from '../../services/configuration.service';
 
 @Component({
   selector: 'app-search-linked-source-modal',
-  styleUrls: ['./search-linked-integration-resource-modal.component.scss'],
-  template: `
-    <div class="modal-header">
-      <h4 class="modal-title">
-        <a><i id="close_modal_link" class="fa fa-times" (click)="cancel()"></i></a>
-        <span>{{titleLabel}}</span>
-      </h4>
-    </div>
-
-    <div class="modal-body full-height">
-      <div>
-        <div class="filter-info">
-          <span class="search-label search-label with-info" translate>Filter results</span>
-          <app-information-symbol [infoText]="'INFO_TEXT_SOURCE_FILTER_RESULTS'"></app-information-symbol>
-        </div>
-
-        <div class=" d-inline-block mb-3">
-          <div class="input-group input-group-lg input-group-search">
-            <input #searchInput id="search_linked_source_input" type="text" class="form-control"
-                   [placeholder]="searchLabel"
-                   [(ngModel)]="search"/>
-          </div>
-        </div>
-
-        <app-filter-dropdown *ngIf="!containerUri"
-                             class="d-inline-block mb-3"
-                             id="integration_container_type_filter_dropdown"
-                             [filterSubject]="containerType$"
-                             [options]="containerTypeOptions"></app-filter-dropdown>
-
-        <app-filter-dropdown class="d-inline-block mb-3"
-                             id="integration_status_filter_dropdown"
-                             [filterSubject]="status$"
-                             [options]="statusOptions"></app-filter-dropdown>
-      </div>
-
-      <div class="row full-height">
-        <div class="col-12">
-          <div class="content-box">
-            <div class="resource-results">
-              <div *ngIf="hasContainerType">
-                <div *ngIf="!loading">
-                  <div *ngIf="hasContent">
-                    <div *ngFor="let resource of searchResults$ | async; let last = last"
-                         id="{{resource.id + '_resource_link'}}"
-                         class="resource-result">
-                      <div class="content" [class.last]="last">
-                        <app-status class="status" [status]="resource.status"></app-status>
-                        <span class="title" (click)="select(resource)">{{ resource.getDisplayName(languageService, useUILanguage) }}</span>
-                        <div *ngIf="resource.getDescription(languageService, useUILanguage) as descriptionText"
-                             class="description-container">
-                          <app-expandable-text [text]="descriptionText" [rows]="2" [captureClick]="true"></app-expandable-text>
-                        </div>
-                        <div>
-                          <span translate>Last modification</span><span>: {{ resource.modifiedDisplayValue }}</span>
-                        </div>
-                        <div>
-                          <a class="uri"
-                             href="{{configurationService.getUriWithEnv(resource.uri)}}" target="_blank">
-                            {{ configurationService.getUriWithEnv(resource.uri) }}
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div *ngIf="!hasContent">
-                    <span class="infoText" translate>Search did not find in any resources for commenting.</span>
-                  </div>
-                </div>
-                <div *ngIf="loading">
-                  <app-ajax-loading-indicator></app-ajax-loading-indicator>
-                </div>
-              </div>
-              <div *ngIf="!hasContainerType">
-                <span class="infoText" translate>Please select tool to get container resources for commenting.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal-footer">
-      <button id="cancel_modal_button"
-              type="button"
-              class="btn btn-link cancel"
-              (click)="cancel()">
-        <span translate>Cancel</span>
-      </button>
-
-      <button *ngIf="openThreads"
-              id="cancel_modal_button"
-              type="button"
-              class="btn btn-secondary-action"
-              (click)="createEmptyResource()">
-        <span translate>Create new suggestion</span>
-      </button>
-    </div>
-  `
+  templateUrl: './search-linked-integration-resource-modal.component.html',
+  styleUrls: ['./search-linked-integration-resource-modal.component.scss']
 })
 export class SearchLinkedIntegrationResourceModalComponent implements AfterViewInit, OnInit {
 

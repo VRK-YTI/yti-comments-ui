@@ -20,6 +20,17 @@
   }
 }
 
+.modal-sections {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.scrolling-full-height {
+  height: 100%;
+  overflow-y: auto;
+}
+
 app-filter-dropdown {
   padding-left: 10px;
 }
