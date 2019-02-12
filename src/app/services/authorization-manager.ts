@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserService } from 'yti-common-ui/services/user.service';
 import { EditableEntity } from '../entity/editable-entity';
+import { CommentRound } from '../entity/commentround';
 
 @Injectable()
 export class AuthorizationManager {
@@ -47,6 +48,14 @@ export class AuthorizationManager {
     if (editableEntity.allowOrganizationEdit()) {
       return this.user.isInOrganization(editableEntity.getOwningOrganizationIds(),
         ['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR']);
+    }
+    return false;
+  }
+
+  canDeleteCommentRound(commentRound: CommentRound) {
+
+    if (this.user.superuser || commentRound.user.email === this.user.email) {
+      return true;
     }
     return false;
   }

@@ -7,34 +7,18 @@
 
   <div class="main">
     <div>
-      <div class="d-inline-block">
+      <div>
         <h1 class="text-content-wrap">{{ commentRound.label }}</h1>
       </div>
-      <app-commentround-status class="d-inline-block align-top mt-3 ml-5" [status]="commentRound.status"></app-commentround-status>
+      <div class="align-top mt-2 mb-3">
+        <app-commentround-status class="status" [status]="commentRound.status"></app-commentround-status>
+      </div>
     </div>
 
     <div>
-      <div *ngIf="canDeleteCommentRound" class="ml-3 float-right d-inline-block">
-        <button id="delete_commentround_button"
-                type="button"
-                class="btn btn-action"
-                (click)="deleteCommentRound()">
-          <span translate>Delete comment round</span>
-        </button>
-      </div>
-
       <app-editable-buttons *ngIf="currentTab$.value === 'commentround_resources_tab'"
                             [form]="form"
                             [entity]="commentRound"></app-editable-buttons>
-
-      <div *ngIf="canComment && !commenting" class="ml-3 float-right d-inline-block">
-        <button id="start_commenting_button"
-                type="button"
-                class="btn btn-action"
-                (click)="startCommenting()">
-          <span translate>Start commenting</span>
-        </button>
-      </div>
 
       <div *ngIf="canComment && commenting" class="ml-3 float-right d-inline-block">
         <button id="send_comments_button"
@@ -43,6 +27,15 @@
                 [disabled]="commentRoundForm.invalid"
                 (click)="sendCommentsAndAddResources()">
           <span translate>Send comments</span>
+        </button>
+      </div>
+
+      <div *ngIf="canComment && !commenting" class="ml-3 float-right d-inline-block">
+        <button id="start_commenting_button"
+                type="button"
+                class="btn btn-action"
+                (click)="startCommenting()">
+          <span translate>Start commenting</span>
         </button>
       </div>
 
@@ -55,23 +48,33 @@
         </button>
       </div>
 
-      <div *ngIf="canStartCommentRound" class="ml-3 float-right d-inline-block">
-        <button id="start_commentround_button"
-                type="button"
-                class="btn btn-secondary-action"
-                [disabled]="commentRound.commentThreads.length === 0"
-                (click)="startCommentRound()">
-          <span translate>Start comment round</span>
-        </button>
-      </div>
+      <div *ngIf="showMenu" ngbDropdown class="d-inline-block float-right ml-3" placement="bottom-right">
+        <button class="btn btn-action" id="commentRoundDropdown" ngbDropdownToggle translate>Choose action</button>
+        <div ngbDropdownMenu aria-labelledby="commentRoundDropdown">
+          <button *ngIf="canStartCommentRound"
+                  id="start_commentround_button"
+                  type="button"
+                  class="dropdown-item"
+                  (click)="startCommentRound()">
+            <span translate>Start comment round</span>
+          </button>
 
-      <div *ngIf="canEndCommenting" class="ml-3 float-right d-inline-block">
-        <button id="end_commentround_button"
-                type="button"
-                class="btn btn-secondary-action"
-                (click)="closeCommentRound()">
-          <span translate>Close comment round</span>
-        </button>
+          <button *ngIf="canEndCommenting"
+                  id="end_commentround_button"
+                  type="button"
+                  class="dropdown-item"
+                  (click)="closeCommentRound()">
+            <span translate>Close comment round</span>
+          </button>
+
+          <button *ngIf="canDeleteCommentRound"
+                  id="delete_commentround_button"
+                  type="button"
+                  class="dropdown-item"
+                  (click)="deleteCommentRound()">
+            <span translate>Delete comment round</span>
+          </button>
+        </div>
       </div>
 
       <div *ngIf="showExcelExport" class="ml-3 float-right d-inline-block">

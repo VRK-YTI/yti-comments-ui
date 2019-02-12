@@ -554,6 +554,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   get canStartCommentRound(): boolean {
 
     return this.commentRound.status === 'INCOMPLETE' &&
+      this.commentRound.commentThreads.length > 0 &&
       !this.editing &&
       this.authorizationManager.user.email === this.commentRound.user.email;
   }
@@ -566,7 +567,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
   get canDeleteCommentRound(): boolean {
 
-    return this.authorizationManager.user.superuser;
+    return this.authorizationManager.canDeleteCommentRound(this.commentRound);
   }
 
   get commentRoundCountTranslateParams() {
@@ -603,5 +604,10 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   getCommentThreadResourceUri(commentThread: CommentThread): string | null {
 
     return this.configurationService.getUriWithEnv(commentThread.resourceUri);
+  }
+
+  get showMenu(): boolean {
+
+    return this.authorizationManager.user.superuser || this.commentRound.user.email === this.authorizationManager.user.email;
   }
 }

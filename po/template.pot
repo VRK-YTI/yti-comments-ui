@@ -166,7 +166,7 @@ msgstr ""
 msgid "Commentable resources"
 msgstr ""
 
-msgid "Delete comment round"
+msgid "Choose action"
 msgstr ""
 
 msgid "Start commenting"
@@ -179,6 +179,9 @@ msgid "Start comment round"
 msgstr ""
 
 msgid "Close comment round"
+msgstr ""
+
+msgid "Delete comment round"
 msgstr ""
 
 msgid "Export Excel"
