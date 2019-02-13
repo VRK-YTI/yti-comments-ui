@@ -45,7 +45,7 @@ export class IntegrationResource {
 
   getDisplayName(localizer: LanguageService, useUILanguage: boolean = false): string {
 
-    if (localizer.isLocalizableEmpty(this.prefLabel)) {
+    if (!localizer.isLocalizableEmpty(this.prefLabel)) {
       return localizer.translate(this.prefLabel, useUILanguage);
     }
     return this.uri;
