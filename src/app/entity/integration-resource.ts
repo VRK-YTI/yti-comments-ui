@@ -3,6 +3,7 @@ import { Status } from 'yti-common-ui/entities/status';
 import { Localizable, Localizer } from 'yti-common-ui/types/localization';
 import { formatDateTime, formatDisplayDateTime, parseDateTime } from '../utils/date';
 import { Moment } from 'moment';
+import { LanguageService } from '../services/language.service';
 
 export class IntegrationResource {
 
@@ -42,9 +43,9 @@ export class IntegrationResource {
     };
   }
 
-  getDisplayName(localizer: Localizer, useUILanguage: boolean = false): string {
+  getDisplayName(localizer: LanguageService, useUILanguage: boolean = false): string {
 
-    if (this.prefLabel) {
+    if (localizer.isLocalizableEmpty(this.prefLabel)) {
       return localizer.translate(this.prefLabel, useUILanguage);
     }
     return this.uri;
