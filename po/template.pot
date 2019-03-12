@@ -193,7 +193,7 @@ msgstr ""
 msgid "Current status"
 msgstr ""
 
-msgid "Proposers comment"
+msgid "Proposer's comment"
 msgstr ""
 
 msgid "Actions"
@@ -215,10 +215,10 @@ msgstr ""
 msgid "OWN COMMENTS"
 msgstr ""
 
-msgid "{{ commenting ? 'Propose status' : 'Commenters proposal for status' }}"
+msgid "{{ commenting ? 'Propose status' : 'Commenter\\'s proposal for status' }}"
 msgstr ""
 
-msgid "{{ commenting ? 'Your comment' : 'Commenters comment' }}"
+msgid "{{ commenting ? 'Your comment' : 'Commenter\\'s comment' }}"
 msgstr ""
 
 msgid ""
@@ -567,10 +567,10 @@ msgstr ""
 msgid "Select tool"
 msgstr ""
 
-msgid "Commenters proposal for status"
+msgid "Commenter's proposal for status"
 msgstr ""
 
-msgid "Commenters comment"
+msgid "Commenter's comment"
 msgstr ""
 
 msgid "Your comment"
