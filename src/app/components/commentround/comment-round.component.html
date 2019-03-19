@@ -291,7 +291,7 @@
                 </td>
                 <td style="width: 15%">
                   <app-proposed-status-table-dropdown *ngIf="isNewResource(commentThread.value.id) && commentThread.value.resourceUri != null"
-                                                      [restrict]="commentRound.status === 'INPROGRESS' && isNewResource(commentThread.value.id)"
+                                                      [restrict]="commentRound.status !== 'INCOMPLETE' && commentRound.status !== 'AWAIT' && commentRound.status !== 'INPROGRESS' && isNewResource(commentThread.value.id)"
                                                       [formControlName]="'proposedStatus'"></app-proposed-status-table-dropdown>
                   <span *ngIf="(isNewResource(commentThread.value.id) && commentThread.value.resourceUri == null) || !isNewResource(commentThread.value.id)"
                         translate>{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : 'NOSTATUS' }}</span>
