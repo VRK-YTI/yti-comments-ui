@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { regularStatuses, Status } from 'yti-common-ui/entities/status';
 import { IntegrationResourceType } from '../../services/api-schema';
 import { ConfigurationService } from '../../services/configuration.service';
+import { comparingLocalizable, comparingPrimitive } from 'yti-common-ui/utils/comparator';
 
 @Component({
   selector: 'app-search-linked-source-modal',
@@ -115,7 +116,12 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
             const isNotRestricted = !contains(this.restricts, integrationResource.uri);
             const statusMatches = !status || integrationResource.status === status;
             return searchMatches && isNotRestricted && statusMatches;
-          });
+          }).sort(comparingPrimitive<IntegrationResource>(
+            integrationResource => this.languageService.isLocalizableEmpty(integrationResource.prefLabel))
+            .andThen(comparingPrimitive<IntegrationResource>(integrationResource =>
+              this.languageService.isLocalizableEmpty(integrationResource.prefLabel) ? integrationResource.uri.toLowerCase() : null))
+            .andThen(comparingLocalizable<IntegrationResource>(this.languageService,
+              integrationResource => integrationResource.prefLabel ? integrationResource.prefLabel : {})));
         })
       ).subscribe(results => {
       this.searchResults$.next(results);
