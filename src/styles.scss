@@ -127,6 +127,7 @@ div.localized {
   div.localization {
 
     float: left;
+    padding: 1% 0;
     width: calc(100% - #{$language-width});
     min-height: $language-height;
     padding-left: 10px;
