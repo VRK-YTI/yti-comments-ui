@@ -112,7 +112,9 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
         map(([integrationResources, status, search]) => {
           return integrationResources.filter(integrationResource => {
             const label = this.languageService.translate(integrationResource.prefLabel, true);
-            const searchMatches = !search || label.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+            const searchMatches = !search ||
+              label.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+              integrationResource.uri.toLowerCase().indexOf(search.toLowerCase()) !== -1;
             const isNotRestricted = !contains(this.restricts, integrationResource.uri);
             const statusMatches = !status || integrationResource.status === status;
             return searchMatches && isNotRestricted && statusMatches;
