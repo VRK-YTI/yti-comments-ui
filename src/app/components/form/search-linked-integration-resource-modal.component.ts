@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Injectable, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, combineLatest, concat, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, concat } from 'rxjs';
 import { LanguageService } from '../../services/language.service';
 import { contains } from 'yti-common-ui/utils/array';
 import { ModalService } from '../../services/modal.service';
@@ -38,7 +38,6 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
   statusOptions: FilterOptions<Status>;
   containerTypeOptions: FilterOptions<string>;
 
-  resources$: Observable<IntegrationResource[]>;
   resources: IntegrationResource[];
 
   status$ = new BehaviorSubject<Status | null>(null);
@@ -73,15 +72,19 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
     if (this.containerUri && this.containerType) {
       this.titleLabel = this.translateService.instant('Select resource');
       this.instructionText = this.translateService.instant('HELP_TEXT_COMMENTTHREAD_RESOURCE_MODAL_INSTRUCTION');
-      this.resources$ = this.dataService.getResources(this.containerType, this.containerUri, this.languageService.language);
-      this.filterResources();
+      this.dataService.getResources(this.containerType, this.containerUri, this.languageService.language).subscribe(resources => {
+        this.resources = resources;
+        this.filterResources();
+      });
     } else {
       this.titleLabel = this.translateService.instant('Select source');
       this.instructionText = this.translateService.instant('HELP_TEXT_COMMENTROUND_SOURCE_MODAL_INSTRUCTION');
       this.containerType$.subscribe(selectedContainerType => {
         if (selectedContainerType != null) {
-          this.resources$ = this.dataService.getContainers(selectedContainerType, this.languageService.language);
-          this.filterResources();
+          this.dataService.getContainers(selectedContainerType, this.languageService.language).subscribe(resources => {
+            this.resources = resources;
+            this.filterResources();
+          });
         }
       });
     }
@@ -106,15 +109,15 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
     const initialSearch = this.search$.pipe(take(1));
     const debouncedSearch = this.search$.pipe(skip(1), debounceTime(500));
 
-    combineLatest(this.resources$, this.status$, concat(initialSearch, debouncedSearch))
+    combineLatest(this.status$, concat(initialSearch, debouncedSearch))
       .pipe(
         tap(() => this.loading = false),
-        map(([integrationResources, status, search]) => {
-          return integrationResources.filter(integrationResource => {
+        map(([status, search]) => {
+          return this.resources.filter(integrationResource => {
             const label = this.languageService.translate(integrationResource.prefLabel, true);
             const searchMatches = !search ||
               label.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
-              integrationResource.uri.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+              (integrationResource.uri !== undefined && integrationResource.uri.toLowerCase().indexOf(search.toLowerCase()) !== -1);
             const isNotRestricted = !contains(this.restricts, integrationResource.uri);
             const statusMatches = !status || integrationResource.status === status;
             return searchMatches && isNotRestricted && statusMatches;
