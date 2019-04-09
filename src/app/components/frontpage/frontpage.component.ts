@@ -87,7 +87,7 @@ export class FrontpageComponent implements OnInit, OnDestroy {
         flatMap(([status, organization, containerType]) => {
           const organizationId = organization ? organization.id : null;
 
-          return this.dataService.getCommentRounds(organizationId, status, containerType, true);
+          return this.dataService.getCommentRounds(organizationId, status, containerType, true, true);
         }),
         tap(() => this.searchInProgress = false)
       )
