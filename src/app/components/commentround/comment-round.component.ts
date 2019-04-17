@@ -223,9 +223,9 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     this.commentThreadForms.push(commentThreadFormGroup);
   }
 
-  canModifyCommentProposedStatus(commentThread: CommentThread): boolean {
+  canModifyCommentProposedStatus(): boolean {
 
-    return this.authorizationManager.canCreateComment(commentThread) && this.commentRound.status === 'INPROGRESS';
+    return this.authorizationManager.canCreateComment(this.commentRound) && this.commentRound.status === 'INPROGRESS';
   }
 
   canModifyComment(commentThreadId: string): boolean {

@@ -405,10 +405,10 @@
                   <span>{{ commentThread.value.proposedText ? commentThread.value.proposedText : '-'}}</span>
                 </td>
                 <td style="width: 20%">
-                  <app-proposed-status-table-dropdown *ngIf="canModifyCommentProposedStatus(commentThread.value.id)"
+                  <app-proposed-status-table-dropdown *ngIf="canModifyCommentProposedStatus()"
                                                       [isEditing]="commenting"
                                                       [formControlName]="'commentersProposedStatus'"></app-proposed-status-table-dropdown>
-                  <span *ngIf="!canModifyCommentProposedStatus(commentThread.value.id)"
+                  <span *ngIf="!canModifyCommentProposedStatus()"
                         translate>{{ commentThread.value.commentersProposedStatus ? commentThread.value.commentersProposedStatus : commentThread.value.proposedSatus }}</span>
                 </td>
                 <td style="width: 20%">
