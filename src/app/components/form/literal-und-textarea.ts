@@ -1,7 +1,6 @@
 import { Component, Input, Optional, Self } from '@angular/core';
 import { EditableService } from '../../services/editable.service';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { LanguageService } from '../../services/language.service';
 import { Localizable } from 'yti-common-ui/types/localization';
 
 @Component({
@@ -18,7 +17,7 @@ import { Localizable } from 'yti-common-ui/types/localization';
           <textarea [id]="id"
                     autosize
                     class="form-control"
-                    [ngClass]="{ 'is-invalid': !valid && !pending }"
+                    [ngClass]="{ 'is-invalid': !valid }"
                     [ngModel]="value[contentLanguage]"
                     (ngModelChange)="onChange($event)"></textarea>
           <app-error-messages [id]="id + '_error_messages'" [control]="parentControl"></app-error-messages>
@@ -45,8 +44,7 @@ export class LocalizableUndefinedTextareaComponent implements ControlValueAccess
   private propagateTouched: (fn: any) => void = () => {};
 
   constructor(@Self() @Optional() public parentControl: NgControl,
-              private editableService: EditableService,
-              private languageService: LanguageService) {
+              private editableService: EditableService) {
 
     if (parentControl) {
       parentControl.valueAccessor = this;

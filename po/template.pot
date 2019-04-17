@@ -7,7 +7,10 @@ msgstr ""
 msgid "Commenting period"
 msgstr ""
 
-msgid "{{titleLabel}}"
+msgid "Reply"
+msgstr ""
+
+msgid "Send"
 msgstr ""
 
 msgid "Cancel"
@@ -85,36 +88,6 @@ msgstr ""
 msgid "Round name"
 msgstr ""
 
-msgid "Comment thread name"
-msgstr ""
-
-msgid "Comment thread resource URI"
-msgstr ""
-
-msgid "Comment"
-msgstr ""
-
-msgid "Parent comment"
-msgstr ""
-
-msgid "Create comment"
-msgstr ""
-
-msgid "Commenter"
-msgstr ""
-
-msgid "Thread resource name"
-msgstr ""
-
-msgid "Thread resource URI"
-msgstr ""
-
-msgid "Created"
-msgstr ""
-
-msgid "Add comment"
-msgstr ""
-
 msgid "Tool"
 msgstr ""
 
@@ -149,6 +122,9 @@ msgid "Editor"
 msgstr ""
 
 msgid "Commenting subject"
+msgstr ""
+
+msgid "Created"
 msgstr ""
 
 msgid "Last modification"
@@ -231,30 +207,6 @@ msgid ""
 "commentThread.value.commentersProposedStatus : 'NOSTATUS' }}"
 msgstr ""
 
-msgid "Resource name"
-msgstr ""
-
-msgid "Resource description"
-msgstr ""
-
-msgid "Resource URI"
-msgstr ""
-
-msgid "Proposed action"
-msgstr ""
-
-msgid "Create comment thread"
-msgstr ""
-
-msgid "There are no comments yet."
-msgstr ""
-
-msgid "{{ commentThread.currentStatus }}"
-msgstr ""
-
-msgid "{{ comment.proposedStatus ? comment.proposedStatus : 'NOSTATUS' }}"
-msgstr ""
-
 msgid "Filter results"
 msgstr ""
 
@@ -319,9 +271,6 @@ msgid "Unknown organization"
 msgstr ""
 
 msgid "Waiting for approval"
-msgstr ""
-
-msgid "Send"
 msgstr ""
 
 msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
@@ -426,7 +375,7 @@ msgstr ""
 msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr ""
 
-msgid "Submit error"
+msgid "ERR_MSG_USER_PROPOSED_STATUS_REQUIRED"
 msgstr ""
 
 msgid "Front page"
@@ -489,6 +438,9 @@ msgstr ""
 msgid "ERR_MSG_USER_CANNOT_MODIFY_EXISTING_COMMENTTHREAD"
 msgstr ""
 
+msgid "ERR_MSG_USER_CANNOT_CREATE_EMPTY_COMMENT"
+msgstr ""
+
 msgid "ERR_MSG_USER_INVALID_PARENTCOMMENT"
 msgstr ""
 
@@ -514,6 +466,9 @@ msgid "ERR_MSG_INVALID_ID"
 msgstr ""
 
 msgid "NOSTATUS"
+msgstr ""
+
+msgid "Submit error"
 msgstr ""
 
 msgid "Unexpected error"
@@ -564,6 +519,9 @@ msgstr ""
 msgid "Comment thread"
 msgstr ""
 
+msgid "Comment"
+msgstr ""
+
 msgid "Select tool"
 msgstr ""
 
@@ -580,6 +538,12 @@ msgid "Propose status"
 msgstr ""
 
 msgid "Create comment round"
+msgstr ""
+
+msgid "Create comment thread"
+msgstr ""
+
+msgid "Create comment"
 msgstr ""
 
 msgid "-"

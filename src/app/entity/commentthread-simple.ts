@@ -18,6 +18,7 @@ export class CommentThreadSimple {
   user: User;
   created: Moment | null = null;
   results: CommentThreadResult[];
+  commentCount: number;
 
   constructor(data: CommentThreadSimpleType) {
 
@@ -50,6 +51,7 @@ export class CommentThreadSimple {
     if (data.results) {
       this.results = (data.results || []).map(result => new CommentThreadResult(result));
     }
+    this.commentCount = data.commentCount;
   }
 
   get createdDisplayValue(): string {
@@ -70,7 +72,8 @@ export class CommentThreadSimple {
       proposedText: this.proposedText,
       currentStatus: this.currentStatus,
       proposedStatus: this.proposedStatus,
-      results: this.results.map(result => result.serialize())
+      results: this.results.map(result => result.serialize()),
+      commentCount: this.commentCount
     };
   }
 

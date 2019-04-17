@@ -34,3 +34,22 @@ table {
   max-width: 200px;
   display: inline-block;
 }
+
+.comments {
+  padding: 10px 15px 10px 40px;
+  border: 1px;
+  border-style: solid;
+  border-color: $gray-400;
+}
+
+.comment-icons {
+
+  a {
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
+
+.icon-blue {
+  color: $blue;
+}

@@ -1,3 +1,5 @@
+@import '../../../../node_modules/yti-common-ui/theme/variables';
+
 .name {
   color: black;
   font-weight: bold;
@@ -5,31 +7,44 @@
 
 .created {
   padding-left: 10px;
-  color: gray;
+  color: $gray-600;
 }
 
 .proposedStatus {
-  color: gray;
+  color: $gray-600;
 }
 
 .content {
+  font-size: 16px;
   color: black;
 }
 
 ul {
-  padding-left: 15px;
+  padding-left: 10px;
 
   li {
     list-style: none;
 
     i {
       cursor: pointer;
-      margin-left: -15px;
+      margin-left: -10px;
       font-size: 14px;
     }
   }
 
   li.child-comment {
-    padding-left: 15px;
+    padding-left: 10px;
   }
+}
+
+.input {
+  padding: 0 20px 0 5px;
+}
+
+.comment {
+  padding: 10px;
+}
+
+.actions {
+  padding: 10px;
 }

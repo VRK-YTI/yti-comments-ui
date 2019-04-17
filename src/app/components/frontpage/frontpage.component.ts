@@ -9,7 +9,7 @@ import { Organization } from '../../entity/organization';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
 import { TranslateService } from '@ngx-translate/core';
 import { allCommentRoundStatuses, CommentRoundStatus } from '../../entity/comment-round-status';
-import { comparingLocalizable } from 'yti-common-ui/utils/comparator';
+import { comparingLocalizable, comparingPrimitive } from 'yti-common-ui/utils/comparator';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { LanguageService } from '../../services/language.service';
 import { Option } from 'yti-common-ui/components/dropdown.component';
@@ -65,8 +65,8 @@ export class FrontpageComponent implements OnInit, OnDestroy {
           idIdentifier: () => organization ? labelNameToResourceIdIdentifier(this.languageService.translate(organization.prefLabel, true))
             : 'all_selected'
         }));
-        this.organizationOptions.sort(comparingLocalizable<Option<Organization>>(this.languageService, c =>
-          c.value ? c.value.prefLabel : {}));
+        this.organizationOptions.sort(comparingLocalizable<Option<Organization>>(this.languageService, organization =>
+          organization.value ? organization.value.prefLabel : {}));
       }));
 
     this.statusOptions = [null, ...allCommentRoundStatuses].map(status => ({
@@ -91,7 +91,11 @@ export class FrontpageComponent implements OnInit, OnDestroy {
         }),
         tap(() => this.searchInProgress = false)
       )
-      .subscribe(results => this.commentRounds = results);
+      .subscribe(results => {
+        this.commentRounds = results;
+        this.commentRounds.sort(comparingPrimitive<CommentRound>(commentRound =>
+          commentRound.label.toLowerCase()));
+      });
   }
 
   get loading(): boolean {

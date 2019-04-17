@@ -18,7 +18,7 @@ import { Localizable } from 'yti-common-ui/types/localization';
           <input [id]="id"
                  type="text"
                  class="form-control"
-                 [ngClass]="{ 'is-invalid': !valid && !pending }"
+                 [ngClass]="{ 'is-invalid': !valid }"
                  [ngModel]="value[contentLanguage]"
                  (ngModelChange)="onChange($event)"/>
           <app-error-messages [id]="id + '_error_messages'" [control]="parentControl"></app-error-messages>

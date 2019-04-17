@@ -314,7 +314,7 @@ export class DataService {
 
   createCommentsToCommentRound(commentRoundId: string, commentsList: CommentType[]): Observable<CommentSimple[]> {
 
-    return this.http.post<WithResults<CommentType>>(
+    return this.http.post<WithResults<CommentSimpleType>>(
       `${commentRoundsApiPath}/${commentRoundId}/${comments}`, commentsList)
       .pipe(map(res => res.results.map(data => new CommentSimple(data))));
   }

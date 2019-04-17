@@ -21,6 +21,7 @@ export class CommentThread extends AbstractResource implements EditableEntity {
   created: Moment | null = null;
   commentRound: CommentRound;
   results: CommentThreadResult[];
+  commentCount: number;
 
   constructor(data: CommentThreadType) {
 
@@ -31,6 +32,7 @@ export class CommentThread extends AbstractResource implements EditableEntity {
     this.proposedText = data.proposedText;
     this.currentStatus = data.currentStatus;
     this.proposedStatus = data.proposedStatus;
+    this.commentCount = data.commentCount;
     if (data.user) {
       this.user = new User(data.user);
     }
@@ -86,7 +88,8 @@ export class CommentThread extends AbstractResource implements EditableEntity {
       currentStatus: this.currentStatus,
       proposedStatus: this.proposedStatus,
       commentRound: this.commentRound.serialize(),
-      results: this.results.map(result => result.serialize())
+      results: this.results.map(result => result.serialize()),
+      commentCount: this.commentCount
     };
   }
 

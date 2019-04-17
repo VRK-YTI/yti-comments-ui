@@ -16,7 +16,6 @@ import { AuthorizationManager } from '../../services/authorization-manager';
 import { CommentThreadSimple } from '../../entity/commentthread-simple';
 import { CommentsConfirmationModalService } from '../common/confirmation-modal.service';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
-import { TranslateService } from '@ngx-translate/core';
 import { SearchLinkedIntegrationResourceModalService } from '../form/search-linked-integration-resource-modal.component';
 import { CommentThreadSimpleType, CommentThreadType, CommentType } from '../../services/api-schema';
 import { IntegrationResource } from '../../entity/integration-resource';
@@ -28,6 +27,8 @@ import { NgbTabChangeEvent, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { hasLocalization } from 'yti-common-ui/utils/localization';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { CommentRoundErrorModalService } from '../common/error-modal.service';
+import { CommentSimple } from '../../entity/comment-simple';
+import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
 
 function addToControl<T>(control: FormControl, itemToAdd: T) {
 
@@ -52,6 +53,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   @ViewChild('tabSet') tabSet: NgbTabset;
 
   commentRound: CommentRound;
+  commentRoundId: string | undefined = undefined;
   myComments: Comment[];
   commenting$ = new BehaviorSubject<boolean>(false);
   newIds: string[] = [];
@@ -59,6 +61,9 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   currentTab$ = new BehaviorSubject<string>('');
 
   cancelSubscription: Subscription;
+
+  showCommentsId: number | undefined = undefined;
+  activeThreadComments: CommentSimple[];
 
   commentRoundForm = new FormGroup({
     label: new FormControl(''),
@@ -81,7 +86,6 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
               private confirmationModalService: CommentsConfirmationModalService,
               private errorModalService: CommentRoundErrorModalService,
               private searchLinkedIntegrationResourceModalService: SearchLinkedIntegrationResourceModalService,
-              private translateService: TranslateService,
               public languageService: LanguageService,
               public configurationService: ConfigurationService) {
 
@@ -99,6 +103,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     this.newIds = [];
 
     const commentRoundId = this.route.snapshot.params.commentRoundId;
+    this.commentRoundId = commentRoundId;
 
     if (!commentRoundId) {
       throw new Error(`Illegal route, commentRound: '${commentRoundId}'`);
@@ -208,7 +213,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
       label: new FormControl(integrationResource.prefLabel),
       description: new FormControl(integrationResource.description),
       currentStatus: new FormControl(integrationResource.status),
-      proposedStatus: new FormControl(integrationResource.uri != null ? 'NOSTATUS' : 'SUGGESTION'),
+      proposedStatus: new FormControl(integrationResource.uri != null ? integrationResource.status : 'SUGGESTION'),
       proposedText: new FormControl(''),
       commentersProposedStatus: new FormControl('NOSTATUS'),
       commentersProposedText: new FormControl(''),
@@ -216,6 +221,11 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     });
 
     this.commentThreadForms.push(commentThreadFormGroup);
+  }
+
+  canModifyCommentProposedStatus(commentThread: CommentThread): boolean {
+
+    return this.authorizationManager.canCreateComment(commentThread) && this.commentRound.status === 'INPROGRESS';
   }
 
   canModifyComment(commentThreadId: string): boolean {
@@ -281,9 +291,10 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
         currentStatus: new FormControl(commentThread.currentStatus),
         proposedStatus: new FormControl(commentThread.proposedStatus),
         proposedText: new FormControl(commentThread.proposedText),
-        commentersProposedStatus: new FormControl(this.getMyProposedStatusForCommentThread(commentThread.id)),
+        commentersProposedStatus: new FormControl(this.getMyProposedStatusForCommentThread(commentThread)),
         commentersProposedText: new FormControl(this.getMyCommentContentForCommentThread(commentThread.id)),
-        results: new FormControl(commentThread.results)
+        results: new FormControl(commentThread.results),
+        commentCount: new FormControl(commentThread.commentCount)
       });
       this.commentThreadForms.push(commentThreadFormGroup);
     });
@@ -315,12 +326,12 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     return content;
   }
 
-  getMyProposedStatusForCommentThread(commentThreadId: string): string {
+  getMyProposedStatusForCommentThread(commentThread: CommentThreadSimple): string {
 
-    let proposedStatus = 'NOSTATUS';
+    let proposedStatus = commentThread.proposedStatus;
     if (this.myComments) {
       this.myComments.forEach(comment => {
-        if (comment.commentThread.id === commentThreadId && comment.proposedStatus != null) {
+        if (comment.commentThread.id === commentThread.id && comment.proposedStatus != null) {
           proposedStatus = comment.proposedStatus;
         }
       });
@@ -345,7 +356,8 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
           proposedText: commentThreadInputValue.proposedText,
           commentersProposedStatus: commentThreadInputValue.commentersProposedStatus,
           commentersProposedText: commentThreadInputValue.commentersProposedText,
-          results: commentThreadInputValue.results
+          results: commentThreadInputValue.results,
+          commentCount: commentThreadInputValue.commentCount
         };
         const commentThread: CommentThreadSimple = new CommentThreadSimple(commentThreadFromFormInput);
         commentThreads.push(commentThread);
@@ -482,15 +494,18 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     return this.commentRound.source.containerType;
   }
 
-  viewCommentThread(commentThread: CommentThread) {
+  toggleShowThreadComments(commentRoundId: string, commentThreadId: string, index: number) {
 
-    this.router.navigate([
-      'commentthread',
-      {
-        commentRoundId: this.commentRound.id,
-        commentThreadId: commentThread.id
-      }
-    ]);
+    if (index === this.showCommentsId) {
+      this.showCommentsId = undefined;
+      this.activeThreadComments = [];
+    } else {
+      this.dataService.getCommentRoundCommentThreadComments(commentRoundId, commentThreadId).subscribe(comments => {
+        this.showCommentsId = index;
+        this.sortCommentsByCreated(comments);
+        this.activeThreadComments = comments;
+      });
+    }
   }
 
   onTabChange(event: NgbTabChangeEvent) {
@@ -523,6 +538,13 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   get canComment(): boolean {
 
     return this.commentsTabActive &&
+      this.authorizationManager.canCreateComment(this.commentRound) &&
+      this.commentRound.status === 'INPROGRESS';
+  }
+
+  get canInlineComment(): boolean {
+
+    return this.resourcesTabActive &&
       this.authorizationManager.canCreateComment(this.commentRound) &&
       this.commentRound.status === 'INPROGRESS';
   }
@@ -594,6 +616,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   }
 
   hasLocalization(localizable: Localizable) {
+
     return hasLocalization(localizable);
   }
 
@@ -606,4 +629,26 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
     return this.authorizationManager.user.superuser || this.commentRound.user.email === this.authorizationManager.user.email;
   }
+
+  filterTopLevelComments(comments: CommentSimple[]): CommentSimple[] {
+
+    return comments.filter(comment => comment.parentComment == null);
+  }
+
+  refreshComments(commentThreadId: string) {
+
+    this.dataService.getCommentRoundCommentThreadComments(this.commentRound.id, commentThreadId).subscribe(comments => {
+      this.sortCommentsByCreated(comments);
+      this.activeThreadComments = comments;
+    }, error => {
+      this.errorModalService.openSubmitError(error);
+    });
+  }
+
+  sortCommentsByCreated(comments: CommentSimple[]) {
+
+    comments.sort(
+      comparingPrimitive<CommentSimple>(comment => comment.created ? comment.created.toString() : undefined));
+  }
+
 }

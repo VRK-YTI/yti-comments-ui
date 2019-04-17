@@ -24,7 +24,9 @@ export class Comment extends AbstractResource implements EditableEntity {
       this.user = new User(data.user);
     }
     this.content = data.content;
-    this.proposedStatus = data.proposedStatus;
+    if (data.proposedStatus) {
+      this.proposedStatus = data.proposedStatus;
+    }
     if (data.created) {
       this.created = parseDateTime(data.created);
     }

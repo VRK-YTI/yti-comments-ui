@@ -15,10 +15,9 @@ export type Placement = NgbPlacement;
   }],
   template: `
     <div *ngIf="editing" ngbDropdown [placement]="placement">
-      <button [id]="'selected_' + id" class="btn btn-dropdown" ngbDropdownToggle>
+      <button [id]="'selected_proposed_status_' + id" class="btn btn-dropdown" ngbDropdownToggle>
         <span translate>{{ selectedStatus }}</span>
       </button>
-
       <div ngbDropdownMenu>
         <button *ngFor="let option of options"
                 [id]="option + '_' + id"
@@ -60,23 +59,28 @@ export class ProposedStatusTableDropdownComponent implements ControlValueAccesso
   }
 
   isSelected(option: ProposedStatus) {
+
     return this.selectedStatus === option;
   }
 
   select(option: ProposedStatus) {
+
     this.selectedStatus = option;
     this.propagateChange(option);
   }
 
   writeValue(obj: any): void {
+
     this.selectedStatus = obj;
   }
 
   registerOnChange(fn: any): void {
+
     this.propagateChange = fn;
   }
 
   registerOnTouched(fn: any): void {
+
     this.propagateTouched = fn;
   }
 }

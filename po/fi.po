@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-03-12 12:17+0200\n"
+"PO-Revision-Date: 2019-04-16 12:02+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -16,8 +16,11 @@ msgstr ""
 msgid "Commenting period"
 msgstr "Kommentointiaika"
 
-msgid "{{titleLabel}}"
-msgstr ""
+msgid "Reply"
+msgstr "Vastaa"
+
+msgid "Send"
+msgstr "Lähetä"
 
 msgid "Cancel"
 msgstr "Peruuta"
@@ -101,36 +104,6 @@ msgstr "Kommentit"
 msgid "Round name"
 msgstr "Kierroksen nimi"
 
-msgid "Comment thread name"
-msgstr "Kommentointiketjun nimi"
-
-msgid "Comment thread resource URI"
-msgstr "Kommentointiketju tietosisällön URI"
-
-msgid "Comment"
-msgstr "Kommentti"
-
-msgid "Parent comment"
-msgstr "Ylätason kommentti"
-
-msgid "Create comment"
-msgstr "Luo kommentti"
-
-msgid "Commenter"
-msgstr "Kommentoija"
-
-msgid "Thread resource name"
-msgstr "Kommentointiketju tietosisällön nimi"
-
-msgid "Thread resource URI"
-msgstr "Kommentointiketju tietosisällön URI"
-
-msgid "Created"
-msgstr "Luontiajankohta"
-
-msgid "Add comment"
-msgstr "Luo kommentti"
-
 msgid "Tool"
 msgstr "Työkalu"
 
@@ -166,6 +139,9 @@ msgstr "Ylläpitäjä"
 
 msgid "Commenting subject"
 msgstr "Kommentoinnin kohde"
+
+msgid "Created"
+msgstr "Luontiajankohta"
 
 msgid "Last modification"
 msgstr "Viimeisin muokkaus"
@@ -248,30 +224,6 @@ msgid ""
 "commentersProposedStatus : 'NOSTATUS' }}"
 msgstr ""
 
-msgid "Resource name"
-msgstr "Tietosisällön nimi"
-
-msgid "Resource description"
-msgstr "Tietosisällön kuvaus"
-
-msgid "Resource URI"
-msgstr "Tietosisällön URI"
-
-msgid "Proposed action"
-msgstr "Ehdotettu toiminto"
-
-msgid "Create comment thread"
-msgstr "Luo kommenttiketju"
-
-msgid "There are no comments yet."
-msgstr "Kommentteja ei vielä ole."
-
-msgid "{{ commentThread.currentStatus }}"
-msgstr ""
-
-msgid "{{ comment.proposedStatus ? comment.proposedStatus : 'NOSTATUS' }}"
-msgstr ""
-
 msgid "Filter results"
 msgstr "Rajaa hakutuloksia"
 
@@ -342,9 +294,6 @@ msgstr "Tuntematon organisaatio"
 
 msgid "Waiting for approval"
 msgstr "Odottaa hyväksymistä"
-
-msgid "Send"
-msgstr "Lähetä"
 
 msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
 msgstr "Kommenttiketjun kuvaus"
@@ -463,8 +412,8 @@ msgstr ""
 "Hakutuloksia voi rajata organisaatio-, tila- ja työkalukohtaisesti "
 "alasvetovalikoiden avulla"
 
-msgid "Submit error"
-msgstr "Toiminnossa tapahtui virhe"
+msgid "ERR_MSG_USER_PROPOSED_STATUS_REQUIRED"
+msgstr "Tila-ehdotus on vaadittu päätason kommenteille."
 
 msgid "Front page"
 msgstr "Etusivu"
@@ -526,6 +475,9 @@ msgstr "Olemassaolevaa kommenttia ei voi muokata."
 msgid "ERR_MSG_USER_CANNOT_MODIFY_EXISTING_COMMENTTHREAD"
 msgstr "Olemassaolevaa kommenttiketjua ei voi muokata."
 
+msgid "ERR_MSG_USER_CANNOT_CREATE_EMPTY_COMMENT"
+msgstr "Tyhjää kommenttia ei voi luoda."
+
 msgid "ERR_MSG_USER_INVALID_PARENTCOMMENT"
 msgstr "Kommentti on liitetty epäsopivaan päätason kommenttiin."
 
@@ -552,6 +504,9 @@ msgstr "Viallinen ID datassa."
 
 msgid "NOSTATUS"
 msgstr "Ei valittua tilaa"
+
+msgid "Submit error"
+msgstr "Toiminnossa tapahtui virhe"
 
 msgid "Unexpected error"
 msgstr "Tapahtui odottamaton virhe"
@@ -601,6 +556,9 @@ msgstr "kommentointikierros"
 msgid "Comment thread"
 msgstr "Kommentointiketju"
 
+msgid "Comment"
+msgstr "Kommentti"
+
 msgid "Select tool"
 msgstr "Valitse työkalu"
 
@@ -619,6 +577,12 @@ msgstr "Ehdota tilaa"
 msgid "Create comment round"
 msgstr "Luo kommentointikierros"
 
+msgid "Create comment thread"
+msgstr "Luo kommenttiketju"
+
+msgid "Create comment"
+msgstr "Luo kommentti"
+
 msgid "-"
 msgstr "-"
 
@@ -636,3 +600,39 @@ msgstr "Virheellinen päivämäärä"
 
 msgid "invalidDateRange"
 msgstr "Virheellinen päivämääräväli"
+
+#~ msgid "Comment thread name"
+#~ msgstr "Kommentointiketjun nimi"
+
+#~ msgid "Comment thread resource URI"
+#~ msgstr "Kommentointiketju tietosisällön URI"
+
+#~ msgid "Parent comment"
+#~ msgstr "Ylätason kommentti"
+
+#~ msgid "Commenter"
+#~ msgstr "Kommentoija"
+
+#~ msgid "Thread resource name"
+#~ msgstr "Kommentointiketju tietosisällön nimi"
+
+#~ msgid "Thread resource URI"
+#~ msgstr "Kommentointiketju tietosisällön URI"
+
+#~ msgid "Add comment"
+#~ msgstr "Luo kommentti"
+
+#~ msgid "Resource name"
+#~ msgstr "Tietosisällön nimi"
+
+#~ msgid "Resource description"
+#~ msgstr "Tietosisällön kuvaus"
+
+#~ msgid "Resource URI"
+#~ msgstr "Tietosisällön URI"
+
+#~ msgid "Proposed action"
+#~ msgstr "Ehdotettu toiminto"
+
+#~ msgid "There are no comments yet."
+#~ msgstr "Kommentteja ei vielä ole."

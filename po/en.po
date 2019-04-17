@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-03-12 12:07+0200\n"
+"PO-Revision-Date: 2019-04-16 12:02+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -16,7 +16,10 @@ msgstr ""
 msgid "Commenting period"
 msgstr ""
 
-msgid "{{titleLabel}}"
+msgid "Reply"
+msgstr ""
+
+msgid "Send"
 msgstr ""
 
 msgid "Cancel"
@@ -101,36 +104,6 @@ msgstr ""
 msgid "Round name"
 msgstr ""
 
-msgid "Comment thread name"
-msgstr ""
-
-msgid "Comment thread resource URI"
-msgstr ""
-
-msgid "Comment"
-msgstr ""
-
-msgid "Parent comment"
-msgstr ""
-
-msgid "Create comment"
-msgstr ""
-
-msgid "Commenter"
-msgstr ""
-
-msgid "Thread resource name"
-msgstr ""
-
-msgid "Thread resource URI"
-msgstr ""
-
-msgid "Created"
-msgstr ""
-
-msgid "Add comment"
-msgstr ""
-
 msgid "Tool"
 msgstr ""
 
@@ -165,6 +138,9 @@ msgid "Editor"
 msgstr ""
 
 msgid "Commenting subject"
+msgstr ""
+
+msgid "Created"
 msgstr ""
 
 msgid "Last modification"
@@ -248,30 +224,6 @@ msgid ""
 "commentersProposedStatus : 'NOSTATUS' }}"
 msgstr ""
 
-msgid "Resource name"
-msgstr ""
-
-msgid "Resource description"
-msgstr ""
-
-msgid "Resource URI"
-msgstr ""
-
-msgid "Proposed action"
-msgstr ""
-
-msgid "Create comment thread"
-msgstr ""
-
-msgid "There are no comments yet."
-msgstr ""
-
-msgid "{{ commentThread.currentStatus }}"
-msgstr ""
-
-msgid "{{ comment.proposedStatus ? comment.proposedStatus : 'NOSTATUS' }}"
-msgstr ""
-
 msgid "Filter results"
 msgstr ""
 
@@ -341,9 +293,6 @@ msgid "Unknown organization"
 msgstr ""
 
 msgid "Waiting for approval"
-msgstr ""
-
-msgid "Send"
 msgstr ""
 
 msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
@@ -457,8 +406,8 @@ msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr ""
 "Results can be filtered by organization, status and tool using dropdown"
 
-msgid "Submit error"
-msgstr ""
+msgid "ERR_MSG_USER_PROPOSED_STATUS_REQUIRED"
+msgstr "Status proposal is required for main level comments."
 
 msgid "Front page"
 msgstr ""
@@ -520,6 +469,9 @@ msgstr "Cannot modify existing comment."
 msgid "ERR_MSG_USER_CANNOT_MODIFY_EXISTING_COMMENTTHREAD"
 msgstr "Cannot modify existing comment thread."
 
+msgid "ERR_MSG_USER_CANNOT_CREATE_EMPTY_COMMENT"
+msgstr "Cannot create comment with empty content."
+
 msgid "ERR_MSG_USER_INVALID_PARENTCOMMENT"
 msgstr "Comment is linked to invalid parent comment."
 
@@ -546,6 +498,9 @@ msgstr "Invalid ID in data."
 
 msgid "NOSTATUS"
 msgstr "No selected status"
+
+msgid "Submit error"
+msgstr ""
 
 msgid "Unexpected error"
 msgstr ""
@@ -595,6 +550,9 @@ msgstr ""
 msgid "Comment thread"
 msgstr ""
 
+msgid "Comment"
+msgstr ""
+
 msgid "Select tool"
 msgstr ""
 
@@ -611,6 +569,12 @@ msgid "Propose status"
 msgstr ""
 
 msgid "Create comment round"
+msgstr ""
+
+msgid "Create comment thread"
+msgstr ""
+
+msgid "Create comment"
 msgstr ""
 
 msgid "-"

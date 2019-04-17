@@ -7,7 +7,6 @@ import { ResolveEnd, Route, Router, RouterModule, Routes, UrlSegment, UrlSegment
 import { of } from 'rxjs';
 import { MissingTranslationHandler, MissingTranslationHandlerParams, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClientModule } from '@angular/common/http';
-import { CommentComponent } from './components/comment/comment.component';
 import { CommentRoundComponent } from './components/commentround/comment-round.component';
 import { NavigationBarComponent } from './components/navigation/navigation-bar.component';
 import { LogoComponent } from './components/navigation/logo.component';
@@ -16,7 +15,6 @@ import { LocationService } from './services/location.service';
 import { LanguageService } from './services/language.service';
 import { AUTHENTICATED_USER_ENDPOINT } from 'yti-common-ui/services/user.service';
 import { LOCALIZER, YtiCommonModule } from 'yti-common-ui';
-import { CommentThreadComponent } from './components/commentthread/comment-thread.component';
 import { InformationAboutServiceComponent } from './components/information/information-about-service.component';
 import { ModalService } from './services/modal.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -50,9 +48,7 @@ import { AuthorizationManager } from './services/authorization-manager';
 import { CommentRoundStatusDropdownComponent } from './components/form/comment-round-status-dropdown.component';
 import { CommentRoundListitemComponent } from './components/commentround/comment-round-listitem.component';
 import { BooleanInputComponent } from './components/form/boolean-input-component';
-import { CommentThreadCreateComponent } from './components/commentthread/comment-thread-create.component';
 import { LocalizableInputComponent } from './components/form/localizable-input';
-import { CommentCreateComponent } from './components/comment/comment-create.component';
 import { CommentInputComponent } from './components/form/parent-comment-input';
 import {
   SearchLinkedCommentModalComponent,
@@ -69,7 +65,6 @@ import { CurrentStatusComponent } from './components/form/current-status';
 import { ProposedStatusTableDropdownComponent } from './components/form/proposed-status-dropdown';
 import { IntegrationResourceService } from './services/integrationresource.service';
 import { CommentsConfirmationModalService } from './components/common/confirmation-modal.service';
-import { DiscussionModalComponent, DiscussionModalService } from './components/common/discussion-modal.service';
 import { HierarchicalCommentListitemComponent } from './components/common/hierarchical-comment-listitem.component';
 import { LiteralMultilanguageComponent } from './components/form/literal-multilanguage';
 import { ConfigurationService } from './services/configuration.service';
@@ -143,10 +138,6 @@ const appRoutes: Routes = [
   { path: 'frontpage', redirectTo: '/', pathMatch: 'full' },
   { path: 'commentround', component: CommentRoundComponent, pathMatch: 'full' },
   { path: 'createcommentround', component: CommentRoundCreateComponent, pathMatch: 'full' },
-  { path: 'commentthread', component: CommentThreadComponent, pathMatch: 'full' },
-  { path: 'createcommentthread', component: CommentThreadCreateComponent, pathMatch: 'full' },
-  { path: 'comment', component: CommentComponent, pathMatch: 'full' },
-  { path: 'createcomment', component: CommentCreateComponent, pathMatch: 'full' },
   { path: 'information', component: InformationAboutServiceComponent },
   { path: 'userdetails', component: UserDetailsComponent },
   // NOTE: If createRefreshRouteMatcher(['re']) starts to work after angular upgrade, then switch to that.
@@ -157,11 +148,9 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     FrontpageComponent,
-    CommentComponent,
     CommentRoundComponent,
     NavigationBarComponent,
     LogoComponent,
-    CommentThreadComponent,
     InformationAboutServiceComponent,
     UserDetailsComponent,
     RefreshComponent,
@@ -182,12 +171,9 @@ const appRoutes: Routes = [
     SourceInputComponent,
     SearchLinkedIntegrationResourceModalComponent,
     SearchLinkedOrganizationModalComponent,
-    DiscussionModalComponent,
     ContentLanguageComponent,
     CommentRoundStatusDropdownComponent,
     CommentRoundListitemComponent,
-    CommentThreadCreateComponent,
-    CommentCreateComponent,
     BooleanInputComponent,
     LocalizableInputComponent,
     CommentInputComponent,
@@ -206,8 +192,7 @@ const appRoutes: Routes = [
   entryComponents: [
     SearchLinkedIntegrationResourceModalComponent,
     SearchLinkedOrganizationModalComponent,
-    SearchLinkedCommentModalComponent,
-    DiscussionModalComponent
+    SearchLinkedCommentModalComponent
   ],
   imports: [
     YtiCommonModule,
@@ -241,7 +226,6 @@ const appRoutes: Routes = [
     SearchLinkedIntegrationResourceModalService,
     SearchLinkedOrganizationModalService,
     SearchLinkedCommentModalService,
-    DiscussionModalService,
     CommentRoundErrorModalService
   ],
   bootstrap: [AppComponent]

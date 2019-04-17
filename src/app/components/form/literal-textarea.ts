@@ -16,7 +16,7 @@ import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
           <textarea [id]="id"
                     autosize
                     class="form-control"
-                    [ngClass]="{ 'is-invalid': !valid && !pending}"
+                    [ngClass]="{ 'is-invalid': !valid}"
                     [formControl]="control"></textarea>
           <app-error-messages [id]="id + '_error_messages'" [control]="parentControl"></app-error-messages>
         </div>

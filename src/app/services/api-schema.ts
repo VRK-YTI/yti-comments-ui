@@ -80,7 +80,7 @@ export interface CommentType extends BaseResourceType {
 
   content: string;
   user?: UserType;
-  proposedStatus: string;
+  proposedStatus?: string;
   created?: string | null;
   modified?: string;
   commentThread: CommentThreadType;
@@ -99,6 +99,7 @@ export interface CommentThreadType extends BaseResourceType {
   created?: string | null;
   commentRound: CommentRoundType;
   results?: CommentThreadResultType[];
+  commentCount: number;
 }
 
 export interface CommentThreadSimpleType {
@@ -114,6 +115,7 @@ export interface CommentThreadSimpleType {
   user?: UserType;
   created?: string | null;
   results?: CommentThreadResultType[];
+  commentCount: number;
 }
 
 export interface CommentThreadResultType {
