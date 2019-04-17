@@ -343,7 +343,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
   getMyProposedEndStatusForCommentThread(commentThread: CommentThreadSimple): string {
 
-    let proposedEndStatus = 'NOSTATUS';
+    let proposedEndStatus = commentThread.proposedStatus;
     if (this.myComments) {
       this.myComments.forEach(comment => {
         if (comment.commentThread.id === commentThread.id && comment.endStatus != null) {
