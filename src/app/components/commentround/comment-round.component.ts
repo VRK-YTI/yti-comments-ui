@@ -28,7 +28,7 @@ import { hasLocalization } from 'yti-common-ui/utils/localization';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { CommentRoundErrorModalService } from '../common/error-modal.service';
 import { CommentSimple } from '../../entity/comment-simple';
-import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
+import { comparingLocalizable, comparingPrimitive } from 'yti-common-ui/utils/comparator';
 
 function addToControl<T>(control: FormControl, itemToAdd: T) {
 
@@ -282,6 +282,9 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     });
 
     this.commentThreadForms.controls = [];
+
+    commentThreads.sort(comparingLocalizable<CommentThreadSimple>(this.languageService,
+        commentThread => commentThread.label ? commentThread.label : {}));
 
     commentThreads.forEach(commentThread => {
       const commentThreadFormGroup: FormGroup = new FormGroup({

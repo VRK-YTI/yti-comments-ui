@@ -5,8 +5,7 @@ import { DataService } from '../../services/data.service';
 import { CommentThreadType, CommentType } from '../../services/api-schema';
 import { v4 as uuid } from 'uuid';
 import { CommentRoundErrorModalService } from './error-modal.service';
-import { comparingLocalizable, comparingPrimitive } from 'yti-common-ui/utils/comparator';
-import { IntegrationResource } from '../../entity/integration-resource';
+import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
 
 @Component({
   selector: 'app-hierarchical-comment',
