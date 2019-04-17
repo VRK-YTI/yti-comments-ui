@@ -71,6 +71,7 @@ export interface CommentSimpleType extends BaseResourceType {
   content: string;
   user?: UserType;
   proposedStatus: string;
+  endStatus: string;
   created?: string | null;
   modified?: string;
   parentComment?: CommentSimpleType;
@@ -81,6 +82,7 @@ export interface CommentType extends BaseResourceType {
   content: string;
   user?: UserType;
   proposedStatus?: string;
+  endStatus?: string;
   created?: string | null;
   modified?: string;
   commentThread: CommentThreadType;

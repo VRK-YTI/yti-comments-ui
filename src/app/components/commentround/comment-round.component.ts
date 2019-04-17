@@ -216,6 +216,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
       proposedStatus: new FormControl(integrationResource.uri != null ? integrationResource.status : 'SUGGESTION'),
       proposedText: new FormControl(''),
       commentersProposedStatus: new FormControl('NOSTATUS'),
+      commentersProposedEndStatus: new FormControl('NOSTATUS'),
       commentersProposedText: new FormControl(''),
       results: new FormControl([])
     });
@@ -292,6 +293,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
         proposedStatus: new FormControl(commentThread.proposedStatus),
         proposedText: new FormControl(commentThread.proposedText),
         commentersProposedStatus: new FormControl(this.getMyProposedStatusForCommentThread(commentThread)),
+        commentersProposedEndStatus: new FormControl(this.getMyProposedEndStatusForCommentThread(commentThread)),
         commentersProposedText: new FormControl(this.getMyCommentContentForCommentThread(commentThread.id)),
         results: new FormControl(commentThread.results),
         commentCount: new FormControl(commentThread.commentCount)
@@ -339,6 +341,19 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     return proposedStatus;
   }
 
+  getMyProposedEndStatusForCommentThread(commentThread: CommentThreadSimple): string {
+
+    let proposedEndStatus = 'NOSTATUS';
+    if (this.myComments) {
+      this.myComments.forEach(comment => {
+        if (comment.commentThread.id === commentThread.id && comment.endStatus != null) {
+          proposedEndStatus = comment.endStatus;
+        }
+      });
+    }
+    return proposedEndStatus;
+  }
+
   mapCommentThreads(commentThreadsFormArray: FormArray): CommentThreadSimple[] {
 
     const commentThreads: CommentThreadSimple[] = [];
@@ -355,6 +370,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
           proposedStatus: commentThreadInputValue.proposedStatus,
           proposedText: commentThreadInputValue.proposedText,
           commentersProposedStatus: commentThreadInputValue.commentersProposedStatus,
+          commentersProposedEndStatus: commentThreadInputValue.commentersProposedEndStatus,
           commentersProposedText: commentThreadInputValue.commentersProposedText,
           results: commentThreadInputValue.results,
           commentCount: commentThreadInputValue.commentCount
@@ -443,6 +459,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
       const commentType: CommentType = <CommentType>{
         commentThread: <CommentThreadType>{ id: commentThreadInputValue.id },
         proposedStatus: commentThreadInputValue.commentersProposedStatus,
+        endStatus: commentThreadInputValue.commentersProposedEndStatus,
         content: commentThreadInputValue.commentersProposedText
       };
       comments.push(commentType);

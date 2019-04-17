@@ -407,7 +407,7 @@
                 <td style="width: 20%">
                   <app-proposed-status-table-dropdown *ngIf="canModifyCommentProposedStatus()"
                                                       [isEditing]="commenting"
-                                                      [formControlName]="'commentersProposedStatus'"></app-proposed-status-table-dropdown>
+                                                      [formControlName]="'commentersProposedEndStatus'"></app-proposed-status-table-dropdown>
                   <span *ngIf="!canModifyCommentProposedStatus()"
                         translate>{{ commentThread.value.commentersProposedStatus ? commentThread.value.commentersProposedStatus : commentThread.value.proposedSatus }}</span>
                 </td>

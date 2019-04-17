@@ -17,7 +17,9 @@ import { IntegrationResource } from '../../entity/integration-resource';
         <div class="comment">
           <span class="name">{{ comment.user.firstName }} {{ comment.user.lastName }}</span>
           <span class="created">{{ comment.createdDisplayValue }}</span>
-          <span class="proposedStatus" *ngIf="comment.proposedStatus">, {{ comment.proposedStatus | translate }}</span>
+          <span class="proposedStatus" *ngIf="comment.proposedStatus === comment.endStatus">, {{ comment.endStatus | translate }}</span>
+          <span class="proposedStatus" *ngIf="comment.proposedStatus !== comment.endStatus">
+            , <s>{{ comment.proposedStatus | translate }}</s> \t&#x2192; {{ comment.endStatus | translate }}</span>
           <br>
           <span class="content">{{ comment.content }}</span>
         </div>

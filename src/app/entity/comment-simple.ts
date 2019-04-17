@@ -9,6 +9,7 @@ export class CommentSimple extends AbstractResource {
   user: User;
   content: string;
   proposedStatus: string;
+  endStatus: string;
   created: Moment | null = null;
   parentComment: CommentSimple;
 
@@ -20,6 +21,7 @@ export class CommentSimple extends AbstractResource {
     }
     this.content = data.content;
     this.proposedStatus = data.proposedStatus;
+    this.endStatus = data.endStatus;
     if (data.created) {
       this.created = parseDateTime(data.created);
     }
@@ -40,11 +42,13 @@ export class CommentSimple extends AbstractResource {
       url: this.url,
       content: this.content,
       proposedStatus: this.proposedStatus,
+      endStatus: this.endStatus,
       created: formatDateTime(this.created)
     };
   }
 
   clone(): CommentSimple {
+
     return new CommentSimple(this.serialize());
   }
 }

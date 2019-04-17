@@ -13,6 +13,7 @@ export class Comment extends AbstractResource implements EditableEntity {
   user: User;
   content: string;
   proposedStatus: string;
+  endStatus: string;
   created: Moment | null = null;
   commentThread: CommentThread;
   parentComment: CommentSimple;
@@ -26,6 +27,9 @@ export class Comment extends AbstractResource implements EditableEntity {
     this.content = data.content;
     if (data.proposedStatus) {
       this.proposedStatus = data.proposedStatus;
+    }
+    if (data.endStatus) {
+      this.endStatus = data.endStatus;
     }
     if (data.created) {
       this.created = parseDateTime(data.created);
@@ -75,6 +79,7 @@ export class Comment extends AbstractResource implements EditableEntity {
       content: this.content,
       user: this.user ? this.user.serialize() : undefined,
       proposedStatus: this.proposedStatus,
+      endStatus: this.endStatus,
       created: formatDateTime(this.created),
       parentComment: this.parentComment ? this.parentComment.serialize() : undefined,
       commentThread: this.commentThread.serialize()
