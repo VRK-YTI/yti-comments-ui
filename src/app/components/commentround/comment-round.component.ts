@@ -417,7 +417,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   }
 
   isNewResource(id: string): boolean {
-    return this.newIds.includes(id);
+    return this.newIds.indexOf(id) !== -1;
   }
 
   get editing() {
