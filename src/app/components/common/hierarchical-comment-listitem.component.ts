@@ -15,7 +15,7 @@ import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
       <div class="row">
         <div class="comment">
           <span class="name">{{ comment.user.firstName }} {{ comment.user.lastName }}</span>
-          <span class="created">{{ comment.createdDisplayValue }}</span>
+          <span class="created" x-ms-format-detection="none">{{ comment.createdDisplayValue }}</span>
           <span class="proposedStatus" *ngIf="comment.proposedStatus === comment.endStatus">, {{ comment.endStatus | translate }}</span>
           <span class="proposedStatus" *ngIf="comment.proposedStatus !== comment.endStatus">
             , <s>{{ comment.proposedStatus | translate }}</s> \t&#x2192; {{ comment.endStatus | translate }}</span>
