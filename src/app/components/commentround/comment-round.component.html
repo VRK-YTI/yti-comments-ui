@@ -238,7 +238,7 @@
     </div>
 
     <ngb-tabset #tabSet="ngbTabset" (tabChange)="onTabChange($event)">
-      <ngb-tab *ngIf="isEditorOrSuperUser"
+      <ngb-tab *ngIf="isEditorOrSuperUser || (myComments && myComments.length > 0)"
                id="commentround_resources_tab">
         <ng-template ngbTabTitle>
           <span translate>RESOURCES</span>
@@ -246,7 +246,7 @@
 
         <ng-template ngbTabContent>
           <div formArrayName="commentThreads">
-            <table *ngIf="isEditorOrSuperUser && hasCommentThreads" class="table table-borderless" width="100%">
+            <table class="table table-borderless" width="100%">
               <thead>
               <tr>
                 <th style="width: 2%" translate></th>
