@@ -124,7 +124,7 @@ export interface CommentThreadResultType {
 
   status: string;
   count: number;
-  percentage: number;
+  percentage: string;
 }
 
 export interface OrganizationType {

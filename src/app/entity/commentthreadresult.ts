@@ -4,7 +4,7 @@ export class CommentThreadResult {
 
   status: string;
   count: number;
-  percentage: number;
+  percentage: string;
 
   constructor(data: CommentThreadResultType) {
 
