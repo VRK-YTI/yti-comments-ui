@@ -25,7 +25,7 @@
                 type="button"
                 class="btn btn-action"
                 [disabled]="commentRoundForm.invalid"
-                (click)="sendCommentsAndAddResources()">
+                (click)="sendComments()">
           <span translate>Send comments</span>
         </button>
       </div>
@@ -196,6 +196,7 @@
         <app-date-range-input class="col-md-6"
                               [id]="'commentround_validity_input'"
                               [showLabel]="false"
+                              [restrict]="true"
                               [label]="'Commenting period' | translate"
                               [infoText]="'INFO_TEXT_COMMENTROUND_VALIDITY'"
                               [formControlName]="'validity'"></app-date-range-input>
@@ -216,6 +217,7 @@
       <app-literal-textarea [id]="'commentround_description_input'"
                             [label]="'Description' | translate"
                             [required]="true"
+                            [restrict]="true"
                             [infoText]="'INFO_TEXT_COMMENTROUND_DESCRIPTION'"
                             [formControlName]="'description'"></app-literal-textarea>
     </div>
@@ -225,16 +227,14 @@
       <span *ngIf="!hasCommentThreads" translate>There are no resources to comment.</span>
     </div>
 
-    <div *ngIf="isEditorOrSuperUser || (!isEditor && commenting)">
-      <div *ngIf="canCreateCommentThread" class="col-md-2 float-right d-inline-block">
-        <button id="create_commentthread_button"
-                type="button"
-                class="btn btn-secondary-action float-right"
-                (click)="addCommentThreadToCommentRound()">
-          <span>＋ </span>
-          <span translate>Add new resource</span>
-        </button>
-      </div>
+    <div *ngIf="canCreateCommentThread" class="col-md-2 float-right d-inline-block">
+      <button id="create_commentthread_button"
+              type="button"
+              class="btn btn-secondary-action float-right"
+              (click)="addCommentThreadToCommentRound()">
+        <span>＋ </span>
+        <span translate>Add new resource</span>
+      </button>
     </div>
 
     <ngb-tabset #tabSet="ngbTabset" (tabChange)="onTabChange($event)">
@@ -343,7 +343,7 @@
                         </div>
                         <div>
                           <a style="float: right;"><i id="'close_commentthread_' + i + '_comments_button'" class="fa fa-times"
-                                (click)="toggleShowThreadComments(commentRound.id, commentThread.value.id, i)"></i></a>
+                                                      (click)="toggleShowThreadComments(commentRound.id, commentThread.value.id, i)"></i></a>
                         </div>
                       </div>
                       <div *ngFor="let comment of filterTopLevelComments(activeThreadComments)">
@@ -447,7 +447,7 @@
                       type="button"
                       class="btn btn-action"
                       [disabled]="commentRoundForm.invalid"
-                      (click)="sendCommentsAndAddResources()">
+                      (click)="sendComments()">
                 <span translate>Send comments</span>
               </button>
             </div>

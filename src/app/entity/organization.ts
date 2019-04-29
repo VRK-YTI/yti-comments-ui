@@ -36,7 +36,7 @@ export class Organization {
       url: this.url,
       prefLabel: {...this.prefLabel},
       description: {...this.description},
-      commentRounds: this.commentRounds.map(cr => cr.serialize()),
+      commentRounds: this.commentRounds.map(cr => cr.serialize())
     };
   }
 

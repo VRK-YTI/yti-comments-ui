@@ -20,7 +20,7 @@ export class AuthorizationManager {
       return true;
     }
     if (editableEntity.allowUserEdit()) {
-      return this.user.email === editableEntity.getUser().email;
+      return true;
     }
     if (editableEntity.allowOrganizationEdit()) {
       return this.user.isInOrganization(editableEntity.getOwningOrganizationIds(), ['ADMIN']);

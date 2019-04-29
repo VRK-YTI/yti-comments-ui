@@ -95,6 +95,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   }
 
   ngAfterViewInit() {
+
     this.initialize();
   }
 
@@ -123,7 +124,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   activateCurrentTab() {
 
     if (!this.currentTab$.value) {
-      if (this.isEditorOrSuperUser) {
+      if (this.isEditorOrSuperUser || (this.myComments && this.myComments.length > 0)) {
         this.currentTab$.next('commentround_resources_tab');
         this.tabSet.activeId = 'commentround_resources_tab';
       } else {
@@ -145,15 +146,16 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
   get canCreateCommentThread(): boolean {
 
-    if (this.commentRound.status === 'INCOMPLETE') {
-      return this.authorizationManager.user.email === this.commentRound.user.email &&
-        this.editing && this.resourcesTabActive;
-    } else if (this.commentRound.status === 'INPROGRESS' &&
-      !this.commentRound.fixedThreads &&
-      (this.editing || this.commenting) &&
-      this.resourcesTabActive) {
-      return this.authorizationManager.canCreateCommentThread();
+    if (this.resourcesTabActive) {
+      if (this.commentRound.status === 'INCOMPLETE') {
+        return this.authorizationManager.user.email === this.commentRound.user.email && this.editing;
+      } else if (this.commentRound.status === 'INPROGRESS' &&
+        !this.commentRound.fixedThreads &&
+        (this.editing || this.commenting)) {
+        return this.authorizationManager.canCreateCommentThread();
+      }
     }
+
     return false;
   }
 
@@ -392,32 +394,47 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
   save(formData: any): Observable<any> {
 
-    const { label, description, fixedThreads, openThreads, validity, organizations, status } = formData;
+    if (this.isEditorOrSuperUser) {
 
-    const commentThreadsToBeUpdated: CommentThreadSimple[] = this.mapCommentThreads(this.commentThreadForms);
+      const { label, description, fixedThreads, openThreads, validity, organizations, status } = formData;
 
-    const updatedCommentRound = this.commentRound.clone();
+      const commentThreadsToBeUpdated: CommentThreadSimple[] = this.mapCommentThreads(this.commentThreadForms);
 
-    Object.assign(updatedCommentRound, {
-      label: label,
-      description: description,
-      fixedThreads: fixedThreads,
-      openThreads: openThreads,
-      startDate: validity.start,
-      endDate: validity.end,
-      organizations: organizations,
-      source: this.commentRound.source,
-      sourceLabel: this.commentRound.sourceLabel,
-      status: status,
-      commentThreads: commentThreadsToBeUpdated
-    });
+      const updatedCommentRound = this.commentRound.clone();
 
-    const save = () => {
+      Object.assign(updatedCommentRound, {
+        label: label,
+        description: description,
+        fixedThreads: fixedThreads,
+        openThreads: openThreads,
+        startDate: validity.start,
+        endDate: validity.end,
+        organizations: organizations,
+        source: this.commentRound.source,
+        sourceLabel: this.commentRound.sourceLabel,
+        status: status,
+        commentThreads: commentThreadsToBeUpdated
+      });
 
-      return this.dataService.updateCommentRound(updatedCommentRound.serialize()).pipe(tap(() => this.initialize()));
-    };
+      const save = () => {
 
-    return save();
+        return this.dataService.updateCommentRound(updatedCommentRound.serialize()).pipe(tap(() => this.initialize()));
+      };
+
+      return save();
+
+    } else {
+
+      const commentThreadsToBeUpdated: CommentThreadSimpleType[] =
+        this.mapCommentThreads(this.commentThreadForms).map(ct => ct.serialize());
+
+      const save = () => {
+
+        return this.dataService.createCommentThreads(this.commentRound.id, commentThreadsToBeUpdated).pipe(tap(() => this.initialize()));
+      };
+
+      return save();
+    }
   }
 
   isNewResource(id: string): boolean {
@@ -439,22 +456,6 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
     this.reset();
     this.commenting$.next(false);
-  }
-
-  sendCommentsAndAddResources() {
-
-    const commentThreadsToBeAdded: CommentThreadSimple[] =
-      this.mapCommentThreads(this.commentThreadForms).filter(commentThread => this.isNewResource(commentThread.id));
-
-    if (commentThreadsToBeAdded.length > 0) {
-      this.dataService.createCommentThreads(this.commentRound.id,
-        commentThreadsToBeAdded.map(thread => thread.serialize())).subscribe(commentThreads => {
-        this.newIds = [];
-        this.sendComments();
-      });
-    } else {
-      this.sendComments();
-    }
   }
 
   sendComments() {
@@ -563,6 +564,12 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
     return this.commentsTabActive &&
       this.authorizationManager.canCreateComment(this.commentRound) &&
+      this.commentRound.status === 'INPROGRESS';
+  }
+
+  get canAddResources(): boolean {
+
+    return this.resourcesTabActive &&
       this.commentRound.status === 'INPROGRESS';
   }
 

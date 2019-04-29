@@ -123,7 +123,11 @@ export class CommentRound extends AbstractResource implements EditableEntity {
 
   allowUserEdit(): boolean {
 
-    return true;
+    if (this.user.email === this.getUser().email ||
+      (this.status === 'INPROGRESS' && !this.fixedThreads)) {
+      return true;
+    }
+    return false;
   }
 
   getUser(): User {
