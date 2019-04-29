@@ -265,7 +265,7 @@
                   <td>
                     <div *ngIf="commentThread.value.commentCount != null && commentThread.value.commentCount > 0"
                          class="h4 comment-icons">
-                      <a><i id="'view_commentthread_' + i + '_comments_button'"
+                      <a><i id="'view_commentthread_{{commentThread.value.id}}_comments_button'"
                             class="icon icon-bubble icon-blue"
                             (click)="toggleShowThreadComments(commentRound.id, commentThread.value.id, i)"></i></a>
                     </div>
@@ -302,6 +302,7 @@
                   <td style="width: 15%">
                     <app-proposed-status-table-dropdown *ngIf="isNewResource(commentThread.value.id) && commentThread.value.resourceUri != null"
                                                         [restrict]="commentRound.status !== 'INCOMPLETE' && commentRound.status !== 'AWAIT' && commentRound.status !== 'INPROGRESS' && isNewResource(commentThread.value.id)"
+                                                        [id]="commentThread.value.id"
                                                         [formControlName]="'proposedStatus'"></app-proposed-status-table-dropdown>
                     <span *ngIf="(isNewResource(commentThread.value.id) && commentThread.value.resourceUri == null) || !isNewResource(commentThread.value.id)"
                           translate>{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : 'NOSTATUS' }}</span>
@@ -310,7 +311,7 @@
                     <app-literal-textarea *ngIf="commentThread.value.resourceUri && isNewResource(commentThread.value.id)"
                                           [required]=true
                                           [showRequired]=false
-                                          [id]="'commentthread_proposed_text_input'"
+                                          [id]="'commentthread_proposed_text_input_' + commentThread.value.id"
                                           [formControlName]="'proposedText'"></app-literal-textarea>
                     <span *ngIf="!isNewResource(commentThread.value.id)">{{ commentThread.value.proposedText }}</span>
                   </td>
@@ -407,6 +408,7 @@
                 <td style="width: 20%">
                   <app-proposed-status-table-dropdown *ngIf="canModifyCommentProposedStatus()"
                                                       [isEditing]="commenting"
+                                                      [id]="commentThread.value.id"
                                                       [formControlName]="'commentersProposedEndStatus'"></app-proposed-status-table-dropdown>
                   <span *ngIf="!canModifyCommentProposedStatus()"
                         translate>{{ commentThread.value.commentersProposedStatus ? commentThread.value.commentersProposedStatus : commentThread.value.proposedSatus }}</span>
@@ -416,7 +418,7 @@
                                         [required]=requireComments
                                         [showRequired]=false
                                         [isEditing]="commenting"
-                                        [id]="'commentthread_proposed_text_input'"
+                                        [id]="'commentthread_proposed_text_input_' + commentThread.value.id"
                                         [formControlName]="'commentersProposedText'"></app-literal-textarea>
                   <span *ngIf="!canModifyComment(commentThread.value.id)">{{ commentThread.value.commentersProposedText }}</span>
                 </td>
