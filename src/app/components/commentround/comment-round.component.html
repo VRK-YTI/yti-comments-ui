@@ -265,14 +265,14 @@
                   <td>
                     <div *ngIf="commentThread.value.commentCount != null && commentThread.value.commentCount > 0"
                          class="h4 comment-icons">
-                      <a><i id="'view_commentthread_{{commentThread.value.id}}_comments_button'"
+                      <a><i id="'view_commentthread_{{i}}_comments_button'"
                             class="icon icon-bubble icon-blue"
                             (click)="toggleShowThreadComments(commentRound.id, commentThread.value.id, i)"></i></a>
                     </div>
                   </td>
                   <td style="width: 15%">
                     <a *ngIf="commentThread.value.label && commentThread.value.resourceUri"
-                       id="commenthread_uri_link"
+                       [id]="'commentthread_link_' + i"
                        [href]="getCommentThreadResourceUri(commentThread.value)"
                        target="_blank">
                       <app-literal-multilanguage *ngIf="hasLocalization(commentThread.value.label)" [value]="commentThread.value.label"></app-literal-multilanguage>
@@ -282,7 +282,7 @@
                                                         [required]=true
                                                         [restrict]="!isNewResource(commentThread.value.id)"
                                                         [showRequired]=false
-                                                        [id]="'commenthread_' + commentThread.value.id + '_label_text_input'"
+                                                        [id]="'commenthread_' + i + '_label_text_input'"
                                                         [formControlName]="'label'"></app-localizable-undefined-textarea>
                   </td>
                   <td style="width: 15%;">
@@ -293,7 +293,7 @@
                                                         [required]=true
                                                         [restrict]="!isNewResource(commentThread.value.id)"
                                                         [showRequired]=false
-                                                        [id]="'commenthread_' + commentThread.value.id + '_description_text_input'"
+                                                        [id]="'commenthread_' + i + '_description_text_input'"
                                                         [formControlName]="'description'"></app-localizable-undefined-textarea>
                   </td>
                   <td style="width: 10%">
@@ -311,7 +311,7 @@
                     <app-literal-textarea *ngIf="commentThread.value.resourceUri && isNewResource(commentThread.value.id)"
                                           [required]=true
                                           [showRequired]=false
-                                          [id]="'commentthread_proposed_text_input_' + commentThread.value.id"
+                                          [id]="'commentthread_proposed_text_input_' + i"
                                           [formControlName]="'proposedText'"></app-literal-textarea>
                     <span *ngIf="!isNewResource(commentThread.value.id)">{{ commentThread.value.proposedText }}</span>
                   </td>
@@ -389,6 +389,7 @@
                 <td style="width: 15%">
                   <a *ngIf="commentThread.value.resourceUri"
                      [href]="getCommentThreadResourceUri(commentThread.value)"
+                     [id]="'commentthread_link_' + i"
                      target="_blank">
                     <app-literal-multilanguage *ngIf="hasLocalization(commentThread.value.label)" [value]="commentThread.value.label"></app-literal-multilanguage>
                     <app-literal *ngIf="!hasLocalization(commentThread.value.label)" [value]="commentThread.value.resourceUri"></app-literal>
@@ -418,7 +419,7 @@
                                         [required]=requireComments
                                         [showRequired]=false
                                         [isEditing]="commenting"
-                                        [id]="'commentthread_proposed_text_input_' + commentThread.value.id"
+                                        [id]="'commentthread_proposed_text_input_' + i"
                                         [formControlName]="'commentersProposedText'"></app-literal-textarea>
                   <span *ngIf="!canModifyComment(commentThread.value.id)">{{ commentThread.value.commentersProposedText }}</span>
                 </td>
