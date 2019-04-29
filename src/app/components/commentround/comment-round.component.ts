@@ -283,8 +283,12 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
     this.commentThreadForms.controls = [];
 
-    commentThreads.sort(comparingLocalizable<CommentThreadSimple>(this.languageService,
-        commentThread => commentThread.label ? commentThread.label : {}));
+    commentThreads.sort(comparingPrimitive<CommentThreadSimple>(
+      commentThread => this.languageService.isLocalizableEmpty(commentThread.label))
+      .andThen(comparingPrimitive<CommentThreadSimple>(commentThread =>
+        this.languageService.isLocalizableEmpty(commentThread.label) ? commentThread.url.toLowerCase() : null))
+      .andThen(comparingLocalizable<CommentThreadSimple>(this.languageService,
+        commentThread => commentThread.label ? commentThread.label : {})));
 
     commentThreads.forEach(commentThread => {
       const commentThreadFormGroup: FormGroup = new FormGroup({
