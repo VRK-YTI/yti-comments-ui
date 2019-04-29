@@ -5,10 +5,9 @@ import { AbstractResource } from './abstract-resource';
 import { CommentSimple } from './comment-simple';
 import { Location } from 'yti-common-ui/types/location';
 import { User } from './user';
-import { EditableEntity } from './editable-entity';
 import { CommentThread } from './commentthread';
 
-export class Comment extends AbstractResource implements EditableEntity {
+export class Comment extends AbstractResource {
 
   user: User;
   content: string;
@@ -89,27 +88,5 @@ export class Comment extends AbstractResource implements EditableEntity {
   clone(): Comment {
 
     return new Comment(this.serialize());
-  }
-
-  allowUserEdit(): boolean {
-
-    return true;
-  }
-
-  getUser(): User {
-
-    return this.user;
-  }
-
-  allowOrganizationEdit(): boolean {
-
-    // TODO: Implement backend support for comment commentthread commentround, returning true for now.
-    // return this.commentThread.commentRound.organizations.map(org => org.id);
-    return true;
-  }
-
-  getOwningOrganizationIds(): string[] {
-
-    return [];
   }
 }

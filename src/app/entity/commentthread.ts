@@ -6,10 +6,9 @@ import { formatDateTime, formatDisplayDateTime, parseDateTime } from '../utils/d
 import { Moment } from 'moment';
 import { Location } from 'yti-common-ui/types/location';
 import { User } from './user';
-import { EditableEntity } from './editable-entity';
 import { CommentThreadResult } from './commentthreadresult';
 
-export class CommentThread extends AbstractResource implements EditableEntity {
+export class CommentThread extends AbstractResource {
 
   resourceUri: string;
   label: Localizable = {};
@@ -96,25 +95,5 @@ export class CommentThread extends AbstractResource implements EditableEntity {
   clone(): CommentThread {
 
     return new CommentThread(this.serialize());
-  }
-
-  allowUserEdit(): boolean {
-
-    return true;
-  }
-
-  getUser(): User {
-
-    return this.user;
-  }
-
-  allowOrganizationEdit(): boolean {
-
-    return true;
-  }
-
-  getOwningOrganizationIds(): string[] {
-
-    return this.commentRound.organizations.map(org => org.id);
   }
 }
