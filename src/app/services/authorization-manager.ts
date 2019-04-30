@@ -43,10 +43,10 @@ export class AuthorizationManager {
 
   canCreateComment(editableEntity: EditableEntity) {
 
-    if (this.user.superuser) {
+    if (this.user.superuser || this.user.email === editableEntity.getUser().email) {
       return true;
     }
-    if (editableEntity.allowOrganizationEdit()) {
+    if (editableEntity.allowOrganizationComment()) {
       return this.user.isInOrganization(editableEntity.getOwningOrganizationIds(),
         ['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR']);
     }
@@ -55,7 +55,7 @@ export class AuthorizationManager {
 
   canDeleteCommentRound(commentRound: CommentRound) {
 
-    if (this.user.superuser || commentRound.user.email === this.user.email) {
+    if (this.user.superuser || this.user.email === commentRound.user.email) {
       return true;
     }
     return false;

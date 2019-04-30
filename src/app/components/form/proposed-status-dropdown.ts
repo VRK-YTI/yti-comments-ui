@@ -29,7 +29,8 @@ export type Placement = NgbPlacement;
       </div>
     </div>
     <div *ngIf="!editing">
-      <span translate>{{ selectedStatus }}</span>
+      <span *ngIf="selectedStatus === 'NOSTATUS'">-</span>
+      <span *ngIf="selectedStatus !== 'NOSTATUS'" translate>{{ selectedStatus }}</span>
     </div>
   `
 })
@@ -39,6 +40,7 @@ export class ProposedStatusTableDropdownComponent implements ControlValueAccesso
   @Input() placement: Placement = 'bottom-left';
   @Input() isEditing: boolean | null;
   @Input() restrict = false;
+  @Input() defaultStatus: ProposedStatus;
 
   selectedStatus: ProposedStatus;
 
@@ -60,6 +62,10 @@ export class ProposedStatusTableDropdownComponent implements ControlValueAccesso
 
   isSelected(option: ProposedStatus) {
 
+    if (this.selectedStatus == null || this.selectedStatus === 'NOSTATUS') {
+      this.selectedStatus = this.defaultStatus;
+      this.propagateChange(this.selectedStatus);
+    }
     return this.selectedStatus === option;
   }
 

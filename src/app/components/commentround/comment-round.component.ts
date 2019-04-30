@@ -124,7 +124,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   activateCurrentTab() {
 
     if (!this.currentTab$.value) {
-      if (this.isEditorOrSuperUser || (this.myComments && this.myComments.length > 0)) {
+      if (this.isEditorOrSuperUser || (this.myComments && this.myComments.length > 0)) {
         this.currentTab$.next('commentround_resources_tab');
         this.tabSet.activeId = 'commentround_resources_tab';
       } else {
@@ -321,6 +321,8 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
         }
       });
     }
+    if (myComment == null) {
+    }
     return myComment;
   }
 
@@ -352,7 +354,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
   getMyProposedEndStatusForCommentThread(commentThread: CommentThreadSimple): string {
 
-    let proposedEndStatus = commentThread.proposedStatus;
+    let proposedEndStatus = 'NOSTATUS';
     if (this.myComments) {
       this.myComments.forEach(comment => {
         if (comment.commentThread.id === commentThread.id && comment.endStatus != null) {
@@ -560,16 +562,34 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     return this.editableService.editing;
   }
 
-  get canComment(): boolean {
+  get canStartCommenting(): boolean {
 
-    return this.commentsTabActive &&
+    return !this.commenting &&
+      this.commentsTabActive &&
       this.authorizationManager.canCreateComment(this.commentRound) &&
       this.commentRound.status === 'INPROGRESS';
   }
 
-  get canAddResources(): boolean {
+  get showCancelCommenting(): boolean {
 
-    return this.resourcesTabActive &&
+    return this.commenting &&
+      this.commentsTabActive &&
+      this.authorizationManager.canCreateComment(this.commentRound) &&
+      this.commentRound.status === 'INPROGRESS';
+  }
+
+  get canSendComments(): boolean {
+
+    return this.commenting &&
+      this.commentsTabActive &&
+      this.authorizationManager.canCreateComment(this.commentRound) &&
+      this.commentRound.status === 'INPROGRESS';
+  }
+
+  get canComment(): boolean {
+
+    return this.commentsTabActive &&
+      this.authorizationManager.canCreateComment(this.commentRound) &&
       this.commentRound.status === 'INPROGRESS';
   }
 

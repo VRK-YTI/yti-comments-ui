@@ -5,6 +5,8 @@ export interface EditableEntity {
 
   allowOrganizationEdit(): boolean;
 
+  allowOrganizationComment(): boolean;
+
   getUser(): User;
 
   allowUserEdit(): boolean;

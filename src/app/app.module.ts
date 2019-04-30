@@ -54,8 +54,6 @@ import {
   SearchLinkedCommentModalComponent,
   SearchLinkedCommentModalService
 } from './components/form/search-linked-comment-modal.component';
-import { ProposedStatusInputComponent } from './components/form/proposed-status-input.component';
-import { ProposedStatusDropdownComponent } from './components/form/proposedstatus-dropdown-component';
 import { CommentRoundStatusComponent } from './components/form/comment-round-status.component';
 import { LiteralTextareaComponent } from './components/form/literal-textarea';
 import { LocalizableTextareaComponent } from './components/form/localizable-textarea';
@@ -178,8 +176,6 @@ const appRoutes: Routes = [
     LocalizableInputComponent,
     CommentInputComponent,
     SearchLinkedCommentModalComponent,
-    ProposedStatusInputComponent,
-    ProposedStatusDropdownComponent,
     CommentRoundStatusComponent,
     LiteralTextareaComponent,
     CurrentStatusComponent,
