@@ -19,11 +19,12 @@ export class AuthorizationManager {
     if (this.user.superuser) {
       return true;
     }
-    if (editableEntity.allowUserEdit()) {
+    if (editableEntity.allowUserEdit() && this.user.email === editableEntity.getUser().email) {
       return true;
     }
     if (editableEntity.allowOrganizationEdit()) {
-      return this.user.isInOrganization(editableEntity.getOwningOrganizationIds(), ['ADMIN']);
+      return this.user.isInOrganization(editableEntity.getOwningOrganizationIds(),
+        ['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR']);
     }
     return false;
   }

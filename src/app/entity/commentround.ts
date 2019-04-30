@@ -123,11 +123,7 @@ export class CommentRound extends AbstractResource implements EditableEntity {
 
   allowUserEdit(): boolean {
 
-    if (this.user.email === this.getUser().email ||
-      (this.status === 'INPROGRESS' && !this.fixedThreads)) {
-      return true;
-    }
-    return false;
+    return true;
   }
 
   getUser(): User {
@@ -137,7 +133,7 @@ export class CommentRound extends AbstractResource implements EditableEntity {
 
   allowOrganizationEdit(): boolean {
 
-    return true;
+    return this.status === 'INPROGRESS' && !this.fixedThreads;
   }
 
   getOwningOrganizationIds(): string[] {

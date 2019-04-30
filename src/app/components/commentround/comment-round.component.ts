@@ -611,7 +611,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   get canEndCommenting(): boolean {
 
     return this.commentRound.status === 'INPROGRESS' && !this.editing &&
-      this.authorizationManager.user.email === this.commentRound.user.email;
+      (this.authorizationManager.user.superuser || this.authorizationManager.user.email === this.commentRound.user.email);
   }
 
   get canDeleteCommentRound(): boolean {
