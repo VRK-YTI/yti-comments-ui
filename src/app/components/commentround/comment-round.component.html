@@ -343,7 +343,7 @@
                                 (click)="refreshComments(commentThread.value.id)">refresh</i></a>
                         </div>
                         <div>
-                          <a style="float: right;"><i id="'close_commentthread_' + i + '_comments_button'" class="fa fa-times"
+                          <a style="float: right;"><i id="close_commentthread_{{i}}_comments_button" class="fa fa-times"
                                                       (click)="toggleShowThreadComments(commentRound.id, commentThread.value.id, i)"></i></a>
                         </div>
                       </div>
