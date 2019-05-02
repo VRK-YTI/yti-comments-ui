@@ -349,6 +349,7 @@
                       </div>
                       <div *ngFor="let comment of filterTopLevelComments(activeThreadComments)">
                         <app-hierarchical-comment *ngIf="!comment.parentComment"
+                                                  [id]="comment.id"
                                                   [comment]="comment"
                                                   [comments]="activeThreadComments"
                                                   [commentRoundId]="commentRoundId"

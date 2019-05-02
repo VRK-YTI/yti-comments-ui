@@ -36,7 +36,7 @@ import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
         <app-literal-input *ngIf="this.commenting"
                            class="input col-md-6"
                            [isEditing]="this.commenting"
-                           [id]="'comment' + this.comment.id + '_input'"
+                           [id]="'comment_' + this.comment.id + '_input'"
                            [(ngModel)]="this.commentContent"></app-literal-input>
         <div class="col-md-6">
           <button *ngIf="this.commenting && canComment"
@@ -59,7 +59,8 @@ import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
     </div>
     <ul *ngIf="hasChildComments">
       <li class="child-comment" *ngFor="let childComment of childComments; trackBy: commentIdentity">
-        <app-hierarchical-comment [comment]="childComment"
+        <app-hierarchical-comment [id]="childComment.id"
+                                  [comment]="childComment"
                                   [comments]="comments"
                                   [commentRoundId]="commentRoundId"
                                   [commentThreadId]="commentThreadId"
