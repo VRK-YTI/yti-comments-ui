@@ -1,6 +1,6 @@
 import { CommentRoundSimpleType } from '../services/api-schema';
 import { formatDate, formatDateTime, parseDate, parseDateTime } from '../utils/date';
-import { Moment } from 'moment';
+import { Moment, utc } from 'moment';
 import { AbstractResource } from './abstract-resource';
 import { Source } from './source';
 import { Localizable } from 'yti-common-ui/types/localization';
@@ -37,10 +37,10 @@ export class CommentRoundSimple extends AbstractResource {
       this.source = new Source(data.source);
     }
     if (data.created) {
-      this.created = parseDateTime(data.created);
+      this.created = utc(data.created);
     }
     if (data.modified) {
-      this.modified = parseDateTime(data.modified);
+      this.modified = utc(data.modified);
     }
     if (data.startDate) {
       this.startDate = parseDate(data.startDate);

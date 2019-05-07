@@ -1,6 +1,6 @@
 import { CommentRoundType } from '../services/api-schema';
-import { formatDate, formatDateTime, formatDisplayDateTime, parseDate, parseDateTime } from '../utils/date';
-import { Moment } from 'moment';
+import { formatDate, formatDateTime, formatDisplayDateTime, parseDate } from '../utils/date';
+import { Moment, utc } from 'moment';
 import { AbstractResource } from './abstract-resource';
 import { Source } from './source';
 import { Location } from 'yti-common-ui/types/location';
@@ -43,10 +43,10 @@ export class CommentRound extends AbstractResource implements EditableEntity {
       this.source = new Source(data.source);
     }
     if (data.created) {
-      this.created = parseDateTime(data.created);
+      this.created = utc(data.created);
     }
     if (data.modified) {
-      this.modified = parseDateTime(data.modified);
+      this.modified = utc(data.modified);
     }
     if (data.startDate) {
       this.startDate = parseDate(data.startDate);

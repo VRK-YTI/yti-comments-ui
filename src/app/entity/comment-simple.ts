@@ -1,5 +1,5 @@
 import { formatDateTime, formatDisplayDateTime, parseDateTime } from '../utils/date';
-import { Moment } from 'moment';
+import { Moment, utc } from 'moment';
 import { AbstractResource } from './abstract-resource';
 import { CommentSimpleType } from '../services/api-schema';
 import { User } from './user';
@@ -23,7 +23,7 @@ export class CommentSimple extends AbstractResource {
     this.proposedStatus = data.proposedStatus;
     this.endStatus = data.endStatus;
     if (data.created) {
-      this.created = parseDateTime(data.created);
+      this.created = utc(data.created);
     }
     if (data.parentComment) {
       this.parentComment = new CommentSimple(data.parentComment);

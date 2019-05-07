@@ -2,8 +2,8 @@ import { AbstractResource } from './abstract-resource';
 import { CommentThreadType } from '../services/api-schema';
 import { CommentRound } from './commentround';
 import { Localizable } from 'yti-common-ui/types/localization';
-import { formatDateTime, formatDisplayDateTime, parseDateTime } from '../utils/date';
-import { Moment } from 'moment';
+import { formatDateTime, formatDisplayDateTime } from '../utils/date';
+import { Moment, utc } from 'moment';
 import { Location } from 'yti-common-ui/types/location';
 import { User } from './user';
 import { CommentThreadResult } from './commentthreadresult';
@@ -36,7 +36,7 @@ export class CommentThread extends AbstractResource {
       this.user = new User(data.user);
     }
     if (data.created) {
-      this.created = parseDateTime(data.created);
+      this.created = utc(data.created);
     }
     if (data.results) {
       this.results = (data.results || []).map(result => new CommentThreadResult(result));

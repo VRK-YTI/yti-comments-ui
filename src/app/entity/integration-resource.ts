@@ -2,7 +2,7 @@ import { IntegrationResourceType } from '../services/api-schema';
 import { Status } from 'yti-common-ui/entities/status';
 import { Localizable, Localizer } from 'yti-common-ui/types/localization';
 import { formatDateTime, formatDisplayDateTime, parseDateTime } from '../utils/date';
-import { Moment } from 'moment';
+import { Moment, utc } from 'moment';
 import { LanguageService } from '../services/language.service';
 
 export class IntegrationResource {
@@ -26,7 +26,7 @@ export class IntegrationResource {
       this.type = data.type;
     }
     if (data.modified) {
-      this.modified = parseDateTime(data.modified);
+      this.modified = utc(data.modified);
     }
   }
 

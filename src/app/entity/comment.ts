@@ -1,6 +1,6 @@
 import { CommentType } from '../services/api-schema';
-import { formatDateTime, formatDisplayDateTime, parseDateTime } from '../utils/date';
-import { Moment } from 'moment';
+import { formatDateTime, formatDisplayDateTime } from '../utils/date';
+import { Moment, utc } from 'moment';
 import { AbstractResource } from './abstract-resource';
 import { CommentSimple } from './comment-simple';
 import { Location } from 'yti-common-ui/types/location';
@@ -31,7 +31,7 @@ export class Comment extends AbstractResource {
       this.endStatus = data.endStatus;
     }
     if (data.created) {
-      this.created = parseDateTime(data.created);
+      this.created = utc(data.created);
     }
     this.commentThread = new CommentThread(data.commentThread);
     if (data.parentComment) {
