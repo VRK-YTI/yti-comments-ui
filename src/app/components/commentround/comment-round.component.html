@@ -339,12 +339,10 @@
                     <div class="comments col-md-12">
                       <div class="h4 comment-icons">
                         <div>
-                          <a><i id="'refresh_commentthread_' + i + '_comments_button'" class="material-icons icon-blue"
-                                (click)="refreshComments(commentThread.value.id)">refresh</i></a>
-                        </div>
-                        <div>
-                          <a style="float: right;"><i id="close_commentthread_{{i}}_comments_button" class="fa fa-times"
+                          <a class="action-button"><i id="close_commentthread_{{i}}_comments_button" class="fa fa-times"
                                                       (click)="toggleShowThreadComments(commentRound.id, commentThread.value.id, i)"></i></a>
+                          <a class="action-button"><i id="refresh_commentthread_{{i}}_comments_button" class="fa fa-undo"
+                                                      (click)="refreshComments(commentThread.value.id)"></i></a>
                         </div>
                       </div>
                       <div *ngFor="let comment of filterTopLevelComments(activeThreadComments)">

@@ -30,7 +30,7 @@ import { TranslateService } from '@ngx-translate/core';
       <div *ngIf="commentRound.description as descriptionText" class="description-component-container" style="width: calc(100% - 260px);">
         <app-expandable-text [text]="descriptionText"></app-expandable-text>
       </div>
-      
+
       <ul class="organizations dot-separated-list">
         <li class="organization" *ngFor="let org of commentRound.organizations">
           {{org.prefLabel | translateValue:true}}
