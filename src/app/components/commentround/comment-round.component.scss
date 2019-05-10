@@ -50,11 +50,21 @@ table {
   }
 }
 
+.comment-count {
+
+  font-weight: normal;
+  cursor: pointer;
+  padding-top: 7px;
+  color: $blue;
+}
+
 .icon-blue {
+
   color: $blue;
 }
 
 .action-button {
+
   float: right;
   padding-left: 10px;
 }
