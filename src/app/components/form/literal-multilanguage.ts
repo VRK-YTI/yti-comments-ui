@@ -13,7 +13,7 @@ import { LanguageService } from '../../services/language.service';
       </dt>
       <dd *ngIf="valueLanguages.length > 0">
         <div class="localized" *ngFor="let language of valueLanguages">
-          <div class="language">{{ language.toUpperCase()}}</div>
+          <div *ngIf="language.toUpperCase() !== 'UND'" class="language">{{ language.toUpperCase()}}</div>
           <div class="localization">{{ value[language] }}</div>
         </div>
       </dd>
