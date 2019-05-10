@@ -535,8 +535,14 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     }
   }
 
+  closeInlineComments() {
+    this.showCommentsId = undefined;
+    this.activeThreadComments = [];
+  }
+
   onTabChange(event: NgbTabChangeEvent) {
 
+    this.closeInlineComments();
     if (this.isEditing()) {
       event.preventDefault();
 
