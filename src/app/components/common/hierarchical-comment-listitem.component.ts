@@ -1,11 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { LanguageService } from '../../services/language.service';
 import { CommentSimple } from '../../entity/comment-simple';
 import { DataService } from '../../services/data.service';
 import { CommentThreadType, CommentType } from '../../services/api-schema';
 import { v4 as uuid } from 'uuid';
 import { CommentRoundErrorModalService } from './error-modal.service';
-import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
 
 @Component({
   selector: 'app-hierarchical-comment',
@@ -61,7 +60,8 @@ import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
     </div>
     <ul *ngIf="hasChildComments">
       <li class="child-comment" *ngFor="let childComment of childComments; trackBy: commentIdentity">
-        <app-hierarchical-comment [id]="childComment.id"
+        <app-hierarchical-comment (refreshComments)="emitRefreshComments()"
+                                  [id]="childComment.id"
                                   [comment]="childComment"
                                   [comments]="comments"
                                   [commentRoundId]="commentRoundId"
@@ -78,6 +78,7 @@ export class HierarchicalCommentListitemComponent {
   @Input() commentRoundId: string;
   @Input() commentThreadId: string;
   @Input() canComment: boolean;
+  @Output() refreshComments = new EventEmitter<string>();
 
   commenting = false;
   commentContent = '';
@@ -108,20 +109,14 @@ export class HierarchicalCommentListitemComponent {
     this.dataService.createComment(this.commentRoundId, newComment).subscribe(createdComment => {
       this.toggleCommenting();
       this.comments.push(createdComment as CommentSimple);
-      this.refreshComments();
+      this.refreshComments.emit(this.commentThreadId);
     }, error => {
       this.errorModalService.openSubmitError(error);
     });
   }
 
-  refreshComments() {
-
-    this.dataService.getCommentRoundCommentThreadComments(this.commentRoundId, this.commentThreadId).subscribe(comments => {
-      this.comments = comments;
-      this.comments.sort(comparingPrimitive<CommentSimple>(comment => comment.created ? comment.created.toString() : undefined));
-    }, error => {
-      this.errorModalService.openSubmitError(error);
-    });
+  emitRefreshComments() {
+    this.refreshComments.emit(this.commentThreadId);
   }
 
   get hasChildComments(): boolean {

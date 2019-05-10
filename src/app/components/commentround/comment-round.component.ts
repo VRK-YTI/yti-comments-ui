@@ -460,7 +460,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     this.commenting$.next(false);
   }
 
-  sendComments() {
+  sendMyComments() {
 
     const comments: CommentType[] = [];
 

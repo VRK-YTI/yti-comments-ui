@@ -25,7 +25,7 @@
                 type="button"
                 class="btn btn-action"
                 [disabled]="commentRoundForm.invalid"
-                (click)="sendComments()">
+                (click)="sendMyComments()">
           <span translate>Send comments</span>
         </button>
       </div>
@@ -347,6 +347,7 @@
                       </div>
                       <div *ngFor="let comment of filterTopLevelComments(activeThreadComments)">
                         <app-hierarchical-comment *ngIf="!comment.parentComment"
+                                                  (refreshComments)="refreshComments($event)"
                                                   [id]="comment.id"
                                                   [comment]="comment"
                                                   [comments]="activeThreadComments"
@@ -449,7 +450,7 @@
                       type="button"
                       class="btn btn-action"
                       [disabled]="commentRoundForm.invalid"
-                      (click)="sendComments()">
+                      (click)="sendMyComments()">
                 <span translate>Send comments</span>
               </button>
             </div>
