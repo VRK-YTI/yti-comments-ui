@@ -40,7 +40,7 @@ export function fromPickerDate(date: NgbDate | null): Moment | null {
 }
 
 export function formatDisplayDateTime(dateTime: Moment | null): string {
-  return dateTime ? dateTime.format(displayDateTimeFormat) : '-';
+  return dateTime ? dateTime.local().format(displayDateTimeFormat) : '-';
 }
 
 export function parseDateTime(dateTime: string): Moment {
