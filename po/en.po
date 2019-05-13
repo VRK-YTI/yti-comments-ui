@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-05-13 09:16+0300\n"
+"PO-Revision-Date: 2019-05-13 09:43+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -594,6 +594,9 @@ msgid "CLOSE COMMENT ROUND?"
 msgstr ""
 
 msgid "DELETE COMMENT ROUND?"
+msgstr ""
+
+msgid "DELETE COMMENT THREAD?"
 msgstr ""
 
 msgid "invalidDate"

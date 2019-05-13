@@ -264,7 +264,10 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
   removeCommentThread(i: any) {
 
-    this.commentThreadForms.removeAt(i);
+    this.confirmationModalService.deleteCommentThread()
+      .then(() => {
+        this.commentThreadForms.removeAt(i);
+      }, ignoreModalClose);
   }
 
   get restrictedThreads(): string[] {

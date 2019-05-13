@@ -22,4 +22,8 @@ export class CommentsConfirmationModalService {
   deleteCommentRound() {
     return this.confirmationModalService.open('DELETE COMMENT ROUND?', '');
   }
+
+  deleteCommentThread() {
+    return this.confirmationModalService.open('DELETE COMMENT THREAD?', '');
+  }
 }

@@ -278,7 +278,7 @@
                       <span class="fa-stack fa-1x icon h5"
                             (click)="toggleShowThreadComments(commentRound.id, commentThread.value.id, i)">
                         <a><i id="view_commentthread_{{i}}_comments_button"
-                           class="fa icon-bubble fa-stack-2x icon-blue comment-icons"></i></a>
+                              class="fa icon-bubble fa-stack-2x icon-blue comment-icons"></i></a>
                         <span class="fa fa-stack-1x comment-count h6">{{commentThread.value.commentCount}}</span>
                       </span>
                     </div>
@@ -333,7 +333,7 @@
                     <span *ngIf="!isNewResource(commentThread.value.id)">{{ commentThread.value.proposedText }}</span>
                   </td>
                   <td *ngIf="editing">
-                    <button *ngIf="(commentRound.status === 'INCOMPLETE' || isNewResource(commentThread.value.id))"
+                    <button *ngIf="((commentRound.status === 'INCOMPLETE' && isEditorOrSuperUser) || isNewResource(commentThread.value.id))"
                             [id]="'remove_commentthread_' + i + '_button'"
                             type="button"
                             class="icon icon-trash"
