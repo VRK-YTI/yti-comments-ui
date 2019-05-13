@@ -274,7 +274,7 @@
               <tbody>
               <ng-container *ngFor="let commentThread of commentThreadForms.controls; let i = index" [formGroupName]="i">
                 <tr>
-                  <td class="cell-padding" style="width: 2%">
+                  <td style="width: 2%">
                     <div *ngIf="commentThread.value.commentCount != null && commentThread.value.commentCount > 0">
                       <span id="view_commentthread_{{i}}_comments_button"
                             class="fa-stack fa-1x icon h5"
@@ -284,7 +284,7 @@
                       </span>
                     </div>
                   </td>
-                  <td class="cell-padding" style="width: 15%">
+                  <td style="width: 15%">
                     <a *ngIf="commentThread.value.label && commentThread.value.resourceUri"
                        [id]="'commentthread_link_' + i"
                        [href]="getCommentThreadResourceUri(commentThread.value)"
@@ -299,13 +299,13 @@
                                                         [id]="'commenthread_' + i + '_label_text_input'"
                                                         [formControlName]="'label'"></app-localizable-undefined-textarea>
                   </td>
-                  <td class="cell-padding" style="width: 10%" >
+                  <td style="width: 10%" >
                     <span>{{ formatDisplayDate(commentThread.value.created) }}</span>
                   </td>
-                  <td class="cell-padding" style="width: 10%" *ngIf="!commentRound.fixedThreads">
+                  <td style="width: 10%" *ngIf="!commentRound.fixedThreads">
                     <span>{{ commentThread.value.user ? commentThread.value.user.getDisplayName() : authorizationManager.user ? authorizationManager.user.name : '-'}}</span>
                   </td>
-                  <td class="cell-padding" style="width: 15%">
+                  <td style="width: 15%">
                     <span class="wrap"
                           *ngIf="commentThread.value.resourceUri && !languageService.isLocalizableEmpty(commentThread.value.description)">{{ commentThread.value.description | translateValue }}</span>
                     <span *ngIf="commentThread.value.resourceUri && languageService.isLocalizableEmpty(commentThread.value.description)">-</span>
@@ -316,10 +316,10 @@
                                                         [id]="'commenthread_' + i + '_description_text_input'"
                                                         [formControlName]="'description'"></app-localizable-undefined-textarea>
                   </td>
-                  <td class="cell-padding" style="width: 10%">
+                  <td style="width: 10%">
                     <span translate>{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : '-' }}</span>
                   </td>
-                  <td class="cell-padding" style="width: 10%">
+                  <td style="width: 10%">
                     <app-proposed-status-table-dropdown *ngIf="isNewResource(commentThread.value.id) && commentThread.value.resourceUri != null"
                                                         [restrict]="commentRound.status !== 'INCOMPLETE' && commentRound.status !== 'AWAIT' && commentRound.status !== 'INPROGRESS' && isNewResource(commentThread.value.id)"
                                                         [id]="i"
@@ -328,7 +328,7 @@
                     <span *ngIf="(isNewResource(commentThread.value.id) && commentThread.value.resourceUri == null) || !isNewResource(commentThread.value.id)"
                           translate>{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : 'NOSTATUS' }}</span>
                   </td>
-                  <td class="cell-padding" style="width: 20%">
+                  <td style="width: 20%">
                     <app-literal-textarea *ngIf="commentThread.value.resourceUri && isNewResource(commentThread.value.id)"
                                           [required]=true
                                           [showRequired]=false
@@ -336,14 +336,14 @@
                                           [formControlName]="'proposedText'"></app-literal-textarea>
                     <span *ngIf="!isNewResource(commentThread.value.id)">{{ commentThread.value.proposedText }}</span>
                   </td>
-                  <td class="cell-padding" style="width: 3%" *ngIf="editing">
+                  <td style="width: 3%" *ngIf="editing">
                     <button *ngIf="((commentRound.status === 'INCOMPLETE' && isEditorOrSuperUser) || isNewResource(commentThread.value.id))"
                             [id]="'remove_commentthread_' + i + '_button'"
                             type="button"
                             class="icon icon-trash"
                             (click)="removeCommentThread(i)"></button>
                   </td>
-                  <td class="cell-padding" style="width: 15%" *ngIf="showResults && commentThread.value.results && commentThread.value.results.length > 0">
+                  <td style="width: 15%" *ngIf="showResults && commentThread.value.results && commentThread.value.results.length > 0">
                     <div *ngFor="let result of commentThread.value.results">
                       <div>
                         <span>{{ result.status | translate }}</span>: <span>{{ result.count }}</span> (<span>{{ result.percentage }}</span> %)
