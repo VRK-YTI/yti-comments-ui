@@ -276,10 +276,10 @@
                 <tr>
                   <td>
                     <div *ngIf="commentThread.value.commentCount != null && commentThread.value.commentCount > 0">
-                      <span class="fa-stack fa-1x icon h5"
+                      <span id="view_commentthread_{{i}}_comments_button"
+                            class="fa-stack fa-1x icon h5"
                             (click)="toggleShowThreadComments(commentRound.id, commentThread.value.id, i)">
-                        <a><i id="view_commentthread_{{i}}_comments_button"
-                              class="fa icon-bubble fa-stack-2x icon-blue comment-icons"></i></a>
+                        <a><i class="fa icon-bubble fa-stack-2x icon-blue comment-icons"></i></a>
                         <span class="fa fa-stack-1x comment-count h6">{{commentThread.value.commentCount}}</span>
                       </span>
                     </div>
