@@ -6,7 +6,7 @@ import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
   selector: 'app-literal-textarea',
   template: `
     <dl *ngIf="show">
-      <dt>
+      <dt *ngIf="label">
         <label>{{ label }}</label>
         <app-information-symbol [infoText]="infoText"></app-information-symbol>
         <app-required-symbol *ngIf="showRequired && required && editing"></app-required-symbol>

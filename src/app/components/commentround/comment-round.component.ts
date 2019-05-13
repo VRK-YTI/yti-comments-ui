@@ -577,6 +577,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   onTabChange(event: NgbTabChangeEvent) {
 
     this.closeInlineComments();
+    this.cancelCommenting();
     if (this.isEditing()) {
       event.preventDefault();
 

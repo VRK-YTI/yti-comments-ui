@@ -17,6 +17,11 @@ table {
   th {
     color: $gray-600;
   }
+
+  td {
+    padding-top: 10px;
+    vertical-align: top;
+  }
 }
 
 .bottom {
@@ -77,4 +82,9 @@ table {
 .sort-content {
 
   cursor: pointer;
+}
+
+.cell-padding {
+
+  padding-top: 3px;
 }

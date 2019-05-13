@@ -127,7 +127,7 @@ div.localized {
   div.localization {
 
     float: left;
-    padding: 1% 0;
+    padding: 3px 0;
     width: calc(100% - #{$language-width});
     min-height: $language-height;
     padding-left: 10px;
@@ -138,10 +138,8 @@ div.localized {
   div.localization-without-id {
 
     float: left;
-    padding: 1% 0;
     width: calc(100%);
     min-height: $language-height;
-    padding-left: 10px;
     padding-right: 10px;
     white-space: normal;
   }

@@ -7,7 +7,7 @@ import { Localizable } from 'yti-common-ui/types/localization';
   selector: 'app-localizable-undefined-textarea',
   template: `
     <dl>
-      <dt>
+      <dt *ngIf="label">
         <label>{{ label }}</label>
         <app-information-symbol [infoText]="infoText"></app-information-symbol>
         <app-required-symbol *ngIf="showRequired && required && editing"></app-required-symbol>
