@@ -96,7 +96,7 @@
       <app-literal [id]="'commentround_user_name'"
                    [label]="'Editor' | translate"
                    [infoText]="'INFO_TEXT_COMMENTROUND_USER'"
-                   [value]="commentRound.user.getDisplayName()"></app-literal>
+                   [value]="commentRound.user.getDisplayNameWithEmail()"></app-literal>
 
       <div class="row">
         <app-literal-input class="col-md-4"
@@ -184,7 +184,7 @@
       <app-literal [id]="'commentround_user_name'"
                    [label]="'Editor' | translate"
                    [infoText]="'INFO_TEXT_COMMENTROUND_USER'"
-                   [value]="commentRound.user.getDisplayName()"></app-literal>
+                   [value]="commentRound.user.getDisplayNameWithEmail()"></app-literal>
 
       <div class="row">
         <app-literal class="col-md-2"
@@ -273,7 +273,7 @@
               </thead>
               <tbody>
               <ng-container *ngFor="let commentThread of commentThreadForms.controls; let i = index" [formGroupName]="i">
-                <tr>
+                <tr style="valign: top">
                   <td>
                     <div *ngIf="commentThread.value.commentCount != null && commentThread.value.commentCount > 0">
                       <span id="view_commentthread_{{i}}_comments_button"
@@ -303,7 +303,7 @@
                     <span>{{ formatDisplayDate(commentThread.value.created) }}</span>
                   </td>
                   <td *ngIf="!commentRound.fixedThreads" style="width: 10%">
-                    <span>{{ commentThread.value.user.getDisplayName() }}</span>
+                    <span>{{ commentThread.value.user ? commentThread.value.user.getDisplayName() : authorizationManager.user ? authorizationManager.user.name : '-'}}</span>
                   </td>
                   <td style="width: 15%;">
                     <span class="wrap"
@@ -433,7 +433,7 @@
                   <span>{{ formatDisplayDate(commentThread.value.created) }}</span>
                 </td>
                 <td *ngIf="!commentRound.fixedThreads" style="width: 10%">
-                  <span>{{ commentThread.value.user.getDisplayName() }}</span>
+                  <span>{{ commentThread.value.user ? commentThread.value.user.getDisplayName() : authorizationManager.user ? authorizationManager.user.name : '-'}}</span>
                 </td>
                 <td style="width: 15%">
                   <span translate>{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : 'NOSTATUS' }}</span>

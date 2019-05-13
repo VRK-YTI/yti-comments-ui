@@ -24,6 +24,10 @@ export class User {
   }
 
   getDisplayName(): string {
+    return this.firstName + ' ' + this.lastName;
+  }
+
+  getDisplayNameWithEmail(): string {
     return this.firstName + ' ' + this.lastName + ', ' + this.email;
   }
 }
