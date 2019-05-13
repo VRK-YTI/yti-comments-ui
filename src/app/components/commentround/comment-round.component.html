@@ -262,6 +262,7 @@
                     <span [class.sort-content-active]="sortOption === 'created'"> ▼</span>
                   </div>
                 </th>
+                <th *ngIf="!commentRound.fixedThreads" style="width: 10%" translate>Added by</th>
                 <th style="width: 20%" translate>Description</th>
                 <th style="width: 15%" translate>Current status</th>
                 <th style="width: 15%" translate>Proposed status</th>
@@ -300,6 +301,9 @@
                   </td>
                   <td style="width: 10%">
                     <span>{{ formatDisplayDate(commentThread.value.created) }}</span>
+                  </td>
+                  <td *ngIf="!commentRound.fixedThreads" style="width: 10%">
+                    <span>{{ commentThread.value.user.getDisplayName() }}</span>
                   </td>
                   <td style="width: 15%;">
                     <span class="wrap"
@@ -403,6 +407,7 @@
                     <span [class.sort-content-active]="sortOption === 'created'"> ▼</span>
                   </div>
                 </th>
+                <th *ngIf="!commentRound.fixedThreads" style="width: 10%" translate>Added by</th>
                 <th style="width: 15%" translate>Current status</th>
                 <th style="width: 15%" translate>Proposed status</th>
                 <th style="width: 15%" translate>Proposer's comment</th>
@@ -426,6 +431,9 @@
                 </td>
                 <td style="width: 10%">
                   <span>{{ formatDisplayDate(commentThread.value.created) }}</span>
+                </td>
+                <td *ngIf="!commentRound.fixedThreads" style="width: 10%">
+                  <span>{{ commentThread.value.user.getDisplayName() }}</span>
                 </td>
                 <td style="width: 15%">
                   <span translate>{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : 'NOSTATUS' }}</span>

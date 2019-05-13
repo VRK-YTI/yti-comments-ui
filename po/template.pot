@@ -163,6 +163,9 @@ msgstr ""
 msgid "Added"
 msgstr ""
 
+msgid "Added by"
+msgstr ""
+
 msgid "Current status"
 msgstr ""
 
