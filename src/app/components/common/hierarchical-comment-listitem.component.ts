@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { LanguageService } from '../../services/language.service';
 import { CommentSimple } from '../../entity/comment-simple';
 import { DataService } from '../../services/data.service';
 import { CommentThreadType, CommentType } from '../../services/api-schema';
 import { v4 as uuid } from 'uuid';
 import { CommentRoundErrorModalService } from './error-modal.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-hierarchical-comment',
@@ -20,17 +21,13 @@ import { CommentRoundErrorModalService } from './error-modal.service';
           <span *ngIf="comment.proposedStatus !== comment.endStatus"
                 class="proposedStatus"
           >, <s>{{ comment.proposedStatus | translate }}</s> \t&#x2192; {{ comment.endStatus | translate }}</span>
+          <span class="actions float-right"
+                *ngIf="!this.commenting && canComment"
+                [id]="'comment_' + this.comment.id + '_reply_button'"
+                (click)="toggleCommenting()"
+                translate>Reply</span>
           <br>
           <span class="content">{{ comment.content }}</span>
-        </div>
-        <div class="actions float-right">
-          <button *ngIf="!this.commenting && canComment"
-                  [id]="'comment_' + this.comment.id + '_reply_button'"
-                  class="btn btn-secondary-action"
-                  type="button"
-                  (click)="toggleCommenting()">
-            <span translate>Reply</span>
-          </button>
         </div>
       </div>
       <div class="row">
@@ -66,18 +63,20 @@ import { CommentRoundErrorModalService } from './error-modal.service';
                                   [comments]="comments"
                                   [commentRoundId]="commentRoundId"
                                   [commentThreadId]="commentThreadId"
+                                  [activeCommentId$]="activeCommentId$"
                                   [canComment]="canComment"></app-hierarchical-comment>
       </li>
     </ul>
   `
 })
-export class HierarchicalCommentListitemComponent {
+export class HierarchicalCommentListitemComponent implements OnInit {
 
   @Input() comment: CommentSimple;
   @Input() comments: CommentSimple[];
   @Input() commentRoundId: string;
   @Input() commentThreadId: string;
   @Input() canComment: boolean;
+  @Input() activeCommentId$ = new BehaviorSubject<string | null>(null);
   @Output() refreshComments = new EventEmitter<string>();
 
   commenting = false;
@@ -88,10 +87,24 @@ export class HierarchicalCommentListitemComponent {
               private errorModalService: CommentRoundErrorModalService) {
   }
 
+  ngOnInit() {
+
+    this.activeCommentId$.subscribe(activeCommentId => {
+      if (activeCommentId !== this.comment.id) {
+        this.commentContent = '';
+        this.commenting = false;
+      }
+    });
+  }
+
   toggleCommenting() {
 
     if (this.commenting) {
       this.commentContent = '';
+    }
+    if (!this.commenting) {
+      this.commentContent = '';
+      this.activeCommentId$.next(this.comment.id);
     }
     this.commenting = !this.commenting;
   }

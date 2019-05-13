@@ -30,7 +30,6 @@ import { CommentRoundErrorModalService } from '../common/error-modal.service';
 import { CommentSimple } from '../../entity/comment-simple';
 import { comparingLocalizable, comparingPrimitive } from 'yti-common-ui/utils/comparator';
 import { Moment } from 'moment';
-import { TranslateService } from '@ngx-translate/core';
 
 function addToControl<T>(control: FormControl, itemToAdd: T) {
 
@@ -66,6 +65,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
   showCommentsId: number | undefined = undefined;
   activeThreadComments: CommentSimple[];
+  activeCommentId$ = new BehaviorSubject<string | null>(null);
 
   sortOption = 'alphabetical';
 
@@ -91,8 +91,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
               private errorModalService: CommentRoundErrorModalService,
               private searchLinkedIntegrationResourceModalService: SearchLinkedIntegrationResourceModalService,
               public languageService: LanguageService,
-              public configurationService: ConfigurationService,
-              private translateService: TranslateService) {
+              public configurationService: ConfigurationService) {
 
     this.cancelSubscription = editableService.cancel$.subscribe(() => this.reset());
 

@@ -46,5 +46,11 @@ ul {
 }
 
 .actions {
-  padding: 10px;
+  cursor: pointer;
+  padding-left: 20px;
+  color: $blue;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
