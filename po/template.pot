@@ -58,12 +58,6 @@ msgstr ""
 msgid "{{ selectedStatus }}"
 msgstr ""
 
-msgid "Proposed status"
-msgstr ""
-
-msgid "{{ option }}"
-msgstr ""
-
 msgid "Search term"
 msgstr ""
 
@@ -166,7 +160,13 @@ msgstr ""
 msgid "Resource"
 msgstr ""
 
+msgid "Added"
+msgstr ""
+
 msgid "Current status"
+msgstr ""
+
+msgid "Proposed status"
 msgstr ""
 
 msgid "Proposer's comment"
@@ -203,8 +203,9 @@ msgid ""
 msgstr ""
 
 msgid ""
-"{{ commentThread.value.commentersProposedStatus ? "
-"commentThread.value.commentersProposedStatus : 'NOSTATUS' }}"
+"{{ commentThread.value.commentersProposedStatus && "
+"getMyCommentForCommentThread(commentThread.value.id) != null ? "
+"commentThread.value.commentersProposedStatus : '-' }}"
 msgstr ""
 
 msgid "Filter results"
@@ -375,7 +376,7 @@ msgstr ""
 msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr ""
 
-msgid "ERR_MSG_USER_PROPOSED_STATUS_REQUIRED"
+msgid "Submit error"
 msgstr ""
 
 msgid "Front page"
@@ -465,10 +466,10 @@ msgstr ""
 msgid "ERR_MSG_INVALID_ID"
 msgstr ""
 
-msgid "NOSTATUS"
+msgid "ERR_MSG_USER_PROPOSED_STATUS_REQUIRED"
 msgstr ""
 
-msgid "Submit error"
+msgid "NOSTATUS"
 msgstr ""
 
 msgid "Unexpected error"
@@ -496,6 +497,12 @@ msgid "terminology"
 msgstr ""
 
 msgid "datamodel"
+msgstr ""
+
+msgid "alphabetical"
+msgstr ""
+
+msgid "created"
 msgstr ""
 
 msgid "codelist-type"

@@ -13,8 +13,9 @@ import { LanguageService } from '../../services/language.service';
       </dt>
       <dd *ngIf="valueLanguages.length > 0">
         <div class="localized" *ngFor="let language of valueLanguages">
-          <div *ngIf="language.toUpperCase() !== 'UND'" class="language">{{ language.toUpperCase()}}</div>
-          <div class="localization">{{ value[language] }}</div>
+          <div *ngIf="showLanguageIdentifier(language)" class="language">{{ language.toUpperCase()}}</div>
+          <div *ngIf="showLanguageIdentifier(language)" class="localization">{{ value[language] }}</div>
+          <div *ngIf="!showLanguageIdentifier(language)" class="localization-without-id">{{ value[language] }}</div>
         </div>
       </dd>
       <dd *ngIf="valueLanguages.length === 0">
@@ -35,5 +36,10 @@ export class LiteralMultilanguageComponent {
 
   get valueLanguages(): string[] {
     return Object.keys(this.value);
+  }
+
+  showLanguageIdentifier(language: string): boolean {
+
+    return language.toUpperCase() !== 'UND';
   }
 }

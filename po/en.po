@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-05-10 14:28+0300\n"
+"PO-Revision-Date: 2019-05-13 09:16+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -65,12 +65,6 @@ msgid "Search comment"
 msgstr ""
 
 msgid "{{ selectedStatus }}"
-msgstr ""
-
-msgid "Proposed status"
-msgstr ""
-
-msgid "{{ option }}"
 msgstr ""
 
 msgid "Search term"
@@ -182,7 +176,13 @@ msgstr ""
 msgid "Resource"
 msgstr ""
 
+msgid "Added"
+msgstr ""
+
 msgid "Current status"
+msgstr ""
+
+msgid "Proposed status"
 msgstr ""
 
 msgid "Proposer's comment"
@@ -220,8 +220,9 @@ msgid ""
 msgstr ""
 
 msgid ""
-"{{ commentThread.value.commentersProposedStatus ? commentThread.value."
-"commentersProposedStatus : 'NOSTATUS' }}"
+"{{ commentThread.value.commentersProposedStatus && "
+"getMyCommentForCommentThread(commentThread.value.id) != null ? commentThread."
+"value.commentersProposedStatus : '-' }}"
 msgstr ""
 
 msgid "Filter results"
@@ -406,8 +407,8 @@ msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr ""
 "Results can be filtered by organization, status and tool using dropdown"
 
-msgid "ERR_MSG_USER_PROPOSED_STATUS_REQUIRED"
-msgstr "Status proposal is required for main level comments."
+msgid "Submit error"
+msgstr ""
 
 msgid "Front page"
 msgstr ""
@@ -496,11 +497,11 @@ msgstr "Invalid source data."
 msgid "ERR_MSG_INVALID_ID"
 msgstr "Invalid ID in data."
 
+msgid "ERR_MSG_USER_PROPOSED_STATUS_REQUIRED"
+msgstr "Status proposal is required for main level comments."
+
 msgid "NOSTATUS"
 msgstr "No selected status"
-
-msgid "Submit error"
-msgstr ""
 
 msgid "Unexpected error"
 msgstr ""
@@ -528,6 +529,12 @@ msgstr "Suomi.fi Terminologies"
 
 msgid "datamodel"
 msgstr "Suomi.fi Data Vocabularies"
+
+msgid "alphabetical"
+msgstr "Alphabetical"
+
+msgid "created"
+msgstr "Created"
 
 msgid "codelist-type"
 msgstr "Code list"

@@ -134,6 +134,17 @@ div.localized {
     padding-right: 10px;
     white-space: normal;
   }
+
+  div.localization-without-id {
+
+    float: left;
+    padding: 1% 0;
+    width: calc(100%);
+    min-height: $language-height;
+    padding-left: 10px;
+    padding-right: 10px;
+    white-space: normal;
+  }
 }
 
 .main {

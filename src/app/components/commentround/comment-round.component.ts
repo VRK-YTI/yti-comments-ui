@@ -4,8 +4,8 @@ import { CommentRound } from '../../entity/commentround';
 import { DataService } from '../../services/data.service';
 import { CommentThread } from '../../entity/commentthread';
 import { EditableService } from '../../services/editable.service';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { validDateRange } from '../../utils/date';
+import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { formatDisplayDateTime, validDateRange } from '../../utils/date';
 import { CommentRoundStatus } from '../../entity/comment-round-status';
 import { requiredList } from 'yti-common-ui/utils/validator';
 import { Location } from '@angular/common';
@@ -29,6 +29,8 @@ import { Localizable } from 'yti-common-ui/types/localization';
 import { CommentRoundErrorModalService } from '../common/error-modal.service';
 import { CommentSimple } from '../../entity/comment-simple';
 import { comparingLocalizable, comparingPrimitive } from 'yti-common-ui/utils/comparator';
+import { Moment } from 'moment';
+import { TranslateService } from '@ngx-translate/core';
 
 function addToControl<T>(control: FormControl, itemToAdd: T) {
 
@@ -65,6 +67,8 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   showCommentsId: number | undefined = undefined;
   activeThreadComments: CommentSimple[];
 
+  sortOption = 'alphabetical';
+
   commentRoundForm = new FormGroup({
     label: new FormControl(''),
     description: new FormControl(''),
@@ -87,7 +91,8 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
               private errorModalService: CommentRoundErrorModalService,
               private searchLinkedIntegrationResourceModalService: SearchLinkedIntegrationResourceModalService,
               public languageService: LanguageService,
-              public configurationService: ConfigurationService) {
+              public configurationService: ConfigurationService,
+              private translateService: TranslateService) {
 
     this.cancelSubscription = editableService.cancel$.subscribe(() => this.reset());
 
@@ -119,6 +124,26 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
         this.activateCurrentTab();
       });
     });
+  }
+
+  sortContent(sortingType: string) {
+    this.sortOption = sortingType;
+    switch (sortingType) {
+      case 'alphabetical':
+        this.commentThreadForms.controls.sort(comparingPrimitive<AbstractControl>(
+          commentThread => this.languageService.isLocalizableEmpty(commentThread.value.label))
+          .andThen(comparingPrimitive<AbstractControl>(commentThread =>
+            this.languageService.isLocalizableEmpty(commentThread.value.label) ? commentThread.value.url.toLowerCase() : null))
+          .andThen(comparingLocalizable<AbstractControl>(this.languageService,
+            commentThread => commentThread.value.label ? commentThread.value.label : {})));
+        break;
+      case 'created':
+        this.commentThreadForms.controls.sort(comparingPrimitive<AbstractControl>(
+          commentThread => commentThread.value.created));
+        break;
+      default:
+        break;
+    }
   }
 
   activateCurrentTab() {
@@ -212,6 +237,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
       id: new FormControl(id),
       resourceUri: new FormControl(integrationResource.uri),
       resourceType: new FormControl(integrationResource.type),
+      created: new FormControl(),
       label: new FormControl(integrationResource.prefLabel),
       description: new FormControl(integrationResource.description),
       currentStatus: new FormControl(integrationResource.status),
@@ -298,6 +324,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
         resourceUri: new FormControl(commentThread.resourceUri),
         label: new FormControl(commentThread.label, Validators.required),
         description: new FormControl(commentThread.description, Validators.required),
+        created: new FormControl(commentThread.created),
         currentStatus: new FormControl(commentThread.currentStatus),
         proposedStatus: new FormControl(commentThread.proposedStatus),
         proposedText: new FormControl(commentThread.proposedText),
@@ -377,6 +404,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
           resourceUri: commentThreadInputValue.resourceUri,
           label: commentThreadInputValue.label,
           description: commentThreadInputValue.description,
+          created: commentThreadInputValue.created,
           currentStatus: commentThreadInputValue.currentStatus,
           proposedStatus: commentThreadInputValue.proposedStatus,
           proposedText: commentThreadInputValue.proposedText,
@@ -708,4 +736,8 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
       comparingPrimitive<CommentSimple>(comment => comment.created ? comment.created.toString() : undefined));
   }
 
+  formatDisplayDate(created: Moment): string {
+
+    return formatDisplayDateTime(created);
+  }
 }
