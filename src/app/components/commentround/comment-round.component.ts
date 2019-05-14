@@ -694,6 +694,12 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     };
   }
 
+  get showActions(): boolean {
+
+    return this.editing &&
+      (this.commentRound.status === 'INCOMPLETE' || this.commentRound.status === 'INPROGRESS' || this.commentRound.status === 'AWAIT');
+  }
+
   get showResults(): boolean {
 
     return this.commentRound.status === 'ENDED' || this.commentRound.status === 'CLOSED';
