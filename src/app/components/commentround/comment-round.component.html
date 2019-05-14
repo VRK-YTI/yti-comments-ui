@@ -24,7 +24,7 @@
         <button id="send_comments_button"
                 type="button"
                 class="btn btn-action"
-                [disabled]="commentRoundForm.invalid"
+                [disabled]="!commentsHaveContent"
                 (click)="sendMyComments()">
           <span translate>Send comments</span>
         </button>
@@ -476,11 +476,11 @@
               </tr>
               </tbody>
             </table>
-            <div *ngIf="canComment && commenting" class="d-flex justify-content-end">
+            <div *ngIf="canSendComments" class="d-flex justify-content-end">
               <button id="send_comments_button_bottom"
                       type="button"
                       class="btn btn-action"
-                      [disabled]="commentRoundForm.invalid"
+                      [disabled]="!commentsHaveContent"
                       (click)="sendMyComments()">
                 <span translate>Send comments</span>
               </button>

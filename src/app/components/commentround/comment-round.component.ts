@@ -629,11 +629,16 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
       this.commentRound.status === 'INPROGRESS';
   }
 
-  get canComment(): boolean {
+  get commentsHaveContent(): boolean {
 
-    return this.commentsTabActive &&
-      this.authorizationManager.canCreateComment(this.commentRound) &&
-      this.commentRound.status === 'INPROGRESS';
+    let hasContent = true;
+
+    this.commentThreadForms.controls.forEach(commentThread => {
+      if (commentThread.value.commentersProposedText == null || commentThread.value.commentersProposedText === '') {
+        hasContent = false;
+      }
+    });
+    return hasContent;
   }
 
   get canInlineComment(): boolean {
@@ -741,6 +746,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   }
 
   updateCommentCountForCommentThread(commentThreadId: string, count: number) {
+
     this.commentThreadForms.controls.forEach(commentThread => {
       if (commentThread.value.id === commentThreadId) {
         commentThread.value.commentCount = count;
