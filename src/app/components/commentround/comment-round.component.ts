@@ -732,10 +732,19 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   refreshComments(commentThreadId: string) {
 
     this.dataService.getCommentRoundCommentThreadComments(this.commentRound.id, commentThreadId).subscribe(comments => {
+      this.updateCommentCountForCommentThread(commentThreadId, comments.length);
       this.sortCommentsByCreated(comments);
       this.activeThreadComments = comments;
     }, error => {
       this.errorModalService.openSubmitError(error);
+    });
+  }
+
+  updateCommentCountForCommentThread(commentThreadId: string, count: number) {
+    this.commentThreadForms.controls.forEach(commentThread => {
+      if (commentThread.value.id === commentThreadId) {
+        commentThread.value.commentCount = count;
+      }
     });
   }
 
