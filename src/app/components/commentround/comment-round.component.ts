@@ -132,7 +132,8 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
         this.commentThreadForms.controls.sort(comparingPrimitive<AbstractControl>(
           commentThread => this.languageService.isLocalizableEmpty(commentThread.value.label))
           .andThen(comparingPrimitive<AbstractControl>(commentThread =>
-            this.languageService.isLocalizableEmpty(commentThread.value.label) ? commentThread.value.url.toLowerCase() : null))
+            this.languageService.isLocalizableEmpty(
+              commentThread.value.label) ? (commentThread.value.url ? commentThread.value.url.toLowerCase() : null) : null))
           .andThen(comparingLocalizable<AbstractControl>(this.languageService,
             commentThread => commentThread.value.label ? commentThread.value.label : {})));
         break;
@@ -324,6 +325,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     commentThreads.forEach(commentThread => {
       const commentThreadFormGroup: FormGroup = new FormGroup({
         id: new FormControl(commentThread.id),
+        url: new FormControl(commentThread.url),
         resourceUri: new FormControl(commentThread.resourceUri),
         label: new FormControl(commentThread.label, Validators.required),
         description: new FormControl(commentThread.description, Validators.required),
@@ -405,6 +407,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
         const commentThreadInputValue = commentThreadInput.value;
         const commentThreadFromFormInput: CommentThreadSimpleType = <CommentThreadSimpleType>{
           id: commentThreadInputValue.id,
+          url: commentThreadInputValue.url,
           resourceUri: commentThreadInputValue.resourceUri,
           label: commentThreadInputValue.label,
           description: commentThreadInputValue.description,
