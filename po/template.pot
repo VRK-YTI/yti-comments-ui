@@ -379,16 +379,13 @@ msgstr ""
 msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr ""
 
-msgid "Submit error"
+msgid "Unexpected error"
 msgstr ""
 
 msgid "Front page"
 msgstr ""
 
 msgid "SUPERSEDED"
-msgstr ""
-
-msgid "SUBMITTED"
 msgstr ""
 
 msgid "RETIRED"
@@ -472,10 +469,10 @@ msgstr ""
 msgid "ERR_MSG_USER_PROPOSED_STATUS_REQUIRED"
 msgstr ""
 
-msgid "NOSTATUS"
+msgid "Submit error"
 msgstr ""
 
-msgid "Unexpected error"
+msgid "NOSTATUS"
 msgstr ""
 
 msgid "ADMIN"

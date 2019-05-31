@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-05-13 10:02+0300\n"
+"PO-Revision-Date: 2019-05-31 10:15+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -416,17 +416,14 @@ msgstr ""
 "Hakutuloksia voi rajata organisaatio-, tila- ja työkalukohtaisesti "
 "alasvetovalikoiden avulla"
 
-msgid "Submit error"
-msgstr "Toiminnossa tapahtui virhe"
+msgid "Unexpected error"
+msgstr "Tapahtui odottamaton virhe"
 
 msgid "Front page"
 msgstr "Etusivu"
 
 msgid "SUPERSEDED"
 msgstr "Korvattu"
-
-msgid "SUBMITTED"
-msgstr "Odottaa hyväksyntää"
 
 msgid "RETIRED"
 msgstr "Poistettu"
@@ -509,11 +506,11 @@ msgstr "Viallinen ID datassa."
 msgid "ERR_MSG_USER_PROPOSED_STATUS_REQUIRED"
 msgstr "Tilaehdotus on vaadittu päätason kommenteille."
 
+msgid "Submit error"
+msgstr "Toiminnossa tapahtui virhe"
+
 msgid "NOSTATUS"
 msgstr "Ei valittua tilaa"
-
-msgid "Unexpected error"
-msgstr "Tapahtui odottamaton virhe"
 
 msgid "ADMIN"
 msgstr "Ylläpitäjä"
@@ -613,39 +610,3 @@ msgstr "Virheellinen päivämäärä"
 
 msgid "invalidDateRange"
 msgstr "Virheellinen päivämääräväli"
-
-#~ msgid "Comment thread name"
-#~ msgstr "Kommentointiketjun nimi"
-
-#~ msgid "Comment thread resource URI"
-#~ msgstr "Kommentointiketju tietosisällön URI"
-
-#~ msgid "Parent comment"
-#~ msgstr "Ylätason kommentti"
-
-#~ msgid "Commenter"
-#~ msgstr "Kommentoija"
-
-#~ msgid "Thread resource name"
-#~ msgstr "Kommentointiketju tietosisällön nimi"
-
-#~ msgid "Thread resource URI"
-#~ msgstr "Kommentointiketju tietosisällön URI"
-
-#~ msgid "Add comment"
-#~ msgstr "Luo kommentti"
-
-#~ msgid "Resource name"
-#~ msgstr "Tietosisällön nimi"
-
-#~ msgid "Resource description"
-#~ msgstr "Tietosisällön kuvaus"
-
-#~ msgid "Resource URI"
-#~ msgstr "Tietosisällön URI"
-
-#~ msgid "Proposed action"
-#~ msgstr "Ehdotettu toiminto"
-
-#~ msgid "There are no comments yet."
-#~ msgstr "Kommentteja ei vielä ole."

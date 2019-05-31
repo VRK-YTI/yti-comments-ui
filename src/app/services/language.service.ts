@@ -11,16 +11,20 @@ export class LanguageService implements Localizer {
 
   private static readonly LANGUAGE_KEY: string = 'yti-comments-ui.language-service.language';
   private static readonly CONTENT_LANGUAGE_KEY: string = 'yti-comments-ui.language-service.content-language';
+  private static readonly LANGUAGE_FI = 'fi';
+  private static readonly LANGUAGE_EN = 'en';
+  private static readonly LANGUAGE_SV = 'sv';
 
-  language$ = new BehaviorSubject<Language>(getFromLocalStorage(LanguageService.LANGUAGE_KEY, 'fi'));
-  contentLanguage$ = new BehaviorSubject<Language>(getFromLocalStorage(LanguageService.CONTENT_LANGUAGE_KEY, 'fi'));
+
+  language$ = new BehaviorSubject<Language>(getFromLocalStorage(LanguageService.LANGUAGE_KEY, LanguageService.LANGUAGE_FI));
+  contentLanguage$ = new BehaviorSubject<Language>(getFromLocalStorage(LanguageService.CONTENT_LANGUAGE_KEY, LanguageService.LANGUAGE_FI));
   translateLanguage$ = new BehaviorSubject<Language>(this.language);
 
   constructor(private translateService: TranslateService) {
 
-    translateService.addLangs(['fi', 'en']);
-    translateService.use('fi');
-    translateService.setDefaultLang('en');
+    translateService.addLangs([LanguageService.LANGUAGE_FI, LanguageService.LANGUAGE_EN]);
+    translateService.use(LanguageService.LANGUAGE_FI);
+    translateService.setDefaultLang(LanguageService.LANGUAGE_EN);
     this.language$.subscribe(lang => this.translateService.use(lang));
 
     combineLatest(this.language$, this.contentLanguage$)
@@ -85,5 +89,56 @@ export class LanguageService implements Localizer {
     }
 
     return JSON.stringify(localizable) === JSON.stringify({});
+  }
+
+  translateToGivenLanguage(localizable: Localizable, languageToUse: string | null = LanguageService.LANGUAGE_FI): string {
+
+    if (!localizable || !languageToUse) {
+      return '';
+    }
+
+    const primaryLocalization = localizable[languageToUse];
+
+    if (primaryLocalization) {
+      return primaryLocalization;
+    } else {
+
+      const fallbackValue = this.checkForFallbackLanguages(localizable);
+
+      if (fallbackValue != null) {
+        return fallbackValue;
+      }
+
+      for (const [language, value] of Object.entries(localizable)) {
+        if (value) {
+          return `${value} (${language})`;
+        }
+      }
+
+      return '';
+    }
+  }
+
+  checkForFallbackLanguages(localizable: Localizable): string | null {
+
+    const fallbackLanguages: string[] = [LanguageService.LANGUAGE_EN, LanguageService.LANGUAGE_FI, LanguageService.LANGUAGE_SV];
+
+    for (const language of fallbackLanguages) {
+      if (this.hasLocalizationForLanguage(localizable, language)) {
+        return this.fallbackLocalization(localizable, language);
+      }
+    }
+
+    return null;
+  }
+
+  hasLocalizationForLanguage(localizable: Localizable, language: string) {
+    const value: string = localizable[language];
+    return value != null && value !== '';
+  }
+
+  fallbackLocalization(localizable: Localizable, language: string) {
+    const value: string = localizable[language];
+    return `${value} (${language})`;
   }
 }
