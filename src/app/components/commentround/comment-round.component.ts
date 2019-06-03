@@ -508,7 +508,11 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
         endStatus: commentThreadInputValue.commentersProposedEndStatus,
         content: commentThreadInputValue.commentersProposedText
       };
-      comments.push(commentType);
+      if (!this.commentRound.fixedThreads && this.commentRound.openThreads && commentThreadInputValue.commentersProposedText) {
+        comments.push(commentType);
+      } else {
+        comments.push(commentType);
+      }
     });
 
     this.dataService.createCommentsToCommentRound(this.commentRound.id, comments).subscribe(myComments => {
@@ -634,7 +638,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     let hasContent = true;
 
     this.commentThreadForms.controls.forEach(commentThread => {
-      if (commentThread.value.commentersProposedText == null || commentThread.value.commentersProposedText === '') {
+      if (commentThread.value.commentersProposedText == null || commentThread.value.commentersProposedText === '') {
         hasContent = false;
       }
     });
@@ -697,7 +701,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   get showActions(): boolean {
 
     return this.editing &&
-      (this.commentRound.status === 'INCOMPLETE' || this.commentRound.status === 'INPROGRESS' || this.commentRound.status === 'AWAIT');
+      (this.commentRound.status === 'INCOMPLETE' || this.commentRound.status === 'INPROGRESS' || this.commentRound.status === 'AWAIT');
   }
 
   get showResults(): boolean {
