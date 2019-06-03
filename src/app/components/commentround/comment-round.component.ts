@@ -508,9 +508,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
         endStatus: commentThreadInputValue.commentersProposedEndStatus,
         content: commentThreadInputValue.commentersProposedText
       };
-      if (!this.commentRound.fixedThreads && this.commentRound.openThreads && commentThreadInputValue.commentersProposedText) {
-        comments.push(commentType);
-      } else {
+      if (commentThreadInputValue.commentersProposedText) {
         comments.push(commentType);
       }
     });
@@ -635,11 +633,11 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
   get commentsHaveContent(): boolean {
 
-    let hasContent = true;
+    let hasContent = false;
 
     this.commentThreadForms.controls.forEach(commentThread => {
-      if (commentThread.value.commentersProposedText == null || commentThread.value.commentersProposedText === '') {
-        hasContent = false;
+      if (commentThread.value.commentersProposedText != null && commentThread.value.commentersProposedText !== '') {
+        hasContent = true;
       }
     });
     return hasContent;
