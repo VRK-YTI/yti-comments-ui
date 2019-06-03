@@ -98,7 +98,6 @@ export class NavigationBarComponent {
 
   get environmentIdentifier() {
 
-    const env = this.configurationService.env;
-    return env ? env !== 'prod' ? ' - ' + env.toUpperCase() : '' : '';
+    return this.configurationService.getEnvironmentIdentifier('postfix');
   }
 }
