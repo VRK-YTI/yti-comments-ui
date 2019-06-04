@@ -336,7 +336,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
         proposedText: new FormControl(commentThread.proposedText),
         commentersProposedStatus: new FormControl(this.getMyProposedStatusForCommentThread(commentThread)),
         commentersProposedEndStatus: new FormControl(this.getMyProposedEndStatusForCommentThread(commentThread)),
-        commentersProposedText: new FormControl(this.getMyCommentContentForCommentThread(commentThread.id)),
+        commentersProposedText: new FormControl(this.getMyCommentContentForCommentThread(commentThread.id), Validators.required),
         results: new FormControl(commentThread.results),
         commentCount: new FormControl(commentThread.commentCount)
       });
@@ -633,14 +633,14 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
   get commentsHaveContent(): boolean {
 
-    let hasContent = false;
+    let allCommentsHaveContent = true;
 
     this.commentThreadForms.controls.forEach(commentThread => {
-      if (commentThread.value.commentersProposedText != null && commentThread.value.commentersProposedText !== '') {
-        hasContent = true;
+      if (commentThread.value.commentersProposedText == null || commentThread.value.commentersProposedText === '') {
+        allCommentsHaveContent = false;
       }
     });
-    return hasContent;
+    return allCommentsHaveContent;
   }
 
   get canInlineComment(): boolean {
