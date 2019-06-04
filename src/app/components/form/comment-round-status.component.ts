@@ -16,22 +16,27 @@ export class CommentRoundStatusComponent {
   @Input() status: string;
 
   get incomplete() {
+
     return this.status === 'INCOMPLETE' as CommentRoundStatus;
   }
 
   get awaitOrIncomplete() {
+
     return this.status === 'AWAIT' || this.status === 'INCOMPLETE' as CommentRoundStatus;
   }
 
   get danger() {
+
     return this.status === 'ENDED' as CommentRoundStatus;
   }
 
   get warning() {
+
     return this.status === 'CLOSED' as CommentRoundStatus;
   }
 
   get success() {
+
     return this.status === 'INPROGRESS' as CommentRoundStatus;
   }
 }

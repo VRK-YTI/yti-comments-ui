@@ -59,7 +59,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   commenting$ = new BehaviorSubject<boolean>(false);
   newIds: string[] = [];
 
-  currentTab$ = new BehaviorSubject<string>('');
+  currentTab$ = new BehaviorSubject<string | undefined>(undefined);
 
   cancelSubscription: Subscription;
 
@@ -173,7 +173,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
     if (this.resourcesTabActive) {
       if (this.commentRound.status === 'INCOMPLETE') {
-        return this.authorizationManager.user.email === this.commentRound.user.email && this.editing;
+        return this.isEditorOrSuperUser && this.editing;
       } else if (this.commentRound.status === 'INPROGRESS' &&
         !this.commentRound.fixedThreads &&
         (this.editing || this.commenting)) {
@@ -336,12 +336,18 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
         proposedText: new FormControl(commentThread.proposedText),
         commentersProposedStatus: new FormControl(this.getMyProposedStatusForCommentThread(commentThread)),
         commentersProposedEndStatus: new FormControl(this.getMyProposedEndStatusForCommentThread(commentThread)),
-        commentersProposedText: new FormControl(this.getMyCommentContentForCommentThread(commentThread.id), Validators.required),
+        commentersProposedText: new FormControl(this.getMyCommentContentForCommentThread(commentThread.id),
+          this.isCommentersProposedTextRequired.bind(this)),
         results: new FormControl(commentThread.results),
         commentCount: new FormControl(commentThread.commentCount)
       });
       this.commentThreadForms.push(commentThreadFormGroup);
     });
+  }
+
+  isCommentersProposedTextRequired(control: AbstractControl) {
+    const requireComment = !this.resourcesTabActive && (!control.value || control.value.length === 0);
+    return requireComment ? { 'required': { value: control.value } } : null;
   }
 
   getMyCommentForCommentThread(commentThreadId: string): string | null {
@@ -455,7 +461,6 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
       });
 
       const save = () => {
-
         return this.dataService.updateCommentRound(updatedCommentRound.serialize()).pipe(tap(() => this.initialize()));
       };
 
@@ -467,7 +472,6 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
         this.mapCommentThreads(this.commentThreadForms).map(ct => ct.serialize());
 
       const save = () => {
-
         return this.dataService.createCommentThreads(this.commentRound.id, commentThreadsToBeUpdated).pipe(tap(() => this.initialize()));
       };
 
@@ -653,7 +657,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   get commentsTabActive(): boolean {
 
     if (this.currentTab$) {
-      if (this.currentTab$.value === 'commentround_comments_tab') {
+      if ('commentround_comments_tab' === this.currentTab$.value) {
         return true;
       }
     }
@@ -663,7 +667,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   get resourcesTabActive(): boolean {
 
     if (this.currentTab$) {
-      if (this.currentTab$.value === 'commentround_resources_tab') {
+      if ('commentround_resources_tab' === this.currentTab$.value) {
         return true;
       }
     }
@@ -675,13 +679,13 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     return this.commentRound.status === 'INCOMPLETE' &&
       this.commentRound.commentThreads.length > 0 &&
       !this.editing &&
-      this.authorizationManager.user.email === this.commentRound.user.email;
+      this.isEditorOrSuperUser;
   }
 
   get canEndCommenting(): boolean {
 
     return this.commentRound.status === 'INPROGRESS' && !this.editing &&
-      (this.authorizationManager.user.superuser || this.authorizationManager.user.email === this.commentRound.user.email);
+      this.isEditorOrSuperUser;
   }
 
   get canDeleteCommentRound(): boolean {
@@ -734,7 +738,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
   get showMenu(): boolean {
 
-    return this.authorizationManager.user.superuser || this.commentRound.user.email === this.authorizationManager.user.email;
+    return this.isEditorOrSuperUser;
   }
 
   filterTopLevelComments(comments: CommentSimple[]): CommentSimple[] {

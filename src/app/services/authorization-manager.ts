@@ -55,9 +55,6 @@ export class AuthorizationManager {
 
   canDeleteCommentRound(commentRound: CommentRound) {
 
-    if (this.user.superuser || this.user.email === commentRound.user.email) {
-      return true;
-    }
-    return false;
+    return this.user.superuser || this.user.email === commentRound.user.email;
   }
 }
