@@ -36,10 +36,10 @@
     "moment": "^2.22.2",
     "ngx-autosize": "^1.2.4",
     "ngx-clipboard": "11.1.9",
-    "rxjs": "^6.0.0",
+    "rxjs": "~6.3.3",
     "simple-line-icons": "^2.4.1",
     "uuid": "3.0.1",
-    "yti-common-ui": "https://github.com/VRK-YTI/yti-common-ui.git/#486703211d72a2e4859a693381c68d0db0b73002",
+    "yti-common-ui": "https://github.com/VRK-YTI/yti-common-ui.git/#3ddebcdae6a6c341e36eed5a800e93774944e2e9",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
