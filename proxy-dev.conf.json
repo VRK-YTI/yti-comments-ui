@@ -1,6 +1,6 @@
 {
   "/comments-api/*": {
-    "target": "https://kommentit-dev.suomi.fi",
+    "target": "https://kommentit.dev.yti.cloud.vrk.fi",
     "changeOrigin": true,
     "secure": false
   }
