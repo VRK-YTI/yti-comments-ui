@@ -59,7 +59,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   commenting$ = new BehaviorSubject<boolean>(false);
   newIds: string[] = [];
 
-  currentTab$ = new BehaviorSubject<string | undefined>(undefined);
+  currentTab$ = new BehaviorSubject<string | undefined>(undefined);
 
   cancelSubscription: Subscription;
 
@@ -339,8 +339,9 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
         proposedText: new FormControl(commentThread.proposedText),
         commentersProposedStatus: new FormControl(this.getMyProposedStatusForCommentThread(commentThread)),
         commentersProposedEndStatus: new FormControl(this.getMyProposedEndStatusForCommentThread(commentThread)),
-        commentersProposedText: new FormControl(this.getMyCommentContentForCommentThread(commentThread.id),
-          this.isCommentersProposedTextRequired.bind(this)),
+        commentersProposedText: new FormControl(this.getMyCommentContentForCommentThread(commentThread.id)),
+        // commentersProposedText: new FormControl(this.getMyCommentContentForCommentThread(commentThread.id),
+        //   this.isCommentersProposedTextRequired.bind(this)),
         results: new FormControl(commentThread.results),
         commentCount: new FormControl(commentThread.commentCount)
       });
@@ -349,7 +350,8 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   }
 
   isCommentersProposedTextRequired(control: AbstractControl) {
-    const requireComment = !this.resourcesTabActive && (!control.value || control.value.length === 0);
+
+    const requireComment = !this.resourcesTabActive && (!control.value || control.value.length.trim() === 0);
     return requireComment ? { 'required': { value: control.value } } : null;
   }
 
@@ -507,6 +509,19 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
   sendMyComments() {
 
+    if (this.hasPartialComments) {
+      this.confirmationModalService.sendPartialComments()
+        .then(() => {
+          this.sendComments();
+        }, () => {
+        });
+    } else {
+      this.sendComments();
+    }
+  }
+
+  sendComments() {
+
     const comments: CommentType[] = [];
 
     this.commentThreadForms.controls.forEach(commentThreadInput => {
@@ -642,14 +657,26 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
   get commentsHaveContent(): boolean {
 
-    let allCommentsHaveContent = true;
+    let hasContent = false;
 
     this.commentThreadForms.controls.forEach(commentThread => {
-      if (commentThread.value.commentersProposedText == null || commentThread.value.commentersProposedText === '') {
-        allCommentsHaveContent = false;
+      if (commentThread.value.commentersProposedText != null && commentThread.value.commentersProposedText.trim() !== '') {
+        hasContent = true;
       }
     });
-    return allCommentsHaveContent;
+    return hasContent;
+  }
+
+  get hasPartialComments(): boolean {
+
+    let partialComments = false;
+
+    this.commentThreadForms.controls.forEach(commentThread => {
+      if (commentThread.value.commentersProposedText == null || commentThread.value.commentersProposedText.trim() === '') {
+        partialComments = true;
+      }
+    });
+    return partialComments;
   }
 
   get canInlineComment(): boolean {

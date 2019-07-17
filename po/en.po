@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-07-17 12:23+0300\n"
+"PO-Revision-Date: 2019-07-17 12:57+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -176,6 +176,9 @@ msgstr ""
 msgid "Resource"
 msgstr ""
 
+msgid "Proposer's comment"
+msgstr ""
+
 msgid "Added"
 msgstr ""
 
@@ -186,9 +189,6 @@ msgid "Current status"
 msgstr ""
 
 msgid "Proposed status"
-msgstr ""
-
-msgid "Proposer's comment"
 msgstr ""
 
 msgid "Actions"
@@ -410,8 +410,8 @@ msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr ""
 "Results can be filtered by organization, status and tool using dropdown"
 
-msgid "Unexpected error"
-msgstr ""
+msgid "ADMIN"
+msgstr "Admin"
 
 msgid "Front page"
 msgstr ""
@@ -503,11 +503,11 @@ msgstr "Status proposal is required for main level comments."
 msgid "Submit error"
 msgstr ""
 
+msgid "Unexpected error"
+msgstr ""
+
 msgid "NOSTATUS"
 msgstr "No selected status"
-
-msgid "ADMIN"
-msgstr "Admin"
 
 msgid "DATA_MODEL_EDITOR"
 msgstr "Data model editor"
@@ -597,6 +597,14 @@ msgid "DELETE COMMENT ROUND?"
 msgstr ""
 
 msgid "DELETE COMMENT THREAD?"
+msgstr ""
+
+msgid "SEND COMMENTS?"
+msgstr ""
+
+msgid ""
+"You have not commented all resources. Are you sure you want to send partial "
+"comments?"
 msgstr ""
 
 msgid "invalidDate"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-07-17 12:23+0300\n"
+"PO-Revision-Date: 2019-07-17 12:57+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -176,6 +176,9 @@ msgstr "TIETOSISÄLLÖT"
 msgid "Resource"
 msgstr "Tietosisältö"
 
+msgid "Proposer's comment"
+msgstr "Ehdottajan kommentti"
+
 msgid "Added"
 msgstr "Lisätty"
 
@@ -187,9 +190,6 @@ msgstr "Nykyinen tila"
 
 msgid "Proposed status"
 msgstr "Ehdotettu tila"
-
-msgid "Proposer's comment"
-msgstr "Ehdottajan kommentti"
 
 msgid "Actions"
 msgstr "Toiminnot"
@@ -416,8 +416,8 @@ msgstr ""
 "Hakutuloksia voi rajata organisaatio-, tila- ja työkalukohtaisesti "
 "alasvetovalikoiden avulla"
 
-msgid "Unexpected error"
-msgstr "Tapahtui odottamaton virhe"
+msgid "ADMIN"
+msgstr "Ylläpitäjä"
 
 msgid "Front page"
 msgstr "Etusivu"
@@ -509,11 +509,11 @@ msgstr "Tilaehdotus on vaadittu päätason kommenteille."
 msgid "Submit error"
 msgstr "Toiminnossa tapahtui virhe"
 
+msgid "Unexpected error"
+msgstr "Tapahtui odottamaton virhe"
+
 msgid "NOSTATUS"
 msgstr "Ei valittua tilaa"
-
-msgid "ADMIN"
-msgstr "Ylläpitäjä"
 
 msgid "DATA_MODEL_EDITOR"
 msgstr "Tietomallintaja"
@@ -604,6 +604,16 @@ msgstr "POISTETAANKO KOMMENTOINTIKIERROS?"
 
 msgid "DELETE COMMENT THREAD?"
 msgstr "POISTETAANKO KOMMENTOINTIKETJU?"
+
+msgid "SEND COMMENTS?"
+msgstr "LÄHETÄ KOMMENTIT?"
+
+msgid ""
+"You have not commented all resources. Are you sure you want to send partial "
+"comments?"
+msgstr ""
+"Et ole kommentoinut kaikkia kierroksella olevia tietosisältöjä. Oletko varma "
+"että haluat lähettää kommentit?"
 
 msgid "invalidDate"
 msgstr "Virheellinen päivämäärä"

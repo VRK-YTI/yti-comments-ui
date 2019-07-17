@@ -26,4 +26,9 @@ export class CommentsConfirmationModalService {
   deleteCommentThread() {
     return this.confirmationModalService.open('DELETE COMMENT THREAD?', '');
   }
+
+  sendPartialComments() {
+    return this.confirmationModalService.open('SEND COMMENTS?',
+      '', 'You have not commented all resources. Are you sure you want to send partial comments?');
+  }
 }
