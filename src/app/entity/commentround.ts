@@ -15,6 +15,7 @@ export class CommentRound extends AbstractResource implements EditableEntity {
   user: User;
   label: string;
   sourceLabel: Localizable = {};
+  sourceLocalName: string | null;
   description: string;
   status: string;
   fixedThreads: boolean;
@@ -38,6 +39,9 @@ export class CommentRound extends AbstractResource implements EditableEntity {
     this.status = data.status;
     this.fixedThreads = data.fixedThreads;
     this.openThreads = data.openThreads;
+    if (data.sourceLocalName) {
+      this.sourceLocalName = data.sourceLocalName;
+    }
     this.sourceLabel = data.sourceLabel || {};
     if (data.source) {
       this.source = new Source(data.source);
@@ -107,6 +111,7 @@ export class CommentRound extends AbstractResource implements EditableEntity {
       endDate: formatDate(this.endDate),
       label: this.label,
       description: this.description,
+      sourceLocalName: this.sourceLocalName,
       sourceLabel: { ...this.sourceLabel },
       fixedThreads: this.fixedThreads,
       openThreads: this.openThreads,

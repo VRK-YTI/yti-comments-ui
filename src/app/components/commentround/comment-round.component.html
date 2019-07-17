@@ -129,11 +129,19 @@
                             [formControlName]="'description'"></app-literal-textarea>
 
       <div class="row main">
-        <app-literal-multilanguage class="col-md-6"
+        <app-literal-multilanguage *ngIf="hasLocalization(commentRound.sourceLabel)"
+                                   class="col-md-6"
                                    [id]="'integration_resource_input'"
                                    [label]="'Commenting subject' | translate"
                                    [value]="commentRound.sourceLabel"
                                    [infoText]="'INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE'"></app-literal-multilanguage>
+
+        <app-literal *ngIf="!hasLocalization(commentRound.sourceLabel)"
+                     class="col-md-6"
+                     [id]="'integration_resource_input'"
+                     [label]="'Commenting subject' | translate"
+                     [value]="commentRound.sourceLocalName"
+                     [infoText]="'INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE'"></app-literal>
 
         <app-boolean-input class="col-md-3 bottom"
                            [id]="'commentround_fixedthreads_textarea'"
@@ -202,10 +210,17 @@
                               [formControlName]="'validity'"></app-date-range-input>
       </div>
 
-      <app-literal-multilanguage [id]="'integration_resource_input'"
+      <app-literal-multilanguage *ngIf="hasLocalization(commentRound.sourceLabel)"
+                                 [id]="'integration_resource_input'"
                                  [label]="'Commenting subject' | translate"
                                  [value]="commentRound.sourceLabel"
                                  [infoText]="'INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE'"></app-literal-multilanguage>
+
+      <app-literal *ngIf="!hasLocalization(commentRound.sourceLabel)"
+                   [id]="'integration_resource_input'"
+                   [label]="'Commenting subject' | translate"
+                   [value]="commentRound.sourceLocalName"
+                   [infoText]="'INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE'"></app-literal>
 
       <app-inline-clipboard *ngIf="getResourceUri"
                             [id]="'integration_resource_containeruri'"
@@ -291,7 +306,8 @@
                        target="_blank">
                       <app-literal-multilanguage *ngIf="hasLocalization(commentThread.value.label)" [value]="commentThread.value.label"></app-literal-multilanguage>
                       <app-literal *ngIf="!hasLocalization(commentThread.value.label) && commentThread.value.localName" [value]="commentThread.value.localName"></app-literal>
-                      <app-literal *ngIf="!hasLocalization(commentThread.value.label) && commentThread.value.localName == null" [value]="commentThread.value.resourceUri"></app-literal>
+                      <app-literal *ngIf="!hasLocalization(commentThread.value.label) && commentThread.value.localName == null"
+                                   [value]="commentThread.value.resourceUri"></app-literal>
                     </a>
                     <app-localizable-undefined-textarea *ngIf="!commentThread.value.resourceUri"
                                                         [required]=true
@@ -300,7 +316,7 @@
                                                         [id]="'commenthread_' + i + '_label_text_input'"
                                                         [formControlName]="'label'"></app-localizable-undefined-textarea>
                   </td>
-                  <td style="width: 10%" >
+                  <td style="width: 10%">
                     <span>{{ formatDisplayDate(commentThread.value.created) }}</span>
                   </td>
                   <td style="width: 10%" *ngIf="!commentRound.fixedThreads">
@@ -427,7 +443,8 @@
                      target="_blank">
                     <app-literal-multilanguage *ngIf="hasLocalization(commentThread.value.label)" [value]="commentThread.value.label"></app-literal-multilanguage>
                     <app-literal *ngIf="!hasLocalization(commentThread.value.label) && commentThread.value.localName" [value]="commentThread.value.localName"></app-literal>
-                    <app-literal *ngIf="!hasLocalization(commentThread.value.label) && commentThread.value.localName == null" [value]="commentThread.value.resourceUri"></app-literal>
+                    <app-literal *ngIf="!hasLocalization(commentThread.value.label) && commentThread.value.localName == null"
+                                 [value]="commentThread.value.resourceUri"></app-literal>
                   </a>
                   <app-literal-multilanguage *ngIf="!commentThread.value.resourceUri"
                                              [value]="commentThread.value.label"></app-literal-multilanguage>

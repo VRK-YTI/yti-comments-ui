@@ -21,6 +21,7 @@ export interface CommentRoundSimpleType extends BaseResourceType {
   user?: UserType;
   label: string;
   description: string;
+  sourceLocalName?: string | null;
   sourceLabel: Localizable;
   status: string;
   fixedThreads: boolean;
@@ -37,6 +38,7 @@ export interface CommentRoundType extends BaseResourceType {
   user?: UserType;
   label: string;
   description: string;
+  sourceLocalName?: string | null;
   sourceLabel: Localizable;
   status: string;
   fixedThreads: boolean;
@@ -152,7 +154,7 @@ export interface IntegrationResourceType {
   uri: string;
   prefLabel: Localizable;
   description: Localizable;
-  localName: string;
+  localName?: string | null;
   status: Status;
   type?: string;
   modified?: string;

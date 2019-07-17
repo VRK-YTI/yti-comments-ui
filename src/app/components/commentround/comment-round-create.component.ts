@@ -101,6 +101,7 @@ export class CommentRoundCreateComponent implements OnInit {
       endDate: formatDate(validity.end),
       organizations: organizations.map((organization: Organization) => organization.serialize()),
       source: source,
+      sourceLocalName: resource.localName,
       sourceLabel: resource.prefLabel,
       status: status
     };

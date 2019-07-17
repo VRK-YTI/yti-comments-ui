@@ -12,7 +12,7 @@ export class CommentThreadSimple {
   resourceUri: string;
   label: Localizable = {};
   description: Localizable = {};
-  localName: string | undefined;
+  localName: string | null;
   proposedText: string;
   currentStatus: string | undefined;
   proposedStatus: string;

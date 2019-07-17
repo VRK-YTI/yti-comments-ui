@@ -11,7 +11,7 @@ export class IntegrationResource {
   uri: string;
   prefLabel: Localizable = {};
   description: Localizable = {};
-  localName: string;
+  localName: string | null;
   status: Status;
   type?: string;
   modified: Moment | null = null;
@@ -22,7 +22,9 @@ export class IntegrationResource {
     this.uri = data.uri;
     this.prefLabel = data.prefLabel;
     this.description = data.description;
-    this.localName = data.localName;
+    if (data.localName) {
+      this.localName = data.localName;
+    }
     this.status = data.status;
     if (data.type) {
       this.type = data.type;

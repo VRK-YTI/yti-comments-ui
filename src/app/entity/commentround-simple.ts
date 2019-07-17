@@ -1,5 +1,5 @@
 import { CommentRoundSimpleType } from '../services/api-schema';
-import { formatDate, formatDateTime, parseDate, parseDateTime } from '../utils/date';
+import { formatDate, formatDateTime, parseDate } from '../utils/date';
 import { Moment, utc } from 'moment';
 import { AbstractResource } from './abstract-resource';
 import { Source } from './source';
@@ -10,6 +10,7 @@ export class CommentRoundSimple extends AbstractResource {
 
   user: User;
   label: string;
+  sourceLocalName: string | null;
   sourceLabel: Localizable = {};
   description: string;
   status: string;
@@ -32,6 +33,9 @@ export class CommentRoundSimple extends AbstractResource {
     this.status = data.status;
     this.fixedThreads = data.fixedThreads;
     this.openThreads = data.openThreads;
+    if (data.sourceLocalName) {
+      this.sourceLocalName = data.sourceLocalName;
+    }
     this.sourceLabel = data.sourceLabel || {};
     if (data.source) {
       this.source = new Source(data.source);
@@ -62,6 +66,7 @@ export class CommentRoundSimple extends AbstractResource {
       endDate: formatDate(this.endDate),
       label: this.label,
       description: this.description,
+      sourceLocalName: this.sourceLocalName,
       sourceLabel: { ...this.sourceLabel },
       fixedThreads: this.fixedThreads,
       openThreads: this.openThreads,

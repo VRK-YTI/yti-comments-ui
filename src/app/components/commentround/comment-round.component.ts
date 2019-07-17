@@ -444,7 +444,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
     if (this.isEditorOrSuperUser) {
 
-      const { label, description, localName, fixedThreads, openThreads, validity, organizations, status } = formData;
+      const { label, description, fixedThreads, openThreads, validity, organizations, status } = formData;
 
       const commentThreadsToBeUpdated: CommentThreadSimple[] = this.mapCommentThreads(this.commentThreadForms);
 
@@ -453,13 +453,13 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
       Object.assign(updatedCommentRound, {
         label: label,
         description: description,
-        localName: localName,
         fixedThreads: fixedThreads,
         openThreads: openThreads,
         startDate: validity.start,
         endDate: validity.end,
         organizations: organizations,
         source: this.commentRound.source,
+        sourceLocalName: this.commentRound.sourceLocalName,
         sourceLabel: this.commentRound.sourceLabel,
         status: status,
         commentThreads: commentThreadsToBeUpdated
