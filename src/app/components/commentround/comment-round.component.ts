@@ -72,6 +72,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
   commentRoundForm = new FormGroup({
     label: new FormControl(''),
     description: new FormControl(''),
+    localName: new FormControl(),
     fixedThreads: new FormControl(),
     openThreads: new FormControl(),
     validity: new FormControl({ start: null, end: null }, validDateRange),
@@ -80,7 +81,9 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     commentThreads: new FormArray([])
   }, null);
 
-  constructor(private router: Router,
+  constructor(public languageService: LanguageService,
+              public configurationService: ConfigurationService,
+              private router: Router,
               private route: ActivatedRoute,
               private dataService: DataService,
               private editableService: EditableService,
@@ -89,9 +92,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
               private authorizationManager: AuthorizationManager,
               private confirmationModalService: CommentsConfirmationModalService,
               private errorModalService: CommentRoundErrorModalService,
-              private searchLinkedIntegrationResourceModalService: SearchLinkedIntegrationResourceModalService,
-              public languageService: LanguageService,
-              public configurationService: ConfigurationService) {
+              private searchLinkedIntegrationResourceModalService: SearchLinkedIntegrationResourceModalService) {
 
     this.cancelSubscription = editableService.cancel$.subscribe(() => this.reset());
 
@@ -241,6 +242,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
       user: new FormControl(),
       label: new FormControl(integrationResource.prefLabel),
       description: new FormControl(integrationResource.description),
+      localName: new FormControl(integrationResource.localName),
       currentStatus: new FormControl(integrationResource.status),
       proposedStatus: new FormControl(integrationResource.uri != null ? integrationResource.status : 'SUGGESTION'),
       proposedText: new FormControl(''),
@@ -329,6 +331,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
         resourceUri: new FormControl(commentThread.resourceUri),
         label: new FormControl(commentThread.label, Validators.required),
         description: new FormControl(commentThread.description, Validators.required),
+        localName: new FormControl(commentThread.localName),
         created: new FormControl(commentThread.created),
         user: new FormControl(commentThread.user),
         currentStatus: new FormControl(commentThread.currentStatus),
@@ -417,6 +420,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
           resourceUri: commentThreadInputValue.resourceUri,
           label: commentThreadInputValue.label,
           description: commentThreadInputValue.description,
+          localName: commentThreadInputValue.localName,
           created: commentThreadInputValue.created,
           user: commentThreadInputValue.user,
           currentStatus: commentThreadInputValue.currentStatus,
@@ -440,7 +444,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
 
     if (this.isEditorOrSuperUser) {
 
-      const { label, description, fixedThreads, openThreads, validity, organizations, status } = formData;
+      const { label, description, localName, fixedThreads, openThreads, validity, organizations, status } = formData;
 
       const commentThreadsToBeUpdated: CommentThreadSimple[] = this.mapCommentThreads(this.commentThreadForms);
 
@@ -449,6 +453,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
       Object.assign(updatedCommentRound, {
         label: label,
         description: description,
+        localName: localName,
         fixedThreads: fixedThreads,
         openThreads: openThreads,
         startDate: validity.start,

@@ -11,6 +11,7 @@ export class IntegrationResource {
   uri: string;
   prefLabel: Localizable = {};
   description: Localizable = {};
+  localName: string;
   status: Status;
   type?: string;
   modified: Moment | null = null;
@@ -21,6 +22,7 @@ export class IntegrationResource {
     this.uri = data.uri;
     this.prefLabel = data.prefLabel;
     this.description = data.description;
+    this.localName = data.localName;
     this.status = data.status;
     if (data.type) {
       this.type = data.type;
@@ -37,6 +39,7 @@ export class IntegrationResource {
       uri: this.uri,
       prefLabel: this.prefLabel,
       description: this.description,
+      localName: this.localName,
       status: this.status,
       modified: formatDateTime(this.modified),
       type: this.type
@@ -47,6 +50,8 @@ export class IntegrationResource {
 
     if (!localizer.isLocalizableEmpty(this.prefLabel)) {
       return localizer.translate(this.prefLabel, useUILanguage);
+    } else if (this.localName) {
+      return this.localName;
     }
     return this.uri;
   }

@@ -94,6 +94,7 @@ export interface CommentThreadType extends BaseResourceType {
   resourceUri: string;
   label: Localizable;
   description: Localizable;
+  localName?: string | null;
   proposedText: string;
   currentStatus?: string;
   proposedStatus: string;
@@ -111,6 +112,7 @@ export interface CommentThreadSimpleType {
   resourceUri?: string;
   label?: Localizable;
   description?: Localizable;
+  localName?: string | null;
   proposedText?: string;
   currentStatus?: string;
   proposedStatus?: string;
@@ -150,6 +152,7 @@ export interface IntegrationResourceType {
   uri: string;
   prefLabel: Localizable;
   description: Localizable;
+  localName: string;
   status: Status;
   type?: string;
   modified?: string;

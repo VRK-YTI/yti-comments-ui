@@ -13,6 +13,7 @@ export class CommentThread extends AbstractResource {
   resourceUri: string;
   label: Localizable = {};
   description: Localizable = {};
+  localName: string | undefined;
   proposedText: string;
   currentStatus: string | undefined;
   proposedStatus: string;
@@ -28,6 +29,9 @@ export class CommentThread extends AbstractResource {
     this.resourceUri = data.resourceUri;
     this.label = data.label || {};
     this.description = data.description || {};
+    if (data.localName) {
+      this.localName = data.localName;
+    }
     this.proposedText = data.proposedText;
     this.currentStatus = data.currentStatus;
     this.proposedStatus = data.proposedStatus;
@@ -81,6 +85,7 @@ export class CommentThread extends AbstractResource {
       user: this.user ? this.user.serialize() : undefined,
       resourceUri: this.resourceUri,
       description: this.description,
+      localName: this.localName,
       created: formatDateTime(this.created),
       label: this.label,
       proposedText: this.proposedText,

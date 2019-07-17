@@ -72,6 +72,7 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
     if (this.containerUri && this.containerType) {
       this.titleLabel = this.translateService.instant('Select resource');
       this.instructionText = this.translateService.instant('HELP_TEXT_COMMENTTHREAD_RESOURCE_MODAL_INSTRUCTION');
+      this.loading = true;
       this.dataService.getResources(this.containerType, this.containerUri, this.languageService.language).subscribe(resources => {
         this.resources = resources;
         this.filterResources();
@@ -81,6 +82,7 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
       this.instructionText = this.translateService.instant('HELP_TEXT_COMMENTROUND_SOURCE_MODAL_INSTRUCTION');
       this.containerType$.subscribe(selectedContainerType => {
         if (selectedContainerType != null) {
+          this.loading = true;
           this.dataService.getContainers(selectedContainerType, this.languageService.language).subscribe(resources => {
             this.resources = resources;
             this.filterResources();

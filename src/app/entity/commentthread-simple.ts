@@ -12,6 +12,7 @@ export class CommentThreadSimple {
   resourceUri: string;
   label: Localizable = {};
   description: Localizable = {};
+  localName: string | undefined;
   proposedText: string;
   currentStatus: string | undefined;
   proposedStatus: string;
@@ -33,6 +34,9 @@ export class CommentThreadSimple {
     }
     this.label = data.label || {};
     this.description = data.description || {};
+    if (data.localName) {
+      this.localName = data.localName;
+    }
     if (data.proposedText) {
       this.proposedText = data.proposedText;
     }
@@ -68,6 +72,7 @@ export class CommentThreadSimple {
       resourceUri: this.resourceUri ? this.resourceUri : undefined,
       label: this.label,
       description: this.description ? this.description : undefined,
+      localName: this.localName,
       created: formatDateTime(this.created),
       proposedText: this.proposedText,
       currentStatus: this.currentStatus,
