@@ -426,6 +426,7 @@
                   </div>
                 </th>
                 <th *ngIf="!commentRound.fixedThreads" style="width: 10%" translate>Added by</th>
+                <th style="width: 20%" translate>Description</th>
                 <th style="width: 8%" translate>Current status</th>
                 <th style="width: 8%" translate>Proposed status</th>
                 <th style="width: 20%" translate>Proposer's comment</th>
@@ -454,6 +455,17 @@
                 </td>
                 <td *ngIf="!commentRound.fixedThreads" style="width: 10%">
                   <span>{{ commentThread.value.user ? commentThread.value.user.getDisplayName() : authorizationManager.user ? authorizationManager.user.name : '-'}}</span>
+                </td>
+                <td style="width: 15%">
+                    <span class="wrap"
+                          *ngIf="commentThread.value.resourceUri && !languageService.isLocalizableEmpty(commentThread.value.description)">{{ commentThread.value.description | translateValue }}</span>
+                  <span *ngIf="commentThread.value.resourceUri && languageService.isLocalizableEmpty(commentThread.value.description)">-</span>
+                  <app-localizable-undefined-textarea *ngIf="!commentThread.value.resourceUri"
+                                                      [required]=true
+                                                      [restrict]="!isNewResource(commentThread.value.id)"
+                                                      [showRequired]=false
+                                                      [id]="'commenthread_' + i + '_description_text_input'"
+                                                      [formControlName]="'description'"></app-localizable-undefined-textarea>
                 </td>
                 <td style="width: 8%">
                   <span translate>{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : 'NOSTATUS' }}</span>
