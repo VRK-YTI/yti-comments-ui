@@ -160,6 +160,12 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     }
   }
 
+  activateTab(tabId: string) {
+
+    this.currentTab$.next(tabId);
+    this.tabSet.activeId = tabId;
+  }
+
   ngOnDestroy() {
 
     this.cancelSubscription.unsubscribe();
@@ -540,6 +546,7 @@ export class CommentRoundComponent implements OnChanges, OnDestroy, AfterViewIni
     this.dataService.createCommentsToCommentRound(this.commentRound.id, comments).subscribe(myComments => {
       this.cancelCommenting();
       this.initialize();
+      this.activateTab('commentround_resources_tab');
     }, error => {
       this.cancelCommenting();
       this.errorModalService.openSubmitError(error);
