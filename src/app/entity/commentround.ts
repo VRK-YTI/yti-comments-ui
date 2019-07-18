@@ -9,6 +9,7 @@ import { OrganizationSimple } from './organization-simple';
 import { User } from './user';
 import { EditableEntity } from './editable-entity';
 import { CommentThreadSimple } from './commentthread-simple';
+import { LanguageService } from '../services/language.service';
 
 export class CommentRound extends AbstractResource implements EditableEntity {
 
@@ -74,6 +75,16 @@ export class CommentRound extends AbstractResource implements EditableEntity {
   get modifiedDisplayValue(): string {
 
     return formatDisplayDateTime(this.modified);
+  }
+
+  getDisplayName(localizer: LanguageService, useUILanguage: boolean = false): string {
+
+    if (!localizer.isLocalizableEmpty(this.sourceLabel)) {
+      return localizer.translate(this.sourceLabel, useUILanguage);
+    } else if (this.sourceLocalName) {
+      return this.sourceLocalName;
+    }
+    return '';
   }
 
   get location(): Location[] {

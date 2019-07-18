@@ -58,11 +58,6 @@ export class CommentThreadSimple {
     this.commentCount = data.commentCount;
   }
 
-  get createdDisplayValue(): string {
-
-    return formatDisplayDateTime(this.created);
-  }
-
   serialize(): CommentThreadSimpleType {
 
     return {

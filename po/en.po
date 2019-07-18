@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-07-17 12:57+0300\n"
+"PO-Revision-Date: 2019-07-18 23:01+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -95,6 +95,49 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
+msgid "Add new resource"
+msgstr ""
+
+msgid "Resource"
+msgstr ""
+
+msgid "Proposer's comment"
+msgstr ""
+
+msgid "Added"
+msgstr ""
+
+msgid "Added by"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Current status"
+msgstr ""
+
+msgid "Proposed status"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Proposed statuses"
+msgstr ""
+
+msgid "Start commenting"
+msgstr "Comment"
+
+msgid "Send comments"
+msgstr ""
+
+msgid "{{ commenting ? 'Your comment' : 'Commenter\\'s comment' }}"
+msgstr ""
+
+msgid ""
+"{{ commenting ? 'Propose status' : 'Commenter\\'s proposal for status' }}"
+msgstr ""
+
 msgid "Round name"
 msgstr ""
 
@@ -105,9 +148,6 @@ msgid "Start of commenting"
 msgstr ""
 
 msgid "End of commenting"
-msgstr ""
-
-msgid "Description"
 msgstr ""
 
 msgid "Source"
@@ -143,11 +183,8 @@ msgstr ""
 msgid "Commentable resources"
 msgstr "Commentable resources {{ value }}."
 
-msgid "Send comments"
+msgid "There are no resources to comment."
 msgstr ""
-
-msgid "Start commenting"
-msgstr "Comment"
 
 msgid "Choose action"
 msgstr ""
@@ -164,68 +201,13 @@ msgstr ""
 msgid "Export Excel"
 msgstr ""
 
-msgid "There are no resources to comment."
-msgstr ""
-
-msgid "Add new resource"
+msgid "INFORMATION"
 msgstr ""
 
 msgid "RESOURCES"
 msgstr ""
 
-msgid "Resource"
-msgstr ""
-
-msgid "Proposer's comment"
-msgstr ""
-
-msgid "Added"
-msgstr ""
-
-msgid "Added by"
-msgstr ""
-
-msgid "Current status"
-msgstr ""
-
-msgid "Proposed status"
-msgstr ""
-
-msgid "Actions"
-msgstr ""
-
-msgid "Proposed statuses"
-msgstr ""
-
-msgid ""
-"{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : "
-"'-' }}"
-msgstr ""
-
-msgid ""
-"{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : "
-"'NOSTATUS' }}"
-msgstr ""
-
 msgid "OWN COMMENTS"
-msgstr ""
-
-msgid ""
-"{{ commenting ? 'Propose status' : 'Commenter\\'s proposal for status' }}"
-msgstr ""
-
-msgid "{{ commenting ? 'Your comment' : 'Commenter\\'s comment' }}"
-msgstr ""
-
-msgid ""
-"{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : "
-"'NOSTATUS' }}"
-msgstr ""
-
-msgid ""
-"{{ commentThread.value.commentersProposedStatus && "
-"getMyCommentForCommentThread(commentThread.value.id) != null ? commentThread."
-"value.commentersProposedStatus : '-' }}"
 msgstr ""
 
 msgid "Filter results"
@@ -434,8 +416,8 @@ msgstr "Draft"
 msgid "INCOMPLETE"
 msgstr "Incomplete"
 
-msgid "SUGGESTION"
-msgstr "Suggestion"
+msgid "SUGGESTED"
+msgstr "Suggested"
 
 msgid "AWAIT"
 msgstr "Await"
@@ -612,3 +594,8 @@ msgstr "Invalid date"
 
 msgid "invalidDateRange"
 msgstr "Invalid date range"
+
+#, fuzzy
+#~| msgid "ERR_MSG_COMMENT_DOES_NOT_HAVE_COMMENTTHREAD"
+#~ msgid "ERR_MSG_COMMENT_DOES_NOT_HAVE_COMMENT_THREAD"
+#~ msgstr "Comment does not have a comment thread."

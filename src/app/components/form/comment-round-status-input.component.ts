@@ -30,6 +30,7 @@ export class CommentRoundStatusInputComponent implements ControlValueAccessor {
   @Input() restrict = false;
   @Input() required = false;
   @Input() infoText: string;
+
   control = new FormControl();
 
   private propagateChange: (fn: any) => void = () => {};
@@ -46,26 +47,32 @@ export class CommentRoundStatusInputComponent implements ControlValueAccessor {
   }
 
   get status() {
+
     return this.control.value as CommentRoundStatus;
   }
 
   get show() {
+
     return this.editing || this.control.value;
   }
 
   get editing() {
+
     return this.editableService.editing;
   }
 
   writeValue(obj: any): void {
+
     this.control.setValue(obj);
   }
 
   registerOnChange(fn: any): void {
+
     this.propagateChange = fn;
   }
 
   registerOnTouched(fn: any): void {
+
     this.propagateTouched = fn;
   }
 }

@@ -35,6 +35,7 @@ export class LiteralMultilanguageComponent {
   }
 
   get valueLanguages(): string[] {
+
     return Object.keys(this.value);
   }
 

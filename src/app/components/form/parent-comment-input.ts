@@ -63,6 +63,7 @@ export class CommentInputComponent implements ControlValueAccessor {
   @Input() required = false;
   @Input() infoText: string;
   @Input() restricts: string[] = [];
+
   control = new FormControl(null);
 
   private propagateChange: (fn: any) => void = () => {};
@@ -83,10 +84,12 @@ export class CommentInputComponent implements ControlValueAccessor {
   }
 
   get comment() {
+
     return this.control.value as CommentSimple;
   }
 
   selectComment() {
+
     const titleLabel = this.translateService.instant('Select comment');
     const searchlabel = this.translateService.instant('Search comment');
 
@@ -96,22 +99,27 @@ export class CommentInputComponent implements ControlValueAccessor {
   }
 
   removeComment() {
+
     removeFromControl(this.control);
   }
 
   get editing() {
+
     return this.editableService.editing;
   }
 
   writeValue(obj: any): void {
+
     this.control.setValue(obj);
   }
 
   registerOnChange(fn: any): void {
+
     this.propagateChange = fn;
   }
 
   registerOnTouched(fn: any): void {
+
     this.propagateTouched = fn;
   }
 }

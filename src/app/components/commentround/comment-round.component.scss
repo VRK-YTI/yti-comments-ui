@@ -1,91 +1,9 @@
 @import '../../../../node_modules/yti-common-ui/theme/variables';
 
-table {
-  border: 0;
-  border-style: none;
-
-  thead {
-    font-style: normal;
-    border-top: 0;
-    border-right: 0;
-    border-bottom: 1px;
-    border-left: 0;
-    border-style: solid;
-    border-color: $gray-400;
-  }
-
-  th {
-    color: $gray-600;
-  }
-
-  td {
-    padding-top: 15px;
-    vertical-align: top;
-  }
-
-  @media only screen and (max-width: 1280px) {
-    .description {
-      display: none;
-    }
-  }
-}
-
 .bottom {
   margin-top: auto;
   display: inline-block;
   vertical-align: bottom;
   padding-bottom: 0;
   margin-bottom: 0;
-}
-
-.wrap {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: 200px;
-  display: inline-block;
-}
-
-.comments {
-  padding: 10px 15px 10px 40px;
-  border: 1px;
-  border-style: solid;
-  border-color: $gray-400;
-}
-
-.comment-icons {
-
-  a {
-    font-weight: 600;
-    cursor: pointer;
-  }
-}
-
-.comment-count {
-
-  font-weight: normal;
-  cursor: pointer;
-  padding-top: 7px;
-  color: $blue;
-}
-
-.icon-blue {
-
-  color: $blue;
-}
-
-.action-button {
-
-  float: right;
-  padding-left: 10px;
-}
-
-.sort-content-active {
-
-  color: $blue;
-}
-
-.sort-content {
-
-  cursor: pointer;
 }

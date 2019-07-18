@@ -15,7 +15,6 @@ nav.navbar {
 }
 
 .input-group.input-group-search {
-
   position: relative !important;
 
   .form-control {
@@ -39,12 +38,21 @@ nav.navbar {
 }
 
 .metabar {
-  padding: 10px;
+  padding: 0 10px 0 0;
+  margin-bottom: 0.5rem;
+
+  .metastatus {
+    display: inline-block;
+    padding: 0 15px 0 0;
+    float: left;
+    clear: right;
+    font-weight: 400;
+  }
 
   .metaitem {
     display: inline-block;
     color: $blue;
-    padding: 5px 15px 5px 0;
+    padding: 0 15px 0 0;
     font-size: small;
   }
 }
@@ -57,7 +65,6 @@ nav.navbar {
 }
 
 ul.errors {
-
   padding-left: 0;
   margin-bottom: 0;
 
@@ -71,9 +78,6 @@ ul.errors {
   background: transparent;
   border: none;
   cursor: pointer;
-  //padding-top: 14px;
-  //padding-left: 10px;
-  //padding-right: 10px;
 }
 
 img.svg-icon {
@@ -83,6 +87,25 @@ img.svg-icon {
 
 .routedLink {
   cursor: pointer;
+  color: inherit;
+
+  &:hover {
+    text-decoration: none;
+    text-transform: none;
+    color: inherit;
+  }
+
+  &:active {
+    text-decoration: none;
+    text-transform: none;
+    color: inherit;
+  }
+
+  &:visited {
+    text-decoration: none;
+    text-transform: none;
+    color: inherit;
+  }
 }
 
 .removal-X {
@@ -90,7 +113,6 @@ img.svg-icon {
 }
 
 .checkbox {
-
   input {
     vertical-align: middle;
     position: relative;
@@ -106,12 +128,10 @@ img.svg-icon {
 }
 
 div.localized {
-
   display: inline-block;
   width: 100%;
 
   div.language {
-
     font-weight: bold;
     border-radius: 2px;
     float: left;
@@ -125,7 +145,6 @@ div.localized {
   }
 
   div.localization {
-
     float: left;
     padding: 3px 0;
     width: calc(100% - #{$language-width});
@@ -136,7 +155,6 @@ div.localized {
   }
 
   div.localization-without-id {
-
     float: left;
     width: calc(100%);
     min-height: $language-height;
@@ -146,6 +164,11 @@ div.localized {
 }
 
 .main {
+  line-height: 1.5;
   display: flex;
   justify-content: space-between;
+}
+
+.content-description-container {
+  margin-top: 1em;
 }

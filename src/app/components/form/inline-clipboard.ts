@@ -41,12 +41,14 @@ export class InlineClipboardComponent {
   clippyImage = clippyImage;
 
   get translateParams() {
+
     return {
       value: this.value
     };
   }
 
   clickToolTip() {
+
     this.tooltip.close();
     setTimeout(() => {
       this.popover.close();

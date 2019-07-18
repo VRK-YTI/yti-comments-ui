@@ -1,0 +1,161 @@
+<form [formGroup]="commentRoundForm" #form="ngForm">
+  <div *ngIf="isEditorOrSuperUser">
+    <div class="row">
+      <div class="col-10">
+        <app-literal [id]="'commentround_user_name'"
+                     [label]="'Editor' | translate"
+                     [infoText]="'INFO_TEXT_COMMENTROUND_USER'"
+                     [value]="commentRound.user.getDisplayNameWithEmail()"></app-literal>
+
+        <div class="row">
+          <app-literal-input class="col-md-3"
+                             [id]="'commentround_name_input'"
+                             [label]="'Round name' | translate"
+                             [required]="true"
+                             [infoText]="'INFO_TEXT_COMMENTROUND_NAME'"
+                             [formControlName]="'label'"></app-literal-input>
+
+          <app-literal class="col-md-3"
+                       [id]="'commentround_container_type'"
+                       [label]="'Tool' | translate"
+                       [infoText]="'INFO_TEXT_COMMENTROUND_TOOL_TYPE'"
+                       [value]="toolType | translate"></app-literal>
+
+          <app-comment-round-date-range-input class="col-md-6"
+                                              [id]="'commentround_validity_input'"
+                                              [label]="'Commenting period' | translate"
+                                              [showLabel]="true"
+                                              [startLabel]="'Start of commenting' | translate"
+                                              [endLabel]="'End of commenting' | translate"
+                                              [infoText]="'INFO_TEXT_COMMENTROUND_VALIDITY'"
+                                              [formControlName]="'validity'"></app-comment-round-date-range-input>
+        </div>
+
+        <app-literal-textarea [id]="'commentround_description_input'"
+                              [label]="'Description' | translate"
+                              [required]="true"
+                              [infoText]="'INFO_TEXT_COMMENTROUND_DESCRIPTION'"
+                              [formControlName]="'description'"></app-literal-textarea>
+
+        <div class="row main">
+          <app-literal-multilanguage *ngIf="hasLocalization(commentRound.sourceLabel)"
+                                     class="col-md-6"
+                                     [id]="'integration_resource_input'"
+                                     [label]="'Commenting subject' | translate"
+                                     [value]="commentRound.sourceLabel"
+                                     [infoText]="'INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE'"></app-literal-multilanguage>
+
+          <app-literal *ngIf="!hasLocalization(commentRound.sourceLabel)"
+                       class="col-md-6"
+                       [id]="'integration_resource_input'"
+                       [label]="'Commenting subject' | translate"
+                       [value]="commentRound.sourceLocalName"
+                       [infoText]="'INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE'"></app-literal>
+
+          <app-boolean-input class="col-md-3 bottom"
+                             [id]="'commentround_fixedthreads_textarea'"
+                             [label]="'Only selected resources' | translate"
+                             [infoText]="'INFO_TEXT_COMMENTROUND_FIXED_THREADS'"
+                             [formControlName]="'fixedThreads'"></app-boolean-input>
+
+          <app-boolean-input class="col-md-3 bottom"
+                             [id]="'commentround_openthreads_input'"
+                             [label]="'Allow new comment threads' | translate"
+                             [infoText]="'INFO_TEXT_COMMENTROUND_OPEN_THREADS'"
+                             [formControlName]="'openThreads'"></app-boolean-input>
+        </div>
+
+        <app-inline-clipboard *ngIf="getResourceUri"
+                              [id]="'integration_resource_containeruri'"
+                              [label]="'Source URI' | translate"
+                              [value]="getResourceUri"
+                              [showAsLink]="false"
+                              [infoText]="'INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE_URI'"></app-inline-clipboard>
+
+        <div class="row">
+          <app-organizations-input class="col-md-4"
+                                   [id]="'commentround_organizations_input'"
+                                   [label]="'Organization' | translate"
+                                   [required]="true"
+                                   [infoText]="'INFO_TEXT_COMMENTROUND_ORGANIZATION'"
+                                   [formControlName]="'organizations'"></app-organizations-input>
+
+          <app-comment-round-status-input class="col-md-2"
+                                          [id]="'commentround_status_input'"
+                                          [infoText]="'INFO_TEXT_COMMENTROUND_STATUS'"
+                                          [formControlName]="'status'"></app-comment-round-status-input>
+
+          <app-literal class="col-md-3"
+                       [label]="'Created' | translate"
+                       [value]="commentRound.createdDisplayValue"
+                       [infoText]="'INFO_TEXT_COMMENTROUND_CREATED'"></app-literal>
+
+          <app-literal class="col-md-3"
+                       [label]="'Last modification' | translate"
+                       [value]="commentRound.modifiedDisplayValue"
+                       [infoText]="'INFO_TEXT_COMMENTROUND_LAST_MODIFICATION'"></app-literal>
+        </div>
+      </div>
+
+      <div class="col-2 float-right">
+        <app-editable-buttons *ngIf="showModifyButton"
+                              [form]="form"
+                              [entity]="commentRound"></app-editable-buttons>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!isEditorOrSuperUser">
+    <app-literal [id]="'commentround_user_name'"
+                 [label]="'Editor' | translate"
+                 [infoText]="'INFO_TEXT_COMMENTROUND_USER'"
+                 [value]="commentRound.user.getDisplayNameWithEmail()"></app-literal>
+
+    <div class="row">
+      <app-literal class="col-md-2"
+                   [id]="'commentround_container_type'"
+                   [label]="'Tool' | translate"
+                   [infoText]="'INFO_TEXT_COMMENTROUND_NAME'"
+                   [value]="toolType | translate"></app-literal>
+
+      <app-date-range-input class="col-md-6"
+                            [id]="'commentround_validity_input'"
+                            [showLabel]="false"
+                            [restrict]="true"
+                            [label]="'Commenting period' | translate"
+                            [infoText]="'INFO_TEXT_COMMENTROUND_VALIDITY'"
+                            [formControlName]="'validity'"></app-date-range-input>
+    </div>
+
+    <app-literal-multilanguage *ngIf="hasLocalization(commentRound.sourceLabel)"
+                               [id]="'integration_resource_input'"
+                               [label]="'Commenting subject' | translate"
+                               [value]="commentRound.sourceLabel"
+                               [infoText]="'INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE'"></app-literal-multilanguage>
+
+    <app-literal *ngIf="!hasLocalization(commentRound.sourceLabel)"
+                 [id]="'integration_resource_input'"
+                 [label]="'Commenting subject' | translate"
+                 [value]="commentRound.sourceLocalName"
+                 [infoText]="'INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE'"></app-literal>
+
+    <app-inline-clipboard *ngIf="getResourceUri"
+                          [id]="'integration_resource_containeruri'"
+                          [label]="'Source URI' | translate"
+                          [value]="getResourceUri"
+                          [showAsLink]="false"
+                          [infoText]="'INFO_TEXT_INTEGRATION_RESOURCEURI'"></app-inline-clipboard>
+
+    <app-literal-textarea [id]="'commentround_description_input'"
+                          [label]="'Description' | translate"
+                          [required]="true"
+                          [restrict]="true"
+                          [infoText]="'INFO_TEXT_COMMENTROUND_DESCRIPTION'"
+                          [formControlName]="'description'"></app-literal-textarea>
+  </div>
+
+  <div class="mt-4">
+    <span *ngIf="hasCommentThreads">{{ 'Commentable resources' | translate:commentRoundCountTranslateParams}}</span>
+    <span *ngIf="!hasCommentThreads" translate>There are no resources to comment.</span>
+  </div>
+</form>

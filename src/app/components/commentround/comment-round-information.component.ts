@@ -1,0 +1,168 @@
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChange } from '@angular/core';
+import { CommentRound } from '../../entity/commentround';
+import { AuthorizationManager } from '../../services/authorization-manager';
+import { LanguageService } from '../../services/language.service';
+import { Localizable } from 'yti-common-ui/types/localization';
+import { hasLocalization } from 'yti-common-ui/utils/localization';
+import { ConfigurationService } from '../../services/configuration.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { validDateRange } from '../../utils/date';
+import { CommentRoundStatus } from '../../entity/comment-round-status';
+import { requiredList } from 'yti-common-ui/utils/validator';
+import { Observable, Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { DataService } from '../../services/data.service';
+import { EditableService } from '../../services/editable.service';
+import { CommentThreadSimple } from '../../entity/commentthread-simple';
+
+@Component({
+  selector: 'app-comment-round-information',
+  templateUrl: './comment-round-information.component.html',
+  providers: [EditableService]
+})
+export class CommentRoundInformationComponent implements OnInit, OnDestroy, OnChanges {
+
+  @Input() commentRound: CommentRound;
+  @Input() commentThreads: CommentThreadSimple[];
+
+  @Output() refreshCommentRound = new EventEmitter();
+
+  cancelSubscription: Subscription;
+
+  commentRoundForm = new FormGroup({
+    label: new FormControl(''),
+    description: new FormControl(''),
+    localName: new FormControl(),
+    fixedThreads: new FormControl(),
+    openThreads: new FormControl(),
+    validity: new FormControl({ start: null, end: null }, validDateRange),
+    status: new FormControl('INCOMPLETE' as CommentRoundStatus),
+    organizations: new FormControl([], [requiredList])
+  }, null);
+
+  constructor(public languageService: LanguageService,
+              public configurationService: ConfigurationService,
+              private authorizationManager: AuthorizationManager,
+              private dataService: DataService,
+              private editableService: EditableService) {
+
+    this.cancelSubscription = editableService.cancel$.subscribe(() => this.reset());
+    editableService.onSave = (formValue: any) => this.save(formValue);
+  }
+
+  ngOnInit() {
+
+    this.reset();
+  }
+
+  ngOnDestroy() {
+
+    this.cancelSubscription.unsubscribe();
+  }
+
+  ngOnChanges(changes: { [property: string]: SimpleChange }) {
+
+    const commentRoundChange: SimpleChange = changes['commentRound'];
+    if (commentRoundChange && !commentRoundChange.isFirstChange()) {
+      this.commentRound = commentRoundChange.currentValue;
+    }
+
+    const commentThreadsChange: SimpleChange = changes['commentThreads'];
+    if (commentThreadsChange && !commentThreadsChange.isFirstChange()) {
+      this.commentThreads = commentThreadsChange.currentValue;
+    }
+  }
+
+  private reset() {
+
+    if (this.loading) {
+      return;
+    }
+
+    const { label, description, fixedThreads, openThreads, startDate, endDate, organizations, status } = this.commentRound;
+
+    this.commentRoundForm.reset({
+      label: label,
+      description: description,
+      fixedThreads: fixedThreads,
+      openThreads: openThreads,
+      validity: { start: startDate, end: endDate },
+      organizations: organizations.map(organization => organization.clone()),
+      status: status
+    });
+  }
+
+  get loading() {
+    return this.commentRound == null;
+  }
+
+  get isEditorOrSuperUser(): boolean {
+
+    return this.authorizationManager.user.superuser || this.commentRound.user.email === this.authorizationManager.user.email;
+  }
+
+  hasLocalization(localizable: Localizable) {
+
+    return hasLocalization(localizable);
+  }
+
+  get toolType(): string {
+
+    return this.commentRound.source.containerType;
+  }
+
+  get getResourceUri(): string | null {
+
+    return this.configurationService.getUriWithEnv(this.commentRound.source.containerUri);
+  }
+
+  get hasCommentThreads(): boolean {
+
+    return this.commentThreads.length > 0;
+  }
+
+  get commentRoundCountTranslateParams() {
+
+    return {
+      value: this.commentThreads.length
+    };
+  }
+
+  get showModifyButton() {
+
+    return this.isEditorOrSuperUser;
+  }
+
+  save(formData: any): Observable<any> {
+
+    const { label, description, fixedThreads, openThreads, validity, organizations, status } = formData;
+    const updatedCommentRound = this.commentRound.clone();
+
+    Object.assign(updatedCommentRound, {
+      label: label,
+      description: description,
+      fixedThreads: fixedThreads,
+      openThreads: openThreads,
+      startDate: validity.start,
+      endDate: validity.end,
+      organizations: organizations,
+      source: this.commentRound.source,
+      sourceLocalName: this.commentRound.sourceLocalName,
+      sourceLabel: this.commentRound.sourceLabel,
+      status: status
+    });
+
+    const save = () => {
+      return this.dataService.updateCommentRound(updatedCommentRound.serialize()).pipe(tap(() => {
+        this.refreshCommentRound.emit();
+      }));
+    };
+
+    return save();
+  }
+
+  get editing() {
+
+    return this.editableService.editing;
+  }
+}

@@ -34,7 +34,7 @@ import { AuthorizationManager } from '../../services/authorization-manager';
       <span translate>Edit</span>
     </button>
 
-    <app-ajax-loading-indicator-small class="float-right" *ngIf="operationPending"></app-ajax-loading-indicator-small>
+    <app-ajax-loading-indicator-small class="ml-3 float-right" *ngIf="operationPending"></app-ajax-loading-indicator-small>
   `
 })
 export class EditableButtonsComponent {

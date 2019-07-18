@@ -30,7 +30,7 @@ export type Placement = NgbPlacement;
     </div>
     <div *ngIf="!editing">
       <span *ngIf="selectedStatus === 'NOSTATUS'">-</span>
-      <span *ngIf="selectedStatus !== 'NOSTATUS'" translate>{{ selectedStatus }}</span>
+      <app-status *ngIf="selectedStatus !== 'NOSTATUS'" class="status" [status]="selectedStatus"></app-status>
     </div>
   `
 })

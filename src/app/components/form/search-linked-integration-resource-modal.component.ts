@@ -55,6 +55,7 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
   }
 
   ngOnInit() {
+
     this.searchLabel = this.translateService.instant('Search term');
 
     this.containerTypeOptions = [null, ...containerTypes].map(containerType => ({

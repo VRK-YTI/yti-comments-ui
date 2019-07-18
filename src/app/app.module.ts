@@ -69,6 +69,9 @@ import { ConfigurationService } from './services/configuration.service';
 import { CommentRoundDateRangeInputComponent } from './components/form/app-comment-round-date-range.component';
 import { AutosizeModule } from 'ngx-autosize';
 import { LocalizableUndefinedTextareaComponent } from './components/form/literal-und-textarea';
+import { CommentRoundInformationComponent } from './components/commentround/comment-round-information.component';
+import { CommentRoundCommentsComponent } from './components/commentround/comment-round-comments.component';
+import { CommentRoundCommentThreadsComponent } from './components/commentround/comment-round-comment-threads.component';
 
 declare var require: any;
 
@@ -147,6 +150,9 @@ const appRoutes: Routes = [
     AppComponent,
     FrontpageComponent,
     CommentRoundComponent,
+    CommentRoundInformationComponent,
+    CommentRoundCommentsComponent,
+    CommentRoundCommentThreadsComponent,
     NavigationBarComponent,
     LogoComponent,
     InformationAboutServiceComponent,

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-07-17 12:57+0300\n"
+"PO-Revision-Date: 2019-07-18 23:01+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -95,6 +95,49 @@ msgstr "Kaikki organisaatiot"
 msgid "Comments"
 msgstr "Kommentit"
 
+msgid "Add new resource"
+msgstr "Lisää uusi tietosisältö"
+
+msgid "Resource"
+msgstr "Tietosisältö"
+
+msgid "Proposer's comment"
+msgstr "Ehdottajan kommentti"
+
+msgid "Added"
+msgstr "Lisätty"
+
+msgid "Added by"
+msgstr "Lisääjä"
+
+msgid "Description"
+msgstr "Kuvaus"
+
+msgid "Current status"
+msgstr "Nykyinen tila"
+
+msgid "Proposed status"
+msgstr "Ehdotettu tila"
+
+msgid "Actions"
+msgstr "Toiminnot"
+
+msgid "Proposed statuses"
+msgstr "Tilaehdotukset"
+
+msgid "Start commenting"
+msgstr "Aloita kommentointi"
+
+msgid "Send comments"
+msgstr "Lähetä kommentit"
+
+msgid "{{ commenting ? 'Your comment' : 'Commenter\\'s comment' }}"
+msgstr ""
+
+msgid ""
+"{{ commenting ? 'Propose status' : 'Commenter\\'s proposal for status' }}"
+msgstr ""
+
 msgid "Round name"
 msgstr "Kierroksen nimi"
 
@@ -106,9 +149,6 @@ msgstr "Kommentointi alkaa"
 
 msgid "End of commenting"
 msgstr "Kommentointi päättyy"
-
-msgid "Description"
-msgstr "Kuvaus"
 
 msgid "Source"
 msgstr "Lähde"
@@ -143,11 +183,8 @@ msgstr "Viimeisin muokkaus"
 msgid "Commentable resources"
 msgstr "Kommentoitavia tietosisältöjä {{ value }} kpl"
 
-msgid "Send comments"
-msgstr "Lähetä kommentit"
-
-msgid "Start commenting"
-msgstr "Aloita kommentointi"
+msgid "There are no resources to comment."
+msgstr "Kommentoitavia tietosisältöjä ei ole."
 
 msgid "Choose action"
 msgstr "Valitse toiminto"
@@ -164,69 +201,14 @@ msgstr "Poista kommentointikierros"
 msgid "Export Excel"
 msgstr "Vie Exceliin"
 
-msgid "There are no resources to comment."
-msgstr "Kommentoitavia tietosisältöjä ei ole."
-
-msgid "Add new resource"
-msgstr "Lisää uusi tietosisältö"
+msgid "INFORMATION"
+msgstr "TIEDOT"
 
 msgid "RESOURCES"
 msgstr "TIETOSISÄLLÖT"
 
-msgid "Resource"
-msgstr "Tietosisältö"
-
-msgid "Proposer's comment"
-msgstr "Ehdottajan kommentti"
-
-msgid "Added"
-msgstr "Lisätty"
-
-msgid "Added by"
-msgstr "Lisääjä"
-
-msgid "Current status"
-msgstr "Nykyinen tila"
-
-msgid "Proposed status"
-msgstr "Ehdotettu tila"
-
-msgid "Actions"
-msgstr "Toiminnot"
-
-msgid "Proposed statuses"
-msgstr "Tilaehdotukset"
-
-msgid ""
-"{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : "
-"'-' }}"
-msgstr ""
-
-msgid ""
-"{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus : "
-"'NOSTATUS' }}"
-msgstr ""
-
 msgid "OWN COMMENTS"
 msgstr "OMAT KOMMENTIT"
-
-msgid ""
-"{{ commenting ? 'Propose status' : 'Commenter\\'s proposal for status' }}"
-msgstr ""
-
-msgid "{{ commenting ? 'Your comment' : 'Commenter\\'s comment' }}"
-msgstr ""
-
-msgid ""
-"{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : "
-"'NOSTATUS' }}"
-msgstr ""
-
-msgid ""
-"{{ commentThread.value.commentersProposedStatus && "
-"getMyCommentForCommentThread(commentThread.value.id) != null ? commentThread."
-"value.commentersProposedStatus : '-' }}"
-msgstr ""
 
 msgid "Filter results"
 msgstr "Rajaa hakutuloksia"
@@ -440,7 +422,7 @@ msgstr "Luonnos"
 msgid "INCOMPLETE"
 msgstr "Keskeneräinen"
 
-msgid "SUGGESTION"
+msgid "SUGGESTED"
 msgstr "Ehdotus"
 
 msgid "AWAIT"

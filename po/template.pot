@@ -79,6 +79,48 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
+msgid "Add new resource"
+msgstr ""
+
+msgid "Resource"
+msgstr ""
+
+msgid "Proposer's comment"
+msgstr ""
+
+msgid "Added"
+msgstr ""
+
+msgid "Added by"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Current status"
+msgstr ""
+
+msgid "Proposed status"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Proposed statuses"
+msgstr ""
+
+msgid "Start commenting"
+msgstr ""
+
+msgid "Send comments"
+msgstr ""
+
+msgid "{{ commenting ? 'Your comment' : 'Commenter\\'s comment' }}"
+msgstr ""
+
+msgid "{{ commenting ? 'Propose status' : 'Commenter\\'s proposal for status' }}"
+msgstr ""
+
 msgid "Round name"
 msgstr ""
 
@@ -89,9 +131,6 @@ msgid "Start of commenting"
 msgstr ""
 
 msgid "End of commenting"
-msgstr ""
-
-msgid "Description"
 msgstr ""
 
 msgid "Source"
@@ -127,10 +166,7 @@ msgstr ""
 msgid "Commentable resources"
 msgstr ""
 
-msgid "Send comments"
-msgstr ""
-
-msgid "Start commenting"
+msgid "There are no resources to comment."
 msgstr ""
 
 msgid "Choose action"
@@ -148,67 +184,13 @@ msgstr ""
 msgid "Export Excel"
 msgstr ""
 
-msgid "There are no resources to comment."
-msgstr ""
-
-msgid "Add new resource"
+msgid "INFORMATION"
 msgstr ""
 
 msgid "RESOURCES"
 msgstr ""
 
-msgid "Resource"
-msgstr ""
-
-msgid "Proposer's comment"
-msgstr ""
-
-msgid "Added"
-msgstr ""
-
-msgid "Added by"
-msgstr ""
-
-msgid "Current status"
-msgstr ""
-
-msgid "Proposed status"
-msgstr ""
-
-msgid "Actions"
-msgstr ""
-
-msgid "Proposed statuses"
-msgstr ""
-
-msgid ""
-"{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : "
-"'-' }}"
-msgstr ""
-
-msgid ""
-"{{ commentThread.value.proposedStatus ? commentThread.value.proposedStatus "
-": 'NOSTATUS' }}"
-msgstr ""
-
 msgid "OWN COMMENTS"
-msgstr ""
-
-msgid "{{ commenting ? 'Propose status' : 'Commenter\\'s proposal for status' }}"
-msgstr ""
-
-msgid "{{ commenting ? 'Your comment' : 'Commenter\\'s comment' }}"
-msgstr ""
-
-msgid ""
-"{{ commentThread.value.currentStatus ? commentThread.value.currentStatus : "
-"'NOSTATUS' }}"
-msgstr ""
-
-msgid ""
-"{{ commentThread.value.commentersProposedStatus && "
-"getMyCommentForCommentThread(commentThread.value.id) != null ? "
-"commentThread.value.commentersProposedStatus : '-' }}"
 msgstr ""
 
 msgid "Filter results"
@@ -403,7 +385,7 @@ msgstr ""
 msgid "INCOMPLETE"
 msgstr ""
 
-msgid "SUGGESTION"
+msgid "SUGGESTED"
 msgstr ""
 
 msgid "AWAIT"

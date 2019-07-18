@@ -83,30 +83,37 @@ export class SearchLinkedCommentModalComponent implements AfterViewInit, OnInit 
   }
 
   ngOnInit() {
+
     this.updateComments();
   }
 
   select(comment: CommentSimple) {
+
     this.modal.close(comment);
   }
 
   ngAfterViewInit() {
+
     this.searchInput.nativeElement.focus();
   }
 
   get search() {
+
     return this.search$.getValue();
   }
 
   set search(value: string) {
+
     this.search$.next(value);
   }
 
   cancel() {
+
     this.modal.dismiss('cancel');
   }
 
   filterComments() {
+
     const initialSearch = this.search$.pipe(take(1));
     const debouncedSearch = this.search$.pipe(skip(1), debounceTime(500));
 
@@ -125,6 +132,7 @@ export class SearchLinkedCommentModalComponent implements AfterViewInit, OnInit 
   }
 
   updateComments() {
+
     this.comments$ = this.dataService.getCommentRoundCommentThreadComments(
       this.commentRound.id,
       this.commentThread.id);

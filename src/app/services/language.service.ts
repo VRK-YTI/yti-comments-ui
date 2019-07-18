@@ -15,7 +15,6 @@ export class LanguageService implements Localizer {
   private static readonly LANGUAGE_EN = 'en';
   private static readonly LANGUAGE_SV = 'sv';
 
-
   language$ = new BehaviorSubject<Language>(getFromLocalStorage(LanguageService.LANGUAGE_KEY, LanguageService.LANGUAGE_FI));
   contentLanguage$ = new BehaviorSubject<Language>(getFromLocalStorage(LanguageService.CONTENT_LANGUAGE_KEY, LanguageService.LANGUAGE_FI));
   translateLanguage$ = new BehaviorSubject<Language>(this.language);
@@ -32,10 +31,12 @@ export class LanguageService implements Localizer {
   }
 
   get language(): Language {
+
     return this.language$.getValue();
   }
 
   set language(language: Language) {
+
     if (this.language !== language) {
       this.language$.next(language);
       setToLocalStorage(LanguageService.LANGUAGE_KEY, language);
@@ -47,6 +48,7 @@ export class LanguageService implements Localizer {
   }
 
   set contentLanguage(language: Language) {
+
     if (this.contentLanguage !== language) {
       this.contentLanguage$.next(language);
       setToLocalStorage(LanguageService.CONTENT_LANGUAGE_KEY, language);
@@ -133,11 +135,13 @@ export class LanguageService implements Localizer {
   }
 
   hasLocalizationForLanguage(localizable: Localizable, language: string) {
+
     const value: string = localizable[language];
     return value != null && value !== '';
   }
 
   fallbackLocalization(localizable: Localizable, language: string) {
+
     const value: string = localizable[language];
     return `${value} (${language})`;
   }

@@ -80,6 +80,7 @@ export class SearchLinkedOrganizationModalComponent implements AfterViewInit, On
   }
 
   ngOnInit() {
+
     const initialSearch = this.search$.pipe(take(1));
     const debouncedSearch = this.search$.pipe(skip(1), debounceTime(500));
 
@@ -99,22 +100,27 @@ export class SearchLinkedOrganizationModalComponent implements AfterViewInit, On
   }
 
   select(organization: OrganizationSimple) {
+
     this.modal.close(organization);
   }
 
   ngAfterViewInit() {
+
     this.searchInput.nativeElement.focus();
   }
 
   get search() {
+
     return this.search$.getValue();
   }
 
   set search(value: string) {
+
     this.search$.next(value);
   }
 
   cancel() {
+
     this.modal.dismiss('cancel');
   }
 }

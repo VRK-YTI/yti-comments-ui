@@ -82,32 +82,39 @@ export class SourceInputComponent implements ControlValueAccessor {
   }
 
   get resource() {
+
     return this.control.value as IntegrationResource;
   }
 
   selectSource() {
+
     this.searchLinkedIntegrationResourceModalService
       .open(this.containerType, this.containerUri, null, this.restricts, true)
       .then(source => addToControl(this.control, source), ignoreModalClose);
   }
 
   removeSource() {
+
     removeFromControl(this.control);
   }
 
   get editing() {
+
     return this.editableService.editing;
   }
 
   writeValue(obj: any): void {
+
     this.control.setValue(obj);
   }
 
   registerOnChange(fn: any): void {
+
     this.propagateChange = fn;
   }
 
   registerOnTouched(fn: any): void {
+
     this.propagateTouched = fn;
   }
 }

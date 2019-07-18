@@ -266,7 +266,7 @@ export class DataService {
 
     const commentRoundId: string = commentThreadToCreate.commentRound.id;
 
-    return this.createCommentThreads(commentRoundId, [commentThreadToCreate]).pipe(map(createdCommentThreads => {
+    return this.createCommentThreads(commentRoundId, [commentThreadToCreate], true).pipe(map(createdCommentThreads => {
       if (createdCommentThreads.length !== 1) {
         throw new Error('Exactly one comment thread needs to be created');
       } else {
@@ -275,10 +275,14 @@ export class DataService {
     }));
   }
 
-  createCommentThreads(commentRoundId: string, commentThreadList: CommentThreadSimpleType[]): Observable<CommentThread[]> {
+  createCommentThreads(commentRoundId: string, commentThreadList: CommentThreadSimpleType[],
+                       removeOrphans: boolean): Observable<CommentThread[]> {
+
+    const params = new HttpParams()
+      .set('removeOrphans', removeOrphans ? 'true' : 'false');
 
     return this.http.post<WithResults<CommentThreadType>>(`${commentRoundsApiPath}/${commentRoundId}/${commentThreads}/`,
-      commentThreadList)
+      commentThreadList, { params: params })
       .pipe(map(res => res.results.map(data => new CommentThread(data))));
   }
 

@@ -42,27 +42,33 @@ export class CommentRoundStatusDropdownComponent implements ControlValueAccessor
   private propagateTouched: (fn: any) => void = () => {};
 
   get options(): CommentRoundStatus[] {
+
     return allCommentRoundStatuses;
   }
 
   isSelected(option: CommentRoundStatus) {
+
     return this.selection === option;
   }
 
   select(option: CommentRoundStatus) {
+
     this.selection = option;
     this.propagateChange(option);
   }
 
   writeValue(obj: any): void {
+
     this.selection = obj;
   }
 
   registerOnChange(fn: any): void {
+
     this.propagateChange = fn;
   }
 
   registerOnTouched(fn: any): void {
+
     this.propagateTouched = fn;
   }
 }
