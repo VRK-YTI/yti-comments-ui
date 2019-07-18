@@ -64,6 +64,18 @@ export class CommentRoundComponent implements OnInit {
     });
   }
 
+  get showStartCommenting() {
+
+    return (this.authorizationManager.canCreateComment(this.commentRound) &&
+      this.commentRound.status === 'INPROGRESS' &&
+      this.tabSet && this.tabSet.activeId !== 'commentround_comments_tab');
+  }
+
+  gotoOwnComments() {
+
+    this.tabSet.activeId = 'commentround_comments_tab';
+  }
+
   startCommentRound() {
 
     this.confirmationModalService.startCommentRound()

@@ -38,6 +38,15 @@
         </div>
       </div>
 
+      <div *ngIf="showStartCommenting" class="ml-3 float-right d-inline-block">
+        <button id="start_commenting_button"
+                type="button"
+                class="btn btn-action"
+                (click)="gotoOwnComments()">
+          <span translate>Start commenting</span>
+        </button>
+      </div>
+
       <div *ngIf="showExcelExport" class="d-inline-block float-right ml-3">
         <a id="commentround_export_excel_link"
            [href]="exportUrl"
