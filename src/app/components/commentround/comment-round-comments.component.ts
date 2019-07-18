@@ -65,21 +65,15 @@ export class CommentRoundCommentsComponent implements OnInit, OnDestroy, OnChang
 
     const commentRoundChange: SimpleChange = changes['commentRound'];
     if (commentRoundChange && !commentRoundChange.isFirstChange()) {
-      console.log('commentRound changed');
-      // this.commentRound = commentRoundChange.currentValue;
     }
 
     const commentThreadsChange: SimpleChange = changes['commentThreads'];
     if (commentThreadsChange && !commentThreadsChange.isFirstChange()) {
-      console.log('commentThreads changed');
-      // this.commentThreads = commentThreadsChange.currentValue;
       this.reset();
     }
 
     const myCommentsChange: SimpleChange = changes['myComments'];
     if (myCommentsChange && !myCommentsChange.isFirstChange()) {
-      console.log('myComments changed');
-      // this.myComments = myCommentsChange.currentValue;
       this.reset();
     }
   }
@@ -240,17 +234,11 @@ export class CommentRoundCommentsComponent implements OnInit, OnDestroy, OnChang
       this.refreshCommentThreads.emit();
       this.refreshMyComments.emit();
       this.cancelCommenting();
-      this.openResourcesTab();
     }, error => {
       this.cancelCommenting();
       this.reset();
       this.errorModalService.openSubmitError(error);
     });
-  }
-
-  openResourcesTab() {
-
-    this.tabSet.activeId = 'commentround_resources_tab';
   }
 
   get commenting(): boolean {

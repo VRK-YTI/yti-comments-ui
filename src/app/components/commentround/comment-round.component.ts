@@ -71,9 +71,14 @@ export class CommentRoundComponent implements OnInit {
       this.tabSet && this.tabSet.activeId !== 'commentround_comments_tab');
   }
 
-  gotoOwnComments() {
+  goToOwnComments() {
 
     this.tabSet.activeId = 'commentround_comments_tab';
+  }
+
+  goToResources() {
+
+    this.tabSet.activeId = 'commentround_resources_tab';
   }
 
   startCommentRound() {
@@ -202,6 +207,7 @@ export class CommentRoundComponent implements OnInit {
 
     this.dataService.getCommentRoundCommenterComments(this.commentRound.id).subscribe(comments => {
       this.myComments = comments;
+      this.goToResources();
     });
   }
 }

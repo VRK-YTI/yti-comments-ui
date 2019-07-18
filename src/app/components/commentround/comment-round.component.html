@@ -1,4 +1,5 @@
 <div *ngIf="loading">
+  <ngb-tabset #tabSet="ngbTabset"></ngb-tabset>
   <app-ajax-loading-indicator></app-ajax-loading-indicator>
 </div>
 
@@ -42,7 +43,7 @@
         <button id="start_commenting_button"
                 type="button"
                 class="btn btn-action"
-                (click)="gotoOwnComments()">
+                (click)="goToOwnComments()">
           <span translate>Start commenting</span>
         </button>
       </div>
@@ -114,7 +115,7 @@
       </ng-template>
     </ngb-tab>
 
-    <ngb-tab *ngIf="authorizationManager.canCreateComment(commentRound)"
+    <ngb-tab *ngIf="authorizationManager.canCreateComment(commentRound) && this.commentRound.commentThreads && this.commentRound.commentThreads.length > 0"
              id="commentround_comments_tab">
       <ng-template ngbTabTitle>
         <span translate>OWN COMMENTS</span>
