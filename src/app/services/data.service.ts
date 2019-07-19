@@ -257,9 +257,12 @@ export class DataService {
 
   updateCommentRound(commentRoundToUpdate: CommentRoundType): Observable<CommentRoundType> {
 
+    const params = new HttpParams()
+      .set('expand', 'source,organization,commentThread');
+
     const commentRoundId: string = commentRoundToUpdate.id;
 
-    return this.http.post<CommentRoundType>(`${commentRoundsApiPath}/${commentRoundId}/`, commentRoundToUpdate);
+    return this.http.post<CommentRoundType>(`${commentRoundsApiPath}/${commentRoundId}/`, commentRoundToUpdate, { params: params });
   }
 
   createCommentThread(commentThreadToCreate: CommentThreadType): Observable<CommentThread> {

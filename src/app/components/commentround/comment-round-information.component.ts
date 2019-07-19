@@ -149,7 +149,8 @@ export class CommentRoundInformationComponent implements OnInit, OnDestroy, OnCh
       source: this.commentRound.source,
       sourceLocalName: this.commentRound.sourceLocalName,
       sourceLabel: this.commentRound.sourceLabel,
-      status: status
+      status: status,
+      commentThreads: null
     });
 
     const save = () => {

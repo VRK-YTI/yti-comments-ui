@@ -49,7 +49,7 @@ export interface CommentRoundType extends BaseResourceType {
   endDate?: string;
   source: SourceType;
   organizations: OrganizationSimpleType[];
-  commentThreads: CommentThreadSimpleType[];
+  commentThreads?: CommentThreadSimpleType[] | null;
 }
 
 export interface SourceType {

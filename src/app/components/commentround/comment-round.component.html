@@ -115,7 +115,7 @@
       </ng-template>
     </ngb-tab>
 
-    <ngb-tab *ngIf="authorizationManager.canCreateComment(commentRound) && this.commentRound.commentThreads && this.commentRound.commentThreads.length > 0"
+    <ngb-tab *ngIf="isEditorOrSuperUser || (authorizationManager.canCreateComment(commentRound) && this.commentRound.commentThreads && this.commentRound.commentThreads.length > 0 && this.commentRound.status === 'INPROGRESS')"
              id="commentround_comments_tab">
       <ng-template ngbTabTitle>
         <span translate>OWN COMMENTS</span>

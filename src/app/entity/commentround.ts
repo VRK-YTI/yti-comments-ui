@@ -128,7 +128,7 @@ export class CommentRound extends AbstractResource implements EditableEntity {
       openThreads: this.openThreads,
       source: this.source.serialize(),
       organizations: this.organizations.map(org => org.serialize()),
-      commentThreads: this.commentThreads.map(commentThread => commentThread.serialize())
+      commentThreads: this.commentThreads ? this.commentThreads.map(commentThread => commentThread.serialize()) : null
     };
   }
 

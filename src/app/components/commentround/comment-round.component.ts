@@ -150,7 +150,7 @@ export class CommentRoundComponent implements OnInit {
 
   get canStartCommentRound(): boolean {
 
-    return this.commentRound.status === 'INCOMPLETE' && this.commentRound.commentThreads.length > 0 &&
+    return this.commentRound.status === 'INCOMPLETE' && this.commentRound.commentThreads && this.commentRound.commentThreads.length > 0 &&
       !this.editing && this.isEditorOrSuperUser;
   }
 
