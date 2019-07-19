@@ -439,4 +439,8 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
 
     return save();
   }
+
+  commentIdentity(index: number, item: CommentSimple) {
+    return item.id;
+  }
 }

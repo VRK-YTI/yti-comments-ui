@@ -16,6 +16,7 @@ export class Comment extends AbstractResource {
   created: Moment | null = null;
   commentThread: CommentThread;
   parentComment: CommentSimple;
+  expanded: boolean;
 
   constructor(data: CommentType) {
 
@@ -37,6 +38,7 @@ export class Comment extends AbstractResource {
     if (data.parentComment) {
       this.parentComment = new CommentSimple(data.parentComment);
     }
+    this.expanded = true;
   }
 
   get route(): any[] {

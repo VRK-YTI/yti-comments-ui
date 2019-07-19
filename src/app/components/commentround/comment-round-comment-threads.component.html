@@ -145,16 +145,20 @@
                                                 (click)="refreshComments(commentThread.value.id)"></i></a>
                   </div>
                 </div>
-                <div *ngFor="let comment of filterTopLevelComments(activeThreadComments)">
-                  <app-hierarchical-comment *ngIf="!comment.parentComment"
-                                            (refreshComments)="refreshComments($event)"
-                                            [id]="comment.id"
-                                            [comment]="comment"
-                                            [comments]="activeThreadComments"
-                                            [commentRoundId]="commentRound.id"
-                                            [commentThreadId]="commentThread.value.id"
-                                            [activeCommentId$]="activeCommentId$"
-                                            [canComment]="canInlineComment"></app-hierarchical-comment>
+                <div id="comments_list_div" class="col-md-12">
+                  <ul id="comments_list">
+                    <li *ngFor="let comment of filterTopLevelComments(activeThreadComments); trackBy: commentIdentity">
+                      <app-hierarchical-comment *ngIf="!comment.parentComment"
+                                                (refreshComments)="refreshComments($event)"
+                                                [id]="comment.id"
+                                                [comment]="comment"
+                                                [comments]="activeThreadComments"
+                                                [commentRoundId]="commentRound.id"
+                                                [commentThreadId]="commentThread.value.id"
+                                                [activeCommentId$]="activeCommentId$"
+                                                [canComment]="canInlineComment"></app-hierarchical-comment>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </td>

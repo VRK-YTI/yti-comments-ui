@@ -19,24 +19,6 @@
   color: black;
 }
 
-ul {
-  padding-left: 10px;
-
-  li {
-    list-style: none;
-
-    i {
-      cursor: pointer;
-      margin-left: -10px;
-      font-size: 14px;
-    }
-  }
-
-  li.child-comment {
-    padding-left: 10px;
-  }
-}
-
 .input {
   padding: 0 20px 0 5px;
 }

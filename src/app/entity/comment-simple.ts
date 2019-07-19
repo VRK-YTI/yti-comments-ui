@@ -12,6 +12,7 @@ export class CommentSimple extends AbstractResource {
   endStatus: string;
   created: Moment | null = null;
   parentComment: CommentSimple;
+  expanded: boolean;
 
   constructor(data: CommentSimpleType) {
 
@@ -28,6 +29,7 @@ export class CommentSimple extends AbstractResource {
     if (data.parentComment) {
       this.parentComment = new CommentSimple(data.parentComment);
     }
+    this.expanded = true;
   }
 
   get createdDisplayValue(): string {
