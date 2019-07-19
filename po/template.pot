@@ -205,6 +205,12 @@ msgstr ""
 msgid "Create new suggestion"
 msgstr ""
 
+msgid "Resources"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
 msgid "comment round"
 msgstr ""
 

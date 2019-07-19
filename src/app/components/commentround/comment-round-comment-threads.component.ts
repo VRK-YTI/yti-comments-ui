@@ -25,6 +25,7 @@ import { CommentThreadSimpleType } from '../../services/api-schema';
 import { tap } from 'rxjs/operators';
 import { CommentSimple } from '../../entity/comment-simple';
 import { Comment } from '../../entity/comment';
+import { SearchLinkedIntegrationResourceMultiModalService } from '../form/search-linked-integration-resource-multi-modal.component';
 
 @Component({
   selector: 'app-comment-round-comment-threads',
@@ -59,7 +60,8 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
               private dataService: DataService,
               private confirmationModalService: CommentsConfirmationModalService,
               private errorModalService: CommentRoundErrorModalService,
-              private searchLinkedIntegrationResourceModalService: SearchLinkedIntegrationResourceModalService,
+              // private searchLinkedIntegrationResourceModalService: SearchLinkedIntegrationResourceModalService,
+              private searchLinkedIntegrationResourceMultiModalService: SearchLinkedIntegrationResourceMultiModalService,
               private editableService: EditableService) {
 
     this.cancelSubscription = editableService.cancel$.subscribe(() => this.reset());
@@ -261,10 +263,10 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
 
   addCommentThreadToCommentRound() {
 
-    this.searchLinkedIntegrationResourceModalService
+    this.searchLinkedIntegrationResourceMultiModalService
       .open(this.commentRound.source.containerType, this.commentRound.source.containerUri,
         this.commentRound.openThreads, this.restrictedThreads, true)
-      .then(source => this.createNewCommentThreadWithSource(source), ignoreModalClose);
+      .then(source => this.createNewCommentThreadsWithSources(source), ignoreModalClose);
   }
 
   get canCreateCommentThread(): boolean {
@@ -317,6 +319,11 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
     });
 
     this.commentThreadForms.push(commentThreadFormGroup);
+  }
+
+  createNewCommentThreadsWithSources(integrationResources: IntegrationResource[]) {
+
+    integrationResources.forEach(integrationResource => this.createNewCommentThreadWithSource(integrationResource));
   }
 
   get commentThreadForms(): FormArray {

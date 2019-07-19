@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-07-18 23:01+0300\n"
+"PO-Revision-Date: 2019-07-19 15:06+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -221,6 +221,12 @@ msgstr "Valitse työkalu, josta kommentoitavat resurssit noudetaan."
 
 msgid "Create new suggestion"
 msgstr "Luo uusi ehdotus"
+
+msgid "Resources"
+msgstr "Tietosisällöt"
+
+msgid "Select"
+msgstr "Valitse"
 
 msgid "comment round"
 msgstr "kommentointikierros"

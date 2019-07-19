@@ -1,0 +1,108 @@
+@import '../../../../node_modules/yti-common-ui/theme/variables';
+
+.input-group-search {
+  width: 300px;
+}
+
+.content-box {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.search-results {
+  height: 100%;
+}
+
+.modal-body.full-height {
+  .row.full-height {
+    height: calc(100% - 140px);
+  }
+}
+
+.modal-sections {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.scrolling-full-height {
+  height: 100%;
+  overflow-y: auto;
+}
+
+app-filter-dropdown {
+  padding-left: 10px;
+}
+
+.filter-info {
+  padding-bottom: 4px;
+}
+
+.title {
+  width: calc(100% - 200px);
+  display: block;
+}
+
+.status {
+  float: right;
+  clear: right;
+}
+
+.description-container {
+  margin-bottom: 0.3em;
+}
+
+.infoText {
+  margin: 10px;
+  display: block;
+}
+
+.resource-results {
+  overflow-y: auto;
+
+  .resource-result {
+    .content {
+      margin: 0 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid $gray;
+
+      &.last {
+        border-bottom: none;
+      }
+
+      .title {
+        display: block;
+        color: $primary;
+        font-size: $font-size-base;
+        width: 100%;
+        padding-bottom: 5px;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .uri {
+        display: block;
+        color: $gray-600;
+        font-size: $font-size-base;
+        width: 100%;
+        padding-bottom: 5px;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .body {
+        display: block;
+        width: 100%;
+        padding-bottom: 15px;
+      }
+    }
+  }
+}
+

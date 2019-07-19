@@ -72,6 +72,10 @@ import { LocalizableUndefinedTextareaComponent } from './components/form/literal
 import { CommentRoundInformationComponent } from './components/commentround/comment-round-information.component';
 import { CommentRoundCommentsComponent } from './components/commentround/comment-round-comments.component';
 import { CommentRoundCommentThreadsComponent } from './components/commentround/comment-round-comment-threads.component';
+import {
+  SearchLinkedIntegrationResourceMultiModalComponent,
+  SearchLinkedIntegrationResourceMultiModalService
+} from './components/form/search-linked-integration-resource-multi-modal.component';
 
 declare var require: any;
 
@@ -174,6 +178,7 @@ const appRoutes: Routes = [
     DateInputComponent,
     SourceInputComponent,
     SearchLinkedIntegrationResourceModalComponent,
+    SearchLinkedIntegrationResourceMultiModalComponent,
     SearchLinkedOrganizationModalComponent,
     ContentLanguageComponent,
     CommentRoundStatusDropdownComponent,
@@ -193,6 +198,7 @@ const appRoutes: Routes = [
   ],
   entryComponents: [
     SearchLinkedIntegrationResourceModalComponent,
+    SearchLinkedIntegrationResourceMultiModalComponent,
     SearchLinkedOrganizationModalComponent,
     SearchLinkedCommentModalComponent
   ],
@@ -226,6 +232,7 @@ const appRoutes: Routes = [
     CommentsConfirmationModalService,
     ModalService,
     SearchLinkedIntegrationResourceModalService,
+    SearchLinkedIntegrationResourceMultiModalService,
     SearchLinkedOrganizationModalService,
     SearchLinkedCommentModalService,
     CommentRoundErrorModalService

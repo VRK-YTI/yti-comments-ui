@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-07-18 23:01+0300\n"
+"PO-Revision-Date: 2019-07-19 15:06+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -220,6 +220,12 @@ msgid "Please select tool to get container resources for commenting."
 msgstr ""
 
 msgid "Create new suggestion"
+msgstr ""
+
+msgid "Resources"
+msgstr ""
+
+msgid "Select"
 msgstr ""
 
 msgid "comment round"

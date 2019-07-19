@@ -7,7 +7,6 @@ import { ModalService } from '../../services/modal.service';
 import { DataService } from '../../services/data.service';
 import { debounceTime, map, skip, take, tap } from 'rxjs/operators';
 import { IntegrationResource } from '../../entity/integration-resource';
-import { containerTypes } from '../common/containertypes';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
 import { TranslateService } from '@ngx-translate/core';
 import { regularStatuses, Status } from 'yti-common-ui/entities/status';
@@ -16,35 +15,31 @@ import { ConfigurationService } from '../../services/configuration.service';
 import { comparingLocalizable, comparingPrimitive } from 'yti-common-ui/utils/comparator';
 
 @Component({
-  selector: 'app-search-linked-source-modal',
-  templateUrl: './search-linked-integration-resource-modal.component.html',
-  styleUrls: ['./search-linked-integration-resource-modal.component.scss']
+  selector: 'app-search-linked-source-multi-modal',
+  templateUrl: './search-linked-integration-resource-multi-modal.component.html',
+  styleUrls: ['./search-linked-integration-resource-multi-modal.component.scss']
 })
-export class SearchLinkedIntegrationResourceModalComponent implements AfterViewInit, OnInit {
+export class SearchLinkedIntegrationResourceMultiModalComponent implements AfterViewInit, OnInit {
 
   @ViewChild('searchInput') searchInput: ElementRef;
 
   @Input() restricts: string[];
   @Input() useUILanguage: boolean;
-  @Input() containerUri: string | null;
-  @Input() containerType: string | null;
+  @Input() containerUri: string;
+  @Input() containerType: string;
   @Input() openThreads: boolean | null;
 
   searchLabel: string;
   instructionText: string;
   titleLabel: string;
-
-  statusOptions: FilterOptions<Status>;
-  containerTypeOptions: FilterOptions<string>;
-
+  selectedResources: IntegrationResource[] = [];
   resources: IntegrationResource[];
+  statusOptions: FilterOptions<Status>;
+  loading = false;
 
   status$ = new BehaviorSubject<Status | null>(null);
-  containerType$ = new BehaviorSubject<string | null>(null);
   search$ = new BehaviorSubject('');
   searchResults$ = new BehaviorSubject<IntegrationResource[]>([]);
-
-  loading = false;
 
   constructor(public configurationService: ConfigurationService,
               public modal: NgbActiveModal,
@@ -57,49 +52,24 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
 
     this.searchLabel = this.translateService.instant('Search term');
 
-    this.containerTypeOptions = [null, ...containerTypes].map(containerType => ({
-      value: containerType,
-      name: () => this.translateService.instant(containerType ? containerType : 'Select tool'),
-      idIdentifier: () => containerType ? containerType : 'select_source_container_type'
-    }));
-
     this.statusOptions = [null, ...regularStatuses].map(status => ({
       value: status,
       name: () => this.translateService.instant(status ? status : 'All statuses'),
       idIdentifier: () => status ? status : 'all_selected'
     }));
 
-    if (this.containerUri && this.containerType) {
-      this.titleLabel = this.translateService.instant('Select resource');
-      this.instructionText = this.translateService.instant('HELP_TEXT_COMMENTTHREAD_RESOURCE_MODAL_INSTRUCTION');
-      this.loading = true;
-      this.dataService.getResources(this.containerType, this.containerUri, this.languageService.language).subscribe(resources => {
-        this.resources = resources;
-        this.filterResources();
-      });
-    } else {
-      this.titleLabel = this.translateService.instant('Select source');
-      this.instructionText = this.translateService.instant('HELP_TEXT_COMMENTROUND_SOURCE_MODAL_INSTRUCTION');
-      this.containerType$.subscribe(selectedContainerType => {
-        if (selectedContainerType != null) {
-          this.loading = true;
-          this.dataService.getContainers(selectedContainerType, this.languageService.language).subscribe(resources => {
-            this.resources = resources;
-            this.filterResources();
-          });
-        }
-      });
-    }
+    this.titleLabel = this.translateService.instant('Select resource');
+    this.instructionText = this.translateService.instant('HELP_TEXT_COMMENTTHREAD_RESOURCE_MODAL_INSTRUCTION');
+    this.loading = true;
+    this.dataService.getResources(this.containerType, this.containerUri, this.languageService.language).subscribe(resources => {
+      this.resources = resources;
+      this.filterResources();
+    });
   }
 
   get hasContent(): boolean {
 
     return this.searchResults$.getValue().length > 0;
-  }
-
-  get hasContainerType(): boolean {
-
-    return this.containerType$.getValue() != null || this.containerType != null;
   }
 
   filterResources() {
@@ -126,7 +96,10 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
           }).sort(comparingPrimitive<IntegrationResource>(
             integrationResource => this.languageService.isLocalizableEmpty(integrationResource.prefLabel))
             .andThen(comparingPrimitive<IntegrationResource>(integrationResource =>
-              this.languageService.isLocalizableEmpty(integrationResource.prefLabel) ? integrationResource.uri.toLowerCase() : null))
+              this.languageService.isLocalizableEmpty(integrationResource.prefLabel) ? integrationResource.localName : null))
+            .andThen(comparingPrimitive<IntegrationResource>(integrationResource =>
+              this.languageService.isLocalizableEmpty(integrationResource.prefLabel) && integrationResource.localName ?
+                integrationResource.uri.toLowerCase() : null))
             .andThen(comparingLocalizable<IntegrationResource>(this.languageService,
               integrationResource => integrationResource.prefLabel ? integrationResource.prefLabel : {})));
         })
@@ -135,10 +108,23 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
     });
   }
 
-  select(resource: IntegrationResource) {
+  selectResource(resource: IntegrationResource) {
 
-    resource.type = this.containerType$.value ? this.containerType$.value : undefined;
-    this.modal.close(resource);
+    resource.type = this.containerType;
+    this.restricts.push(resource.uri);
+    this.selectedResources.push(resource);
+  }
+
+  removeResource(resource: IntegrationResource) {
+
+    const index: number = this.selectedResources.indexOf(resource);
+    if (index !== -1) {
+      this.selectedResources.splice(index, 1);
+    }
+  }
+
+  select() {
+    this.modal.close(this.selectedResources);
   }
 
   ngAfterViewInit() {
@@ -167,24 +153,26 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
       type: this.containerType
     };
     const resource: IntegrationResource = new IntegrationResource(integrationResourceType);
-    this.modal.close(resource);
+    const resources: IntegrationResource[] = [];
+    resources.push(resource);
+    this.modal.close(resources);
   }
 }
 
 @Injectable()
-export class SearchLinkedIntegrationResourceModalService {
+export class SearchLinkedIntegrationResourceMultiModalService {
 
   constructor(private modalService: ModalService) {
   }
 
-  open(containerType: string | null,
-       containerUri: string | null,
+  open(containerType: string,
+       containerUri: string,
        openThreads: boolean | null,
        restrictedResourceUris: string[],
-       useUILanguage: boolean = false): Promise<IntegrationResource> {
+       useUILanguage: boolean = false): Promise<IntegrationResource[]> {
 
-    const modalRef = this.modalService.open(SearchLinkedIntegrationResourceModalComponent, { size: 'lg' });
-    const instance = modalRef.componentInstance as SearchLinkedIntegrationResourceModalComponent;
+    const modalRef = this.modalService.open(SearchLinkedIntegrationResourceMultiModalComponent, { size: 'lg' });
+    const instance = modalRef.componentInstance as SearchLinkedIntegrationResourceMultiModalComponent;
     instance.containerType = containerType;
     instance.containerUri = containerUri;
     instance.openThreads = openThreads;
