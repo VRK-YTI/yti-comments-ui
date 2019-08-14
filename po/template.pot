@@ -10,6 +10,12 @@ msgstr ""
 msgid "Reply"
 msgstr ""
 
+msgid "Modify"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
 msgid "Send"
 msgstr ""
 

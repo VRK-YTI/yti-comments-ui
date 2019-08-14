@@ -30,6 +30,17 @@ import { BehaviorSubject } from 'rxjs';
               [id]="'comment_' + this.comment.id + '_reply_button'"
               (click)="toggleCommenting()"
               translate>Reply</span>
+        <span class="actions float-right"
+              *ngIf="!this.updating && canComment && !hasChildComments"
+              [id]="'comment_' + this.comment.id + '_modify_button'"
+              (click)="toggleUpdatingComment()"
+              translate>Modify</span>
+        <br>
+        <span class="actions float-right"
+              *ngIf="!this.commenting && !this.updating && canComment && !hasChildComments"
+              [id]="'comment_' + this.comment.id + '_delete_button'"
+              (click)="deleteComment()"
+              translate>Delete</span>
         <br>
         <span class="content">{{ comment.content }}</span>
       </div>
@@ -55,6 +66,31 @@ import { BehaviorSubject } from 'rxjs';
                 class="btn btn-link cancel"
                 type="button"
                 (click)="toggleCommenting()">
+          <span translate>Cancel</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <app-literal-input *ngIf="this.updating"
+                         class="input col-md-6"
+                         [isEditing]="this.updating"
+                         [id]="'comment_' + this.comment.id + '_input'"
+                         [(ngModel)]="this.commentContent"></app-literal-input>
+      <div class="col-md-6">
+        <button *ngIf="this.updating && canComment"
+                [id]="'comment_' + this.comment.id + '_send_button'"
+                class="btn btn-secondary-action"
+                [disabled]="commentContent.trim().length == 0"
+                type="button"
+                (click)="updateComment()">
+          <span translate>Modify</span>
+        </button>
+        <button *ngIf="this.updating"
+                [id]="'comment_' + this.comment.id + '_cancel_button'"
+                class="btn btn-link cancel"
+                type="button"
+                (click)="toggleUpdatingComment()">
           <span translate>Cancel</span>
         </button>
       </div>
@@ -86,6 +122,7 @@ export class HierarchicalCommentListitemComponent implements OnInit {
 
   commenting = false;
   commentContent = '';
+  updating = false;
 
   constructor(public languageService: LanguageService,
               private dataService: DataService,
@@ -112,6 +149,54 @@ export class HierarchicalCommentListitemComponent implements OnInit {
       this.activeCommentId$.next(this.comment.id);
     }
     this.commenting = !this.commenting;
+  }
+
+  toggleUpdatingComment() {
+
+    if (this.updating) {
+      this.commentContent = '';
+    }
+    if (!this.updating) {
+      this.commentContent = '';
+      this.activeCommentId$.next(this.comment.id);
+    }
+    this.updating = !this.updating;
+    console.log('this.updating == ', this.updating);
+    console.log('this.canComment == ', this.canComment);
+  }
+
+  updateComment() {
+
+    const commentToUpdate: CommentType = <CommentType>{
+      commentThread: <CommentThreadType>{ id: this.commentThreadId },
+      content: this.commentContent,
+      parentComment: this.comment.parentComment ? this.comment.parentComment.serialize() : null,
+      id: this.comment.id
+    };
+
+    this.dataService.updateComment(this.commentRoundId, commentToUpdate).subscribe(updatedComment => {
+      this.toggleUpdatingComment();
+      this.comments.push(updatedComment as CommentSimple);
+      this.refreshComments.emit(this.commentThreadId);
+    }, error => {
+      this.errorModalService.openSubmitError(error);
+    });
+  }
+
+  deleteComment() {
+
+    const newComment: CommentType = <CommentType>{
+      commentThread: <CommentThreadType>{ id: this.commentThreadId },
+      content: this.commentContent,
+      parentComment: this.comment.parentComment ? this.comment.parentComment.serialize() : null,
+      id: this.comment.id
+    };
+
+    this.dataService.deleteComment(this.commentRoundId, newComment).subscribe(() => {
+      this.refreshComments.emit(this.commentThreadId);
+    }, error => {
+      this.errorModalService.openSubmitError(error);
+    });
   }
 
   sendComment() {

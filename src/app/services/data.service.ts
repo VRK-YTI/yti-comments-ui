@@ -331,9 +331,18 @@ export class DataService {
     const commentThreadId: string = commentToUpdate.commentThread.id;
     const commentId: string = commentToUpdate.id;
 
+    console.log('commentId', commentId);
     return this.http.post<CommentSimpleType>(
       `${commentRoundsApiPath}/${commentRoundId}/${commentThreads}/${commentThreadId}/${comments}/${commentId}/`,
       commentToUpdate);
+  }
+
+  deleteComment(commentRoundId: string, commentToDelete: CommentType): Observable<CommentSimpleType> {
+
+    const commentThreadId: string = commentToDelete.commentThread.id;
+    const commentId: string = commentToDelete.id;
+    return this.http.delete<CommentSimpleType>(
+      `${commentRoundsApiPath}/${commentRoundId}/${commentThreads}/${commentThreadId}/${comments}/${commentId}/delete`);
   }
 
   getOrganizations(): Observable<OrganizationSimple[]> {
