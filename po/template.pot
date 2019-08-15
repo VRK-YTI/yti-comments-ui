@@ -373,7 +373,7 @@ msgstr ""
 msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr ""
 
-msgid "ADMIN"
+msgid "Unexpected error"
 msgstr ""
 
 msgid "Front page"
@@ -463,13 +463,18 @@ msgstr ""
 msgid "ERR_MSG_USER_PROPOSED_STATUS_REQUIRED"
 msgstr ""
 
+msgid ""
+"ERR_MSG_USER_OTHER_USER_ALREADY_RESPONDED_TO_THIS_COMMENT_CANT_MODIFY_OR_"
+"DELETE"
+msgstr ""
+
 msgid "Submit error"
 msgstr ""
 
-msgid "Unexpected error"
+msgid "NOSTATUS"
 msgstr ""
 
-msgid "NOSTATUS"
+msgid "ADMIN"
 msgstr ""
 
 msgid "DATA_MODEL_EDITOR"
