@@ -31,7 +31,7 @@ import { BehaviorSubject } from 'rxjs';
               (click)="toggleCommenting()"
               translate>Reply</span>
         <span class="actions"
-              *ngIf="!this.updating && canComment && !hasChildComments"
+              *ngIf="!this.updating && canComment && !hasChildComments && comment.parentComment"
               [id]="'comment_' + this.comment.id + '_modify_button'"
               (click)="toggleUpdatingComment()"
               translate>Modify</span>
