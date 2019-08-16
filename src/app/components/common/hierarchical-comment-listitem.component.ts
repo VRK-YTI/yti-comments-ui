@@ -25,19 +25,18 @@ import { BehaviorSubject } from 'rxjs';
               class="proposedStatus">, {{ comment.endStatus | translate }}</span>
         <span *ngIf="comment.proposedStatus !== comment.endStatus"
               class="proposedStatus">, <s>{{ comment.proposedStatus | translate }}</s> \t&#x2192; {{ comment.endStatus | translate }}</span>
-        <span class="actions float-right"
+        <span class="actions"
               *ngIf="!this.commenting && canComment"
               [id]="'comment_' + this.comment.id + '_reply_button'"
               (click)="toggleCommenting()"
               translate>Reply</span>
-        <span class="actions float-right"
+        <span class="actions"
               *ngIf="!this.updating && canComment && !hasChildComments"
               [id]="'comment_' + this.comment.id + '_modify_button'"
               (click)="toggleUpdatingComment()"
               translate>Modify</span>
-        <br>
-        <span class="actions float-right"
-              *ngIf="!this.commenting && !this.updating && canComment && !hasChildComments"
+        <span class="actions"
+              *ngIf="!this.commenting && !this.updating && canComment && !hasChildComments && comment.parentComment"
               [id]="'comment_' + this.comment.id + '_delete_button'"
               (click)="deleteComment()"
               translate>Delete</span>
@@ -74,14 +73,14 @@ import { BehaviorSubject } from 'rxjs';
     <div class="row">
       <app-literal-input *ngIf="this.updating"
                          class="input col-md-6"
-                         [isEditing]="this.updating"
+                         [isEditing]="updating"
                          [id]="'comment_' + this.comment.id + '_input'"
-                         [(ngModel)]="this.commentContent"></app-literal-input>
+                         [(ngModel)]="comment.content"></app-literal-input>
       <div class="col-md-6">
         <button *ngIf="this.updating && canComment"
                 [id]="'comment_' + this.comment.id + '_send_button'"
                 class="btn btn-secondary-action"
-                [disabled]="commentContent.trim().length == 0"
+                [disabled]="comment.content.trim().length == 0"
                 type="button"
                 (click)="updateComment()">
           <span translate>Modify</span>
@@ -169,7 +168,7 @@ export class HierarchicalCommentListitemComponent implements OnInit {
 
     const commentToUpdate: CommentType = <CommentType>{
       commentThread: <CommentThreadType>{ id: this.commentThreadId },
-      content: this.commentContent,
+      content: this.comment.content,
       parentComment: this.comment.parentComment ? this.comment.parentComment.serialize() : null,
       id: this.comment.id
     };
