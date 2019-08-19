@@ -109,10 +109,11 @@ export class SearchLinkedIntegrationResourceMultiModalComponent implements After
   }
 
   selectResource(resource: IntegrationResource) {
-
-    resource.type = this.containerType;
-    this.restricts.push(resource.uri);
-    this.selectedResources.push(resource);
+    if (!this.selectedResources.includes(resource)) {
+      resource.type = this.containerType;
+      this.restricts.push(resource.uri);
+      this.selectedResources.push(resource);
+    }
   }
 
   removeResource(resource: IntegrationResource) {
