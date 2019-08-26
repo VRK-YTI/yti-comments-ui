@@ -68,6 +68,7 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
 
   ngOnInit() {
 
+    this.refreshCommentThreads.emit();
     this.reset();
   }
 
