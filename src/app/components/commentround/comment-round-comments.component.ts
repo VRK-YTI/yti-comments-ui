@@ -193,7 +193,7 @@ export class CommentRoundCommentsComponent implements OnInit, OnDestroy, OnChang
     let hasContent = false;
 
     this.commentThreadForms.controls.forEach(commentThread => {
-      if (commentThread.value.commentersProposedText != null && commentThread.value.commentersProposedText.trim() !== '') {
+      if (commentThread.value.commentersProposedText != null && commentThread.value.commentersProposedText.trim().length > 0) {
         hasContent = true;
       }
     });
@@ -225,7 +225,7 @@ export class CommentRoundCommentsComponent implements OnInit, OnDestroy, OnChang
         endStatus: commentThreadInputValue.commentersProposedEndStatus,
         content: commentThreadInputValue.commentersProposedText
       };
-      if (commentThreadInputValue.commentersProposedText) {
+      if (commentThreadInputValue.commentersProposedText && commentThreadInputValue.commentersProposedText.trim().length > 0) {
         comments.push(commentType);
       }
     });
