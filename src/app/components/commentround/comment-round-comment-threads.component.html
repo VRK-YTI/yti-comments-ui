@@ -41,7 +41,7 @@
             </div>
           </th>
           <th *ngIf="!commentRound.fixedThreads" style="width: 10%" translate>Added by</th>
-          <th class="description" style="width: 20%" translate>Description</th>
+          <th [ngClass]="isEditing ? '' : 'description'" style="width: 20%" translate>Description</th>
           <th style="width: 15%" translate>Current status</th>
           <th style="width: 10%" translate>Proposed status</th>
           <th *ngIf="showActions" style="width: 3%" translate>Actions</th>
@@ -93,7 +93,7 @@
             <td style="width: 10%" *ngIf="!commentRound.fixedThreads">
               <span>{{ commentThread.value.user ? commentThread.value.user.getDisplayName() : authorizationManager.user ? authorizationManager.user.name : '-'}}</span>
             </td>
-            <td class="description" style="width: 15%">
+            <td [ngClass]="isEditing ? '' : 'description'" style="width: 15%">
                       <span class="wrap"
                             *ngIf="commentThread.value.resourceUri && !languageService.isLocalizableEmpty(commentThread.value.description)">{{ commentThread.value.description | translateValue }}</span>
               <span *ngIf="commentThread.value.resourceUri && languageService.isLocalizableEmpty(commentThread.value.description)">-</span>
