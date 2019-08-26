@@ -250,8 +250,11 @@ export class DataService {
 
   createCommentRounds(commentRoundList: CommentRoundType[]): Observable<CommentRound[]> {
 
+    const params = new HttpParams()
+      .set('expand', 'source,organization,commentThread');
+
     return this.http.post<WithResults<CommentRoundType>>(`${commentRoundsApiPath}/`,
-      commentRoundList)
+      commentRoundList, { params: params })
       .pipe(map(res => res.results.map(data => new CommentRound(data))));
   }
 
@@ -282,7 +285,8 @@ export class DataService {
                        removeOrphans: boolean): Observable<CommentThread[]> {
 
     const params = new HttpParams()
-      .set('removeOrphans', removeOrphans ? 'true' : 'false');
+      .set('removeOrphans', removeOrphans ? 'true' : 'false')
+      .set('expand', 'comment');
 
     return this.http.post<WithResults<CommentThreadType>>(`${commentRoundsApiPath}/${commentRoundId}/${commentThreads}/`,
       commentThreadList, { params: params })
@@ -294,8 +298,11 @@ export class DataService {
     const commentRoundId: string = commentThreadToUpdate.commentRound.id;
     const commentThreadId: string = commentThreadToUpdate.id;
 
+    const params = new HttpParams()
+      .set('expand', 'comment');
+
     return this.http.post<CommentThreadSimpleType>(`${commentRoundsApiPath}/${commentRoundId}/${commentThreads}/${commentThreadId}/`,
-      commentThreadToUpdate);
+      commentThreadToUpdate, { params: params });
   }
 
   createComment(commentRoundId: string, commentToCreate: CommentType): Observable<Comment> {
@@ -313,16 +320,22 @@ export class DataService {
 
   createCommentToCommentThread(commentRoundId: string, commentThreadId: string, commentsList: CommentType[]): Observable<Comment[]> {
 
+    const params = new HttpParams()
+      .set('expand', 'commentThread,commentRound')
+
     return this.http.post<WithResults<CommentType>>(
       `${commentRoundsApiPath}/${commentRoundId}/${commentThreads}/${commentThreadId}/${comments}`,
-      commentsList)
+      commentsList, { params: params })
       .pipe(map(res => res.results.map(data => new Comment(data))));
   }
 
   createCommentsToCommentRound(commentRoundId: string, commentsList: CommentType[]): Observable<CommentSimple[]> {
 
+    const params = new HttpParams()
+      .set('expand', 'commentThread,commentRound')
+
     return this.http.post<WithResults<CommentSimpleType>>(
-      `${commentRoundsApiPath}/${commentRoundId}/${comments}`, commentsList)
+      `${commentRoundsApiPath}/${commentRoundId}/${comments}`, commentsList, { params: params })
       .pipe(map(res => res.results.map(data => new CommentSimple(data))));
   }
 
@@ -331,10 +344,12 @@ export class DataService {
     const commentThreadId: string = commentToUpdate.commentThread.id;
     const commentId: string = commentToUpdate.id;
 
-    console.log('commentId', commentId);
+    const params = new HttpParams()
+      .set('expand', 'commentThread,commentRound')
+
     return this.http.post<CommentSimpleType>(
       `${commentRoundsApiPath}/${commentRoundId}/${commentThreads}/${commentThreadId}/${comments}/${commentId}/`,
-      commentToUpdate);
+      commentToUpdate, { params: params });
   }
 
   deleteComment(commentRoundId: string, commentToDelete: CommentType): Observable<CommentSimpleType> {
