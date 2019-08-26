@@ -160,8 +160,6 @@ export class HierarchicalCommentListitemComponent implements OnInit {
       this.activeCommentId$.next(this.comment.id);
     }
     this.updating = !this.updating;
-    console.log('this.updating == ', this.updating);
-    console.log('this.canComment == ', this.canComment);
   }
 
   updateComment() {
