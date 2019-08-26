@@ -13,7 +13,6 @@ import { CommentsConfirmationModalService } from '../common/confirmation-modal.s
 import { comparingLocalizable, comparingPrimitive } from 'yti-common-ui/utils/comparator';
 import { Moment } from 'moment';
 import { CommentRoundErrorModalService } from '../common/error-modal.service';
-import { SearchLinkedIntegrationResourceModalService } from '../form/search-linked-integration-resource-modal.component';
 import { CommentThread } from '../../entity/commentthread';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { hasLocalization } from 'yti-common-ui/utils/localization';
@@ -60,7 +59,6 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
               private dataService: DataService,
               private confirmationModalService: CommentsConfirmationModalService,
               private errorModalService: CommentRoundErrorModalService,
-              // private searchLinkedIntegrationResourceModalService: SearchLinkedIntegrationResourceModalService,
               private searchLinkedIntegrationResourceMultiModalService: SearchLinkedIntegrationResourceMultiModalService,
               private editableService: EditableService) {
 
