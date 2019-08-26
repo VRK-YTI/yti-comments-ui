@@ -73,20 +73,9 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
 
   ngOnChanges(changes: { [property: string]: SimpleChange }) {
 
-    const commentRoundChange: SimpleChange = changes['commentRound'];
-    if (commentRoundChange && !commentRoundChange.isFirstChange()) {
-      // this.commentRound = commentRoundChange.currentValue;
-    }
-
     const commentThreadsChange: SimpleChange = changes['commentThreads'];
     if (commentThreadsChange && !commentThreadsChange.isFirstChange()) {
-      // this.commentThreads = commentThreadsChange.currentValue;
       this.reset();
-    }
-
-    const myCommentsChange: SimpleChange = changes['myComments'];
-    if (myCommentsChange && !myCommentsChange.isFirstChange()) {
-      // this.myComments = myCommentsChange.currentValue;
     }
   }
 
@@ -439,6 +428,7 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
   }
 
   commentIdentity(index: number, item: CommentSimple) {
+
     return item.id;
   }
 }
