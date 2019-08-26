@@ -108,8 +108,19 @@ export class SearchLinkedIntegrationResourceMultiModalComponent implements After
     });
   }
 
+  isResourceSelected(resource: IntegrationResource) {
+    let isSelected = false;
+    for (const selectedResource of this.selectedResources) {
+      if (resource.uri.toLowerCase() === selectedResource.uri) {
+        isSelected = true;
+        break;
+      }
+    }
+    return isSelected;
+  }
+
   selectResource(resource: IntegrationResource) {
-    if (!this.selectedResources.includes(resource)) {
+    if (!this.isResourceSelected(resource)) {
       resource.type = this.containerType;
       this.restricts.push(resource.uri);
       this.selectedResources.push(resource);
