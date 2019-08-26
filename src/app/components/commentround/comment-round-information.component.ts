@@ -65,6 +65,7 @@ export class CommentRoundInformationComponent implements OnInit, OnDestroy, OnCh
     const commentRoundChange: SimpleChange = changes['commentRound'];
     if (commentRoundChange && !commentRoundChange.isFirstChange()) {
       this.commentRound = commentRoundChange.currentValue;
+      this.reset();
     }
 
     const commentThreadsChange: SimpleChange = changes['commentThreads'];
