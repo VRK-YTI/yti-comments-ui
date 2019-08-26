@@ -44,6 +44,7 @@
               <span [class.sort-content-active]="sortOption === 'alphabetical'"> ▼</span>
             </div>
           </th>
+          <th style="width: 13%" translate>Proposer's comment</th>
           <th style="width: 13%" translate>{{ commenting ? 'Your comment' : 'Commenter\'s comment' }}</th>
           <th style="width: 9%">
             <div class="sort-content" (click)="sortContent('created')">
@@ -55,7 +56,6 @@
           <th class="description" style="width: 15%" translate>Description</th>
           <th style="width: 10%" translate>Current status</th>
           <th style="width: 10%" translate>Proposed status</th>
-          <th style="width: 13%" translate>Proposer's comment</th>
           <th style="width: 10%" translate>{{ commenting ? 'Propose status' : 'Commenter\'s proposal for status' }}</th>
         </tr>
         </thead>
@@ -74,6 +74,9 @@
             </a>
             <app-literal-multilanguage *ngIf="!commentThread.value.resourceUri"
                                        [value]="commentThread.value.label"></app-literal-multilanguage>
+          </td>
+          <td style="width: 13%">
+            <span>{{ commentThread.value.proposedText ? commentThread.value.proposedText : '-'}}</span>
           </td>
           <td style="width: 13%">
             <app-literal-textarea *ngIf="canModifyComment(commentThread.value.id)"
@@ -107,9 +110,6 @@
           </td>
           <td style="width: 10%">
             <app-status class="status" [status]="commentThread.value.proposedStatus !== 'NOSTATUS' ? commentThread.value.proposedStatus : 'SUGGESTED'"></app-status>
-          </td>
-          <td style="width: 13%">
-            <span>{{ commentThread.value.proposedText ? commentThread.value.proposedText : '-'}}</span>
           </td>
           <td style="width: 10%">
             <app-proposed-status-table-dropdown *ngIf="canModifyCommentProposedStatus()"

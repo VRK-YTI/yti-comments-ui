@@ -24,7 +24,7 @@
       <table>
         <thead>
         <tr>
-          <th style="width: 2%">
+          <th style="width: 7%">
             <span translate>Comments</span>
           </th>
           <th style="width: 15%">
@@ -41,7 +41,7 @@
             </div>
           </th>
           <th *ngIf="!commentRound.fixedThreads" style="width: 10%" translate>Added by</th>
-          <th [ngClass]="isEditing ? '' : 'description'" style="width: 20%" translate>Description</th>
+          <th [ngClass]="isEditing ? '' : 'description'" style="width: 15%" translate>Description</th>
           <th style="width: 15%" translate>Current status</th>
           <th style="width: 10%" translate>Proposed status</th>
           <th *ngIf="showActions" style="width: 3%" translate>Actions</th>
@@ -52,7 +52,7 @@
         <tbody>
         <ng-container *ngFor="let commentThread of commentThreadForms.controls; let i = index" [formGroupName]="i">
           <tr>
-            <td style="width: 2%">
+            <td style="width: 7%">
               <div *ngIf="commentThread.value.commentCount != null && commentThread.value.commentCount > 0">
                         <span id="view_commentthread_{{i}}_comments_button"
                               class="fa-stack fa-1x icon h5"
@@ -79,7 +79,7 @@
                                                   [id]="'commenthread_' + i + '_label_text_input'"
                                                   [formControlName]="'label'"></app-localizable-undefined-textarea>
             </td>
-            <td style="width: 20%">
+            <td style="width: 15%">
               <app-literal-textarea *ngIf="commentThread.value.resourceUri && isNewResource(commentThread.value.id)"
                                     [required]=true
                                     [showRequired]=false
