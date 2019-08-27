@@ -499,20 +499,18 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
 
   get numberOfExpanded() {
 
-    return this.filterTopLevelComments(this.activeThreadComments).filter(comment => comment.expanded).length;
+    return this.filterTopLevelComments(this.activeThreadComments)
+      .filter(comment => comment.expanded && this.hasChildComments(comment.id)).length;
+  }
+
+  hasChildComments(parentCommentId: string): boolean {
+
+    return this.activeThreadComments.filter(comment => comment.parentComment && comment.parentComment.id === parentCommentId).length > 0;
   }
 
   get numberOfCollapsed() {
 
     return this.filterTopLevelComments(this.activeThreadComments).filter(comment => !comment.expanded).length;
-  }
-
-  get parentComments() {
-
-    const childComments = this.activeThreadComments.filter(comment => comment.parentComment != null);
-    const parentCommentIds = childComments.map(comment => comment.parentComment.id);
-
-    return this.activeThreadComments.filter(comment => contains(parentCommentIds, comment.id));
   }
 
   hasExpanded() {
@@ -527,19 +525,17 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
 
   expandAll() {
 
-    this.activeThreadComments.map(comment => {
-      if (contains(this.parentComments, comment)) {
-        comment.expanded = true;
-      }
+    this.activeThreadComments.forEach(comment => {
+      comment.expanded = true;
     });
+    this.collapsedComments = [];
   }
 
   collapseAll() {
 
-    this.activeThreadComments.map(comment => {
-      if (contains(this.parentComments, comment)) {
-        comment.expanded = false;
-      }
+    this.activeThreadComments.forEach(comment => {
+      comment.expanded = false;
+      this.collapsedComments.push(comment.id);
     });
   }
 
