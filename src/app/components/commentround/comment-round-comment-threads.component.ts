@@ -25,6 +25,7 @@ import { tap } from 'rxjs/operators';
 import { CommentSimple } from '../../entity/comment-simple';
 import { Comment } from '../../entity/comment';
 import { SearchLinkedIntegrationResourceMultiModalService } from '../form/search-linked-integration-resource-multi-modal.component';
+import { contains } from 'yti-common-ui/utils/array';
 
 @Component({
   selector: 'app-comment-round-comment-threads',
@@ -45,8 +46,10 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
 
   newIds: string[] = [];
   showCommentsId: number | undefined = undefined;
+  activeThreadId: string | undefined = undefined;
   activeCommentId$ = new BehaviorSubject<string | null>(null);
   activeThreadComments: CommentSimple[];
+  collapsedComments: string[] = [];
   sortOption = 'alphabetical';
 
   commentThreadForm = new FormGroup({
@@ -136,10 +139,12 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
 
     if (index === this.showCommentsId) {
       this.showCommentsId = undefined;
+      this.activeThreadId = undefined;
       this.activeThreadComments = [];
     } else {
       this.dataService.getCommentRoundCommentThreadComments(commentRoundId, commentThreadId).subscribe(comments => {
         this.showCommentsId = index;
+        this.activeThreadId = commentThreadId;
         this.sortCommentsByCreated(comments);
         this.activeThreadComments = comments;
       });
@@ -185,10 +190,69 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
     this.dataService.getCommentRoundCommentThreadComments(this.commentRound.id, commentThreadId).subscribe(comments => {
       this.updateCommentCountForCommentThread(commentThreadId, comments.length);
       this.sortCommentsByCreated(comments);
+      if (commentThreadId === this.activeThreadId) {
+        comments.forEach(comment => {
+          const index = this.collapsedComments.indexOf(comment.id);
+          if (index >= 0) {
+            comment.expanded = false;
+          } else {
+            comment.expanded = true;
+          }
+        });
+      }
       this.activeThreadComments = comments;
     }, error => {
       this.errorModalService.openSubmitError(error);
     });
+  }
+
+  expandComment(commentId: string) {
+
+    const index = this.collapsedComments.indexOf(commentId, 0);
+    if (index > -1) {
+      this.activeThreadComments.forEach(comment => {
+        if (comment.id === commentId) {
+          comment.expanded = true;
+          this.expandChildComments(comment.id);
+        }
+      });
+      this.collapsedComments.splice(index, 1);
+    }
+  }
+
+  expandChildComments(parentCommentId: string) {
+
+    const childComments: CommentSimple[] = this.getRecursiveChildComments(parentCommentId);
+    childComments.forEach(comment => {
+      comment.expanded = true;
+    });
+  }
+
+  getRecursiveChildComments(parentCommentId: string): CommentSimple[] {
+
+    const childComments: CommentSimple[] = [];
+    this.activeThreadComments.forEach(comment => {
+      if (comment.parentComment && comment.parentComment.id === parentCommentId) {
+        childComments.push(comment);
+        const grandChildComments = this.getRecursiveChildComments(comment.id);
+        if (grandChildComments.length > 0) {
+          grandChildComments.forEach(grandChildComment => {
+            childComments.push(grandChildComment);
+          });
+        }
+      }
+    });
+    return childComments;
+  }
+
+  collapseComment(commentId: string) {
+
+    this.activeThreadComments.forEach(comment => {
+      if (comment.id === commentId) {
+        comment.expanded = false;
+      }
+    });
+    this.collapsedComments.push(commentId);
   }
 
   updateCommentCountForCommentThread(commentThreadId: string, count: number) {
@@ -431,5 +495,71 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
   commentIdentity(index: number, item: CommentSimple) {
 
     return item.id;
+  }
+
+  get numberOfExpanded() {
+
+    return this.filterTopLevelComments(this.activeThreadComments).filter(comment => comment.expanded).length;
+  }
+
+  get numberOfCollapsed() {
+
+    return this.filterTopLevelComments(this.activeThreadComments).filter(comment => !comment.expanded).length;
+  }
+
+  get parentComments() {
+
+    const childComments = this.activeThreadComments.filter(comment => comment.parentComment != null);
+    const parentCommentIds = childComments.map(comment => comment.parentComment.id);
+
+    return this.activeThreadComments.filter(comment => contains(parentCommentIds, comment.id));
+  }
+
+  hasExpanded() {
+
+    return this.numberOfExpanded > 0;
+  }
+
+  hasCollapsed() {
+
+    return this.numberOfCollapsed > 0;
+  }
+
+  expandAll() {
+
+    this.activeThreadComments.map(comment => {
+      if (contains(this.parentComments, comment)) {
+        comment.expanded = true;
+      }
+    });
+  }
+
+  collapseAll() {
+
+    this.activeThreadComments.map(comment => {
+      if (contains(this.parentComments, comment)) {
+        comment.expanded = false;
+      }
+    });
+  }
+
+  showExpandAll() {
+
+    return this.hasCollapsed();
+  }
+
+  showCollapseAll() {
+
+    return this.hasExpanded();
+  }
+
+  hasHierarchy() {
+
+    return this.activeThreadComments.filter(comment => comment.parentComment !== undefined).length > 0;
+  }
+
+  allowExpandAllAndCollapseAll() {
+
+    return this.hasHierarchy && this.activeThreadComments.length <= 500;
   }
 }

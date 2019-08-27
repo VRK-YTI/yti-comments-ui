@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { LanguageService } from '../../services/language.service';
 import { CommentSimple } from '../../entity/comment-simple';
 import { DataService } from '../../services/data.service';
@@ -98,6 +98,8 @@ import { BehaviorSubject } from 'rxjs';
     <ul *ngIf="expanded && hasChildComments">
       <li class="child-comment" *ngFor="let childComment of childComments; trackBy: commentIdentity">
         <app-hierarchical-comment (refreshComments)="emitRefreshComments()"
+                                  (expandComment)="emitExpandComment($event)"
+                                  (collapseComment)="emitCollapseComment($event)"
                                   [id]="childComment.id"
                                   [comment]="childComment"
                                   [comments]="comments"
@@ -118,6 +120,8 @@ export class HierarchicalCommentListitemComponent implements OnInit {
   @Input() canComment: boolean;
   @Input() activeCommentId$ = new BehaviorSubject<string | null>(null);
   @Output() refreshComments = new EventEmitter<string>();
+  @Output() expandComment = new EventEmitter<string>();
+  @Output() collapseComment = new EventEmitter<string>();
 
   commenting = false;
   commentContent = '';
@@ -210,19 +214,15 @@ export class HierarchicalCommentListitemComponent implements OnInit {
       this.toggleCommenting();
       this.comments.push(createdComment as CommentSimple);
       this.refreshComments.emit(this.commentThreadId);
+      this.emitExpandComment(this.comment.id);
     }, error => {
       this.errorModalService.openSubmitError(error);
     });
   }
 
-  emitRefreshComments() {
-    this.refreshComments.emit(this.commentThreadId);
-  }
-
   get hasChildComments(): boolean {
 
-    const childComments = this.childComments;
-    return childComments != null && childComments.length > 0;
+    return this.childComments && this.childComments.length > 0;
   }
 
   get childComments(): CommentSimple[] {
@@ -236,18 +236,37 @@ export class HierarchicalCommentListitemComponent implements OnInit {
   }
 
   get expanded() {
+
     return this.comment.expanded;
   }
 
   get collapsed() {
+
     return !this.expanded;
   }
 
   expand() {
-    this.comment.expanded = true;
+
+    this.emitExpandComment(this.comment.id);
   }
 
   collapse() {
-    this.comment.expanded = false;
+
+    this.emitCollapseComment(this.comment.id);
+  }
+
+  emitRefreshComments() {
+
+    this.refreshComments.emit(this.commentThreadId);
+  }
+
+  emitExpandComment(commentId: string) {
+
+    this.expandComment.emit(commentId);
+  }
+
+  emitCollapseComment(commentId: string) {
+
+    this.collapseComment.emit(commentId);
   }
 }

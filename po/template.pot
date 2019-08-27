@@ -115,6 +115,12 @@ msgstr ""
 msgid "Proposed statuses"
 msgstr ""
 
+msgid "Expand all"
+msgstr ""
+
+msgid "Collapse all"
+msgstr ""
+
 msgid "Start commenting"
 msgstr ""
 
