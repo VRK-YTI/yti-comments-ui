@@ -141,12 +141,14 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
       this.showCommentsId = undefined;
       this.activeThreadId = undefined;
       this.activeThreadComments = [];
+      this.collapsedComments = [];
     } else {
       this.dataService.getCommentRoundCommentThreadComments(commentRoundId, commentThreadId).subscribe(comments => {
         this.showCommentsId = index;
         this.activeThreadId = commentThreadId;
         this.sortCommentsByCreated(comments);
         this.activeThreadComments = comments;
+        this.collapsedComments = [];
       });
     }
   }
