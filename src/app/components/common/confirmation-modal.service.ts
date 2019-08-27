@@ -27,6 +27,10 @@ export class CommentsConfirmationModalService {
     return this.confirmationModalService.open('DELETE COMMENT THREAD?', '');
   }
 
+  deleteComment() {
+    return this.confirmationModalService.open('DELETE COMMENT?', '');
+  }
+
   sendPartialComments() {
     return this.confirmationModalService.open('SEND COMMENTS?',
       '', 'You have not commented all resources. Are you sure you want to send partial comments?');

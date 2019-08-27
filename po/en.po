@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-08-27 09:28+0300\n"
+"PO-Revision-Date: 2019-08-27 13:07+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -405,8 +405,8 @@ msgstr "Comment round integration resource URI address"
 msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr "Results can be filtered by organization, status and tool using dropdown"
 
-msgid "Unexpected error"
-msgstr ""
+msgid "ADMIN"
+msgstr "Admin"
 
 msgid "Front page"
 msgstr ""
@@ -501,11 +501,11 @@ msgstr "This comment has already been commented on. It can not be modified or de
 msgid "Submit error"
 msgstr ""
 
+msgid "Unexpected error"
+msgstr ""
+
 msgid "NOSTATUS"
 msgstr "No selected status"
-
-msgid "ADMIN"
-msgstr "Admin"
 
 msgid "DATA_MODEL_EDITOR"
 msgstr "Data model editor"
@@ -595,6 +595,9 @@ msgid "DELETE COMMENT ROUND?"
 msgstr ""
 
 msgid "DELETE COMMENT THREAD?"
+msgstr ""
+
+msgid "DELETE COMMENT?"
 msgstr ""
 
 msgid "SEND COMMENTS?"

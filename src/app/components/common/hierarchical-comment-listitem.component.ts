@@ -6,6 +6,8 @@ import { CommentThreadType, CommentType } from '../../services/api-schema';
 import { v4 as uuid } from 'uuid';
 import { CommentRoundErrorModalService } from './error-modal.service';
 import { BehaviorSubject } from 'rxjs';
+import { ignoreModalClose } from 'yti-common-ui/utils/modal';
+import { CommentsConfirmationModalService } from './confirmation-modal.service';
 
 @Component({
   selector: 'app-hierarchical-comment',
@@ -129,7 +131,8 @@ export class HierarchicalCommentListitemComponent implements OnInit {
 
   constructor(public languageService: LanguageService,
               private dataService: DataService,
-              private errorModalService: CommentRoundErrorModalService) {
+              private errorModalService: CommentRoundErrorModalService,
+              private confirmationModalService: CommentsConfirmationModalService) {
   }
 
   ngOnInit() {
@@ -186,18 +189,21 @@ export class HierarchicalCommentListitemComponent implements OnInit {
 
   deleteComment() {
 
-    const newComment: CommentType = <CommentType>{
-      commentThread: <CommentThreadType>{ id: this.commentThreadId },
-      content: this.commentContent,
-      parentComment: this.comment.parentComment ? this.comment.parentComment.serialize() : null,
-      id: this.comment.id
-    };
+    this.confirmationModalService.deleteComment()
+      .then(() => {
+        const newComment: CommentType = <CommentType>{
+          commentThread: <CommentThreadType>{ id: this.commentThreadId },
+          content: this.commentContent,
+          parentComment: this.comment.parentComment ? this.comment.parentComment.serialize() : null,
+          id: this.comment.id
+        };
 
-    this.dataService.deleteComment(this.commentRoundId, newComment).subscribe(() => {
-      this.refreshComments.emit(this.commentThreadId);
-    }, error => {
-      this.errorModalService.openSubmitError(error);
-    });
+        this.dataService.deleteComment(this.commentRoundId, newComment).subscribe(() => {
+          this.refreshComments.emit(this.commentThreadId);
+        }, error => {
+          this.errorModalService.openSubmitError(error);
+        });
+      }, ignoreModalClose);
   }
 
   sendComment() {

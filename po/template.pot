@@ -379,7 +379,7 @@ msgstr ""
 msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr ""
 
-msgid "Unexpected error"
+msgid "ADMIN"
 msgstr ""
 
 msgid "Front page"
@@ -477,10 +477,10 @@ msgstr ""
 msgid "Submit error"
 msgstr ""
 
-msgid "NOSTATUS"
+msgid "Unexpected error"
 msgstr ""
 
-msgid "ADMIN"
+msgid "NOSTATUS"
 msgstr ""
 
 msgid "DATA_MODEL_EDITOR"
@@ -571,6 +571,9 @@ msgid "DELETE COMMENT ROUND?"
 msgstr ""
 
 msgid "DELETE COMMENT THREAD?"
+msgstr ""
+
+msgid "DELETE COMMENT?"
 msgstr ""
 
 msgid "SEND COMMENTS?"

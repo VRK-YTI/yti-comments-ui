@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-08-27 09:32+0300\n"
+"PO-Revision-Date: 2019-08-27 13:07+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -411,8 +411,8 @@ msgstr ""
 "Hakutuloksia voi rajata organisaatio-, tila- ja työkalukohtaisesti "
 "alasvetovalikoiden avulla"
 
-msgid "Unexpected error"
-msgstr "Tapahtui odottamaton virhe"
+msgid "ADMIN"
+msgstr "Ylläpitäjä"
 
 msgid "Front page"
 msgstr "Etusivu"
@@ -507,11 +507,11 @@ msgstr "Kommenttiisi on jo tehty kommentteja, muokkausta/poistoa ei voi tehdä"
 msgid "Submit error"
 msgstr "Toiminnossa tapahtui virhe"
 
+msgid "Unexpected error"
+msgstr "Tapahtui odottamaton virhe"
+
 msgid "NOSTATUS"
 msgstr "Ei valittua tilaa"
-
-msgid "ADMIN"
-msgstr "Ylläpitäjä"
 
 msgid "DATA_MODEL_EDITOR"
 msgstr "Tietomallintaja"
@@ -602,6 +602,9 @@ msgstr "POISTETAANKO KOMMENTOINTIKIERROS?"
 
 msgid "DELETE COMMENT THREAD?"
 msgstr "POISTETAANKO KOMMENTOINTIKETJU?"
+
+msgid "DELETE COMMENT?"
+msgstr "POISTETAANKO KOMMENTTI?"
 
 msgid "SEND COMMENTS?"
 msgstr "LÄHETÄ KOMMENTIT?"
