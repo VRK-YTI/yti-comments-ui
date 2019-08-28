@@ -48,7 +48,6 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
   activeThreadId: string | undefined = undefined;
   activeCommentId$ = new BehaviorSubject<string | null>(null);
   activeThreadComments: CommentSimple[];
-  collapsedComments: string[] = [];
   sortOption = 'alphabetical';
 
   commentThreadForm = new FormGroup({
@@ -140,14 +139,12 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
       this.showCommentsId = undefined;
       this.activeThreadId = undefined;
       this.activeThreadComments = [];
-      this.collapsedComments = [];
     } else {
       this.dataService.getCommentRoundCommentThreadComments(commentRoundId, commentThreadId).subscribe(comments => {
         this.showCommentsId = index;
         this.activeThreadId = commentThreadId;
         this.sortCommentsByCreated(comments);
         this.activeThreadComments = comments;
-        this.collapsedComments = [];
       });
     }
   }
@@ -191,16 +188,13 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
     this.dataService.getCommentRoundCommentThreadComments(this.commentRound.id, commentThreadId).subscribe(comments => {
       this.updateCommentCountForCommentThread(commentThreadId, comments.length);
       this.sortCommentsByCreated(comments);
-      if (commentThreadId === this.activeThreadId) {
-        comments.forEach(comment => {
-          const index = this.collapsedComments.indexOf(comment.id);
-          if (index >= 0) {
-            comment.expanded = false;
-          } else {
-            comment.expanded = true;
+      comments.forEach(comment => {
+        this.activeThreadComments.forEach(c => {
+          if (comment.id === c.id) {
+            comment.expanded = c.expanded;
           }
         });
-      }
+      });
       this.activeThreadComments = comments;
     }, error => {
       this.errorModalService.openSubmitError(error);
@@ -209,16 +203,12 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
 
   expandComment(commentId: string) {
 
-    const index = this.collapsedComments.indexOf(commentId, 0);
-    if (index > -1) {
-      this.activeThreadComments.forEach(comment => {
-        if (comment.id === commentId) {
-          comment.expanded = true;
-          this.expandChildComments(comment.id);
-        }
-      });
-      this.collapsedComments.splice(index, 1);
-    }
+    this.activeThreadComments.forEach(comment => {
+      if (comment.id === commentId) {
+        comment.expanded = true;
+        this.expandChildComments(comment.id);
+      }
+    });
   }
 
   expandChildComments(parentCommentId: string) {
@@ -251,9 +241,14 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
     this.activeThreadComments.forEach(comment => {
       if (comment.id === commentId) {
         comment.expanded = false;
+        const grandChildComments = this.getRecursiveChildComments(comment.id);
+        if (grandChildComments.length > 0) {
+          grandChildComments.forEach(grandChildComment => {
+            grandChildComment.expanded = true;
+          });
+        }
       }
     });
-    this.collapsedComments.push(commentId);
   }
 
   updateCommentCountForCommentThread(commentThreadId: string, count: number) {
@@ -517,7 +512,7 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
 
   get numberOfCollapsed() {
 
-    return this.filterTopLevelComments(this.activeThreadComments).filter(comment => !comment.expanded).length;
+    return this.activeThreadComments.filter(comment => !comment.expanded).length;
   }
 
   hasExpanded() {
@@ -535,14 +530,12 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
     this.activeThreadComments.forEach(comment => {
       comment.expanded = true;
     });
-    this.collapsedComments = [];
   }
 
   collapseAll() {
 
     this.activeThreadComments.forEach(comment => {
       comment.expanded = false;
-      this.collapsedComments.push(comment.id);
     });
   }
 
