@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { LanguageService } from '../../services/language.service';
 import { CommentSimple } from '../../entity/comment-simple';
 import { DataService } from '../../services/data.service';
@@ -8,6 +8,8 @@ import { CommentRoundErrorModalService } from './error-modal.service';
 import { BehaviorSubject } from 'rxjs';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { CommentsConfirmationModalService } from './confirmation-modal.service';
+import { AuthorizationManager } from '../../services/authorization-manager';
+import { CommentRound } from '../../entity/commentround';
 
 @Component({
   selector: 'app-hierarchical-comment',
@@ -33,12 +35,12 @@ import { CommentsConfirmationModalService } from './confirmation-modal.service';
               (click)="toggleCommenting()"
               translate>Reply</span>
         <span class="actions"
-              *ngIf="!this.updating && canComment && !hasChildComments && comment.parentComment"
+              *ngIf="!this.updating && canModifyOrDeleteComment && !hasChildComments && comment.parentComment"
               [id]="'comment_' + this.comment.id + '_modify_button'"
               (click)="toggleUpdatingComment()"
               translate>Modify</span>
         <span class="actions"
-              *ngIf="!this.commenting && !this.updating && canComment && !hasChildComments && comment.parentComment"
+              *ngIf="!this.commenting && !this.updating && canModifyOrDeleteComment && !hasChildComments && comment.parentComment"
               [id]="'comment_' + this.comment.id + '_delete_button'"
               (click)="deleteComment()"
               translate>Delete</span>
@@ -105,10 +107,11 @@ import { CommentsConfirmationModalService } from './confirmation-modal.service';
                                   [id]="childComment.id"
                                   [comment]="childComment"
                                   [comments]="comments"
-                                  [commentRoundId]="commentRoundId"
+                                  [commentRound]="commentRound"
                                   [commentThreadId]="commentThreadId"
                                   [activeCommentId$]="activeCommentId$"
-                                  [canComment]="canComment"></app-hierarchical-comment>
+                                  [canComment]="canComment"
+                                  [canModifyOrDeleteComment]="canModifyOrDeleteInlineComment(childComment)"></app-hierarchical-comment>
       </li>
     </ul>
   `
@@ -117,8 +120,9 @@ export class HierarchicalCommentListitemComponent implements OnInit {
 
   @Input() comment: CommentSimple;
   @Input() comments: CommentSimple[];
-  @Input() commentRoundId: string;
+  @Input() commentRound: CommentRound;
   @Input() commentThreadId: string;
+  @Input() canModifyOrDeleteComment: boolean;
   @Input() canComment: boolean;
   @Input() activeCommentId$ = new BehaviorSubject<string | null>(null);
   @Output() refreshComments = new EventEmitter<string>();
@@ -132,7 +136,8 @@ export class HierarchicalCommentListitemComponent implements OnInit {
   constructor(public languageService: LanguageService,
               private dataService: DataService,
               private errorModalService: CommentRoundErrorModalService,
-              private confirmationModalService: CommentsConfirmationModalService) {
+              private confirmationModalService: CommentsConfirmationModalService,
+              private authorizationManager: AuthorizationManager) {
   }
 
   ngOnInit() {
@@ -178,7 +183,7 @@ export class HierarchicalCommentListitemComponent implements OnInit {
       id: this.comment.id
     };
 
-    this.dataService.updateComment(this.commentRoundId, commentToUpdate).subscribe(updatedComment => {
+    this.dataService.updateComment(this.commentRound.id, commentToUpdate).subscribe(updatedComment => {
       this.toggleUpdatingComment();
       this.comments.push(updatedComment as CommentSimple);
       this.refreshComments.emit(this.commentThreadId);
@@ -198,7 +203,7 @@ export class HierarchicalCommentListitemComponent implements OnInit {
           id: this.comment.id
         };
 
-        this.dataService.deleteComment(this.commentRoundId, newComment).subscribe(() => {
+        this.dataService.deleteComment(this.commentRound.id, newComment).subscribe(() => {
           this.refreshComments.emit(this.commentThreadId);
         }, error => {
           this.errorModalService.openSubmitError(error);
@@ -216,7 +221,7 @@ export class HierarchicalCommentListitemComponent implements OnInit {
       id: id
     };
 
-    this.dataService.createComment(this.commentRoundId, newComment).subscribe(createdComment => {
+    this.dataService.createComment(this.commentRound.id, newComment).subscribe(createdComment => {
       this.toggleCommenting();
       this.comments.push(createdComment as CommentSimple);
       this.refreshComments.emit(this.commentThreadId);
@@ -234,6 +239,12 @@ export class HierarchicalCommentListitemComponent implements OnInit {
   get childComments(): CommentSimple[] {
 
     return this.comments.filter(comment => comment.parentComment != null && comment.parentComment.id === this.comment.id);
+  }
+
+  canModifyOrDeleteInlineComment(comment: CommentSimple): boolean {
+
+    return (this.authorizationManager.user.email === comment.user.email) &&
+      this.commentRound.status === 'INPROGRESS';
   }
 
   commentIdentity(index: number, item: CommentSimple) {

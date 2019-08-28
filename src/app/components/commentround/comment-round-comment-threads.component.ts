@@ -25,7 +25,6 @@ import { tap } from 'rxjs/operators';
 import { CommentSimple } from '../../entity/comment-simple';
 import { Comment } from '../../entity/comment';
 import { SearchLinkedIntegrationResourceMultiModalService } from '../form/search-linked-integration-resource-multi-modal.component';
-import { contains } from 'yti-common-ui/utils/array';
 
 @Component({
   selector: 'app-comment-round-comment-threads',
@@ -290,6 +289,12 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
   get canInlineComment(): boolean {
 
     return this.authorizationManager.canCreateComment(this.commentRound) &&
+      this.commentRound.status === 'INPROGRESS';
+  }
+
+  canModifyOrDeleteInlineComment(comment: CommentSimple): boolean {
+
+    return (this.authorizationManager.user.email === comment.user.email) &&
       this.commentRound.status === 'INPROGRESS';
   }
 

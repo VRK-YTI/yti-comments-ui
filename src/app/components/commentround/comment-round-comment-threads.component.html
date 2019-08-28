@@ -172,10 +172,11 @@
                                                 [id]="comment.id"
                                                 [comment]="comment"
                                                 [comments]="activeThreadComments"
-                                                [commentRoundId]="commentRound.id"
+                                                [commentRound]="commentRound"
                                                 [commentThreadId]="commentThread.value.id"
                                                 [activeCommentId$]="activeCommentId$"
-                                                [canComment]="canInlineComment"></app-hierarchical-comment>
+                                                [canComment]="canInlineComment"
+                                                [canModifyOrDeleteComment]="canModifyOrDeleteInlineComment(comment)"></app-hierarchical-comment>
                     </li>
                   </ul>
                 </div>
