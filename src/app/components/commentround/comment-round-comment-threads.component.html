@@ -66,6 +66,8 @@
               <a *ngIf="commentThread.value.label && commentThread.value.resourceUri"
                  [id]="'commentthread_link_' + i"
                  [href]="getCommentThreadResourceUri(commentThread.value)"
+                 ngbPopover="{{ commentThread.value.description | translateValue:true }}"
+                 triggers="mouseenter:mouseleave"
                  target="_blank">
                 <app-literal-multilanguage *ngIf="hasLocalization(commentThread.value.label)" [value]="commentThread.value.label"></app-literal-multilanguage>
                 <app-literal *ngIf="!hasLocalization(commentThread.value.label) && commentThread.value.localName" [value]="commentThread.value.localName"></app-literal>
