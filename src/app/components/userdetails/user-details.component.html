@@ -27,25 +27,8 @@
           </li>
         </ul>
       </div>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class="input-group">
-      <app-dropdown [options]="organizationOptions"
-                    id="access_request_dropdown"
-                    [showNullOption]="false"
-                    [placement]="'top-left'"
-                    [(ngModel)]="selectedOrganization"></app-dropdown>
-
-      <div class="input-group-btn">
-        <button type="button"
-                id="send_request_button"
-                class="btn btn-action"
-                [disabled]="!selectedOrganization"
-                (click)="sendRequest()">
-          <span translate>Send</span>
-        </button>
+      <div *ngIf="userOrganizations.length === 0">
+        <span translate>This user does not have any roles in organizations.</span>
       </div>
     </div>
   </div>

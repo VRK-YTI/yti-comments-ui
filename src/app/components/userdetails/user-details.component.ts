@@ -3,14 +3,10 @@ import { Role, UserService } from 'yti-common-ui/services/user.service';
 import { Router } from '@angular/router';
 import { combineLatest, Subscription } from 'rxjs';
 import { index } from 'yti-common-ui/utils/array';
-import { Options } from 'yti-common-ui/components/dropdown.component';
 import { comparingLocalizable } from 'yti-common-ui/utils/comparator';
-import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../services/language.service';
 import { LocationService } from '../../services/location.service';
 import { DataService } from '../../services/data.service';
-import { combineSets, hasAny } from 'yti-common-ui/utils/set';
-import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { OrganizationSimple } from '../../entity/organization-simple';
 
 interface UserOrganizationRoles {
@@ -37,8 +33,7 @@ export class UserDetailsComponent implements OnDestroy {
               private userService: UserService,
               private locationService: LocationService,
               private dataService: DataService,
-              private languageService: LanguageService,
-              private translateService: TranslateService) {
+              private languageService: LanguageService) {
 
     this.subscriptionToClean.push(this.userService.loggedIn$.subscribe(loggedIn => {
       if (!loggedIn) {
@@ -63,14 +58,17 @@ export class UserDetailsComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
+
     this.subscriptionToClean.forEach(s => s.unsubscribe());
   }
 
   get user() {
+
     return this.userService.user;
   }
 
   get loading() {
+
     return this.allOrganizations == null || this.requestsInOrganizations == null;
   }
 
@@ -93,40 +91,6 @@ export class UserDetailsComponent implements OnDestroy {
       org.organization ? org.organization.prefLabel : {}));
 
     return result;
-  }
-
-  get organizationOptions(): Options<OrganizationSimple> {
-
-    const hasExistingRoleOrRequest = (org: OrganizationSimple) => {
-
-      const rolesOrRequests = combineSets([
-        this.user.getRoles(org.id),
-        this.requestsInOrganizations.get(org.id) || new Set<Role>()
-      ]);
-
-      return hasAny(rolesOrRequests, ['CODE_LIST_EDITOR', 'ADMIN']);
-    };
-
-    const requestableOrganizations = this.allOrganizations.filter(organization => !hasExistingRoleOrRequest(organization));
-
-    return [null, ...requestableOrganizations].map(org => {
-      return {
-        value: org,
-        name: () => org ? this.languageService.translate(org.prefLabel, true)
-          : this.translateService.instant('Select organization'),
-        idIdentifier: () => org ? labelNameToResourceIdIdentifier(this.languageService.translate(org.prefLabel, true)) : 'all_selected'
-      };
-    });
-  }
-
-  sendRequest() {
-
-    if (!this.selectedOrganization) {
-      throw new Error('No organization selected for request');
-    }
-
-    this.dataService.sendUserRequest(this.selectedOrganization.id)
-      .subscribe(() => this.refreshRequests());
   }
 
   refreshRequests() {

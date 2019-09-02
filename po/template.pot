@@ -277,6 +277,9 @@ msgstr ""
 msgid "Waiting for approval"
 msgstr ""
 
+msgid "This user does not have any roles in organizations."
+msgstr ""
+
 msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
 msgstr ""
 

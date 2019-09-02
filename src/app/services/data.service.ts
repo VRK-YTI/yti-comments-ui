@@ -382,11 +382,6 @@ export class DataService {
       .pipe(map(response => response.results));
   }
 
-  sendUserRequest(organizationId: string): Observable<any> {
-
-    return this.http.post(`${groupManagementRequestBasePath}/?organizationId=${organizationId}`, null);
-  }
-
   getContainers(containerType: string, language: string): Observable<IntegrationResource[]> {
 
     let params = new HttpParams();
