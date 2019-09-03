@@ -4609,9 +4609,10 @@ neo-async@^2.5.0, neo-async@^2.6.0:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
 
-ngx-autosize@^1.2.4:
-  version "1.6.3"
-  resolved "https://registry.yarnpkg.com/ngx-autosize/-/ngx-autosize-1.6.3.tgz#1ba9309107d99dadfeea843c7d0bbcb7a1b856ae"
+ngx-autosize@~1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/ngx-autosize/-/ngx-autosize-1.2.4.tgz#978535d60b06288776472ac6b63a979a4e8f1c45"
+  integrity sha512-C169j9Iwb+bOplYqirh/Rv/UQTPXnGgEeAbrwWALX8a6ZB3FijyFSUmOtClX85KBgSlZbUfcoEiMjNeD40FBTg==
   dependencies:
     tslib "^1.9.0"
 
