@@ -198,6 +198,7 @@ export class CommentRoundComponent implements OnInit {
 
   refreshCommentThreads() {
 
+    this.refreshCommentRound();
     this.dataService.getCommentRoundCommentThreads(this.commentRound.id).subscribe(commentThreads => {
       this.commentThreads = commentThreads;
     });
