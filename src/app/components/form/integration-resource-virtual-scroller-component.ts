@@ -68,7 +68,6 @@ export class IntegrationResourceVirtualScrollerComponent {
             integrationResource.uri.toLowerCase() : null))
         .andThen(comparingLocalizable<IntegrationResource>(this.languageService,
           integrationResource => integrationResource.prefLabel ? integrationResource.prefLabel : {}))));
-      console.log('ja sitten this.buffer lopuksi on', this.buffer);
       if (chunk.length === 0) {
         this.previousRequestGotZeroResults = true;
       } else {
