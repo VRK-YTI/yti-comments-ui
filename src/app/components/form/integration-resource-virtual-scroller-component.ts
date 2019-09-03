@@ -47,7 +47,7 @@ export class IntegrationResourceVirtualScrollerComponent {
               private dataService: DataService) {
   }
 
-  protected fetchMore(event: IPageInfo) {
+  public fetchMore(event: IPageInfo) {
 
     if (this.loading || this.previousRequestGotZeroResults) {
       return;
@@ -80,7 +80,7 @@ export class IntegrationResourceVirtualScrollerComponent {
     });
   }
 
-  protected fetchNextChunk(skip: number, limit: number): Promise<IntegrationResource[]> {
+  public fetchNextChunk(skip: number, limit: number): Promise<IntegrationResource[]> {
     return this.dataService.getResourcesPaged(this.containerType, this.containerUri, this.language, limit.toString(), skip.toString(),
       this.status$.value, this.search$.value);
   }
