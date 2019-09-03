@@ -22,6 +22,7 @@ import { IntegrationResource } from '../entity/integration-resource';
 import { CommentThreadSimple } from '../entity/commentthread-simple';
 import { CommentSimple } from '../entity/comment-simple';
 import { Source } from '../entity/source';
+import { type } from 'os';
 
 const apiContext = 'comments-api';
 const api = 'api';
@@ -321,7 +322,7 @@ export class DataService {
   createCommentToCommentThread(commentRoundId: string, commentThreadId: string, commentsList: CommentType[]): Observable<Comment[]> {
 
     const params = new HttpParams()
-      .set('expand', 'commentThread,commentRound')
+      .set('expand', 'commentThread,commentRound');
 
     return this.http.post<WithResults<CommentType>>(
       `${commentRoundsApiPath}/${commentRoundId}/${commentThreads}/${commentThreadId}/${comments}`,
@@ -332,7 +333,7 @@ export class DataService {
   createCommentsToCommentRound(commentRoundId: string, commentsList: CommentType[]): Observable<CommentSimple[]> {
 
     const params = new HttpParams()
-      .set('expand', 'commentThread,commentRound')
+      .set('expand', 'commentThread,commentRound');
 
     return this.http.post<WithResults<CommentSimpleType>>(
       `${commentRoundsApiPath}/${commentRoundId}/${comments}`, commentsList, { params: params })
@@ -345,7 +346,7 @@ export class DataService {
     const commentId: string = commentToUpdate.id;
 
     const params = new HttpParams()
-      .set('expand', 'commentThread,commentRound')
+      .set('expand', 'commentThread,commentRound');
 
     return this.http.post<CommentSimpleType>(
       `${commentRoundsApiPath}/${commentRoundId}/${commentThreads}/${commentThreadId}/${comments}/${commentId}/`,
@@ -405,8 +406,37 @@ export class DataService {
     }
 
     const resourcePath = DataService.resolveIntegrationApiPathForContainerType(containerType) + '/' + resources;
-
     return this.http.get<WithResults<IntegrationResourceType>>(resourcePath, { params: params, responseType: 'json' })
       .pipe(map(res => res.results.map((data: IntegrationResourceType) => new IntegrationResource(data))));
+  }
+
+  getResourcesPaged(containerType: string, uri: string, language: string, pageSize: string, from: string,
+                    status: string|null, searchTerm: string|null): Promise<IntegrationResource[]> {
+
+    let params = new HttpParams()
+      .set('container', uri);
+    if (language) {
+      params = params.append('language', language);
+    }
+    if (pageSize) {
+      params = params.append('pageSize', pageSize);
+    }
+    if (from) {
+      params = params.append('from', from);
+    }
+    if (status) {
+      params = params.append('status', status);
+    }
+    if (searchTerm) {
+      params = params.append('searchTerm', searchTerm);
+    }
+
+    const resourcePath = DataService.resolveIntegrationApiPathForContainerType(containerType) + '/' + resources;
+
+    const fetchResult: Observable<IntegrationResource[]> = this.http.get<WithResults<IntegrationResourceType>>(resourcePath,
+      { params: params, responseType: 'json' })
+      .pipe(map(res => res.results.map((data: IntegrationResourceType) => new IntegrationResource(data))));
+
+    return fetchResult.toPromise();
   }
 }

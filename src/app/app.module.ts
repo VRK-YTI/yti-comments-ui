@@ -76,6 +76,9 @@ import {
   SearchLinkedIntegrationResourceMultiModalComponent,
   SearchLinkedIntegrationResourceMultiModalService
 } from './components/form/search-linked-integration-resource-multi-modal.component';
+import { VirtualScrollerModule } from 'ngx-virtual-scroller';
+import { IntegrationResourceListItemComponent } from './components/form/integration-resource-list-item-component';
+import { IntegrationResourceVirtualScrollerComponent } from './components/form/integration-resource-virtual-scroller-component';
 
 declare var require: any;
 
@@ -194,7 +197,9 @@ const appRoutes: Routes = [
     HierarchicalCommentListitemComponent,
     LiteralMultilanguageComponent,
     CommentRoundDateRangeInputComponent,
-    LocalizableUndefinedTextareaComponent
+    LocalizableUndefinedTextareaComponent,
+    IntegrationResourceListItemComponent,
+    IntegrationResourceVirtualScrollerComponent
   ],
   entryComponents: [
     SearchLinkedIntegrationResourceModalComponent,
@@ -212,6 +217,7 @@ const appRoutes: Routes = [
     NgbModule.forRoot(),
     ClipboardModule,
     AutosizeModule,
+    VirtualScrollerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

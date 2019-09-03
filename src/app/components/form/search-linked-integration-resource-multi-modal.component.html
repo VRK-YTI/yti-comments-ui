@@ -51,37 +51,13 @@
 
     <div class="content-box scrolling-full-height">
       <div class="resource-results">
-        <div *ngIf="!loading">
-          <div *ngIf="hasContent">
-            <div *ngFor="let resource of searchResults$ | async; let last = last"
-                 id="{{resource.id + '_resource_link'}}"
-                 class="resource-result">
-              <div class="content" [class.last]="last">
-                <app-status class="status" [status]="resource.status"></app-status>
-                <span class="title" (click)="selectResource(resource)">{{ resource.getDisplayName(languageService, useUILanguage) }}</span>
-                <div *ngIf="resource.getDescription(languageService, useUILanguage) as descriptionText"
-                     class="description-container">
-                  <app-expandable-text [text]="descriptionText" [rows]="2" [captureClick]="true"></app-expandable-text>
-                </div>
-                <div>
-                  <span translate>Last modification</span><span>: {{ resource.modifiedDisplayValue }}</span>
-                </div>
-                <div>
-                  <a class="uri"
-                     href="{{configurationService.getUriWithEnv(resource.uri)}}" target="_blank">
-                    {{ configurationService.getUriWithEnv(resource.uri) }}
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div *ngIf="!hasContent">
-            <span class="infoText" translate>Search did not find in any resources for commenting.</span>
-          </div>
-        </div>
-        <div *ngIf="loading">
-          <app-ajax-loading-indicator></app-ajax-loading-indicator>
-        </div>
+          <app-integration-resource-virtual-scroller *ngIf="virtualScrollerInstanceToggle" [containerUri]="containerUri" [containerType]="containerType" [language]="languageService.language"
+                                                     [items]="searchResults$" [status$]="status$" [search$]="search$" [restricts]="restricts"
+                                                     (selectResourceEvent)="selectResource($event)">
+          </app-integration-resource-virtual-scroller>
+          <app-integration-resource-virtual-scroller *ngIf="!virtualScrollerInstanceToggle" [containerUri]="containerUri" [containerType]="containerType" [language]="languageService.language"
+                                                     [items]="searchResults$" [status$]="status$" [search$]="search$" [restricts]="restricts" (selectResourceEvent)="selectResource($event)">
+          </app-integration-resource-virtual-scroller>
       </div>
     </div>
   </div>

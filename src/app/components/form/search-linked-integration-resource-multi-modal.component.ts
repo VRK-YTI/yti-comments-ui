@@ -2,7 +2,6 @@ import { AfterViewInit, Component, ElementRef, Injectable, Input, OnInit, ViewCh
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, combineLatest, concat } from 'rxjs';
 import { LanguageService } from '../../services/language.service';
-import { contains } from 'yti-common-ui/utils/array';
 import { ModalService } from '../../services/modal.service';
 import { DataService } from '../../services/data.service';
 import { debounceTime, map, skip, take, tap } from 'rxjs/operators';
@@ -12,7 +11,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { regularStatuses, Status } from 'yti-common-ui/entities/status';
 import { IntegrationResourceType } from '../../services/api-schema';
 import { ConfigurationService } from '../../services/configuration.service';
-import { comparingLocalizable, comparingPrimitive } from 'yti-common-ui/utils/comparator';
 
 @Component({
   selector: 'app-search-linked-source-multi-modal',
@@ -33,9 +31,10 @@ export class SearchLinkedIntegrationResourceMultiModalComponent implements After
   instructionText: string;
   titleLabel: string;
   selectedResources: IntegrationResource[] = [];
-  resources: IntegrationResource[];
+  resources: IntegrationResource[] = [];
   statusOptions: FilterOptions<Status>;
   loading = false;
+  virtualScrollerInstanceToggle = true; // This solution is needed to reset the virtual scroller because there is no API to do a reset.
 
   status$ = new BehaviorSubject<Status | null>(null);
   search$ = new BehaviorSubject('');
@@ -61,15 +60,8 @@ export class SearchLinkedIntegrationResourceMultiModalComponent implements After
     this.titleLabel = this.translateService.instant('Select resource');
     this.instructionText = this.translateService.instant('HELP_TEXT_COMMENTTHREAD_RESOURCE_MODAL_INSTRUCTION');
     this.loading = true;
-    this.dataService.getResources(this.containerType, this.containerUri, this.languageService.language).subscribe(resources => {
-      this.resources = resources;
-      this.filterResources();
-    });
-  }
 
-  get hasContent(): boolean {
-
-    return this.searchResults$.getValue().length > 0;
+    this.filterResources();
   }
 
   filterResources() {
@@ -83,35 +75,26 @@ export class SearchLinkedIntegrationResourceMultiModalComponent implements After
 
     combineLatest(this.status$, concat(initialSearch, debouncedSearch))
       .pipe(
-        tap(() => this.loading = false),
+        tap(() => {
+          this.loading = false;
+          this.virtualScrollerInstanceToggle = !this.virtualScrollerInstanceToggle;
+        }),
         map(([status, search]) => {
-          return this.resources.filter(integrationResource => {
-            const label = this.languageService.translate(integrationResource.prefLabel, true);
-            const searchMatches = !search ||
-              label.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
-              (integrationResource.uri !== undefined && integrationResource.uri.toLowerCase().indexOf(search.toLowerCase()) !== -1);
-            const isNotRestricted = !contains(this.restricts, integrationResource.uri);
-            const statusMatches = !status || integrationResource.status === status;
-            return searchMatches && isNotRestricted && statusMatches;
-          }).sort(comparingPrimitive<IntegrationResource>(
-            integrationResource => this.languageService.isLocalizableEmpty(integrationResource.prefLabel))
-            .andThen(comparingPrimitive<IntegrationResource>(integrationResource =>
-              this.languageService.isLocalizableEmpty(integrationResource.prefLabel) ? integrationResource.localName : null))
-            .andThen(comparingPrimitive<IntegrationResource>(integrationResource =>
-              this.languageService.isLocalizableEmpty(integrationResource.prefLabel) && integrationResource.localName ?
-                integrationResource.uri.toLowerCase() : null))
-            .andThen(comparingLocalizable<IntegrationResource>(this.languageService,
-              integrationResource => integrationResource.prefLabel ? integrationResource.prefLabel : {})));
-        })
-      ).subscribe(results => {
-      this.searchResults$.next(results);
+        })).subscribe(next => {
+      console.log('next', next); // TODO Not sure if this block can be empty
     });
   }
 
   isResourceSelected(resource: IntegrationResource) {
     let isSelected = false;
-    for (const selectedResource of this.selectedResources) {
-      if (resource.uri.toLowerCase() === selectedResource.uri) {
+    for (const selectedResource of this.selectedResources) { // selectedResources = the items user clicked while the modal is open just now.
+      if (resource.uri === selectedResource.uri) {
+        isSelected = true;
+        break;
+      }
+    }
+    for (const selectedResourceUri of this.restricts) { // restricts are the items chosen earlier before modal was opened THIS time
+      if (resource.uri === selectedResourceUri) {
         isSelected = true;
         break;
       }
@@ -122,13 +105,11 @@ export class SearchLinkedIntegrationResourceMultiModalComponent implements After
   selectResource(resource: IntegrationResource) {
     if (!this.isResourceSelected(resource)) {
       resource.type = this.containerType;
-      this.restricts.push(resource.uri);
       this.selectedResources.push(resource);
     }
   }
 
   removeResource(resource: IntegrationResource) {
-
     const index: number = this.selectedResources.indexOf(resource);
     if (index !== -1) {
       this.selectedResources.splice(index, 1);
