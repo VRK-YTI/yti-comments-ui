@@ -81,7 +81,7 @@ export class SearchLinkedIntegrationResourceMultiModalComponent implements After
         }),
         map(([status, search]) => {
         })).subscribe(next => {
-      console.log('next', next); // TODO Not sure if this block can be empty
+      ; // nothing, but subscribe is needed anyways(?)
     });
   }
 

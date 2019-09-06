@@ -61,6 +61,21 @@ export class IntegrationResourceVirtualScrollerComponent {
 
     this.loading = true;
     this.fetchNextChunk(this.buffer.length, this.thePageSize).then(chunk => {
+
+      for (const resource of chunk) {
+        let found = false;
+        for (const selectedResource of this.selectedResources$.value) {
+          if (resource.uri === selectedResource.uri) {
+            found = true;
+          }
+        }
+        if (!found) {
+          resource.expanded = true;
+        } else {
+          resource.expanded = false;
+        }
+      }
+
       this.buffer = this.buffer.concat(chunk.sort(comparingPrimitive<IntegrationResource>(
         integrationResource => this.languageService.isLocalizableEmpty(integrationResource.prefLabel))
         .andThen(comparingPrimitive<IntegrationResource>(integrationResource =>
