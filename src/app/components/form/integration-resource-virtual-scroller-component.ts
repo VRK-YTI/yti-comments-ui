@@ -15,7 +15,8 @@ import { comparingLocalizable, comparingPrimitive } from 'yti-common-ui/utils/co
       <virtual-scroller #scroll [items]="buffer" (vsEnd)="fetchMore($event)" [enableUnequalChildrenSizes]="true">
         <app-integration-resource-list-item (selectResourceEvent)="emitSelectResourceEvent($event)"
                                             *ngFor="let item of scroll.viewPortItems; let last = last" [theLast]="last"
-                                            [resource]="item"></app-integration-resource-list-item>
+                                            [resource]="item" [expanded]="item.expanded"
+                                            [selectedResources$]="selectedResources$"></app-integration-resource-list-item>
         <div *ngIf="this.buffer.length == 0">
           <span class="infoText" translate>Search did not find in any resources for commenting.</span>
         </div>
@@ -31,6 +32,7 @@ export class IntegrationResourceVirtualScrollerComponent {
   @Input() status$ = new BehaviorSubject<Status | null>(null);
   @Input() search$ = new BehaviorSubject('');
   @Input() restricts: string[];
+  @Input() selectedResources$: BehaviorSubject<IntegrationResource[]>;
   public buffer: IntegrationResource[] = [];
   public loading = false;
   private previousRequestGotZeroResults = false; // this variable is used to stop an eternal loop in case of 0 results (due to filtering)
@@ -81,7 +83,7 @@ export class IntegrationResourceVirtualScrollerComponent {
 
   public fetchNextChunk(skip: number, limit: number): Promise<IntegrationResource[]> {
     return this.dataService.getResourcesPaged(this.containerType, this.containerUri, this.language, limit.toString(), skip.toString(),
-      this.status$.value, this.search$.value);
+      this.status$.value, this.search$.value, this.restricts.join(','));
   }
 
   emitSelectResourceEvent(resource: IntegrationResource) {

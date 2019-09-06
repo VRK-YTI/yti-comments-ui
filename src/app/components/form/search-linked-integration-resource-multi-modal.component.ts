@@ -31,7 +31,6 @@ export class SearchLinkedIntegrationResourceMultiModalComponent implements After
   instructionText: string;
   titleLabel: string;
   selectedResources: IntegrationResource[] = [];
-  resources: IntegrationResource[] = [];
   statusOptions: FilterOptions<Status>;
   loading = false;
   virtualScrollerInstanceToggle = true; // This solution is needed to reset the virtual scroller because there is no API to do a reset.
@@ -39,6 +38,7 @@ export class SearchLinkedIntegrationResourceMultiModalComponent implements After
   status$ = new BehaviorSubject<Status | null>(null);
   search$ = new BehaviorSubject('');
   searchResults$ = new BehaviorSubject<IntegrationResource[]>([]);
+  selectedResources$ = new BehaviorSubject<IntegrationResource[]>(this.selectedResources);
 
   constructor(public configurationService: ConfigurationService,
               public modal: NgbActiveModal,
@@ -114,6 +114,7 @@ export class SearchLinkedIntegrationResourceMultiModalComponent implements After
     if (index !== -1) {
       this.selectedResources.splice(index, 1);
     }
+    this.selectedResources$.next(this.selectedResources);
   }
 
   select() {

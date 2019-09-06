@@ -1,14 +1,15 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IntegrationResource } from '../../entity/integration-resource';
 import { ConfigurationService } from '../../services/configuration.service';
 import { LanguageService } from '../../services/language.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-integration-resource-list-item',
   styleUrls: ['./integration-resource-list-item.component.scss'],
   template: `
     <div id="{{resource.id + '_resource_link'}}"
-         class="resource-result">
+         class="resource-result" *ngIf="resource.expanded; else flattened">
       <div class="scrollable-content" [class.last]="theLast">
         <app-status class="status" [status]="resource.status"></app-status>
         <span class="title" (click)="emitSelectResourceEvent(resource)">{{ resource.getDisplayName(languageService, true) }}</span>
@@ -27,12 +28,18 @@ import { LanguageService } from '../../services/language.service';
         </div>
       </div>
     </div>
+    <ng-template #flattened>
+      <div height="0">
+      </div>
+    </ng-template>
   `
 })
-export class IntegrationResourceListItemComponent {
+export class IntegrationResourceListItemComponent implements OnInit {
 
   @Input() resource: IntegrationResource;
   @Input() theLast: any;
+  @Input() expanded = true;
+  @Input() selectedResources$: BehaviorSubject<IntegrationResource[]>;
   @Output() selectResourceEvent = new EventEmitter<IntegrationResource>();
 
   infoText = 'the infotext';
@@ -42,6 +49,23 @@ export class IntegrationResourceListItemComponent {
   }
 
   emitSelectResourceEvent(resource: IntegrationResource) {
+    resource.expanded = false;
     this.selectResourceEvent.emit(resource);
+  }
+
+  ngOnInit(): void {
+    this.selectedResources$.subscribe(next => { // this is used to unhide the item in the list, if after selection, gets de-selected
+      let found = false;
+      for (const resource of next) {
+        if (resource.uri === this.resource.uri) {
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        this.resource.expanded = true;
+      }
+    });
+
   }
 }

@@ -52,11 +52,12 @@
     <div class="content-box scrolling-full-height">
       <div class="resource-results">
           <app-integration-resource-virtual-scroller *ngIf="virtualScrollerInstanceToggle" [containerUri]="containerUri" [containerType]="containerType" [language]="languageService.language"
-                                                     [items]="searchResults$" [status$]="status$" [search$]="search$" [restricts]="restricts"
+                                                     [items]="searchResults$" [status$]="status$" [search$]="search$" [restricts]="restricts" [selectedResources$]="selectedResources$"
                                                      (selectResourceEvent)="selectResource($event)">
           </app-integration-resource-virtual-scroller>
           <app-integration-resource-virtual-scroller *ngIf="!virtualScrollerInstanceToggle" [containerUri]="containerUri" [containerType]="containerType" [language]="languageService.language"
-                                                     [items]="searchResults$" [status$]="status$" [search$]="search$" [restricts]="restricts" (selectResourceEvent)="selectResource($event)">
+                                                     [items]="searchResults$" [status$]="status$" [search$]="search$" [restricts]="restricts"  [selectedResources$]="selectedResources$"
+                                                     (selectResourceEvent)="selectResource($event)">
           </app-integration-resource-virtual-scroller>
       </div>
     </div>

@@ -15,6 +15,7 @@ export class IntegrationResource {
   status: Status;
   type?: string;
   modified: Moment | null = null;
+  expanded = true; // only used in virtual scroller in the UI, no need to deal with this in the constructor or serialize() method
 
   constructor(data: IntegrationResourceType) {
 
