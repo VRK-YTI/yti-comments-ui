@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-09-02 10:13+0300\n"
+"PO-Revision-Date: 2019-09-09 13:00+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -15,6 +15,9 @@ msgstr ""
 
 msgid "Commenting period"
 msgstr "Kommentointiaika"
+
+msgid "-type"
+msgstr ""
 
 msgid "Reply"
 msgstr "Vastaa"
@@ -52,6 +55,12 @@ msgstr "Kopioi {{value}} leikepöydälle"
 msgid "Copied to clipboard"
 msgstr "Kopioitu leikepöydälle"
 
+msgid "Last modification"
+msgstr "Viimeisin muokkaus"
+
+msgid "Search did not find in any resources for commenting."
+msgstr "Haku ei löytänyt yhtään kommentoitavaa resurssia."
+
 msgid "{{ control.value }}"
 msgstr ""
 
@@ -76,6 +85,12 @@ msgstr ""
 msgid "Search term"
 msgstr "Hakutermi"
 
+msgid "Select tool"
+msgstr "Valitse työkalu"
+
+msgid "All statuses"
+msgstr "Kaikki tilat"
+
 msgid "Select resource"
 msgstr "Valitse tietosisältö"
 
@@ -95,6 +110,9 @@ msgstr ""
 
 msgid "All organizations"
 msgstr "Kaikki organisaatiot"
+
+msgid "All tools"
+msgstr "Kaikki työkalut"
 
 msgid "Comments"
 msgstr "Kommentit"
@@ -186,9 +204,6 @@ msgstr "Kommentoinnin kohde"
 msgid "Created"
 msgstr "Luontiajankohta"
 
-msgid "Last modification"
-msgstr "Viimeisin muokkaus"
-
 msgid "Commentable resources"
 msgstr "Kommentoitavia tietosisältöjä {{ value }} kpl"
 
@@ -221,9 +236,6 @@ msgstr "OMAT KOMMENTIT"
 
 msgid "Filter results"
 msgstr "Rajaa hakutuloksia"
-
-msgid "Search did not find in any resources for commenting."
-msgstr "Haku ei löytänyt yhtään kommentoitavaa resurssia."
 
 msgid "Please select tool to get container resources for commenting."
 msgstr "Valitse työkalu, josta kommentoitavat resurssit noudetaan."
@@ -298,11 +310,11 @@ msgstr "Odottaa hyväksymistä"
 msgid "This user does not have any roles in organizations."
 msgstr "Tällä käyttäjällä ei ole rooleja organisaatioissa."
 
-msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
-msgstr "Kommenttiketjun kuvaus"
-
 msgid "INFO_TEXT_COMMENTROUND_USER"
 msgstr "Kommentointikierroksen perustanut käyttäjä"
+
+msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE"
+msgstr "Kommentointikierroksen päätason tietosisältö, jota kommentoidaan"
 
 msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE_URI"
 msgstr "Kommentointikierroksen päätason tietosisällön URI-osoite"
@@ -361,8 +373,8 @@ msgstr "Kommenttiketjun perustanut käyttäjä"
 msgid "INFO_TEXT_COMMENTTHREAD_NAME"
 msgstr "Kommenttiketjun nimi"
 
-msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE"
-msgstr "Kommentointikierroksen päätason tietosisältö, jota kommentoidaan"
+msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
+msgstr "Kommenttiketjun kuvaus"
 
 msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
 msgstr "Kommenttiketjun kommentoitava tietosisältö"
@@ -414,11 +426,11 @@ msgstr ""
 "Hakutuloksia voi rajata organisaatio-, tila- ja työkalukohtaisesti "
 "alasvetovalikoiden avulla"
 
-msgid "ADMIN"
-msgstr "Ylläpitäjä"
-
 msgid "Front page"
 msgstr "Etusivu"
+
+msgid "NOSTATUS"
+msgstr "Ei valittua tilaa"
 
 msgid "SUPERSEDED"
 msgstr "Korvattu"
@@ -513,8 +525,8 @@ msgstr "Toiminnossa tapahtui virhe"
 msgid "Unexpected error"
 msgstr "Tapahtui odottamaton virhe"
 
-msgid "NOSTATUS"
-msgstr "Ei valittua tilaa"
+msgid "ADMIN"
+msgstr "Ylläpitäjä"
 
 msgid "DATA_MODEL_EDITOR"
 msgstr "Tietomallintaja"
@@ -552,12 +564,6 @@ msgstr "Sanasto"
 msgid "datamodel-type"
 msgstr "Tietomalli"
 
-msgid "All statuses"
-msgstr "Kaikki tilat"
-
-msgid "All tools"
-msgstr "Kaikki työkalut"
-
 msgid "Comment round"
 msgstr "kommentointikierros"
 
@@ -566,9 +572,6 @@ msgstr "Kommentointiketju"
 
 msgid "Comment"
 msgstr "Kommentti"
-
-msgid "Select tool"
-msgstr "Valitse työkalu"
 
 msgid "Commenter's proposal for status"
 msgstr "Kommentoijan tilaehdotus"

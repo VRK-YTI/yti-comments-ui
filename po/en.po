@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-09-02 10:13+0300\n"
+"PO-Revision-Date: 2019-09-09 13:00+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -14,6 +14,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Commenting period"
+msgstr ""
+
+msgid "-type"
 msgstr ""
 
 msgid "Reply"
@@ -52,6 +55,12 @@ msgstr ""
 msgid "Copied to clipboard"
 msgstr ""
 
+msgid "Last modification"
+msgstr ""
+
+msgid "Search did not find in any resources for commenting."
+msgstr ""
+
 msgid "{{ control.value }}"
 msgstr ""
 
@@ -76,6 +85,12 @@ msgstr ""
 msgid "Search term"
 msgstr ""
 
+msgid "Select tool"
+msgstr ""
+
+msgid "All statuses"
+msgstr ""
+
 msgid "Select resource"
 msgstr ""
 
@@ -95,6 +110,9 @@ msgstr ""
 "addition to a search term, resources can be filtered using the status dropdown."
 
 msgid "All organizations"
+msgstr ""
+
+msgid "All tools"
 msgstr ""
 
 msgid "Comments"
@@ -187,9 +205,6 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-msgid "Last modification"
-msgstr ""
-
 msgid "Commentable resources"
 msgstr "Commentable resources {{ value }}."
 
@@ -221,9 +236,6 @@ msgid "OWN COMMENTS"
 msgstr ""
 
 msgid "Filter results"
-msgstr ""
-
-msgid "Search did not find in any resources for commenting."
 msgstr ""
 
 msgid "Please select tool to get container resources for commenting."
@@ -300,11 +312,11 @@ msgstr ""
 msgid "This user does not have any roles in organizations."
 msgstr ""
 
-msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
-msgstr "Comment thread description"
-
 msgid "INFO_TEXT_COMMENTROUND_USER"
 msgstr "User that created this comment round"
+
+msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE"
+msgstr "Comment round top level resource"
 
 msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE_URI"
 msgstr "Comment round top level resource URI address"
@@ -357,8 +369,8 @@ msgstr "User that created this comment thread"
 msgid "INFO_TEXT_COMMENTTHREAD_NAME"
 msgstr "Comment thread name"
 
-msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE"
-msgstr "Comment round top level resource"
+msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
+msgstr "Comment thread description"
 
 msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
 msgstr "Comment thread integration resource"
@@ -408,11 +420,11 @@ msgstr "Comment round integration resource URI address"
 msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr "Results can be filtered by organization, status and tool using dropdown"
 
-msgid "ADMIN"
-msgstr "Admin"
-
 msgid "Front page"
 msgstr ""
+
+msgid "NOSTATUS"
+msgstr "No selected status"
 
 msgid "SUPERSEDED"
 msgstr "Superseded"
@@ -507,8 +519,8 @@ msgstr ""
 msgid "Unexpected error"
 msgstr ""
 
-msgid "NOSTATUS"
-msgstr "No selected status"
+msgid "ADMIN"
+msgstr "Admin"
 
 msgid "DATA_MODEL_EDITOR"
 msgstr "Data model editor"
@@ -546,12 +558,6 @@ msgstr "Vocabulary"
 msgid "datamodel-type"
 msgstr "Datamodel"
 
-msgid "All statuses"
-msgstr ""
-
-msgid "All tools"
-msgstr ""
-
 msgid "Comment round"
 msgstr ""
 
@@ -559,9 +565,6 @@ msgid "Comment thread"
 msgstr ""
 
 msgid "Comment"
-msgstr ""
-
-msgid "Select tool"
 msgstr ""
 
 msgid "Commenter's proposal for status"

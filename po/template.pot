@@ -1,10 +1,13 @@
 msgid ""
 msgstr ""
-"MIME-Version: 1.0\n"
+"mime-version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "Commenting period"
+msgstr ""
+
+msgid "-type"
 msgstr ""
 
 msgid "Reply"
@@ -43,6 +46,12 @@ msgstr ""
 msgid "Copied to clipboard"
 msgstr ""
 
+msgid "Last modification"
+msgstr ""
+
+msgid "Search did not find in any resources for commenting."
+msgstr ""
+
 msgid "{{ control.value }}"
 msgstr ""
 
@@ -67,6 +76,12 @@ msgstr ""
 msgid "Search term"
 msgstr ""
 
+msgid "Select tool"
+msgstr ""
+
+msgid "All statuses"
+msgstr ""
+
 msgid "Select resource"
 msgstr ""
 
@@ -80,6 +95,9 @@ msgid "HELP_TEXT_COMMENTROUND_SOURCE_MODAL_INSTRUCTION"
 msgstr ""
 
 msgid "All organizations"
+msgstr ""
+
+msgid "All tools"
 msgstr ""
 
 msgid "Comments"
@@ -172,9 +190,6 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-msgid "Last modification"
-msgstr ""
-
 msgid "Commentable resources"
 msgstr ""
 
@@ -206,9 +221,6 @@ msgid "OWN COMMENTS"
 msgstr ""
 
 msgid "Filter results"
-msgstr ""
-
-msgid "Search did not find in any resources for commenting."
 msgstr ""
 
 msgid "Please select tool to get container resources for commenting."
@@ -280,10 +292,10 @@ msgstr ""
 msgid "This user does not have any roles in organizations."
 msgstr ""
 
-msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
+msgid "INFO_TEXT_COMMENTROUND_USER"
 msgstr ""
 
-msgid "INFO_TEXT_COMMENTROUND_USER"
+msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE"
 msgstr ""
 
 msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE_URI"
@@ -331,7 +343,7 @@ msgstr ""
 msgid "INFO_TEXT_COMMENTTHREAD_NAME"
 msgstr ""
 
-msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE"
+msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
 msgstr ""
 
 msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
@@ -382,10 +394,10 @@ msgstr ""
 msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr ""
 
-msgid "ADMIN"
+msgid "Front page"
 msgstr ""
 
-msgid "Front page"
+msgid "NOSTATUS"
 msgstr ""
 
 msgid "SUPERSEDED"
@@ -483,7 +495,7 @@ msgstr ""
 msgid "Unexpected error"
 msgstr ""
 
-msgid "NOSTATUS"
+msgid "ADMIN"
 msgstr ""
 
 msgid "DATA_MODEL_EDITOR"
@@ -522,12 +534,6 @@ msgstr ""
 msgid "datamodel-type"
 msgstr ""
 
-msgid "All statuses"
-msgstr ""
-
-msgid "All tools"
-msgstr ""
-
 msgid "Comment round"
 msgstr ""
 
@@ -535,9 +541,6 @@ msgid "Comment thread"
 msgstr ""
 
 msgid "Comment"
-msgstr ""
-
-msgid "Select tool"
 msgstr ""
 
 msgid "Commenter's proposal for status"
