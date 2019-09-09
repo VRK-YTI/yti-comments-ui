@@ -119,3 +119,29 @@ app-filter-dropdown {
   }
 }
 
+.multi-input {
+
+  min-height: 2.7735em;
+  padding: 0;
+  display: inline-block;
+  margin-bottom: -5px;
+
+  .added-item {
+
+    display: inline-block;
+    float: left;
+
+    .box {
+      padding: 5px 4px;
+      margin: 5px 0 0 5px;
+      line-height: 12px;
+      font-size: 12px;
+      background-color: $light;
+      border-radius: 2px;
+      border: 1px solid $gray;
+      display: inline-block;
+      float: left;
+    }
+  }
+
+}

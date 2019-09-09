@@ -18,14 +18,12 @@
           <label translate>Resources</label>
         </dt>
         <dd>
-          <div>
-            <div *ngFor="let resource of selectedResources">
-              <a class="removal-X">
-                <i [id]="'remove_' + resource + '_organization_link'"
-                   class="fa fa-times"
-                   (click)="removeResource(resource)"></i>
-              </a>
-              <span>{{resource.getDisplayName(languageService, true)}}</span>
+          <div class="multi-input">
+            <div class="added-item" *ngFor="let resource of selectedResources">
+              <div class="box">
+                <span style="padding-right: 5px">{{resource.getDisplayName(languageService, true)}}</span>
+                <div class="badge delete-item" [id]="'remove_' + resource + '_organization_link'" (click)="removeResource(resource)">&times;</div>
+              </div>
             </div>
           </div>
         </dd>
