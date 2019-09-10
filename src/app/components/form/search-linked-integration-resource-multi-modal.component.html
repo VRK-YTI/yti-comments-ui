@@ -13,9 +13,9 @@
     <div class="pb-2">
       <p>{{instructionText}}</p>
 
-      <dl>
+      <dl *ngIf="selectedResources.length > 0">
         <dt>
-          <label translate *ngIf="selectedResources.length > 0">Resources</label>
+          <label translate>Resources</label>
         </dt>
         <dd>
           <div class="multi-input">

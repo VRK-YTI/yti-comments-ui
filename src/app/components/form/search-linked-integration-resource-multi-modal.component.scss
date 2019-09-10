@@ -14,25 +14,6 @@
   height: 100%;
 }
 
-.modal-body {
-  display: inline-block;
-  width: 100%;
-
-  &.full-height {
-    height: calc(100vh - 205px);
-    padding-bottom: 0;
-    overflow-y: auto;
-
-    .row.full-height {
-      height: calc(100% - 104px);
-
-      > div {
-        height: 100%;
-      }
-    }
-  }
-}
-
 .modal-sections {
   display: flex;
   flex-direction: column;
@@ -120,10 +101,9 @@ app-filter-dropdown {
 }
 
 .multi-input {
-
-  height: 6em;
   padding: 0;
   display: inline-block;
+  max-height: 6em;
   margin-bottom: -5px;
   overflow-x: hidden;
   overflow-y: auto;
@@ -143,6 +123,10 @@ app-filter-dropdown {
       border: 1px solid $gray;
       display: inline-block;
       float: left;
+
+      .delete-item {
+        cursor: pointer;
+      }
     }
   }
 
