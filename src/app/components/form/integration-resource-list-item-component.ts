@@ -9,8 +9,8 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./integration-resource-list-item.component.scss'],
   template: `
     <div id="{{resource.id + '_resource_link'}}"
-         class="resource-result" *ngIf="resource.expanded; else flattened">
-      <div class="scrollable-content" [class.last]="theLast">
+         class="resource-result" *ngIf="resource.expanded; else flattened" [class.last]="theLast">
+      <div class="scrollable-content">
         <app-status class="status" [status]="resource.status"></app-status>
         <span class="title" (click)="emitSelectResourceEvent(resource)">{{ resource.getDisplayName(languageService, true) }}</span>
         <div *ngIf="resource.getDescription(languageService, true) as descriptionText"
