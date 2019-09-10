@@ -13,7 +13,8 @@
     <div class="modal-section-rigid pb-2">
       <p>{{instructionText}}</p>
 
-      <dl *ngIf="selectedResources.length > 0">
+      <dl class="selected-resources-container"
+          [ngClass]="{'no-resources': selectedResources.length === 0}">
         <dt>
           <label translate>Resources</label>
         </dt>

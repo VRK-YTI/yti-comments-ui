@@ -56,34 +56,43 @@ app-filter-dropdown {
   display: block;
 }
 
-.multi-input {
-  padding: 0;
-  display: inline-block;
-  max-height: 6em;
-  margin-bottom: -5px;
-  overflow-x: hidden;
-  overflow-y: auto;
+.selected-resources-container {
+  overflow: hidden;
+  max-height: 200px;
+  transition-duration: 500ms;
 
-  .added-item {
+  &.no-resources {
+    max-height: 0px;
+  }
 
+  .multi-input {
+    padding: 0;
     display: inline-block;
-    float: left;
+    max-height: 6em;
+    margin-bottom: -5px;
+    overflow-x: hidden;
+    overflow-y: auto;
 
-    .box {
-      padding: 5px 4px;
-      margin: 5px 0 0 5px;
-      line-height: 12px;
-      font-size: 12px;
-      background-color: $light;
-      border-radius: 2px;
-      border: 1px solid $gray;
+    .added-item {
+
       display: inline-block;
       float: left;
 
-      .delete-item {
-        cursor: pointer;
+      .box {
+        padding: 5px 4px;
+        margin: 5px 0 0 5px;
+        line-height: 12px;
+        font-size: 12px;
+        background-color: $light;
+        border-radius: 2px;
+        border: 1px solid $gray;
+        display: inline-block;
+        float: left;
+
+        .delete-item {
+          cursor: pointer;
+        }
       }
     }
   }
-
 }
