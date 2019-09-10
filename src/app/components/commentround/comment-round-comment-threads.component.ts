@@ -39,8 +39,10 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
   @Input() commentThreads: CommentThreadSimple[];
   @Input() tabSet: NgbTabset;
 
+  @Output() changeTabControl = new EventEmitter<boolean>();
   @Output() refreshCommentThreads = new EventEmitter();
 
+  editSubscription: Subscription;
   cancelSubscription: Subscription;
 
   newIds: string[] = [];
@@ -63,7 +65,11 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
               private searchLinkedIntegrationResourceMultiModalService: SearchLinkedIntegrationResourceMultiModalService,
               private editableService: EditableService) {
 
-    this.cancelSubscription = editableService.cancel$.subscribe(() => this.reset());
+    this.editSubscription = editableService.edit$.subscribe(() => this.changeTabControl.emit(true));
+    this.cancelSubscription = editableService.cancel$.subscribe(() => {
+      this.reset();
+      this.changeTabControl.emit(false);
+    });
     editableService.onSave = () => this.save();
   }
 
@@ -488,6 +494,8 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
     const save = () => {
       return this.dataService.createCommentThreads(this.commentRound.id, commentThreadsToBeUpdated, removeOrphans).pipe(tap(() => {
         this.refreshCommentThreads.emit();
+        this.editableService.cancel();
+        this.changeTabControl.emit(false);
       }));
     };
 

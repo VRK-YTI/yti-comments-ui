@@ -25,9 +25,11 @@ export class CommentRoundInformationComponent implements OnInit, OnDestroy, OnCh
   @Input() commentRound: CommentRound;
   @Input() commentThreads: CommentThreadSimple[];
 
+  @Output() changeTabControl = new EventEmitter<boolean>();
   @Output() refreshCommentRound = new EventEmitter();
 
   cancelSubscription: Subscription;
+  editSubscription: Subscription;
 
   commentRoundForm = new FormGroup({
     label: new FormControl(''),
@@ -46,7 +48,11 @@ export class CommentRoundInformationComponent implements OnInit, OnDestroy, OnCh
               private dataService: DataService,
               private editableService: EditableService) {
 
-    this.cancelSubscription = editableService.cancel$.subscribe(() => this.reset());
+    this.editSubscription = editableService.edit$.subscribe(() => this.changeTabControl.emit(true));
+    this.cancelSubscription = editableService.cancel$.subscribe(() => {
+      this.changeTabControl.emit(false);
+      this.reset();
+    });
     editableService.onSave = (formValue: any) => this.save(formValue);
   }
 
@@ -156,6 +162,7 @@ export class CommentRoundInformationComponent implements OnInit, OnDestroy, OnCh
 
     const save = () => {
       return this.dataService.updateCommentRound(updatedCommentRound.serialize()).pipe(tap(() => {
+        this.changeTabControl.emit(false);
         this.refreshCommentRound.emit();
       }));
     };

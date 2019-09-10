@@ -20,7 +20,10 @@
     </div>
   </div>
   <form [formGroup]="commentThreadForm" #form="ngForm">
-    <div formArrayName="commentThreads">
+    <div *ngIf="commentThreadForms.controls.length === 0">
+      <span translate>This comment round does not have any resources.</span>
+    </div>
+    <div *ngIf="commentThreadForms.controls.length > 0" formArrayName="commentThreads">
       <table>
         <thead>
         <tr>

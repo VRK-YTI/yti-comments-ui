@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-09-10 13:13+0300\n"
+"PO-Revision-Date: 2019-09-10 18:25+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -34,6 +34,9 @@ msgstr "Lähetä"
 msgid "Cancel"
 msgstr "Peruuta"
 
+msgid "Save"
+msgstr "Tallenna"
+
 msgid "Status"
 msgstr "Tila"
 
@@ -42,9 +45,6 @@ msgstr "Alkamispäivä"
 
 msgid "Valid to"
 msgstr "Päättymispäivä"
-
-msgid "Save"
-msgstr "Tallenna"
 
 msgid "Edit"
 msgstr "Muokkaa"
@@ -119,6 +119,9 @@ msgstr "Kommentit"
 
 msgid "Add new resource"
 msgstr "Lisää uusi tietosisältö"
+
+msgid "This comment round does not have any resources."
+msgstr "Tällä kommentointikierroksella ei ole tietosisältöjä."
 
 msgid "Resource"
 msgstr "Tietosisältö"
@@ -626,3 +629,6 @@ msgstr "Virheellinen päivämäärä"
 
 msgid "invalidDateRange"
 msgstr "Virheellinen päivämääräväli"
+
+#~ msgid "There are resources in this comment round."
+#~ msgstr "Kierroksella ei ole tietosisältöjä."

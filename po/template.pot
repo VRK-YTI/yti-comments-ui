@@ -25,6 +25,9 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+msgid "Save"
+msgstr ""
+
 msgid "Status"
 msgstr ""
 
@@ -32,9 +35,6 @@ msgid "Valid from"
 msgstr ""
 
 msgid "Valid to"
-msgstr ""
-
-msgid "Save"
 msgstr ""
 
 msgid "Edit"
@@ -104,6 +104,9 @@ msgid "Comments"
 msgstr ""
 
 msgid "Add new resource"
+msgstr ""
+
+msgid "This comment round does not have any resources."
 msgstr ""
 
 msgid "Resource"

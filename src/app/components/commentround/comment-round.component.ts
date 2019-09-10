@@ -28,6 +28,7 @@ export class CommentRoundComponent implements OnInit {
   commentRound: CommentRound;
   commentThreads: CommentThreadSimple[];
   myComments: Comment[];
+  blockTabChange: boolean;
 
   constructor(public languageService: LanguageService,
               public configurationService: ConfigurationService,
@@ -136,11 +137,11 @@ export class CommentRoundComponent implements OnInit {
 
   onTabChange(event: NgbTabChangeEvent) {
 
-    if (this.editing) {
+    if (this.blockTabChange) {
       event.preventDefault();
       this.confirmationModalService.openEditInProgress()
         .then(() => {
-          this.cancelEditing();
+          this.blockTabChange = false;
           this.tabSet.activeId = event.nextId;
         }, ignoreModalClose);
     } else {
@@ -150,8 +151,7 @@ export class CommentRoundComponent implements OnInit {
 
   get canStartCommentRound(): boolean {
 
-    return this.commentRound.status === 'INCOMPLETE' && this.commentThreads && this.commentThreads.length > 0 &&
-      !this.editing && this.isEditorOrSuperUser;
+    return this.commentRound.status === 'INCOMPLETE' && this.commentThreads && this.commentThreads.length > 0 && this.isEditorOrSuperUser;
   }
 
   get canEndCommenting(): boolean {
@@ -179,14 +179,9 @@ export class CommentRoundComponent implements OnInit {
     return this.isEditorOrSuperUser;
   }
 
-  cancelEditing(): void {
+  changeTabControl(blockChange: boolean) {
 
-    this.editableService.cancel();
-  }
-
-  get editing() {
-
-    return this.editableService.editing;
+    this.blockTabChange = blockChange;
   }
 
   refreshCommentRound() {

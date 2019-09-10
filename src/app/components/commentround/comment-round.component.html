@@ -94,6 +94,7 @@
       <ng-template ngbTabContent>
         <app-comment-round-information [commentRound]="commentRound"
                                        [commentThreads]="commentThreads"
+                                       (changeTabControl)="changeTabControl($event)"
                                        (refreshCommentRound)="refreshCommentRound()">
         </app-comment-round-information>
       </ng-template>
@@ -110,12 +111,13 @@
                                            [commentThreads]="commentThreads"
                                            [myComments]="myComments"
                                            [tabSet]="this.tabSet"
+                                           (changeTabControl)="changeTabControl($event)"
                                            (refreshCommentThreads)="refreshCommentThreads()">
         </app-comment-round-comment-threads>
       </ng-template>
     </ngb-tab>
 
-    <ngb-tab *ngIf="isEditorOrSuperUser || (authorizationManager.canCreateComment(commentRound) && this.commentRound.commentThreads && this.commentRound.commentThreads.length > 0 && this.commentRound.status === 'INPROGRESS')"
+    <ngb-tab *ngIf="(isEditorOrSuperUser && this.commentRound.commentThreads && this.commentRound.commentThreads.length > 0) || (authorizationManager.canCreateComment(commentRound) && this.commentRound.commentThreads && this.commentRound.commentThreads.length > 0 && this.commentRound.status === 'INPROGRESS')"
              id="commentround_comments_tab">
       <ng-template ngbTabTitle>
         <span translate>OWN COMMENTS</span>
@@ -125,6 +127,7 @@
         <app-comment-round-comments [commentRound]="commentRound"
                                     [commentThreads]="commentThreads"
                                     [myComments]="myComments"
+                                    (changeTabControl)="changeTabControl($event)"
                                     (refreshMyComments)="refreshMyComments()"
                                     (refreshCommentThreads)="refreshCommentThreads()"
                                     [tabSet]="this.tabSet">

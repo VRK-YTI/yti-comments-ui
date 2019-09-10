@@ -23,8 +23,7 @@ import { CommentThread } from '../../entity/commentthread';
 @Component({
   selector: 'app-comment-round-comments',
   templateUrl: './comment-round-comments.component.html',
-  styleUrls: ['./comment-round-comments.component.scss'],
-  providers: [EditableService]
+  styleUrls: ['./comment-round-comments.component.scss']
 })
 export class CommentRoundCommentsComponent implements OnInit, OnDestroy, OnChanges {
 
@@ -33,6 +32,7 @@ export class CommentRoundCommentsComponent implements OnInit, OnDestroy, OnChang
   @Input() myComments: Comment[];
   @Input() tabSet: NgbTabset;
 
+  @Output() changeTabControl = new EventEmitter<boolean>();
   @Output() refreshCommentThreads = new EventEmitter();
   @Output() refreshMyComments = new EventEmitter();
 
@@ -248,13 +248,15 @@ export class CommentRoundCommentsComponent implements OnInit, OnDestroy, OnChang
 
   startCommenting() {
 
-    this.editableService.cancel();
+    this.changeTabControl.emit(true);
+    this.editableService.edit();
     this.commenting$.next(true);
   }
 
   cancelCommenting() {
 
     this.reset();
+    this.changeTabControl.emit(false);
     this.commenting$.next(false);
   }
 
