@@ -87,7 +87,7 @@ import { CommentRound } from '../../entity/commentround';
                 [disabled]="comment.content.trim().length == 0"
                 type="button"
                 (click)="updateComment()">
-          <span translate>Modify</span>
+          <span translate>Save</span>
         </button>
         <button *ngIf="this.updating"
                 [id]="'comment_' + this.comment.id + '_cancel_button'"
