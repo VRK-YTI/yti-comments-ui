@@ -17,7 +17,10 @@ import { comparingLocalizable, comparingPrimitive } from 'yti-common-ui/utils/co
                                             *ngFor="let item of scroll.viewPortItems; let last = last" [theLast]="last"
                                             [resource]="item" [expanded]="item.expanded"
                                             [selectedResources$]="selectedResources$"></app-integration-resource-list-item>
-        <div *ngIf="this.buffer.length == 0">
+        <div *ngIf="loading">
+          <app-ajax-loading-indicator></app-ajax-loading-indicator>
+        </div>
+        <div *ngIf="this.buffer.length == 0 && !loading">
           <span class="infoText" translate>Search did not find in any resources for commenting.</span>
         </div>
       </virtual-scroller>
