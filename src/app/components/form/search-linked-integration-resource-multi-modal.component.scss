@@ -121,10 +121,12 @@ app-filter-dropdown {
 
 .multi-input {
 
-  min-height: 2.7735em;
+  height: 6em;
   padding: 0;
   display: inline-block;
   margin-bottom: -5px;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   .added-item {
 
