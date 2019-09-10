@@ -18,11 +18,15 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-}
 
-.scrolling-full-height {
-  height: calc(100% - 40px);
-  overflow-y: auto;
+  .modal-section-rigid {
+    flex: 0 0 auto;
+  }
+
+  .modal-section-flexible {
+    flex: 1 1 auto;
+    min-height: 200px;
+  }
 }
 
 app-filter-dropdown {
@@ -50,54 +54,6 @@ app-filter-dropdown {
 .infoText {
   margin: 10px;
   display: block;
-}
-
-.resource-results {
-  overflow-y: auto;
-
-  .resource-result {
-    .content {
-      margin: 0 10px;
-      padding: 10px 0;
-      border-bottom: 1px solid $gray;
-
-      &.last {
-        border-bottom: none;
-      }
-
-      .title {
-        display: block;
-        color: $primary;
-        font-size: $font-size-base;
-        width: 100%;
-        padding-bottom: 5px;
-        cursor: pointer;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-
-      .uri {
-        display: block;
-        color: $gray-600;
-        font-size: $font-size-base;
-        width: 100%;
-        padding-bottom: 5px;
-        cursor: pointer;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-
-      .body {
-        display: block;
-        width: 100%;
-        padding-bottom: 15px;
-      }
-    }
-  }
 }
 
 .multi-input {
