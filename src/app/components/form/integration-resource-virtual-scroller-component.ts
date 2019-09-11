@@ -106,8 +106,8 @@ export class IntegrationResourceVirtualScrollerComponent {
   }
 
   public fetchNextChunk(skip: number, limit: number): Promise<IntegrationResource[]> {
-    return this.dataService.getResourcesPaged(this.containerType, this.containerUri, this.language, limit.toString(), skip.toString(),
-      this.status$.value, this.search$.value, this.restricts.join(','));
+    return this.dataService.getResourcesPaged(this.containerType, this.containerUri, this.language, limit, skip,
+      this.status$.value, this.search$.value, this.restricts);
   }
 
   emitSelectResourceEvent(resource: IntegrationResource) {

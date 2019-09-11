@@ -22,7 +22,7 @@ import { IntegrationResource } from '../entity/integration-resource';
 import { CommentThreadSimple } from '../entity/commentthread-simple';
 import { CommentSimple } from '../entity/comment-simple';
 import { Source } from '../entity/source';
-import { type } from 'os';
+import { IntegrationRequest } from '../entity/integration-request';
 
 const apiContext = 'comments-api';
 const api = 'api';
@@ -410,32 +410,29 @@ export class DataService {
       .pipe(map(res => res.results.map((data: IntegrationResourceType) => new IntegrationResource(data))));
   }
 
-  getResourcesPaged(containerType: string, uri: string, language: string, pageSize: string, from: string,
-                    status: string|null, searchTerm: string|null, restrictedResourceUris: string|null): Promise<IntegrationResource[]> {
+  getResourcesPaged(containerType: string, uri: string, language: string, pageSize: number, from: number,
+                    status: string | null, searchTerm: string | null, restrictedResourceUris: string[]): Promise<IntegrationResource[]> {
 
-    let params = new HttpParams()
-      .set('container', uri);
-    if (language) {
-      params = params.append('language', language);
-    }
-    if (pageSize) {
-      params = params.append('pageSize', pageSize);
-    }
-    if (from) {
-      params = params.append('from', from);
+    const integrationRequest = new IntegrationRequest();
+    integrationRequest.container = uri;
+    integrationRequest.pageSize = pageSize;
+    integrationRequest.from = from;
+    integrationRequest.language = language;
+    if (searchTerm) {
+      integrationRequest.searchTerm = searchTerm;
     }
     if (status) {
-      params = params.append('status', status);
+      integrationRequest.status.push(status);
     }
-    if (searchTerm) {
-      params = params.append('searchTerm', searchTerm);
+    if (restrictedResourceUris && restrictedResourceUris.length > 0) {
+      integrationRequest.filter = restrictedResourceUris;
     }
 
     const resourcePath = DataService.resolveIntegrationApiPathForContainerType(containerType) + '/' + resources;
 
     const fetchResult: Observable<IntegrationResource[]> = this.http.post<WithResults<IntegrationResourceType>>(resourcePath,
-      restrictedResourceUris,
-      { params: params, responseType: 'json' })
+      integrationRequest,
+      { responseType: 'json' })
       .pipe(map(res => res.results.map((data: IntegrationResourceType) => new IntegrationResource(data))));
 
     return fetchResult.toPromise();
