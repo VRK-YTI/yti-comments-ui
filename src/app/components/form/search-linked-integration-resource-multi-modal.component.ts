@@ -78,11 +78,7 @@ export class SearchLinkedIntegrationResourceMultiModalComponent implements After
         tap(() => {
           this.loading = false;
           this.virtualScrollerInstanceToggle = !this.virtualScrollerInstanceToggle;
-        }),
-        map(([status, search]) => {
-        })).subscribe(next => {
-      ; // nothing, but subscribe is needed anyways(?)
-    });
+        })).subscribe();
   }
 
   isResourceSelected(resource: IntegrationResource) {

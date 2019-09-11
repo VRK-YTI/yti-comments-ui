@@ -74,12 +74,12 @@ export class IntegrationResourceVirtualScrollerComponent {
         }
         if (!found) {
           if (!resource.expanded) {
-            this.virtualScroller.invalidateCachedMeasurementForItem(resource); //need to call every time expanded-boolean changes
+            this.virtualScroller.invalidateCachedMeasurementForItem(resource); // need to call every time expanded-boolean changes
           }
           resource.expanded = true;
         } else {
           if (resource.expanded) {
-            this.virtualScroller.invalidateCachedMeasurementForItem(resource); //need to call every time expanded-boolean changes
+            this.virtualScroller.invalidateCachedMeasurementForItem(resource); // need to call every time expanded-boolean changes
           }
           resource.expanded = false;
         }

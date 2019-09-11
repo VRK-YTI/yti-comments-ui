@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { IntegrationResource } from '../../entity/integration-resource';
 import { ConfigurationService } from '../../services/configuration.service';
 import { LanguageService } from '../../services/language.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-integration-resource-list-item',
@@ -34,7 +34,7 @@ import { BehaviorSubject } from 'rxjs';
     </ng-template>
   `
 })
-export class IntegrationResourceListItemComponent implements OnInit {
+export class IntegrationResourceListItemComponent implements OnInit, OnDestroy {
 
   @Input() resource: IntegrationResource;
   @Input() theLast: any;
@@ -42,6 +42,7 @@ export class IntegrationResourceListItemComponent implements OnInit {
   @Input() selectedResources$: BehaviorSubject<IntegrationResource[]>;
   @Output() selectResourceEvent = new EventEmitter<IntegrationResource>();
 
+  subscriptionsToClean: Subscription[] = [];
   infoText = 'the infotext';
 
   constructor(public configurationService: ConfigurationService,
@@ -54,7 +55,12 @@ export class IntegrationResourceListItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.selectedResources$.subscribe(next => { // this is used to unhide the item in the list, if after selection, gets de-selected
+    this.handleSubscribing();
+  }
+
+  // this is used to unhide the item in the list, if after selection, it gets de-selected by the user => the item must then expand itself
+  handleSubscribing() {
+    this.subscriptionsToClean.push(this.selectedResources$.subscribe(next => {
       let found = false;
       for (const resource of next) {
         if (resource.uri === this.resource.uri) {
@@ -65,7 +71,10 @@ export class IntegrationResourceListItemComponent implements OnInit {
       if (!found) {
         this.resource.expanded = true;
       }
-    });
+    }));
+  }
 
+  ngOnDestroy(): void {
+    this.subscriptionsToClean.forEach(s => s.unsubscribe());
   }
 }
