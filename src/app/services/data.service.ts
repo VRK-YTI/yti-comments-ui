@@ -422,6 +422,7 @@ export class DataService {
       integrationRequest.searchTerm = searchTerm;
     }
     if (status) {
+      integrationRequest.status = [];
       integrationRequest.status.push(status);
     }
     if (restrictedResourceUris && restrictedResourceUris.length > 0) {
