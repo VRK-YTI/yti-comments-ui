@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-09-10 18:25+0300\n"
+"PO-Revision-Date: 2019-09-11 15:30+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -18,6 +18,9 @@ msgstr "Kommentointiaika"
 
 msgid "-type"
 msgstr ""
+
+msgid "(modified)"
+msgstr "(muokattu)"
 
 msgid "Reply"
 msgstr "Vastaa"
@@ -629,6 +632,3 @@ msgstr "Virheellinen päivämäärä"
 
 msgid "invalidDateRange"
 msgstr "Virheellinen päivämääräväli"
-
-#~ msgid "There are resources in this comment round."
-#~ msgstr "Kierroksella ei ole tietosisältöjä."

@@ -14,6 +14,7 @@ export class Comment extends AbstractResource {
   proposedStatus: string;
   endStatus: string;
   created: Moment | null = null;
+  modified: Moment | null = null;
   commentThread: CommentThread;
   parentComment: CommentSimple;
   expanded: boolean;
@@ -33,6 +34,9 @@ export class Comment extends AbstractResource {
     }
     if (data.created) {
       this.created = utc(data.created);
+    }
+    if (data.modified) {
+      this.modified = utc(data.modified);
     }
     this.commentThread = new CommentThread(data.commentThread);
     if (data.parentComment) {
@@ -72,6 +76,11 @@ export class Comment extends AbstractResource {
     return formatDisplayDateTime(this.created);
   }
 
+  get modifiedDisplayValue(): string {
+
+    return formatDisplayDateTime(this.modified);
+  }
+
   serialize(): CommentType {
 
     return {
@@ -82,6 +91,7 @@ export class Comment extends AbstractResource {
       proposedStatus: this.proposedStatus,
       endStatus: this.endStatus,
       created: formatDateTime(this.created),
+      modified: formatDateTime(this.modified),
       parentComment: this.parentComment ? this.parentComment.serialize() : undefined,
       commentThread: this.commentThread.serialize()
     };

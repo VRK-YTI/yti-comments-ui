@@ -11,6 +11,7 @@ export class CommentSimple extends AbstractResource {
   proposedStatus: string;
   endStatus: string;
   created: Moment | null = null;
+  modified: Moment | null = null;
   parentComment: CommentSimple;
   expanded: boolean;
 
@@ -26,6 +27,9 @@ export class CommentSimple extends AbstractResource {
     if (data.created) {
       this.created = utc(data.created);
     }
+    if (data.modified) {
+      this.modified = utc(data.modified);
+    }
     if (data.parentComment) {
       this.parentComment = new CommentSimple(data.parentComment);
     }
@@ -37,6 +41,11 @@ export class CommentSimple extends AbstractResource {
     return formatDisplayDateTime(this.created);
   }
 
+  get modifiedDisplayValue(): string {
+
+    return formatDisplayDateTime(this.modified);
+  }
+
   serialize(): CommentSimpleType {
     return {
       id: this.id,
@@ -45,7 +54,8 @@ export class CommentSimple extends AbstractResource {
       content: this.content,
       proposedStatus: this.proposedStatus,
       endStatus: this.endStatus,
-      created: formatDateTime(this.created)
+      created: formatDateTime(this.created),
+      modified: formatDateTime(this.modified)
     };
   }
 

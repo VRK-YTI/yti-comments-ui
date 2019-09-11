@@ -10,6 +10,9 @@ msgstr ""
 msgid "-type"
 msgstr ""
 
+msgid "(modified)"
+msgstr ""
+
 msgid "Reply"
 msgstr ""
 
