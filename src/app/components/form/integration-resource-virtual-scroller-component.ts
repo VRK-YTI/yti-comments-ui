@@ -73,8 +73,14 @@ export class IntegrationResourceVirtualScrollerComponent {
           }
         }
         if (!found) {
+          if (!resource.expanded) {
+            this.virtualScroller.invalidateCachedMeasurementForItem(resource); //need to call every time expanded-boolean changes
+          }
           resource.expanded = true;
         } else {
+          if (resource.expanded) {
+            this.virtualScroller.invalidateCachedMeasurementForItem(resource); //need to call every time expanded-boolean changes
+          }
           resource.expanded = false;
         }
       }
@@ -105,6 +111,7 @@ export class IntegrationResourceVirtualScrollerComponent {
   }
 
   emitSelectResourceEvent(resource: IntegrationResource) {
+    this.virtualScroller.invalidateCachedMeasurementForItem(resource);
     this.selectResourceEvent.emit(resource);
   }
 
