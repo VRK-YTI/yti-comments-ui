@@ -89,6 +89,9 @@ export class CommentRoundCommentsComponent implements OnInit, OnDestroy, OnChang
       return;
     }
 
+    this.commenting$.next(false);
+    this.changeTabControl.emit(false);
+
     this.commentThreadForms.controls = [];
 
     this.commentThreads.sort(comparingPrimitive<CommentThreadSimple>(
@@ -256,8 +259,9 @@ export class CommentRoundCommentsComponent implements OnInit, OnDestroy, OnChang
   cancelCommenting() {
 
     this.reset();
-    this.changeTabControl.emit(false);
+    this.editableService.cancel();
     this.commenting$.next(false);
+    this.changeTabControl.emit(false);
   }
 
   get canStartCommenting(): boolean {
