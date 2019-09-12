@@ -102,6 +102,7 @@
             <app-localizable-undefined-textarea *ngIf="!commentThread.value.resourceUri"
                                                 [required]=true
                                                 [showRequired]=false
+                                                [restrict]="true"
                                                 [id]="'commenthread_' + i + '_description_text_input'"
                                                 [formControlName]="'description'"></app-localizable-undefined-textarea>
           </td>
