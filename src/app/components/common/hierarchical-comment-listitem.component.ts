@@ -24,10 +24,12 @@ import { CommentRound } from '../../entity/commentround';
 
       <div class="comment" x-ms-format-detection="none">
         <span class="name">{{ comment.user.firstName }} {{ comment.user.lastName }}</span>
-        <span *ngIf="comment.created.isSame(comment.modified)" class="created">{{ comment.createdDisplayValue}}</span>
-        <span *ngIf="!comment.created.isSame(comment.modified)" class="modified">{{ comment.modifiedDisplayValue}}</span>
-        <span *ngIf="!comment.created.isSame(comment.modified)">&nbsp;</span>
-        <span *ngIf="!comment.created.isSame(comment.modified)" translate>(modified)</span>
+        <span *ngIf="comment.created && comment.modified && comment.created.isSame(comment.modified)"
+              class="created">{{ comment.createdDisplayValue}}</span>
+        <span *ngIf="comment.created && comment.modified && !comment.created.isSame(comment.modified)"
+              class="modified">{{ comment.modifiedDisplayValue}}</span>
+        <span *ngIf="comment.created && comment.modified && !comment.created.isSame(comment.modified)">&nbsp;</span>
+        <span *ngIf="comment.created && comment.modified && !comment.created.isSame(comment.modified)" translate>(modified)</span>
         <span *ngIf="comment.proposedStatus != null && comment.proposedStatus === comment.endStatus"
               class="proposedStatus">, {{ comment.endStatus | translate }}</span>
         <span *ngIf="comment.proposedStatus !== comment.endStatus"
