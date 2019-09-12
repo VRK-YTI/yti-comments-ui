@@ -10,6 +10,7 @@ import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { CommentsConfirmationModalService } from './confirmation-modal.service';
 import { AuthorizationManager } from '../../services/authorization-manager';
 import { CommentRound } from '../../entity/commentround';
+import { Moment } from 'moment';
 
 @Component({
   selector: 'app-hierarchical-comment',
@@ -24,12 +25,12 @@ import { CommentRound } from '../../entity/commentround';
 
       <div class="comment" x-ms-format-detection="none">
         <span class="name">{{ comment.user.firstName }} {{ comment.user.lastName }}</span>
-        <span *ngIf="comment.created && comment.modified && comment.created.isSame(comment.modified)"
+        <span *ngIf="comment.created && comment.modified && isSameMoment(comment.created, comment.modified)"
               class="created">{{ comment.createdDisplayValue}}</span>
-        <span *ngIf="comment.created && comment.modified && !comment.created.isSame(comment.modified)"
+        <span *ngIf="comment.created && comment.modified && !isSameMoment(comment.created, comment.modified)"
               class="modified">{{ comment.modifiedDisplayValue}}</span>
-        <span *ngIf="comment.created && comment.modified && !comment.created.isSame(comment.modified)">&nbsp;</span>
-        <span *ngIf="comment.created && comment.modified && !comment.created.isSame(comment.modified)" translate>(modified)</span>
+        <span *ngIf="comment.created && comment.modified && !isSameMoment(comment.created, comment.modified)">&nbsp;</span>
+        <span *ngIf="comment.created && comment.modified && !isSameMoment(comment.created, comment.modified)" translate>(modified)</span>
         <span *ngIf="comment.proposedStatus != null && comment.proposedStatus === comment.endStatus"
               class="proposedStatus">, {{ comment.endStatus | translate }}</span>
         <span *ngIf="comment.proposedStatus !== comment.endStatus"
@@ -255,6 +256,11 @@ export class HierarchicalCommentListitemComponent implements OnInit {
   commentIdentity(index: number, item: CommentSimple) {
 
     return item.id;
+  }
+
+  isSameMoment(moment1: Moment, moment2: Moment): boolean {
+
+    return moment1.valueOf() === moment2.valueOf();
   }
 
   get expanded() {
