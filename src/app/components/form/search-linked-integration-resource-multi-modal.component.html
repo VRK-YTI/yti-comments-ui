@@ -88,6 +88,7 @@
           type="button"
           class="btn btn-secondary-action"
           (click)="createEmptyResource()">
-    <span translate>Create new suggestion</span>
+    <span *ngIf="this.selectedResources && this.selectedResources.length > 0" translate>Create new suggestion and add selected resources</span>
+    <span *ngIf="!this.selectedResources || this.selectedResources.length === 0" translate>Create new suggestion</span>
   </button>
 </div>

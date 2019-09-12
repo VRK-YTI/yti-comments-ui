@@ -241,6 +241,9 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
+msgid "Create new suggestion and add selected resources"
+msgstr ""
+
 msgid "comment round"
 msgstr ""
 

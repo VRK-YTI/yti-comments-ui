@@ -143,9 +143,8 @@ export class SearchLinkedIntegrationResourceMultiModalComponent implements After
       type: this.containerType
     };
     const resource: IntegrationResource = new IntegrationResource(integrationResourceType);
-    const resources: IntegrationResource[] = [];
-    resources.push(resource);
-    this.modal.close(resources);
+    this.selectedResources.push(resource);
+    this.modal.close(this.selectedResources);
   }
 }
 
