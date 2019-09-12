@@ -416,7 +416,7 @@ export class DataService {
     const integrationRequest = new IntegrationRequest();
     integrationRequest.container = uri;
     integrationRequest.pageSize = pageSize;
-    integrationRequest.from = from;
+    integrationRequest.pageFrom = from;
     integrationRequest.language = language;
     if (searchTerm) {
       integrationRequest.searchTerm = searchTerm;

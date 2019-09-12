@@ -1,7 +1,7 @@
 export class IntegrationRequest {
 
   container: string;
-  from: number;
+  pageFrom: number;
   pageSize: number;
   status: string[];
   filter: string[];
