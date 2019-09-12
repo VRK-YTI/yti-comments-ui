@@ -142,6 +142,7 @@ export class CommentRoundComponent implements OnInit {
       this.confirmationModalService.openEditInProgress()
         .then(() => {
           this.blockTabChange = false;
+          this.editableService.cancel();
           this.tabSet.activeId = event.nextId;
         }, ignoreModalClose);
     } else {
