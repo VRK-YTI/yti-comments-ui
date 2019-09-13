@@ -334,21 +334,21 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
     if (this.commentRound.status === 'INCOMPLETE') {
       return this.isEditorOrSuperUser;
     } else if (this.commentRound.status === 'INPROGRESS' && !this.commentRound.fixedThreads) {
-      return this.authorizationManager.canCreateCommentThread();
+      return this.authorizationManager.canCreateCommentThread(this.commentRound);
     }
-
     return false;
   }
 
   get showCreateThreadButton() {
 
-    return (this.isEditing && this.isEditorOrSuperUser) ||
-      (this.isEditing && !this.commentRound.fixedThreads && this.authorizationManager.canCreateCommentThread());
+    return ((this.isEditing && this.isEditorOrSuperUser) ||
+      (this.isEditing && !this.commentRound.fixedThreads && this.authorizationManager.canCreateCommentThread(this.commentRound)));
   }
 
   get showEditableButtons() {
 
-    return this.isEditorOrSuperUser || (!this.commentRound.fixedThreads && this.authorizationManager.canCreateCommentThread());
+    return (this.isEditorOrSuperUser ||
+      (!this.commentRound.fixedThreads && this.authorizationManager.canCreateCommentThread(this.commentRound)));
   }
 
   get isEditing() {

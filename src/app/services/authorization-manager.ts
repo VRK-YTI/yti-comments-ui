@@ -24,7 +24,7 @@ export class AuthorizationManager {
     }
     if (editableEntity.allowOrganizationEdit()) {
       return this.user.isInOrganization(editableEntity.getOwningOrganizationIds(),
-        ['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR']);
+        ['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR', 'MEMBER']);
     }
     return false;
   }
@@ -32,13 +32,19 @@ export class AuthorizationManager {
   canCreateCommentRound() {
 
     return this.user.superuser ||
-      (this.user.isInRoleInAnyOrganization(['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR']));
+      this.user.isInRoleInAnyOrganization(['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR']);
   }
 
-  canCreateCommentThread() {
+  canCreateCommentThread(editableEntity: EditableEntity) {
 
-    return this.user.superuser ||
-      (this.user.isInRoleInAnyOrganization(['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR']));
+    if (this.user.superuser || this.user.email === editableEntity.getUser().email) {
+      return true;
+    }
+    if (editableEntity.allowOrganizationEdit()) {
+      return this.user.isInOrganization(editableEntity.getOwningOrganizationIds(),
+        ['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR', 'MEMBER']);
+    }
+    return false;
   }
 
   canCreateComment(editableEntity: EditableEntity) {
@@ -48,7 +54,7 @@ export class AuthorizationManager {
     }
     if (editableEntity.allowOrganizationComment()) {
       return this.user.isInOrganization(editableEntity.getOwningOrganizationIds(),
-        ['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR']);
+        ['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR', 'MEMBER']);
     }
     return false;
   }
