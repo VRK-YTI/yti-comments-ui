@@ -1,5 +1,5 @@
 <form [formGroup]="commentRoundForm" #form="ngForm">
-  <div *ngIf="isEditorOrSuperUser">
+  <div *ngIf="isEditorOrSuperUser" class="tab-container">
     <div class="row">
       <div class="col-10">
         <app-literal [id]="'commentround_user_name'"
