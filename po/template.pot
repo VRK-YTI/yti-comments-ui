@@ -516,6 +516,9 @@ msgstr ""
 msgid "CODE_LIST_EDITOR"
 msgstr ""
 
+msgid "MEMBER"
+msgstr ""
+
 msgid "required"
 msgstr ""
 
