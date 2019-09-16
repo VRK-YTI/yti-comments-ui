@@ -113,6 +113,25 @@ export class IntegrationResourceVirtualScrollerComponent {
   emitSelectResourceEvent(resource: IntegrationResource) {
     this.virtualScroller.invalidateCachedMeasurementForItem(resource);
     this.selectResourceEvent.emit(resource);
+    this.tryAndStopVisbleGapsFromBeingFormedInTheScroller();
+  }
+
+  // This method tries to stop the following effect : when user chooses rows, they must disappear from the list. There tends to be an empty
+  // area at the bottom quite soon after clicking some items. This weird-looking code attempts to command the scroller to behave better, and
+  // it could be probably optimized more, but at least now it seems that even after over 300 items chosen, no visible gap is there anymore,
+  // at least if the user starts clicking at the top.
+  tryAndStopVisbleGapsFromBeingFormedInTheScroller() {
+    const viewport = this.virtualScroller.viewPortInfo;
+    const changeEventArg = {
+      startIndex: viewport.startIndex,
+      endIndex: viewport.endIndex,
+      scrollStartPosition: viewport.scrollStartPosition,
+      scrollEndPosition: viewport.scrollEndPosition,
+      startIndexWithBuffer: viewport.startIndexWithBuffer + 1,
+      endIndexWithBuffer: viewport.endIndexWithBuffer + 1,
+      maxScrollPosition: viewport.maxScrollPosition
+    };
+    this.virtualScroller.vsEnd.emit(changeEventArg);
   }
 
 }
