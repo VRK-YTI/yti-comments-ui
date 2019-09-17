@@ -29,7 +29,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
       </div>
     </div>
     <ng-template #flattened>
-      <div height="0">
+      <div class="flattened">
       </div>
     </ng-template>
   `
