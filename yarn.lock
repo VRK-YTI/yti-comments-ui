@@ -4827,6 +4827,11 @@ ngx-clipboard@11.1.9:
     ngx-window-token "^1.0.2"
     tslib "^1.9.0"
 
+ngx-cookie-service@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/ngx-cookie-service/-/ngx-cookie-service-2.2.0.tgz#79fe67863b3b93ee226c9ea8d60e1542c7115a58"
+  integrity sha512-2kaC1itlEMxiMAPJ320hOpcwU9vhvjbKQCZ1Go6bGhYjJtqG7eYvhNP7mM9IhFz1/afG2tBryJPySWmFUGhRpA==
+
 ngx-virtual-scroller@3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/ngx-virtual-scroller/-/ngx-virtual-scroller-3.0.2.tgz#509b313d47c9659ca7fa7467bded3a5bba617ff7"

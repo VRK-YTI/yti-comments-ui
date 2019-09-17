@@ -79,6 +79,8 @@ import {
 import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 import { IntegrationResourceListItemComponent } from './components/form/integration-resource-list-item-component';
 import { IntegrationResourceVirtualScrollerComponent } from './components/form/integration-resource-virtual-scroller-component';
+import { CookieCleanupComponent } from './components/cookiecleanup/cookie-cleanup.component';
+import { CookieService } from 'ngx-cookie-service';
 
 declare var require: any;
 
@@ -148,6 +150,7 @@ const appRoutes: Routes = [
   { path: 'createcommentround', component: CommentRoundCreateComponent, pathMatch: 'full' },
   { path: 'information', component: InformationAboutServiceComponent },
   { path: 'userdetails', component: UserDetailsComponent },
+  { path: 'cleancookies', component: CookieCleanupComponent },
   // NOTE: If createRefreshRouteMatcher(['re']) starts to work after angular upgrade, then switch to that.
   { matcher: refreshRouteMatcher, component: RefreshComponent }
 ];
@@ -199,7 +202,8 @@ const appRoutes: Routes = [
     CommentRoundDateRangeInputComponent,
     LocalizableUndefinedTextareaComponent,
     IntegrationResourceListItemComponent,
-    IntegrationResourceVirtualScrollerComponent
+    IntegrationResourceVirtualScrollerComponent,
+    CookieCleanupComponent
   ],
   entryComponents: [
     SearchLinkedIntegrationResourceModalComponent,
@@ -241,7 +245,8 @@ const appRoutes: Routes = [
     SearchLinkedIntegrationResourceMultiModalService,
     SearchLinkedOrganizationModalService,
     SearchLinkedCommentModalService,
-    CommentRoundErrorModalService
+    CommentRoundErrorModalService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
