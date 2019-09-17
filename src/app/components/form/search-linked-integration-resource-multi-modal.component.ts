@@ -4,11 +4,11 @@ import { BehaviorSubject, combineLatest, concat } from 'rxjs';
 import { LanguageService } from '../../services/language.service';
 import { ModalService } from '../../services/modal.service';
 import { DataService } from '../../services/data.service';
-import { debounceTime, map, skip, take, tap } from 'rxjs/operators';
+import { debounceTime, skip, take, tap } from 'rxjs/operators';
 import { IntegrationResource } from '../../entity/integration-resource';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
 import { TranslateService } from '@ngx-translate/core';
-import { regularStatuses, Status } from 'yti-common-ui/entities/status';
+import { allStatuses, Status } from 'yti-common-ui/entities/status';
 import { IntegrationResourceType } from '../../services/api-schema';
 import { ConfigurationService } from '../../services/configuration.service';
 
@@ -51,7 +51,7 @@ export class SearchLinkedIntegrationResourceMultiModalComponent implements After
 
     this.searchLabel = this.translateService.instant('Search term');
 
-    this.statusOptions = [null, ...regularStatuses].map(status => ({
+    this.statusOptions = [null, ...allStatuses].map(status => ({
       value: status,
       name: () => this.translateService.instant(status ? status : 'All statuses'),
       idIdentifier: () => status ? status : 'all_selected'

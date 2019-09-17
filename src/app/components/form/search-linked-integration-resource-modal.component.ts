@@ -10,7 +10,7 @@ import { IntegrationResource } from '../../entity/integration-resource';
 import { containerTypes } from '../common/containertypes';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
 import { TranslateService } from '@ngx-translate/core';
-import { regularStatuses, Status } from 'yti-common-ui/entities/status';
+import { allStatuses, Status } from 'yti-common-ui/entities/status';
 import { IntegrationResourceType } from '../../services/api-schema';
 import { ConfigurationService } from '../../services/configuration.service';
 import { comparingLocalizable, comparingPrimitive } from 'yti-common-ui/utils/comparator';
@@ -63,7 +63,7 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
       idIdentifier: () => containerType ? containerType : 'select_source_container_type'
     }));
 
-    this.statusOptions = [null, ...regularStatuses].map(status => ({
+    this.statusOptions = [null, ...allStatuses].map(status => ({
       value: status,
       name: () => this.translateService.instant(status ? status : 'All statuses'),
       idIdentifier: () => status ? status : 'all_selected'
