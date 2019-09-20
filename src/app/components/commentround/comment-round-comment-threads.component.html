@@ -86,7 +86,7 @@
             </td>
             <td style="width: 15%">
               <app-literal-textarea *ngIf="commentThread.value.resourceUri && isNewResource(commentThread.value.id)"
-                                    [required]=true
+                                    [required]=false
                                     [showRequired]=false
                                     [id]="'commentthread_proposed_text_input_' + i"
                                     [formControlName]="'proposedText'"></app-literal-textarea>
