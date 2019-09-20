@@ -25,6 +25,7 @@ import { tap } from 'rxjs/operators';
 import { CommentSimple } from '../../entity/comment-simple';
 import { Comment } from '../../entity/comment';
 import { SearchLinkedIntegrationResourceMultiModalService } from '../form/search-linked-integration-resource-multi-modal.component';
+import { nonEmptyLocalizableValidator } from '../../utils/validators';
 
 @Component({
   selector: 'app-comment-round-comment-threads',
@@ -116,8 +117,8 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
         id: new FormControl(commentThread.id),
         url: new FormControl(commentThread.url),
         resourceUri: new FormControl(commentThread.resourceUri),
-        label: new FormControl(commentThread.label, Validators.required),
-        description: new FormControl(commentThread.description, Validators.required),
+        label: new FormControl(commentThread.label, nonEmptyLocalizableValidator),
+        description: new FormControl(commentThread.description, nonEmptyLocalizableValidator),
         localName: new FormControl(commentThread.localName),
         created: new FormControl(commentThread.created),
         user: new FormControl(commentThread.user),
@@ -367,9 +368,9 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
       created: new FormControl(),
       user: new FormControl(),
       label: integrationResource.uri ? new FormControl(integrationResource.prefLabel) :
-        new FormControl(integrationResource.prefLabel ? integrationResource.prefLabel : '', Validators.required),
+        new FormControl(integrationResource.prefLabel ? integrationResource.prefLabel : {}, nonEmptyLocalizableValidator),
       description: integrationResource.uri ? new FormControl(integrationResource.description) :
-        new FormControl(integrationResource.description ? integrationResource.description : '', Validators.required),
+        new FormControl(integrationResource.description ? integrationResource.description : {}, nonEmptyLocalizableValidator),
       localName: new FormControl(integrationResource.localName),
       currentStatus: new FormControl(integrationResource.status),
       proposedStatus: new FormControl(integrationResource.uri != null ? integrationResource.status : 'SUGGESTED'),

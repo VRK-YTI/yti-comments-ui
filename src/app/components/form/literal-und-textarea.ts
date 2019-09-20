@@ -18,7 +18,7 @@ import { Localizable } from 'yti-common-ui/types/localization';
                     autosize
                     class="form-control"
                     [ngClass]="{ 'is-invalid': !valid }"
-                    [ngModel]="value ? value[contentLanguage] : ''"
+                    [ngModel]="value[contentLanguage]"
                     (ngModelChange)="onChange($event)"></textarea>
           <app-error-messages [id]="id + '_error_messages'" [control]="parentControl"></app-error-messages>
         </div>
@@ -38,7 +38,7 @@ export class LocalizableUndefinedTextareaComponent implements ControlValueAccess
   @Input() id: string;
   @Input() infoText: string;
 
-  value: Localizable | undefined = {};
+  value: Localizable = {};
 
   private propagateChange: (fn: any) => void = () => {};
   private propagateTouched: (fn: any) => void = () => {};
@@ -58,12 +58,7 @@ export class LocalizableUndefinedTextareaComponent implements ControlValueAccess
 
   onChange(value: string) {
 
-    if (value && value.length > 0) {
-      this.value = {};
-      this.value[this.contentLanguage] = value;
-    } else {
-      this.value = undefined;
-    }
+    this.value[this.contentLanguage] = value;
     this.propagateChange(this.value);
   }
 
