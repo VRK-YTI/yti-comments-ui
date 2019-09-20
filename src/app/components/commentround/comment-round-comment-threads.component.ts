@@ -366,8 +366,10 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
       resourceType: new FormControl(integrationResource.type),
       created: new FormControl(),
       user: new FormControl(),
-      label: new FormControl(integrationResource.prefLabel),
-      description: new FormControl(integrationResource.description),
+      label: integrationResource.uri ? new FormControl(integrationResource.prefLabel) :
+        new FormControl(integrationResource.prefLabel ? integrationResource.prefLabel : '', Validators.required),
+      description: integrationResource.uri ? new FormControl(integrationResource.description) :
+        new FormControl(integrationResource.description ? integrationResource.description : '', Validators.required),
       localName: new FormControl(integrationResource.localName),
       currentStatus: new FormControl(integrationResource.status),
       proposedStatus: new FormControl(integrationResource.uri != null ? integrationResource.status : 'SUGGESTED'),
