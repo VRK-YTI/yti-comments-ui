@@ -6,7 +6,7 @@ import { DataService } from '../../services/data.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../services/language.service';
 import { IntegrationResource } from '../../entity/integration-resource';
-import { SearchLinkedIntegrationResourceModalService } from './search-linked-integration-resource-modal.component';
+import { SearchLinkedContainerModalService } from './search-linked-integration-container-modal.component';
 
 function addToControl<T>(control: FormControl, item: T) {
 
@@ -71,7 +71,7 @@ export class SourceInputComponent implements ControlValueAccessor {
               private editableService: EditableService,
               private translateService: TranslateService,
               private dataService: DataService,
-              private searchLinkedIntegrationResourceModalService: SearchLinkedIntegrationResourceModalService,
+              private searchLinkedContainerModalService: SearchLinkedContainerModalService,
               public languageService: LanguageService) {
 
     this.control.valueChanges.subscribe(x => this.propagateChange(x));
@@ -88,8 +88,8 @@ export class SourceInputComponent implements ControlValueAccessor {
 
   selectSource() {
 
-    this.searchLinkedIntegrationResourceModalService
-      .open(this.containerType, this.containerUri, null, this.restricts, true)
+    this.searchLinkedContainerModalService
+      .open(this.containerType, this.restricts, true)
       .then(source => addToControl(this.control, source), ignoreModalClose);
   }
 

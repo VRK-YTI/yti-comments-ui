@@ -25,8 +25,7 @@
         </div>
       </div>
 
-      <app-filter-dropdown *ngIf="!containerUri"
-                           class="d-inline-block"
+      <app-filter-dropdown class="d-inline-block"
                            id="integration_container_type_filter_dropdown"
                            [filterSubject]="containerType$"
                            [options]="containerTypeOptions"></app-filter-dropdown>
@@ -86,13 +85,5 @@
           class="btn btn-link cancel"
           (click)="cancel()">
     <span translate>Cancel</span>
-  </button>
-
-  <button *ngIf="openThreads"
-          id="create_suggestion_button"
-          type="button"
-          class="btn btn-secondary-action"
-          (click)="createEmptyResource()">
-    <span translate>Create new suggestion</span>
   </button>
 </div>

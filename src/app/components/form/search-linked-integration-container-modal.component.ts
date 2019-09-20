@@ -11,24 +11,21 @@ import { containerTypes } from '../common/containertypes';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
 import { TranslateService } from '@ngx-translate/core';
 import { allStatuses, Status } from 'yti-common-ui/entities/status';
-import { IntegrationResourceType } from '../../services/api-schema';
 import { ConfigurationService } from '../../services/configuration.service';
 import { comparingLocalizable, comparingPrimitive } from 'yti-common-ui/utils/comparator';
 
 @Component({
-  selector: 'app-search-linked-source-modal',
-  templateUrl: './search-linked-integration-resource-modal.component.html',
-  styleUrls: ['./search-linked-integration-resource-modal.component.scss']
+  selector: 'app-search-linked-container-modal',
+  templateUrl: './search-linked-integration-container-modal.component.html',
+  styleUrls: ['./search-linked-integration-container-modal.component.scss']
 })
-export class SearchLinkedIntegrationResourceModalComponent implements AfterViewInit, OnInit {
+export class SearchLinkedContainerModalComponent implements AfterViewInit, OnInit {
 
   @ViewChild('searchInput') searchInput: ElementRef;
 
   @Input() restricts: string[];
   @Input() useUILanguage: boolean;
-  @Input() containerUri: string | null;
   @Input() containerType: string | null;
-  @Input() openThreads: boolean | null;
 
   searchLabel: string;
   instructionText: string;
@@ -69,27 +66,17 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
       idIdentifier: () => status ? status : 'all_selected'
     }));
 
-    if (this.containerUri && this.containerType) {
-      this.titleLabel = this.translateService.instant('Select resource');
-      this.instructionText = this.translateService.instant('HELP_TEXT_COMMENTTHREAD_RESOURCE_MODAL_INSTRUCTION');
-      this.loading = true;
-      this.dataService.getResources(this.containerType, this.containerUri, this.languageService.language).subscribe(resources => {
-        this.resources = resources;
-        this.filterResources();
-      });
-    } else {
-      this.titleLabel = this.translateService.instant('Select source');
-      this.instructionText = this.translateService.instant('HELP_TEXT_COMMENTROUND_SOURCE_MODAL_INSTRUCTION');
-      this.containerType$.subscribe(selectedContainerType => {
-        if (selectedContainerType != null) {
-          this.loading = true;
-          this.dataService.getContainers(selectedContainerType, this.languageService.language).subscribe(resources => {
-            this.resources = resources;
-            this.filterResources();
-          });
-        }
-      });
-    }
+    this.titleLabel = this.translateService.instant('Select source');
+    this.instructionText = this.translateService.instant('HELP_TEXT_COMMENTROUND_SOURCE_MODAL_INSTRUCTION');
+    this.containerType$.subscribe(selectedContainerType => {
+      if (selectedContainerType != null) {
+        this.loading = true;
+        this.dataService.getContainers(selectedContainerType, this.languageService.language).subscribe(resources => {
+          this.resources = resources;
+          this.filterResources();
+        });
+      }
+    });
   }
 
   get hasContent(): boolean {
@@ -160,34 +147,21 @@ export class SearchLinkedIntegrationResourceModalComponent implements AfterViewI
 
     this.modal.dismiss('cancel');
   }
-
-  createEmptyResource() {
-
-    const integrationResourceType: IntegrationResourceType = <IntegrationResourceType>{
-      type: this.containerType
-    };
-    const resource: IntegrationResource = new IntegrationResource(integrationResourceType);
-    this.modal.close(resource);
-  }
 }
 
 @Injectable()
-export class SearchLinkedIntegrationResourceModalService {
+export class SearchLinkedContainerModalService {
 
   constructor(private modalService: ModalService) {
   }
 
   open(containerType: string | null,
-       containerUri: string | null,
-       openThreads: boolean | null,
        restrictedResourceUris: string[],
        useUILanguage: boolean = false): Promise<IntegrationResource> {
 
-    const modalRef = this.modalService.open(SearchLinkedIntegrationResourceModalComponent, { size: 'lg' });
-    const instance = modalRef.componentInstance as SearchLinkedIntegrationResourceModalComponent;
+    const modalRef = this.modalService.open(SearchLinkedContainerModalComponent, { size: 'lg' });
+    const instance = modalRef.componentInstance as SearchLinkedContainerModalComponent;
     instance.containerType = containerType;
-    instance.containerUri = containerUri;
-    instance.openThreads = openThreads;
     instance.restricts = restrictedResourceUris;
     instance.useUILanguage = useUILanguage;
     return modalRef.result;

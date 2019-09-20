@@ -34,10 +34,6 @@ import { CommentRoundStatusInputComponent } from './components/form/comment-roun
 import { DateInputComponent } from './components/form/date-input.component';
 import { DateRangeInputComponent } from './components/form/date-range-input.component';
 import { SourceInputComponent } from './components/form/source-input.component';
-import {
-  SearchLinkedIntegrationResourceModalComponent,
-  SearchLinkedIntegrationResourceModalService
-} from './components/form/search-linked-integration-resource-modal.component';
 import { CommentRoundErrorModalService } from './components/common/error-modal.service';
 import {
   SearchLinkedOrganizationModalComponent,
@@ -81,6 +77,10 @@ import { IntegrationResourceListItemComponent } from './components/form/integrat
 import { IntegrationResourceVirtualScrollerComponent } from './components/form/integration-resource-virtual-scroller-component';
 import { CookieCleanupComponent } from './components/cookiecleanup/cookie-cleanup.component';
 import { CookieService } from 'ngx-cookie-service';
+import {
+  SearchLinkedContainerModalComponent,
+  SearchLinkedContainerModalService
+} from './components/form/search-linked-integration-container-modal.component';
 
 declare var require: any;
 
@@ -183,7 +183,7 @@ const appRoutes: Routes = [
     DateRangeInputComponent,
     DateInputComponent,
     SourceInputComponent,
-    SearchLinkedIntegrationResourceModalComponent,
+    SearchLinkedContainerModalComponent,
     SearchLinkedIntegrationResourceMultiModalComponent,
     SearchLinkedOrganizationModalComponent,
     ContentLanguageComponent,
@@ -206,7 +206,7 @@ const appRoutes: Routes = [
     CookieCleanupComponent
   ],
   entryComponents: [
-    SearchLinkedIntegrationResourceModalComponent,
+    SearchLinkedContainerModalComponent,
     SearchLinkedIntegrationResourceMultiModalComponent,
     SearchLinkedOrganizationModalComponent,
     SearchLinkedCommentModalComponent
@@ -241,7 +241,7 @@ const appRoutes: Routes = [
     IntegrationResourceService,
     CommentsConfirmationModalService,
     ModalService,
-    SearchLinkedIntegrationResourceModalService,
+    SearchLinkedContainerModalService,
     SearchLinkedIntegrationResourceMultiModalService,
     SearchLinkedOrganizationModalService,
     SearchLinkedCommentModalService,

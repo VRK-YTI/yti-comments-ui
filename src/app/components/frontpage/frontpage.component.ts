@@ -16,10 +16,10 @@ import { Option } from 'yti-common-ui/components/dropdown.component';
 import { OrganizationSimple } from '../../entity/organization-simple';
 import { flatMap, tap } from 'rxjs/operators';
 import { containerTypes } from '../common/containertypes';
-import { SearchLinkedIntegrationResourceModalService } from '../form/search-linked-integration-resource-modal.component';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { IntegrationResource } from '../../entity/integration-resource';
 import { IntegrationResourceService } from '../../services/integrationresource.service';
+import { SearchLinkedContainerModalService } from '../form/search-linked-integration-container-modal.component';
 
 @Component({
   selector: 'app-frontpage',
@@ -49,7 +49,7 @@ export class FrontpageComponent implements OnInit, OnDestroy {
               private router: Router,
               private translateService: TranslateService,
               private languageService: LanguageService,
-              private searchLinkedIntegrationResourceModalService: SearchLinkedIntegrationResourceModalService) {
+              private searchLinkedContainerModalService: SearchLinkedContainerModalService) {
 
     locationService.atFrontPage();
   }
@@ -123,8 +123,8 @@ export class FrontpageComponent implements OnInit, OnDestroy {
 
   createNewCommentRound() {
 
-    this.searchLinkedIntegrationResourceModalService
-      .open(null, null, null, [], true)
+    this.searchLinkedContainerModalService
+      .open(null, [], true)
       .then(source => this.storeSourceAndNavigateToCreateCommentRound(source), ignoreModalClose);
   }
 
