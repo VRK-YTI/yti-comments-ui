@@ -397,19 +397,6 @@ export class DataService {
       .pipe(map(res => res.results.map((data: IntegrationResourceType) => new IntegrationResource(data))));
   }
 
-  getResources(containerType: string, uri: string, language: string): Observable<IntegrationResource[]> {
-
-    let params = new HttpParams()
-      .set('container', uri);
-    if (language) {
-      params = params.append('language', language);
-    }
-
-    const resourcePath = DataService.resolveIntegrationApiPathForContainerType(containerType) + '/' + resources;
-    return this.http.get<WithResults<IntegrationResourceType>>(resourcePath, { params: params, responseType: 'json' })
-      .pipe(map(res => res.results.map((data: IntegrationResourceType) => new IntegrationResource(data))));
-  }
-
   getResourcesPaged(containerType: string, uri: string, language: string, pageSize: number, from: number,
                     status: string | null, searchTerm: string | null, restrictedResourceUris: string[]): Promise<IntegrationResource[]> {
 
