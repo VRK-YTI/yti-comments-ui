@@ -19,7 +19,7 @@ export function nonEmptyLocalizableValidator(control: FormControl) {
   function allExistingObjectKeysHaveAnEmptyValue(controlValue: Object): boolean {
     let oneOrMoreKeysHaveANonEmptyValue = false;
     Object.values(control.value).forEach(value => {
-      if ((<string>value).length > 0) {
+      if ((<string>value).trim().length > 0) {
         oneOrMoreKeysHaveANonEmptyValue = true;
       }
     });
