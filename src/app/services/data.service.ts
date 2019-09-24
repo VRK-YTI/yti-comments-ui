@@ -23,6 +23,7 @@ import { CommentThreadSimple } from '../entity/commentthread-simple';
 import { CommentSimple } from '../entity/comment-simple';
 import { Source } from '../entity/source';
 import { IntegrationRequest } from '../entity/integration-request';
+import { AuthorizationManager } from './authorization-manager';
 
 const apiContext = 'comments-api';
 const api = 'api';
@@ -71,7 +72,8 @@ interface WithResults<T> {
 })
 export class DataService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private authorizationManager: AuthorizationManager) {
   }
 
   static resolveIntegrationApiPathForContainerType(containerType: string): string {
@@ -385,15 +387,20 @@ export class DataService {
 
   getContainers(containerType: string, language: string): Observable<IntegrationResource[]> {
 
-    let params = new HttpParams();
-
+    const integrationRequest = new IntegrationRequest();
     if (language) {
-      params = params.append('language', language);
+      integrationRequest.language = language;
     }
+    const userOrganizations = Array.from(this.authorizationManager.user
+      .getOrganizations(['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR', 'MEMBER']));
 
+    if (userOrganizations && userOrganizations.length > 0) {
+      integrationRequest.includeIncompleteFrom = userOrganizations;
+    }
     const containerPath = DataService.resolveIntegrationApiPathForContainerType(containerType) + '/' + containers;
-
-    return this.http.get<WithResults<IntegrationResourceType>>(containerPath, { params: params, responseType: 'json' })
+    return this.http.post<WithResults<IntegrationResourceType>>(containerPath,
+      integrationRequest,
+      { responseType: 'json' })
       .pipe(map(res => res.results.map((data: IntegrationResourceType) => new IntegrationResource(data))));
   }
 
@@ -415,14 +422,11 @@ export class DataService {
     if (restrictedResourceUris && restrictedResourceUris.length > 0) {
       integrationRequest.filter = restrictedResourceUris;
     }
-
     const resourcePath = DataService.resolveIntegrationApiPathForContainerType(containerType) + '/' + resources;
-
     const fetchResult: Observable<IntegrationResource[]> = this.http.post<WithResults<IntegrationResourceType>>(resourcePath,
       integrationRequest,
       { responseType: 'json' })
       .pipe(map(res => res.results.map((data: IntegrationResourceType) => new IntegrationResource(data))));
-
     return fetchResult.toPromise();
   }
 }
