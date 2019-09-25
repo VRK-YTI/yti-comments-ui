@@ -4,7 +4,7 @@ import { CommentRound } from '../../entity/commentround';
 import { LocationService } from '../../services/location.service';
 import { AuthorizationManager } from '../../services/authorization-manager';
 import { Router } from '@angular/router';
-import { BehaviorSubject, combineLatest, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Subscription, concat } from 'rxjs';
 import { Organization } from '../../entity/organization';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -14,7 +14,7 @@ import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { LanguageService } from '../../services/language.service';
 import { Option } from 'yti-common-ui/components/dropdown.component';
 import { OrganizationSimple } from '../../entity/organization-simple';
-import { flatMap, tap } from 'rxjs/operators';
+import { debounceTime, flatMap, map, skip, take, tap } from 'rxjs/operators';
 import { containerTypes } from '../common/containertypes';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { IntegrationResource } from '../../entity/integration-resource';
@@ -36,11 +36,14 @@ export class FrontpageComponent implements OnInit, OnDestroy {
   organizationOptions: FilterOptions<OrganizationSimple>;
   containerTypeOptions: FilterOptions<string>;
 
+  searchTerm$ = new BehaviorSubject('');
   status$ = new BehaviorSubject<CommentRoundStatus | null>(null);
   organization$ = new BehaviorSubject<Organization | null>(null);
   containerType$ = new BehaviorSubject<string | null>(null);
 
   private subscriptionToClean: Subscription[] = [];
+
+  searchError = false;
 
   constructor(private dataService: DataService,
               private integrationResourceService: IntegrationResourceService,
@@ -81,13 +84,16 @@ export class FrontpageComponent implements OnInit, OnDestroy {
       idIdentifier: () => containerType ? containerType : 'all_selected'
     }));
 
-    combineLatest(this.status$, this.organization$, this.containerType$)
+    const initialSearchTerm = this.searchTerm$.pipe(take(1));
+    const debouncedSearchTerm = this.searchTerm$.pipe(skip(1), debounceTime(500));
+    const searchTerm$ = concat(initialSearchTerm, debouncedSearchTerm);
+
+    combineLatest(this.status$, this.organization$, this.containerType$, searchTerm$)
       .pipe(
         tap(() => this.searchInProgress = true),
-        flatMap(([status, organization, containerType]) => {
+        flatMap(([status, organization, containerType, searchTerm]) => {
           const organizationId = organization ? organization.id : null;
-
-          return this.dataService.getCommentRounds(organizationId, status, containerType, true, true);
+          return this.dataService.getCommentRounds(organizationId, status, containerType, searchTerm, true, true);
         }),
         tap(() => this.searchInProgress = false)
       )
@@ -131,5 +137,13 @@ export class FrontpageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
 
     this.subscriptionToClean.forEach(s => s.unsubscribe());
+  }
+
+  get searchTerm(): string {
+    return this.searchTerm$.getValue();
+  }
+
+  set searchTerm(value: string) {
+    this.searchTerm$.next(value);
   }
 }

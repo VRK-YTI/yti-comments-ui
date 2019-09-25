@@ -112,6 +112,7 @@ export class DataService {
   getCommentRounds(organizationId: string | null,
                    status: string | null,
                    containerType: string | null,
+                   searchTerm: string | null,
                    filterIncomplete: boolean,
                    filterContent: boolean | null): Observable<CommentRound[]> {
 
@@ -120,6 +121,10 @@ export class DataService {
 
     if (containerType) {
       params = params.append('containerType', containerType);
+    }
+
+    if (searchTerm) {
+      params = params.append('searchTerm', searchTerm);
     }
 
     if (organizationId) {

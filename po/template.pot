@@ -256,6 +256,9 @@ msgstr ""
 msgid "Add new comment round"
 msgstr ""
 
+msgid "Search for comment rounds"
+msgstr ""
+
 msgid "Did not find any comment rounds."
 msgstr ""
 
@@ -401,6 +404,9 @@ msgid "INFO_TEXT_INTEGRATION_RESOURCEURI"
 msgstr ""
 
 msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
+msgstr ""
+
+msgid "INFO_TEXT_FRONTPAGE_SEARCH"
 msgstr ""
 
 msgid "Front page"

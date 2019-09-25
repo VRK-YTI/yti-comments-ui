@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-09-16 11:06+0300\n"
+"PO-Revision-Date: 2019-09-23 13:20+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -276,6 +276,9 @@ msgstr ""
 msgid "Add new comment round"
 msgstr ""
 
+msgid "Search for comment rounds"
+msgstr "Search comment rounds"
+
 msgid "Did not find any comment rounds."
 msgstr ""
 
@@ -428,6 +431,9 @@ msgstr "Comment round integration resource URI address"
 
 msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr "Results can be filtered by organization, status and tool using dropdown"
+
+msgid "INFO_TEXT_FRONTPAGE_SEARCH"
+msgstr "The search targets the names of the comment rounds"
 
 msgid "Front page"
 msgstr ""

@@ -274,6 +274,9 @@ msgstr ""
 msgid "Add new comment round"
 msgstr "Luo uusi kommentointikierros"
 
+msgid "Search for comment rounds"
+msgstr "Hae kommentointikierroksia"
+
 msgid "Did not find any comment rounds."
 msgstr "Kommentointikierroksia ei löytynyt."
 
@@ -434,6 +437,9 @@ msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr ""
 "Hakutuloksia voi rajata organisaatio-, tila- ja työkalukohtaisesti "
 "alasvetovalikoiden avulla"
+
+msgid "INFO_TEXT_FRONTPAGE_SEARCH"
+msgstr "Haku kohdistuu kierrosten nimiin"
 
 msgid "Front page"
 msgstr "Etusivu"
