@@ -5,6 +5,7 @@ export class IntegrationRequest {
   pageSize: number;
   status: string[];
   filter: string[];
+  includeIncomplete: boolean;
   includeIncompleteFrom: string[];
   language: string;
   searchTerm: string;

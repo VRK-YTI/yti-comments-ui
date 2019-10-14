@@ -417,6 +417,7 @@ export class DataService {
     integrationRequest.pageSize = pageSize;
     integrationRequest.pageFrom = from;
     integrationRequest.language = language;
+    integrationRequest.includeIncomplete = true;
     if (searchTerm) {
       integrationRequest.searchTerm = searchTerm;
     }
