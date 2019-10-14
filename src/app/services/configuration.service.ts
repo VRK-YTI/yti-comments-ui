@@ -54,9 +54,9 @@ export class ConfigurationService {
   getUriWithEnv(uri: string): string | null {
 
     if (uri && this.env !== 'prod') {
-      return this.encodeUriAndEscapeHashTag(uri) + '?env=' + this.env;
+      return uri + '?env=' + this.env;
     }
-    return uri ? this.encodeUriAndEscapeHashTag(uri) : null;
+    return uri ? uri : null;
   }
 
   getEnvironmentIdentifier(style?: 'prefix' | 'postfix'): string {
@@ -72,10 +72,5 @@ export class ConfigurationService {
       }
     }
     return '';
-  }
-
-  encodeUriAndEscapeHashTag(uri: string): string {
-
-    return encodeURI(uri).replace('#', '%23');
   }
 }
