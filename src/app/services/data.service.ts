@@ -396,11 +396,15 @@ export class DataService {
     if (language) {
       integrationRequest.language = language;
     }
-    const userOrganizations = Array.from(this.authorizationManager.user
-      .getOrganizations(['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR', 'MEMBER']));
+    if (this.authorizationManager.user.superuser) {
+      integrationRequest.includeIncomplete = true;
+    } else {
+      const userOrganizations = Array.from(this.authorizationManager.user
+        .getOrganizations(['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR', 'MEMBER']));
 
-    if (userOrganizations && userOrganizations.length > 0) {
-      integrationRequest.includeIncompleteFrom = userOrganizations;
+      if (userOrganizations && userOrganizations.length > 0) {
+        integrationRequest.includeIncompleteFrom = userOrganizations;
+      }
     }
     const containerPath = DataService.resolveIntegrationApiPathForContainerType(containerType) + '/' + containers;
     return this.http.post<WithResults<IntegrationResourceType>>(containerPath,
