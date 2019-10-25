@@ -9,7 +9,9 @@ import {
   CommentThreadSimpleType,
   CommentThreadType,
   CommentType,
-  IntegrationResourceType, MessagingUserType, OrganizationType,
+  IntegrationResourceType,
+  MessagingUserType,
+  OrganizationType,
   SourceType
 } from './api-schema';
 import { Observable, of } from 'rxjs';
@@ -17,7 +19,6 @@ import { catchError, map } from 'rxjs/internal/operators';
 import { ServiceConfiguration } from '../entity/service-configuration';
 import { CommentThread } from '../entity/commentthread';
 import { UserRequest } from '../entity/userrequest';
-import { OrganizationSimple } from '../entity/organization-simple';
 import { IntegrationResource } from '../entity/integration-resource';
 import { CommentThreadSimple } from '../entity/commentthread-simple';
 import { CommentSimple } from '../entity/comment-simple';
@@ -487,10 +488,11 @@ export class DataService {
     return this.subscriptionRequest(resourceUri, undefined, ACTION_DELETE);
   }
 
-  getMessagingUserData(): Observable<MessagingUser> {
+  getMessagingUserData(): Observable<MessagingUser | undefined> {
 
     return this.http.get<MessagingUserType>(`${messagingBasePath}/${user}`)
-      .pipe(map(res => new MessagingUser(res)));
+      .pipe(map(res => new MessagingUser(res)),
+        catchError(err => of(undefined)));
   }
 
   setSubscriptionType(subscriptionType: string): Observable<MessagingUser> {
