@@ -34,7 +34,7 @@ import { CommentRoundStatusInputComponent } from './components/form/comment-roun
 import { DateInputComponent } from './components/form/date-input.component';
 import { DateRangeInputComponent } from './components/form/date-range-input.component';
 import { SourceInputComponent } from './components/form/source-input.component';
-import { CommentRoundErrorModalService } from './components/common/error-modal.service';
+import { CommentsErrorModalService } from './components/common/error-modal.service';
 import {
   SearchLinkedOrganizationModalComponent,
   SearchLinkedOrganizationModalService
@@ -81,6 +81,8 @@ import {
   SearchLinkedContainerModalComponent,
   SearchLinkedContainerModalService
 } from './components/form/search-linked-integration-container-modal.component';
+import { UserDetailsSubscriptionsComponent } from './components/userdetails/user-details-subscriptions.component';
+import { UserDetailsInformationComponent } from './components/userdetails/user-details-information.component';
 
 declare var require: any;
 
@@ -167,6 +169,8 @@ const appRoutes: Routes = [
     LogoComponent,
     InformationAboutServiceComponent,
     UserDetailsComponent,
+    UserDetailsInformationComponent,
+    UserDetailsSubscriptionsComponent,
     RefreshComponent,
     CommentRoundCreateComponent,
     EditableButtonsComponent,
@@ -245,7 +249,7 @@ const appRoutes: Routes = [
     SearchLinkedIntegrationResourceMultiModalService,
     SearchLinkedOrganizationModalService,
     SearchLinkedCommentModalService,
-    CommentRoundErrorModalService,
+    CommentsErrorModalService,
     CookieService
   ],
   bootstrap: [AppComponent]

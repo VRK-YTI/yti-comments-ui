@@ -4,7 +4,7 @@ import { CommentSimple } from '../../entity/comment-simple';
 import { DataService } from '../../services/data.service';
 import { CommentThreadType, CommentType } from '../../services/api-schema';
 import { v4 as uuid } from 'uuid';
-import { CommentRoundErrorModalService } from './error-modal.service';
+import { CommentsErrorModalService } from './error-modal.service';
 import { BehaviorSubject } from 'rxjs';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { CommentsConfirmationModalService } from './confirmation-modal.service';
@@ -141,7 +141,7 @@ export class HierarchicalCommentListitemComponent implements OnInit {
 
   constructor(public languageService: LanguageService,
               private dataService: DataService,
-              private errorModalService: CommentRoundErrorModalService,
+              private errorModalService: CommentsErrorModalService,
               private confirmationModalService: CommentsConfirmationModalService,
               private authorizationManager: AuthorizationManager) {
   }

@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-09-24 12:13+0300\n"
+"PO-Revision-Date: 2019-10-24 13:19+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -94,14 +94,6 @@ msgstr "Valitse työkalu"
 msgid "All statuses"
 msgstr "Kaikki tilat"
 
-msgid "Select resource"
-msgstr "Valitse tietosisältö"
-
-msgid "HELP_TEXT_COMMENTTHREAD_RESOURCE_MODAL_INSTRUCTION"
-msgstr ""
-"Hae tietosisältö kommentoitavaksi. Valinta tehdään klikkaamalla tietosisällön nimeä. "
-"Tietosisältöjen tilaa voi rajata hakutermillä ja erillisellä alasvetovalikolla."
-
 msgid "Select source"
 msgstr "Valitse lähde"
 
@@ -110,6 +102,14 @@ msgstr ""
 "Valitse kommentointikierrokselle lähde valitsemalla ensin Yhteentoimivuusalustan "
 "työkalu alasvetovalikosta. Lähde valitaan klikkaamalla sen nimeä. Lähteitä voi "
 "rajata antamalla hakukenttään termin ja tila-alasvetovalikolla."
+
+msgid "Select resource"
+msgstr "Valitse tietosisältö"
+
+msgid "HELP_TEXT_COMMENTTHREAD_RESOURCE_MODAL_INSTRUCTION"
+msgstr ""
+"Hae tietosisältö kommentoitavaksi. Valinta tehdään klikkaamalla tietosisällön nimeä. "
+"Tietosisältöjen tilaa voi rajata hakutermillä ja erillisellä alasvetovalikolla."
 
 msgid "All organizations"
 msgstr "Kaikki organisaatiot"
@@ -216,8 +216,17 @@ msgstr "Kommentoitavia tietosisältöjä {{ value }} kpl"
 msgid "There are no resources to comment."
 msgstr "Kommentoitavia tietosisältöjä ei ole."
 
+msgid "You will receive an email notification when this resource changes."
+msgstr "Sinulle lähetetään sähköpostia, kun tähän aineistoon tulee muutoksia."
+
 msgid "Choose action"
 msgstr "Valitse toiminto"
+
+msgid "Add email subscription"
+msgstr "Tilaa sähköposti-ilmoitukset"
+
+msgid "Remove email subscription"
+msgstr "Poista sähköposti-ilmoitukset"
 
 msgid "Start comment round"
 msgstr "Aloita kommentointikierros"
@@ -246,9 +255,6 @@ msgstr "Rajaa hakutuloksia"
 msgid "Please select tool to get container resources for commenting."
 msgstr "Valitse työkalu, josta kommentoitavat resurssit noudetaan."
 
-msgid "Create new suggestion"
-msgstr "Luo uusi ehdotus"
-
 msgid "Resources"
 msgstr "Tietosisällöt"
 
@@ -257,6 +263,9 @@ msgstr "Valitse"
 
 msgid "Create new suggestion and add selected resources"
 msgstr "Luo uusi ehdotus ja lisää valitut tietosisällöt"
+
+msgid "Create new suggestion"
+msgstr "Luo uusi ehdotus"
 
 msgid "comment round"
 msgstr "kommentointikierros"
@@ -319,8 +328,33 @@ msgstr "Tuntematon organisaatio"
 msgid "Waiting for approval"
 msgstr "Odottaa hyväksymistä"
 
-msgid "This user does not have any roles in organizations."
-msgstr "Tällä käyttäjällä ei ole rooleja organisaatioissa."
+msgid ""
+"You have subscribed to be notified via email when the following resources change. To "
+"remove the subscription, click the icon next to the resource."
+msgstr ""
+"Olet tilannut seuraavien aineistojen muutoksista ilmoitukset sähköpostiisi. "
+"Poistaaksesi ilmoituksen, paina aineiston vieressä olevaa ikonia."
+
+msgid "Email notifications"
+msgstr "Sähköposti-ilmoitukset"
+
+msgid "Daily"
+msgstr "Joka päivä"
+
+msgid "Code list resources"
+msgstr "Koodistoaineistot"
+
+msgid "Terminology resources"
+msgstr "Suomi.fi-sanastot"
+
+msgid "Datamodel resources"
+msgstr "Tietomalliaineistot"
+
+msgid "Comments resources"
+msgstr "Kommenttien aineistot"
+
+msgid "SUBSCRIPTIONS"
+msgstr "TILAUKSET"
 
 msgid "INFO_TEXT_COMMENTROUND_USER"
 msgstr "Kommentointikierroksen perustanut käyttäjä"
@@ -639,11 +673,33 @@ msgstr ""
 "Et ole kommentoinut kaikkia kierroksella olevia tietosisältöjä. Oletko varma että "
 "haluat lähettää kommentit?"
 
+msgid "ADD EMAIL SUBSCRIPTION TO RESOURCE REGARDING CHANGES?"
+msgstr "TILAA SÄHKÖPOSTI-ILMOITUKSET AINEISTON MUUTOKSISTA?"
+
+msgid "REMOVE EMAIL SUBSCRIPTION TO RESOURCE?"
+msgstr "POISTETAANKO SÄHKÖPOSTI-TILAUS AINEISTOSTA?"
+
+msgid "ARE YOU SURE YOU WANT TO ENABLE THE NOTIFICATION EMAIL SUBSCRIPTION?"
+msgstr ""
+"OLETKO VARMA, ETTÄ HALUAT KYTKEÄ SÄHKÖPOSTIEN VASTAANOTTOON LIITTYVÄN ASETUKSEN POIS "
+"PÄÄLLE?"
+
+msgid "ARE YOU SURE YOU WANT TO DISABLE THE NOTIFICATION EMAIL SUBSCRIPTION?"
+msgstr ""
+"OLETKO VARMA, ETTÄ HALUAT KYTKEÄ SÄHKÖPOSTIEN VASTAANOTTOON LIITTYVÄN ASETUKSEN "
+"PÄÄLLE?"
+
+msgid "Adding subscription failed."
+msgstr "Ilmoitusten tilaus epäonnistui."
+
 msgid "invalidDate"
 msgstr "Virheellinen päivämäärä"
 
 msgid "invalidDateRange"
 msgstr "Virheellinen päivämääräväli"
+
+#~ msgid "This user does not have any roles in organizations."
+#~ msgstr "Tällä käyttäjällä ei ole rooleja organisaatioissa."
 
 #~ msgid "(edited)"
 #~ msgstr "(muokattu)"

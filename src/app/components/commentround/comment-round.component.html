@@ -13,6 +13,18 @@
       <div *ngIf="showMenu" ngbDropdown class="d-inline-block float-right ml-3" placement="bottom-right">
         <button class="btn btn-action" id="commentRoundDropdown" ngbDropdownToggle translate>Choose action</button>
         <div ngbDropdownMenu aria-labelledby="commentRoundDropdown">
+          <button id="add_subscription_button"
+                  *ngIf="!isAnonymous && hasSubscription === false"
+                  type="button"
+                  class="dropdown-item"
+                  (click)="addSubscription()"
+                  translate>Add email subscription</button>
+          <button id="delete_subscription_button"
+                  *ngIf="!isAnonymous && hasSubscription === true"
+                  type="button"
+                  class="dropdown-item"
+                  (click)="removeSubscription()"
+                  translate>Remove email subscription</button>
           <button *ngIf="canStartCommentRound"
                   id="start_commentround_button"
                   type="button"
@@ -59,6 +71,11 @@
           </button>
         </a>
       </div>
+
+      <div *ngIf="hasSubscription" class="subscription">
+        <span class="subscription-icon icon-bell"
+              ngbTooltip="{{ 'You will receive an email notification when this resource changes.' | translate }}"></span>
+      </div>
     </div>
   </div>
 
@@ -85,7 +102,7 @@
     </div>
   </div>
 
-  <ngb-tabset #tabSet="ngbTabset" (tabChange)="onTabChange($event)">
+  <ngb-tabset #tabSet="ngbTabset" [activeId]="getInitialTabId()" (tabChange)="onTabChange($event)">
     <ngb-tab id="commentround_information_tab">
       <ng-template ngbTabTitle>
         <span translate>INFORMATION</span>
@@ -110,6 +127,7 @@
         <app-comment-round-comment-threads [commentRound]="commentRound"
                                            [commentThreads]="commentThreads"
                                            [myComments]="myComments"
+                                           [activeThreadId]="this.activeThreadId"
                                            [tabSet]="this.tabSet"
                                            (changeTabControl)="changeTabControl($event)"
                                            (refreshCommentThreads)="refreshCommentThreads()">

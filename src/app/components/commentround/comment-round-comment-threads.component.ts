@@ -12,7 +12,7 @@ import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { CommentsConfirmationModalService } from '../common/confirmation-modal.service';
 import { comparingLocalizable, comparingPrimitive } from 'yti-common-ui/utils/comparator';
 import { Moment } from 'moment';
-import { CommentRoundErrorModalService } from '../common/error-modal.service';
+import { CommentsErrorModalService } from '../common/error-modal.service';
 import { CommentThread } from '../../entity/commentthread';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { hasLocalization } from 'yti-common-ui/utils/localization';
@@ -39,6 +39,7 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
   @Input() myComments: Comment[];
   @Input() commentThreads: CommentThreadSimple[];
   @Input() tabSet: NgbTabset;
+  @Input() activeThreadId: string | undefined;
 
   @Output() changeTabControl = new EventEmitter<boolean>();
   @Output() refreshCommentThreads = new EventEmitter();
@@ -48,7 +49,6 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
 
   newIds: string[] = [];
   showCommentsId: number | undefined = undefined;
-  activeThreadId: string | undefined = undefined;
   activeCommentId$ = new BehaviorSubject<string | null>(null);
   activeThreadComments: CommentSimple[];
   sortOption = 'alphabetical';
@@ -62,7 +62,7 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
               private authorizationManager: AuthorizationManager,
               private dataService: DataService,
               private confirmationModalService: CommentsConfirmationModalService,
-              private errorModalService: CommentRoundErrorModalService,
+              private errorModalService: CommentsErrorModalService,
               private searchLinkedIntegrationResourceMultiModalService: SearchLinkedIntegrationResourceMultiModalService,
               private editableService: EditableService) {
 
@@ -147,12 +147,7 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
       this.activeThreadId = undefined;
       this.activeThreadComments = [];
     } else {
-      this.dataService.getCommentRoundCommentThreadComments(commentRoundId, commentThreadId).subscribe(comments => {
-        this.showCommentsId = index;
-        this.activeThreadId = commentThreadId;
-        this.sortCommentsByCreated(comments);
-        this.activeThreadComments = comments;
-      });
+      this.loadCommentThreadComments(commentRoundId, commentThreadId, index);
     }
   }
 
@@ -170,6 +165,28 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
   isNewResource(id: string): boolean {
 
     return this.newIds.indexOf(id) !== -1;
+  }
+
+  enableShowComments(commentRoundId: string, commentThreadId: string, index: number): boolean | undefined {
+    if (this.showCommentsId === index) {
+      return true;
+    } else if (this.activeThreadId === commentThreadId) {
+      this.loadCommentThreadComments(commentRoundId, commentThreadId, index);
+      return undefined;
+    } else {
+      return false;
+    }
+  }
+
+  loadCommentThreadComments(commentRoundId: string, commentThreadId: string, index: number) {
+    this.dataService.getCommentRoundCommentThreadComments(this.commentRound.id, commentThreadId).subscribe(comments => {
+      if (comments.length > 0) {
+        this.showCommentsId = index;
+        this.activeThreadId = commentThreadId;
+        this.sortCommentsByCreated(comments);
+        this.activeThreadComments = comments;
+      }
+    });
   }
 
   removeCommentThread(i: any) {

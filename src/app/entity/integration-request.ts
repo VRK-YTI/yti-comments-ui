@@ -9,4 +9,5 @@ export class IntegrationRequest {
   includeIncompleteFrom: string[];
   language: string;
   searchTerm: string;
+  type: string;
 }

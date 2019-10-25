@@ -11,9 +11,10 @@ import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { LanguageService } from '../../services/language.service';
 import { ConfigurationService } from '../../services/configuration.service';
 import { NgbTabChangeEvent, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
-import { CommentRoundErrorModalService } from '../common/error-modal.service';
+import { CommentsErrorModalService } from '../common/error-modal.service';
 import { EditableService } from '../../services/editable.service';
 import { CommentThreadSimple } from '../../entity/commentthread-simple';
+import { UserService } from 'yti-common-ui/services/user.service';
 
 @Component({
   selector: 'app-commentround',
@@ -29,6 +30,8 @@ export class CommentRoundComponent implements OnInit {
   commentThreads: CommentThreadSimple[];
   myComments: Comment[];
   blockTabChange: boolean;
+  activeThreadId: string | undefined = undefined;
+  hasSubscription: boolean | undefined = undefined;
 
   constructor(public languageService: LanguageService,
               public configurationService: ConfigurationService,
@@ -39,13 +42,15 @@ export class CommentRoundComponent implements OnInit {
               private location: Location,
               private authorizationManager: AuthorizationManager,
               private confirmationModalService: CommentsConfirmationModalService,
-              private errorModalService: CommentRoundErrorModalService,
-              private editableService: EditableService) {
+              private errorModalService: CommentsErrorModalService,
+              private editableService: EditableService,
+              private userService: UserService) {
   }
 
   ngOnInit() {
 
     const commentRoundId = this.route.snapshot.params.commentRoundId;
+    this.activeThreadId = this.route.snapshot.params.commentThreadId;
 
     if (!commentRoundId) {
       throw new Error(`Illegal route, commentRound: '${commentRoundId}'`);
@@ -53,6 +58,7 @@ export class CommentRoundComponent implements OnInit {
 
     this.dataService.getCommentRound(commentRoundId).subscribe(commentRound => {
       this.commentRound = commentRound;
+      this.checkSubscription();
       this.locationService.atCommentRoundPage(commentRound);
     });
 
@@ -63,6 +69,13 @@ export class CommentRoundComponent implements OnInit {
     this.dataService.getCommentRoundCommentThreads(commentRoundId).subscribe(commentThreads => {
       this.commentThreads = commentThreads;
     });
+  }
+
+  getInitialTabId(): string {
+    if (this.activeThreadId) {
+      return 'commentround_resources_tab';
+    }
+    return 'commentround_information_tab';
   }
 
   get showStartCommenting() {
@@ -79,6 +92,7 @@ export class CommentRoundComponent implements OnInit {
 
   goToResources() {
 
+    console.log('Trying to activate resources tab');
     this.tabSet.activeId = 'commentround_resources_tab';
   }
 
@@ -178,6 +192,54 @@ export class CommentRoundComponent implements OnInit {
   get showMenu(): boolean {
 
     return this.isEditorOrSuperUser;
+  }
+
+  get isAnonymous(): boolean {
+
+    return this.userService.user.anonymous;
+  }
+
+  checkSubscription() {
+
+    if (!this.isAnonymous) {
+      this.dataService.getSubscription(this.commentRound.id).subscribe(resource => {
+        if (resource) {
+          this.hasSubscription = true;
+        } else {
+          this.hasSubscription = false;
+        }
+      });
+    }
+  }
+
+  addSubscription() {
+
+    this.confirmationModalService.openAddSubscription()
+      .then(() => {
+        this.dataService.addSubscription(this.commentRound.id, 'commentround').subscribe(success => {
+          if (success) {
+            this.hasSubscription = true;
+          } else {
+            this.hasSubscription = false;
+            this.errorModalService.open('Submit error', 'Adding subscription failed.', null);
+          }
+        });
+      }, ignoreModalClose);
+  }
+
+  removeSubscription() {
+
+    this.confirmationModalService.openRemoveSubscription()
+      .then(() => {
+        this.dataService.deleteSubscription(this.commentRound.id).subscribe(success => {
+          if (success) {
+            this.hasSubscription = false;
+          } else {
+            this.hasSubscription = true;
+            this.errorModalService.open('Submit error', 'Subscription deletion failed.', null);
+          }
+        });
+      }, ignoreModalClose);
   }
 
   changeTabControl(blockChange: boolean) {

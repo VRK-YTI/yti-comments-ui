@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-09-23 13:20+0300\n"
+"PO-Revision-Date: 2019-10-24 11:16+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -94,15 +94,6 @@ msgstr ""
 msgid "All statuses"
 msgstr ""
 
-msgid "Select resource"
-msgstr ""
-
-msgid "HELP_TEXT_COMMENTTHREAD_RESOURCE_MODAL_INSTRUCTION"
-msgstr ""
-"Search for a resource to comment. Selecting a resource adds it to the comment round. "
-"Filter resources by typing in a search term and their statuses using the status-"
-"dropdown."
-
 msgid "Select source"
 msgstr ""
 
@@ -111,6 +102,15 @@ msgstr ""
 "Select a source to a comment round by first selecting an Interoperabilityplatform "
 "Tool from the dropdown list. Choosing a source works by clicking on the name. In "
 "addition to a search term, resources can be filtered using the status dropdown."
+
+msgid "Select resource"
+msgstr ""
+
+msgid "HELP_TEXT_COMMENTTHREAD_RESOURCE_MODAL_INSTRUCTION"
+msgstr ""
+"Search for a resource to comment. Selecting a resource adds it to the comment round. "
+"Filter resources by typing in a search term and their statuses using the status-"
+"dropdown."
 
 msgid "All organizations"
 msgstr ""
@@ -217,7 +217,16 @@ msgstr "Commentable resources {{ value }}."
 msgid "There are no resources to comment."
 msgstr ""
 
+msgid "You will receive an email notification when this resource changes."
+msgstr ""
+
 msgid "Choose action"
+msgstr ""
+
+msgid "Add email subscription"
+msgstr ""
+
+msgid "Remove email subscription"
 msgstr ""
 
 msgid "Start comment round"
@@ -247,9 +256,6 @@ msgstr ""
 msgid "Please select tool to get container resources for commenting."
 msgstr ""
 
-msgid "Create new suggestion"
-msgstr ""
-
 msgid "Resources"
 msgstr ""
 
@@ -257,6 +263,9 @@ msgid "Select"
 msgstr ""
 
 msgid "Create new suggestion and add selected resources"
+msgstr ""
+
+msgid "Create new suggestion"
 msgstr ""
 
 msgid "comment round"
@@ -321,7 +330,30 @@ msgstr ""
 msgid "Waiting for approval"
 msgstr ""
 
-msgid "This user does not have any roles in organizations."
+msgid ""
+"You have subscribed to be notified via email when the following resources change. To "
+"remove the subscription, click the icon next to the resource."
+msgstr ""
+
+msgid "Email notifications"
+msgstr ""
+
+msgid "Daily"
+msgstr ""
+
+msgid "Code list resources"
+msgstr ""
+
+msgid "Terminology resources"
+msgstr ""
+
+msgid "Datamodel resources"
+msgstr ""
+
+msgid "Comments resources"
+msgstr ""
+
+msgid "SUBSCRIPTIONS"
 msgstr ""
 
 msgid "INFO_TEXT_COMMENTROUND_USER"
@@ -629,6 +661,21 @@ msgstr ""
 
 msgid ""
 "You have not commented all resources. Are you sure you want to send partial comments?"
+msgstr ""
+
+msgid "ADD EMAIL SUBSCRIPTION TO RESOURCE REGARDING CHANGES?"
+msgstr ""
+
+msgid "REMOVE EMAIL SUBSCRIPTION TO RESOURCE?"
+msgstr ""
+
+msgid "ARE YOU SURE YOU WANT TO ENABLE THE NOTIFICATION EMAIL SUBSCRIPTION?"
+msgstr ""
+
+msgid "ARE YOU SURE YOU WANT TO DISABLE THE NOTIFICATION EMAIL SUBSCRIPTION?"
+msgstr ""
+
+msgid "Adding subscription failed."
 msgstr ""
 
 msgid "invalidDate"

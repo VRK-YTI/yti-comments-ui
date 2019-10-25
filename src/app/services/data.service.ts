@@ -9,11 +9,11 @@ import {
   CommentThreadSimpleType,
   CommentThreadType,
   CommentType,
-  IntegrationResourceType,
+  IntegrationResourceType, MessagingUserType, OrganizationType,
   SourceType
 } from './api-schema';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/internal/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/internal/operators';
 import { ServiceConfiguration } from '../entity/service-configuration';
 import { CommentThread } from '../entity/commentthread';
 import { UserRequest } from '../entity/userrequest';
@@ -24,6 +24,10 @@ import { CommentSimple } from '../entity/comment-simple';
 import { Source } from '../entity/source';
 import { IntegrationRequest } from '../entity/integration-request';
 import { AuthorizationManager } from './authorization-manager';
+import { SubscriptionRequest } from '../entity/subscription-request';
+import { MessagingUser } from '../entity/messaging-user';
+import { SubscriptionTypeRequest } from '../entity/subscription-type-request';
+import { Organization } from '../entity/organization';
 
 const apiContext = 'comments-api';
 const api = 'api';
@@ -40,10 +44,18 @@ const fakeableUsers = 'fakeableUsers';
 const groupmanagement = 'groupmanagement';
 const request = 'request';
 const requests = 'requests';
+const messaging = 'messaging';
+const user = 'user';
+const subscriptions = 'subscriptions';
+const subscriptiontype = 'subscriptiontype';
 
 const codelist = 'codelist';
 const terminology = 'terminology';
 const datamodel = 'datamodel';
+
+const ACTION_GET = 'GET';
+const ACTION_ADD = 'ADD';
+const ACTION_DELETE = 'DELETE';
 
 const baseApiPath = `/${apiContext}/${api}/${version}`;
 const commentRoundsApiPath = `${baseApiPath}/${commentRounds}`;
@@ -56,6 +68,7 @@ const terminologyBasePath = `${baseApiPath}/${terminology}`;
 const datamodelBasePath = `${baseApiPath}/${datamodel}`;
 const groupManagementRequestBasePath = `${baseApiPath}/${groupmanagement}/${request}`;
 const groupManagementRequestsBasePath = `${baseApiPath}/${groupmanagement}/${requests}`;
+const messagingBasePath = `${baseApiPath}/${messaging}`;
 
 interface FakeableUser {
   email: string;
@@ -368,20 +381,20 @@ export class DataService {
       `${commentRoundsApiPath}/${commentRoundId}/${commentThreads}/${commentThreadId}/${comments}/${commentId}/delete`);
   }
 
-  getOrganizations(): Observable<OrganizationSimple[]> {
+  getOrganizations(): Observable<Organization[]> {
 
-    return this.http.get<WithResults<OrganizationSimple>>(organizationsBasePath)
-      .pipe(map(res => res.results.map(data => new OrganizationSimple(data))));
+    return this.http.get<WithResults<OrganizationType>>(organizationsBasePath)
+      .pipe(map(res => res.results.map(data => new Organization(data))));
   }
 
-  getOrganizationsWithCommentRounds(): Observable<OrganizationSimple[]> {
+  getOrganizationsWithCommentRounds(): Observable<Organization[]> {
 
     const params = new HttpParams()
       .set('expand', 'commentRound')
       .set('hasCommentRounds', 'true');
 
-    return this.http.get<WithResults<OrganizationSimple>>(organizationsBasePath, { params: params })
-      .pipe(map(res => res.results.map(data => new OrganizationSimple(data))));
+    return this.http.get<WithResults<OrganizationType>>(organizationsBasePath, { params: params })
+      .pipe(map(res => res.results.map(data => new Organization(data))));
   }
 
   getUserRequests(): Observable<UserRequest[]> {
@@ -422,6 +435,9 @@ export class DataService {
     integrationRequest.pageFrom = from;
     integrationRequest.language = language;
     integrationRequest.includeIncomplete = true;
+    if (containerType === 'codelist') {
+      integrationRequest.type = 'code';
+    }
     if (searchTerm) {
       integrationRequest.searchTerm = searchTerm;
     }
@@ -438,5 +454,51 @@ export class DataService {
       { responseType: 'json' })
       .pipe(map(res => res.results.map((data: IntegrationResourceType) => new IntegrationResource(data))));
     return fetchResult.toPromise();
+  }
+
+  subscriptionRequest(resourceUri: string, type: string | undefined, action: string): Observable<boolean> {
+
+    const subscriptionRequest: SubscriptionRequest = new SubscriptionRequest();
+    subscriptionRequest.uri = resourceUri;
+    if (type) {
+      subscriptionRequest.type = type;
+    }
+    subscriptionRequest.action = action;
+
+    return this.http.post(`${messagingBasePath}/${subscriptions}/`, subscriptionRequest, { observe: 'response' })
+      .pipe(
+        map(res => res.status === 200),
+        catchError(err => of(false))
+      );
+  }
+
+  getSubscription(resourceUri: string): Observable<boolean> {
+
+    return this.subscriptionRequest(resourceUri, undefined, ACTION_GET);
+  }
+
+  addSubscription(resourceUri: string, type: string): Observable<boolean> {
+
+    return this.subscriptionRequest(resourceUri, type, ACTION_ADD);
+  }
+
+  deleteSubscription(resourceUri: string): Observable<boolean> {
+
+    return this.subscriptionRequest(resourceUri, undefined, ACTION_DELETE);
+  }
+
+  getMessagingUserData(): Observable<MessagingUser> {
+
+    return this.http.get<MessagingUserType>(`${messagingBasePath}/${user}`)
+      .pipe(map(res => new MessagingUser(res)));
+  }
+
+  setSubscriptionType(subscriptionType: string): Observable<MessagingUser> {
+
+    const subscriptionTypeRequest: SubscriptionTypeRequest = new SubscriptionTypeRequest();
+    subscriptionTypeRequest.subscriptionType = subscriptionType;
+
+    return this.http.post<MessagingUserType>(`${messagingBasePath}/${user}/${subscriptiontype}`, subscriptionTypeRequest)
+      .pipe(map(res => new MessagingUser(res)));
   }
 }

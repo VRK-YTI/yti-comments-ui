@@ -14,7 +14,7 @@ import { CommentThreadSimple } from '../../entity/commentthread-simple';
 import { Comment } from '../../entity/comment';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { CommentsConfirmationModalService } from '../common/confirmation-modal.service';
-import { CommentRoundErrorModalService } from '../common/error-modal.service';
+import { CommentsErrorModalService } from '../common/error-modal.service';
 import { comparingLocalizable, comparingPrimitive } from 'yti-common-ui/utils/comparator';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { hasLocalization } from 'yti-common-ui/utils/localization';
@@ -51,7 +51,7 @@ export class CommentRoundCommentsComponent implements OnInit, OnDestroy, OnChang
               private dataService: DataService,
               private editableService: EditableService,
               private confirmationModalService: CommentsConfirmationModalService,
-              private errorModalService: CommentRoundErrorModalService) {
+              private errorModalService: CommentsErrorModalService) {
 
     this.cancelSubscription = editableService.cancel$.subscribe(() => this.reset());
   }

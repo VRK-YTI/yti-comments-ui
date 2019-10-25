@@ -140,7 +140,7 @@
               <span>-</span>
             </td>
           </tr>
-          <tr *ngIf="showCommentsId == i">
+          <tr *ngIf="enableShowComments(commentRound.id, commentThread.value.id, i)">
             <td colspan="8">
               <div class="comments col-md-12">
                 <div class="row">
@@ -160,10 +160,16 @@
                   </div>
                   <div class="h4 comment-icons col-md-6 float-right">
                     <div>
-                      <a class="action-button"><i id="close_commentthread_{{i}}_comments_button" class="fa fa-times"
-                                                  (click)="toggleShowThreadComments(commentRound.id, commentThread.value.id, i)"></i></a>
-                      <a class="action-button"><i id="refresh_commentthread_{{i}}_comments_button" class="fa fa-undo icon-blue"
-                                                  (click)="refreshComments(commentThread.value.id)"></i></a>
+                      <a class="action-button">
+                        <i id="close_commentthread_{{i}}_comments_button"
+                           class="fa fa-times"
+                           (click)="toggleShowThreadComments(commentRound.id, commentThread.value.id, i)"></i>
+                      </a>
+                      <a class="action-button">
+                        <i id="refresh_commentthread_{{i}}_comments_button"
+                           class="fa fa-undo icon-blue"
+                           (click)="refreshComments(commentThread.value.id)"></i>
+                      </a>
                     </div>
                   </div>
                 </div>

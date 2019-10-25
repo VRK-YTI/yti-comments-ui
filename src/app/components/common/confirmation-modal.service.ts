@@ -35,4 +35,20 @@ export class CommentsConfirmationModalService {
     return this.confirmationModalService.open('SEND COMMENTS?',
       '', 'You have not commented all resources. Are you sure you want to send partial comments?');
   }
+
+  openAddSubscription() {
+    return this.confirmationModalService.open('ADD EMAIL SUBSCRIPTION TO RESOURCE REGARDING CHANGES?', undefined, '');
+  }
+
+  openRemoveSubscription() {
+    return this.confirmationModalService.open('REMOVE EMAIL SUBSCRIPTION TO RESOURCE?', undefined, '');
+  }
+
+  openToggleNotifications(enable: boolean) {
+    if (enable) {
+      return this.confirmationModalService.open('ARE YOU SURE YOU WANT TO ENABLE THE NOTIFICATION EMAIL SUBSCRIPTION?', undefined, '');
+    } else {
+      return this.confirmationModalService.open('ARE YOU SURE YOU WANT TO DISABLE THE NOTIFICATION EMAIL SUBSCRIPTION?', undefined, '');
+    }
+  }
 }

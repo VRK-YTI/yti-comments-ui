@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable, OnDestroy } from '@angular/core';
 import { UserService } from 'yti-common-ui/services/user.service';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { CommentRoundErrorModalService } from '../components/common/error-modal.service';
+import { CommentsErrorModalService } from '../components/common/error-modal.service';
 import { isModalClose } from 'yti-common-ui/utils/modal';
 
 export interface EditingComponent {
@@ -22,7 +22,7 @@ export class EditableService implements OnDestroy {
 
   private loggedInSubscription: Subscription;
 
-  constructor(private errorModalService: CommentRoundErrorModalService,
+  constructor(private errorModalService: CommentsErrorModalService,
               userService: UserService) {
 
     this.loggedInSubscription = userService.loggedIn$.subscribe(loggedIn => {

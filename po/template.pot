@@ -85,16 +85,16 @@ msgstr ""
 msgid "All statuses"
 msgstr ""
 
-msgid "Select resource"
-msgstr ""
-
-msgid "HELP_TEXT_COMMENTTHREAD_RESOURCE_MODAL_INSTRUCTION"
-msgstr ""
-
 msgid "Select source"
 msgstr ""
 
 msgid "HELP_TEXT_COMMENTROUND_SOURCE_MODAL_INSTRUCTION"
+msgstr ""
+
+msgid "Select resource"
+msgstr ""
+
+msgid "HELP_TEXT_COMMENTTHREAD_RESOURCE_MODAL_INSTRUCTION"
 msgstr ""
 
 msgid "All organizations"
@@ -202,7 +202,16 @@ msgstr ""
 msgid "There are no resources to comment."
 msgstr ""
 
+msgid "You will receive an email notification when this resource changes."
+msgstr ""
+
 msgid "Choose action"
+msgstr ""
+
+msgid "Add email subscription"
+msgstr ""
+
+msgid "Remove email subscription"
 msgstr ""
 
 msgid "Start comment round"
@@ -232,9 +241,6 @@ msgstr ""
 msgid "Please select tool to get container resources for commenting."
 msgstr ""
 
-msgid "Create new suggestion"
-msgstr ""
-
 msgid "Resources"
 msgstr ""
 
@@ -242,6 +248,9 @@ msgid "Select"
 msgstr ""
 
 msgid "Create new suggestion and add selected resources"
+msgstr ""
+
+msgid "Create new suggestion"
 msgstr ""
 
 msgid "comment round"
@@ -301,7 +310,30 @@ msgstr ""
 msgid "Waiting for approval"
 msgstr ""
 
-msgid "This user does not have any roles in organizations."
+msgid ""
+"You have subscribed to be notified via email when the following resources "
+"change. To remove the subscription, click the icon next to the resource."
+msgstr ""
+
+msgid "Email notifications"
+msgstr ""
+
+msgid "Daily"
+msgstr ""
+
+msgid "Code list resources"
+msgstr ""
+
+msgid "Terminology resources"
+msgstr ""
+
+msgid "Datamodel resources"
+msgstr ""
+
+msgid "Comments resources"
+msgstr ""
+
+msgid "SUBSCRIPTIONS"
 msgstr ""
 
 msgid "INFO_TEXT_COMMENTROUND_USER"
@@ -606,6 +638,21 @@ msgstr ""
 msgid ""
 "You have not commented all resources. Are you sure you want to send partial "
 "comments?"
+msgstr ""
+
+msgid "ADD EMAIL SUBSCRIPTION TO RESOURCE REGARDING CHANGES?"
+msgstr ""
+
+msgid "REMOVE EMAIL SUBSCRIPTION TO RESOURCE?"
+msgstr ""
+
+msgid "ARE YOU SURE YOU WANT TO ENABLE THE NOTIFICATION EMAIL SUBSCRIPTION?"
+msgstr ""
+
+msgid "ARE YOU SURE YOU WANT TO DISABLE THE NOTIFICATION EMAIL SUBSCRIPTION?"
+msgstr ""
+
+msgid "Adding subscription failed."
 msgstr ""
 
 msgid "invalidDate"

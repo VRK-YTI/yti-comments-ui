@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
-export class CommentRoundErrorModalService {
+export class CommentsErrorModalService {
 
   constructor(private errorModalService: ErrorModalService) {
   }
@@ -24,5 +24,10 @@ export class CommentRoundErrorModalService {
     } else {
       this.errorModalService.openSubmitError(showDebug ? error : undefined);
     }
+  }
+
+  open(title: string, body: string, error?: any) {
+
+    this.errorModalService.open(title, body, error);
   }
 }

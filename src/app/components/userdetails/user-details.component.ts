@@ -1,109 +1,100 @@
-import { Component, OnDestroy } from '@angular/core';
-import { Role, UserService } from 'yti-common-ui/services/user.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { UserService } from 'yti-common-ui/services/user.service';
 import { Router } from '@angular/router';
-import { combineLatest, Subscription } from 'rxjs';
-import { index } from 'yti-common-ui/utils/array';
-import { comparingLocalizable } from 'yti-common-ui/utils/comparator';
-import { LanguageService } from '../../services/language.service';
 import { LocationService } from '../../services/location.service';
 import { DataService } from '../../services/data.service';
-import { OrganizationSimple } from '../../entity/organization-simple';
-
-interface UserOrganizationRoles {
-  organization?: OrganizationSimple;
-  roles: Role[];
-  requests: Role[];
-}
+import { NgbTabChangeEvent, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
+import { BehaviorSubject } from 'rxjs';
+import { MessagingResource } from '../../entity/messaging-resource';
 
 @Component({
   selector: 'app-user-details',
   styleUrls: ['./user-details.component.scss'],
   templateUrl: './user-details.component.html',
 })
-export class UserDetailsComponent implements OnDestroy {
+export class UserDetailsComponent implements OnInit {
 
-  private subscriptionToClean: Subscription[] = [];
+  @ViewChild('tabSet') tabSet: NgbTabset;
 
-  allOrganizations: OrganizationSimple[];
-  allOrganizationsById: Map<string, OrganizationSimple>;
-  selectedOrganization: OrganizationSimple | null = null;
-  requestsInOrganizations = new Map<string, Set<Role>>();
+  APPLICATION_CODELIST = 'codelist';
+  APPLICATION_TERMINOLOGY = 'terminology';
+  APPLICATION_DATAMODEL = 'datamodel';
+  APPLICATION_COMMENTS = 'comments';
+
+  loading = true;
+
+  messagingResources$ = new BehaviorSubject<Map<string, MessagingResource[]> | null>(null);
 
   constructor(private router: Router,
               private userService: UserService,
               private locationService: LocationService,
-              private dataService: DataService,
-              private languageService: LanguageService) {
-
-    this.subscriptionToClean.push(this.userService.loggedIn$.subscribe(loggedIn => {
-      if (!loggedIn) {
-        router.navigate(['/']);
-      }
-    }));
-
-    userService.updateLoggedInUser();
+              private dataService: DataService) {
 
     locationService.atUserDetails();
-
-    this.subscriptionToClean.push(
-      combineLatest(this.dataService.getOrganizations(), languageService.language$)
-        .subscribe(([organizations]) => {
-          organizations.sort(comparingLocalizable<OrganizationSimple>(languageService, org => org.prefLabel));
-          this.allOrganizations = organizations;
-          this.allOrganizationsById = index(organizations, org => org.id);
-        })
-    );
-
-    this.refreshRequests();
   }
 
-  ngOnDestroy() {
+  ngOnInit() {
 
-    this.subscriptionToClean.forEach(s => s.unsubscribe());
+    this.getUserSubscriptionData();
   }
 
-  get user() {
+  getUserSubscriptionData() {
 
-    return this.userService.user;
-  }
+    this.dataService.getMessagingUserData().subscribe(messagingUserData => {
+      this.loading = true;
+      const resources = new Map<string, MessagingResource[]>();
+      const codelistMessagingResources: MessagingResource[] = [];
+      const datamodelMessagingResources: MessagingResource[] = [];
+      const terminologyMessagingResources: MessagingResource[] = [];
+      const commentsMessagingResources: MessagingResource[] = [];
 
-  get loading() {
-
-    return this.allOrganizations == null || this.requestsInOrganizations == null;
-  }
-
-  get userOrganizations(): UserOrganizationRoles[] {
-
-    const organizationIds = new Set<string>([
-      ...Array.from(this.user.rolesInOrganizations.keys()),
-      ...Array.from(this.requestsInOrganizations.keys())
-    ]);
-
-    const result = Array.from(organizationIds.values()).map(organizationId => {
-      return {
-        organization: this.allOrganizationsById.get(organizationId),
-        roles: Array.from(this.user.getRoles(organizationId)),
-        requests: Array.from(this.requestsInOrganizations.get(organizationId) || [])
-      };
-    });
-
-    result.sort(comparingLocalizable<UserOrganizationRoles>(this.languageService, org =>
-      org.organization ? org.organization.prefLabel : {}));
-
-    return result;
-  }
-
-  refreshRequests() {
-
-    this.selectedOrganization = null;
-
-    this.dataService.getUserRequests().subscribe(userRequests => {
-
-      this.requestsInOrganizations.clear();
-
-      for (const userRequest of userRequests) {
-        this.requestsInOrganizations.set(userRequest.organizationId, new Set<Role>(userRequest.role));
+      messagingUserData.resources.forEach(resource => {
+        if (resource.application === this.APPLICATION_CODELIST) {
+          codelistMessagingResources.push(resource);
+        } else if (resource.application === this.APPLICATION_DATAMODEL) {
+          datamodelMessagingResources.push(resource);
+        } else if (resource.application === this.APPLICATION_TERMINOLOGY) {
+          terminologyMessagingResources.push(resource);
+        } else if (resource.application === this.APPLICATION_COMMENTS) {
+          commentsMessagingResources.push(resource);
+        }
+      });
+      if (codelistMessagingResources.length > 0) {
+        resources.set(this.APPLICATION_CODELIST, codelistMessagingResources);
+      }
+      if (datamodelMessagingResources.length > 0) {
+        resources.set(this.APPLICATION_DATAMODEL, datamodelMessagingResources);
+      }
+      if (terminologyMessagingResources.length > 0) {
+        resources.set(this.APPLICATION_TERMINOLOGY, terminologyMessagingResources);
+      }
+      if (commentsMessagingResources.length > 0) {
+        resources.set(this.APPLICATION_COMMENTS, commentsMessagingResources);
+      }
+      if (resources.size > 0) {
+        this.messagingResources = resources;
+        this.loading = false;
+      } else {
+        this.messagingResources = null;
+        this.loading = false;
       }
     });
+  }
+
+  onTabChange(event: NgbTabChangeEvent) {
+
+    if (event.nextId === 'user_details_info_tab') {
+      this.getUserSubscriptionData();
+    }
+  }
+
+  get messagingResources(): Map<string, MessagingResource[]> | null {
+
+    return this.messagingResources$.getValue();
+  }
+
+  set messagingResources(value: Map<string, MessagingResource[]> | null) {
+
+    this.messagingResources$.next(value);
   }
 }
