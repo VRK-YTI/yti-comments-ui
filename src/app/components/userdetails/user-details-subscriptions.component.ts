@@ -41,8 +41,11 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
 
   getUserSubscriptionData() {
 
+    this.loading = true;
+
     this.dataService.getMessagingUserData().subscribe(messagingUserData => {
-      this.loading = true;
+      this.loading = false;
+
       const resources = new Map<string, MessagingResource[]>();
       const codelistMessagingResources: MessagingResource[] = [];
       const datamodelMessagingResources: MessagingResource[] = [];
@@ -74,10 +77,8 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
       }
       if (resources.size > 0) {
         this.messagingResources = resources;
-        this.loading = false;
       } else {
         this.messagingResources = null;
-        this.loading = false;
       }
     });
   }
