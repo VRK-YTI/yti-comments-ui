@@ -3,5 +3,10 @@
     "target": "https://kommentit.dev.yti.cloud.vrk.fi",
     "changeOrigin": true,
     "secure": false
+  },
+  "/messaging-api/*": {
+    "target": "https://kommentit.dev.yti.cloud.vrk.fi",
+    "changeOrigin": true,
+    "secure": false
   }
 }

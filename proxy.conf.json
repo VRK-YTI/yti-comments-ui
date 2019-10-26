@@ -2,5 +2,9 @@
   "/comments-api/*": {
     "target": "http://localhost:9701",
     "secure": false
+  },
+  "/messaging-api/*": {
+    "target": "http://localhost:9801",
+    "secure": false
   }
 }
