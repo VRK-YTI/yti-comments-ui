@@ -43,20 +43,12 @@ const containers = 'containers';
 const resources = 'resources';
 const fakeableUsers = 'fakeableUsers';
 const groupmanagement = 'groupmanagement';
-const request = 'request';
 const requests = 'requests';
 const messaging = 'messaging';
-const user = 'user';
-const subscriptions = 'subscriptions';
-const subscriptiontype = 'subscriptiontype';
 
 const codelist = 'codelist';
 const terminology = 'terminology';
 const datamodel = 'datamodel';
-
-const ACTION_GET = 'GET';
-const ACTION_ADD = 'ADD';
-const ACTION_DELETE = 'DELETE';
 
 const baseApiPath = `/${apiContext}/${api}/${version}`;
 const commentRoundsApiPath = `${baseApiPath}/${commentRounds}`;
@@ -67,9 +59,19 @@ const organizationsBasePath = `${baseApiPath}/${organizations}`;
 const codelistBasePath = `${baseApiPath}/${codelist}`;
 const terminologyBasePath = `${baseApiPath}/${terminology}`;
 const datamodelBasePath = `${baseApiPath}/${datamodel}`;
-const groupManagementRequestBasePath = `${baseApiPath}/${groupmanagement}/${request}`;
 const groupManagementRequestsBasePath = `${baseApiPath}/${groupmanagement}/${requests}`;
-const messagingBasePath = `${baseApiPath}/${messaging}`;
+
+const ACTION_GET = 'GET';
+const ACTION_ADD = 'ADD';
+const ACTION_DELETE = 'DELETE';
+const user = 'user';
+const subscriptions = 'subscriptions';
+const subscriptiontype = 'subscriptiontype';
+const messagingApiContext = 'messaging-api';
+const messagingBaseApiPath = `/${messagingApiContext}/${api}/${version}`;
+// Constants for either application proxy messaging or direct access
+const messagingProxyBasePath = `${baseApiPath}/${messaging}`;
+const messagingApiBasePath = `${messagingBaseApiPath}`;
 
 interface FakeableUser {
   email: string;
@@ -466,7 +468,7 @@ export class DataService {
     }
     subscriptionRequest.action = action;
 
-    return this.http.post(`${messagingBasePath}/${subscriptions}/`, subscriptionRequest, { observe: 'response' })
+    return this.http.post(`${messagingApiBasePath}/${subscriptions}/`, subscriptionRequest, { observe: 'response' })
       .pipe(
         map(res => res.status === 200),
         catchError(err => of(false))
@@ -490,7 +492,7 @@ export class DataService {
 
   getMessagingUserData(): Observable<MessagingUser | undefined> {
 
-    return this.http.get<MessagingUserType>(`${messagingBasePath}/${user}`)
+    return this.http.get<MessagingUserType>(`${messagingApiBasePath}/${user}`)
       .pipe(map(res => new MessagingUser(res)),
         catchError(err => of(undefined)));
   }
@@ -500,7 +502,7 @@ export class DataService {
     const subscriptionTypeRequest: SubscriptionTypeRequest = new SubscriptionTypeRequest();
     subscriptionTypeRequest.subscriptionType = subscriptionType;
 
-    return this.http.post<MessagingUserType>(`${messagingBasePath}/${user}/${subscriptiontype}`, subscriptionTypeRequest)
+    return this.http.post<MessagingUserType>(`${messagingApiBasePath}/${user}/${subscriptiontype}`, subscriptionTypeRequest)
       .pipe(map(res => new MessagingUser(res)));
   }
 }
