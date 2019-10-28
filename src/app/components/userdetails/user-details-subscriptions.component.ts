@@ -133,7 +133,7 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
       }, ignoreModalClose);
   }
 
-  isSubscriptionEnabled(): boolean {
+  get isSubscriptionEnabled(): boolean {
 
     return this.subscriptionType !== 'DISABLED';
   }
