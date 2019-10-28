@@ -37,8 +37,10 @@ export class UserDetailsComponent implements OnInit {
 
   ngOnInit() {
 
-    if (this.isMessagingEnabled) {
+    if (this.configurationService.isMessagingEnabled && !this.userService.user.anonymous) {
       this.getUserSubscriptionData();
+    } else {
+      this.loading = false;
     }
   }
 

@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CommentsErrorModalService } from '../common/error-modal.service';
 import { MessagingResource } from '../../entities-messaging/messaging-resource';
 import { MessagingService } from '../../services/messaging-service';
+import { UserService } from 'yti-common-ui/services/user.service';
 
 @Component({
   selector: 'app-user-details-subscriptions',
@@ -30,13 +31,18 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
   constructor(public languageService: LanguageService,
               private messagingService: MessagingService,
               private configurationService: ConfigurationService,
+              private userService: UserService,
               private confirmationModalService: CommentsConfirmationModalService,
               private errorModalService: CommentsErrorModalService) {
   }
 
   ngOnInit() {
 
-    this.getUserSubscriptionData();
+    if (this.configurationService.isMessagingEnabled && !this.userService.user.anonymous) {
+      this.getUserSubscriptionData();
+    } else {
+      this.loading = false;
+    }
   }
 
   getUserSubscriptionData() {
