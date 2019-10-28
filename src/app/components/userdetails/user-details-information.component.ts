@@ -8,9 +8,10 @@ import { LanguageService } from '../../services/language.service';
 import { LocationService } from '../../services/location.service';
 import { DataService } from '../../services/data.service';
 import { Organization } from '../../entity/organization';
+import { OrganizationSimple } from '../../entity/organization-simple';
 
 interface UserOrganizationRoles {
-  organization?: Organization;
+  organization?: OrganizationSimple;
   roles: Role[];
   requests: Role[];
 }
@@ -23,9 +24,9 @@ export class UserDetailsInformationComponent implements OnDestroy {
 
   private subscriptionToClean: Subscription[] = [];
 
-  allOrganizations: Organization[];
-  allOrganizationsById: Map<string, Organization>;
-  selectedOrganization: Organization | null = null;
+  allOrganizations: OrganizationSimple[];
+  allOrganizationsById: Map<string, OrganizationSimple>;
+  selectedOrganization: OrganizationSimple | null = null;
   requestsInOrganizations = new Map<string, Set<Role>>();
 
   constructor(private router: Router,

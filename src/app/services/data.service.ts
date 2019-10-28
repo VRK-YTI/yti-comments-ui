@@ -11,7 +11,7 @@ import {
   CommentType,
   IntegrationResourceType,
   MessagingUserType,
-  OrganizationType,
+  OrganizationSimpleType,
   SourceType
 } from './api-schema';
 import { Observable, of } from 'rxjs';
@@ -28,7 +28,7 @@ import { AuthorizationManager } from './authorization-manager';
 import { SubscriptionRequest } from '../entity/subscription-request';
 import { MessagingUser } from '../entity/messaging-user';
 import { SubscriptionTypeRequest } from '../entity/subscription-type-request';
-import { Organization } from '../entity/organization';
+import { OrganizationSimple } from '../entity/organization-simple';
 
 const apiContext = 'comments-api';
 const api = 'api';
@@ -44,7 +44,6 @@ const resources = 'resources';
 const fakeableUsers = 'fakeableUsers';
 const groupmanagement = 'groupmanagement';
 const requests = 'requests';
-const messaging = 'messaging';
 
 const codelist = 'codelist';
 const terminology = 'terminology';
@@ -68,6 +67,7 @@ const user = 'user';
 const subscriptions = 'subscriptions';
 const subscriptiontype = 'subscriptiontype';
 const messagingApiContext = 'messaging-api';
+const messaging = 'messaging';
 const messagingBaseApiPath = `/${messagingApiContext}/${api}/${version}`;
 // Constants for either application proxy messaging or direct access
 const messagingProxyBasePath = `${baseApiPath}/${messaging}`;
@@ -384,20 +384,20 @@ export class DataService {
       `${commentRoundsApiPath}/${commentRoundId}/${commentThreads}/${commentThreadId}/${comments}/${commentId}/delete`);
   }
 
-  getOrganizations(): Observable<Organization[]> {
+  getOrganizations(): Observable<OrganizationSimple[]> {
 
-    return this.http.get<WithResults<OrganizationType>>(organizationsBasePath)
-      .pipe(map(res => res.results.map(data => new Organization(data))));
+    return this.http.get<WithResults<OrganizationSimpleType>>(organizationsBasePath)
+      .pipe(map(res => res.results.map(data => new OrganizationSimple(data))));
   }
 
-  getOrganizationsWithCommentRounds(): Observable<Organization[]> {
+  getOrganizationsWithCommentRounds(): Observable<OrganizationSimple[]> {
 
     const params = new HttpParams()
       .set('expand', 'commentRound')
       .set('hasCommentRounds', 'true');
 
-    return this.http.get<WithResults<OrganizationType>>(organizationsBasePath, { params: params })
-      .pipe(map(res => res.results.map(data => new Organization(data))));
+    return this.http.get<WithResults<OrganizationSimpleType>>(organizationsBasePath, { params: params })
+      .pipe(map(res => res.results.map(data => new OrganizationSimple(data))));
   }
 
   getUserRequests(): Observable<UserRequest[]> {
@@ -490,7 +490,7 @@ export class DataService {
     return this.subscriptionRequest(resourceUri, undefined, ACTION_DELETE);
   }
 
-  getMessagingUserData(): Observable<MessagingUser | undefined> {
+  getMessagingUserData(): Observable<MessagingUser | undefined> {
 
     return this.http.get<MessagingUserType>(`${messagingApiBasePath}/${user}`)
       .pipe(map(res => new MessagingUser(res)),
