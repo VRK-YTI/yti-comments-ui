@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Placement as NgbPlacement } from '@ng-bootstrap/ng-bootstrap';
-import { allCommentRoundStatuses, CommentRoundStatus } from '../../entity/comment-round-status';
+import { allCommentRoundStatuses, CommentRoundStatus } from '../../entities/comment-round-status';
 
 export type Placement = NgbPlacement;
 

@@ -1,4 +1,4 @@
-import { IntegrationResource } from '../entity/integration-resource';
+import { IntegrationResource } from '../entities/integration-resource';
 
 export class IntegrationResourceService {
 

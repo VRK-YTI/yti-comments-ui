@@ -1,7 +1,7 @@
 import { Component, Input, Optional, Self } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { EditableService } from '../../services/editable.service';
-import { CommentRoundStatus } from '../../entity/comment-round-status';
+import { CommentRoundStatus } from '../../entities/comment-round-status';
 
 @Component({
   selector: 'app-comment-round-status-input',

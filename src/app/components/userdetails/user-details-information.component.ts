@@ -7,8 +7,8 @@ import { comparingLocalizable } from 'yti-common-ui/utils/comparator';
 import { LanguageService } from '../../services/language.service';
 import { LocationService } from '../../services/location.service';
 import { DataService } from '../../services/data.service';
-import { Organization } from '../../entity/organization';
-import { OrganizationSimple } from '../../entity/organization-simple';
+import { Organization } from '../../entities/organization';
+import { OrganizationSimple } from '../../entities/organization-simple';
 
 interface UserOrganizationRoles {
   organization?: OrganizationSimple;

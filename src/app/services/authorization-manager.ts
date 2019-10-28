@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserService } from 'yti-common-ui/services/user.service';
-import { EditableEntity } from '../entity/editable-entity';
-import { CommentRound } from '../entity/commentround';
+import { EditableEntity } from '../entities/editable-entity';
+import { CommentRound } from '../entities/commentround';
 
 @Injectable()
 export class AuthorizationManager {

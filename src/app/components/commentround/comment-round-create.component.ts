@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
-import { CommentRoundStatus } from '../../entity/comment-round-status';
+import { CommentRoundStatus } from '../../entities/comment-round-status';
 import { Location } from '@angular/common';
 import { formatDate, validDateRange } from '../../utils/date';
 import { requiredList } from 'yti-common-ui/utils/validator';
@@ -10,11 +10,11 @@ import { DataService } from '../../services/data.service';
 import { EditableService } from '../../services/editable.service';
 import { LanguageService } from '../../services/language.service';
 import { LocationService } from '../../services/location.service';
-import { Organization } from '../../entity/organization';
+import { Organization } from '../../entities/organization';
 import { CommentRoundType, SourceType } from '../../services/api-schema';
 import { tap } from 'rxjs/operators';
 import { IntegrationResourceService } from '../../services/integrationresource.service';
-import { IntegrationResource } from '../../entity/integration-resource';
+import { IntegrationResource } from '../../entities/integration-resource';
 import { ConfigurationService } from '../../services/configuration.service';
 
 @Component({

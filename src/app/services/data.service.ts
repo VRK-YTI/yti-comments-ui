@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Comment } from '../entity/comment';
-import { CommentRound } from '../entity/commentround';
+import { Comment } from '../entities/comment';
+import { CommentRound } from '../entities/commentround';
 import {
   ApiResponseType,
   CommentRoundType,
@@ -10,25 +10,21 @@ import {
   CommentThreadType,
   CommentType,
   IntegrationResourceType,
-  MessagingUserType,
   OrganizationSimpleType,
   SourceType
 } from './api-schema';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/internal/operators';
-import { ServiceConfiguration } from '../entity/service-configuration';
-import { CommentThread } from '../entity/commentthread';
-import { UserRequest } from '../entity/userrequest';
-import { IntegrationResource } from '../entity/integration-resource';
-import { CommentThreadSimple } from '../entity/commentthread-simple';
-import { CommentSimple } from '../entity/comment-simple';
-import { Source } from '../entity/source';
-import { IntegrationRequest } from '../entity/integration-request';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/internal/operators';
+import { ServiceConfiguration } from '../entities/service-configuration';
+import { CommentThread } from '../entities/commentthread';
+import { UserRequest } from '../entities/userrequest';
+import { IntegrationResource } from '../entities/integration-resource';
+import { CommentThreadSimple } from '../entities/commentthread-simple';
+import { CommentSimple } from '../entities/comment-simple';
+import { Source } from '../entities/source';
+import { IntegrationRequest } from '../entities/integration-request';
 import { AuthorizationManager } from './authorization-manager';
-import { SubscriptionRequest } from '../entity/subscription-request';
-import { MessagingUser } from '../entity/messaging-user';
-import { SubscriptionTypeRequest } from '../entity/subscription-type-request';
-import { OrganizationSimple } from '../entity/organization-simple';
+import { OrganizationSimple } from '../entities/organization-simple';
 
 const apiContext = 'comments-api';
 const api = 'api';
@@ -59,19 +55,6 @@ const codelistBasePath = `${baseApiPath}/${codelist}`;
 const terminologyBasePath = `${baseApiPath}/${terminology}`;
 const datamodelBasePath = `${baseApiPath}/${datamodel}`;
 const groupManagementRequestsBasePath = `${baseApiPath}/${groupmanagement}/${requests}`;
-
-const ACTION_GET = 'GET';
-const ACTION_ADD = 'ADD';
-const ACTION_DELETE = 'DELETE';
-const user = 'user';
-const subscriptions = 'subscriptions';
-const subscriptiontype = 'subscriptiontype';
-const messagingApiContext = 'messaging-api';
-const messaging = 'messaging';
-const messagingBaseApiPath = `/${messagingApiContext}/${api}/${version}`;
-// Constants for either application proxy messaging or direct access
-const messagingProxyBasePath = `${baseApiPath}/${messaging}`;
-const messagingApiBasePath = `${messagingBaseApiPath}`;
 
 interface FakeableUser {
   email: string;
@@ -457,52 +440,5 @@ export class DataService {
       { responseType: 'json' })
       .pipe(map(res => res.results.map((data: IntegrationResourceType) => new IntegrationResource(data))));
     return fetchResult.toPromise();
-  }
-
-  subscriptionRequest(resourceUri: string, type: string | undefined, action: string): Observable<boolean> {
-
-    const subscriptionRequest: SubscriptionRequest = new SubscriptionRequest();
-    subscriptionRequest.uri = resourceUri;
-    if (type) {
-      subscriptionRequest.type = type;
-    }
-    subscriptionRequest.action = action;
-
-    return this.http.post(`${messagingApiBasePath}/${subscriptions}/`, subscriptionRequest, { observe: 'response' })
-      .pipe(
-        map(res => res.status === 200),
-        catchError(err => of(false))
-      );
-  }
-
-  getSubscription(resourceUri: string): Observable<boolean> {
-
-    return this.subscriptionRequest(resourceUri, undefined, ACTION_GET);
-  }
-
-  addSubscription(resourceUri: string, type: string): Observable<boolean> {
-
-    return this.subscriptionRequest(resourceUri, type, ACTION_ADD);
-  }
-
-  deleteSubscription(resourceUri: string): Observable<boolean> {
-
-    return this.subscriptionRequest(resourceUri, undefined, ACTION_DELETE);
-  }
-
-  getMessagingUserData(): Observable<MessagingUser | undefined> {
-
-    return this.http.get<MessagingUserType>(`${messagingApiBasePath}/${user}`)
-      .pipe(map(res => new MessagingUser(res)),
-        catchError(err => of(undefined)));
-  }
-
-  setSubscriptionType(subscriptionType: string): Observable<MessagingUser> {
-
-    const subscriptionTypeRequest: SubscriptionTypeRequest = new SubscriptionTypeRequest();
-    subscriptionTypeRequest.subscriptionType = subscriptionType;
-
-    return this.http.post<MessagingUserType>(`${messagingApiBasePath}/${user}/${subscriptiontype}`, subscriptionTypeRequest)
-      .pipe(map(res => new MessagingUser(res)));
   }
 }

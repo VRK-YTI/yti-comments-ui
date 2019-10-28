@@ -1,6 +1,5 @@
 import { Localizable, Localizer } from 'yti-common-ui/types/localization';
-import { MessagingResourceType } from '../services/api-schema';
-import { ConfigurationService } from '../services/configuration.service';
+import { MessagingResourceType } from '../services/messaging-api-schema';
 
 export class MessagingResource {
 
@@ -15,7 +14,6 @@ export class MessagingResource {
     this.type = data.type;
     this.prefLabel = data.prefLabel || {};
   }
-
 
   serialize(): MessagingResourceType {
     return {

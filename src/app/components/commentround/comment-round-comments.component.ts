@@ -6,19 +6,19 @@ import { ConfigurationService } from '../../services/configuration.service';
 import { AuthorizationManager } from '../../services/authorization-manager';
 import { DataService } from '../../services/data.service';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CommentRound } from '../../entity/commentround';
+import { CommentRound } from '../../entities/commentround';
 import { Moment } from 'moment';
 import { formatDisplayDateTime } from '../../utils/date';
 import { CommentThreadType, CommentType } from '../../services/api-schema';
-import { CommentThreadSimple } from '../../entity/commentthread-simple';
-import { Comment } from '../../entity/comment';
+import { CommentThreadSimple } from '../../entities/commentthread-simple';
+import { Comment } from '../../entities/comment';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { CommentsConfirmationModalService } from '../common/confirmation-modal.service';
 import { CommentsErrorModalService } from '../common/error-modal.service';
 import { comparingLocalizable, comparingPrimitive } from 'yti-common-ui/utils/comparator';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { hasLocalization } from 'yti-common-ui/utils/localization';
-import { CommentThread } from '../../entity/commentthread';
+import { CommentThread } from '../../entities/commentthread';
 
 @Component({
   selector: 'app-comment-round-comments',

@@ -6,9 +6,9 @@ import { LanguageService } from '../../services/language.service';
 import { contains } from 'yti-common-ui/utils/array';
 import { ModalService } from '../../services/modal.service';
 import { DataService } from '../../services/data.service';
-import { CommentSimple } from '../../entity/comment-simple';
-import { CommentThread } from '../../entity/commentthread';
-import { CommentRound } from '../../entity/commentround';
+import { CommentSimple } from '../../entities/comment-simple';
+import { CommentThread } from '../../entities/commentthread';
+import { CommentRound } from '../../entities/commentround';
 
 @Component({
   selector: 'app-search-linked-comment-modal',

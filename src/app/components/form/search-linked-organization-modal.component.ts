@@ -5,8 +5,8 @@ import { LanguageService } from '../../services/language.service';
 import { contains } from 'yti-common-ui/utils/array';
 import { ModalService } from '../../services/modal.service';
 import { debounceTime, map, skip, take, tap } from 'rxjs/operators';
-import { OrganizationSimple } from '../../entity/organization-simple';
-import { Organization } from '../../entity/organization';
+import { OrganizationSimple } from '../../entities/organization-simple';
+import { Organization } from '../../entities/organization';
 import { comparingLocalizable } from 'yti-common-ui/utils/comparator';
 
 @Component({

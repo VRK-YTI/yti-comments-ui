@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
-import { ServiceConfiguration } from '../entity/service-configuration';
+import { ServiceConfiguration } from '../entities/service-configuration';
 
 @Injectable({
   providedIn: 'root',

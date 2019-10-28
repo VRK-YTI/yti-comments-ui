@@ -83,6 +83,7 @@ import {
 } from './components/form/search-linked-integration-container-modal.component';
 import { UserDetailsSubscriptionsComponent } from './components/userdetails/user-details-subscriptions.component';
 import { UserDetailsInformationComponent } from './components/userdetails/user-details-information.component';
+import { MessagingService } from './services/messaging-service';
 
 declare var require: any;
 
@@ -242,6 +243,7 @@ const appRoutes: Routes = [
     LocationService,
     AuthorizationManager,
     DataService,
+    MessagingService,
     IntegrationResourceService,
     CommentsConfirmationModalService,
     ModalService,

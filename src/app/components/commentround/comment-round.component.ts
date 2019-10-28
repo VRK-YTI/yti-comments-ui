@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommentRound } from '../../entity/commentround';
-import { Comment } from '../../entity/comment';
+import { CommentRound } from '../../entities/commentround';
+import { Comment } from '../../entities/comment';
 import { DataService } from '../../services/data.service';
 import { Location } from '@angular/common';
 import { LocationService } from '../../services/location.service';
@@ -13,8 +13,9 @@ import { ConfigurationService } from '../../services/configuration.service';
 import { NgbTabChangeEvent, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { CommentsErrorModalService } from '../common/error-modal.service';
 import { EditableService } from '../../services/editable.service';
-import { CommentThreadSimple } from '../../entity/commentthread-simple';
+import { CommentThreadSimple } from '../../entities/commentthread-simple';
 import { UserService } from 'yti-common-ui/services/user.service';
+import { MessagingService } from '../../services/messaging-service';
 
 @Component({
   selector: 'app-commentround',
@@ -38,6 +39,7 @@ export class CommentRoundComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private dataService: DataService,
+              private messagingService: MessagingService,
               private locationService: LocationService,
               private location: Location,
               private authorizationManager: AuthorizationManager,
@@ -202,7 +204,7 @@ export class CommentRoundComponent implements OnInit {
   checkSubscription() {
 
     if (!this.isAnonymous) {
-      this.dataService.getSubscription(this.commentRound.id).subscribe(resource => {
+      this.messagingService.getSubscription(this.commentRound.id).subscribe(resource => {
         if (resource) {
           this.hasSubscription = true;
         } else {
@@ -216,7 +218,7 @@ export class CommentRoundComponent implements OnInit {
 
     this.confirmationModalService.openAddSubscription()
       .then(() => {
-        this.dataService.addSubscription(this.commentRound.id, 'commentround').subscribe(success => {
+        this.messagingService.addSubscription(this.commentRound.id, 'commentround').subscribe(success => {
           if (success) {
             this.hasSubscription = true;
           } else {
@@ -231,7 +233,7 @@ export class CommentRoundComponent implements OnInit {
 
     this.confirmationModalService.openRemoveSubscription()
       .then(() => {
-        this.dataService.deleteSubscription(this.commentRound.id).subscribe(success => {
+        this.messagingService.deleteSubscription(this.commentRound.id).subscribe(success => {
           if (success) {
             this.hasSubscription = false;
           } else {

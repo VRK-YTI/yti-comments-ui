@@ -2,11 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from 'yti-common-ui/services/user.service';
 import { Router } from '@angular/router';
 import { LocationService } from '../../services/location.service';
-import { DataService } from '../../services/data.service';
 import { NgbTabChangeEvent, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject } from 'rxjs';
-import { MessagingResource } from '../../entity/messaging-resource';
-import { error } from '@angular/compiler/src/util';
+import { MessagingResource } from '../../entities-messaging/messaging-resource';
+import { MessagingService } from '../../services/messaging-service';
 
 @Component({
   selector: 'app-user-details',
@@ -29,7 +28,7 @@ export class UserDetailsComponent implements OnInit {
   constructor(private router: Router,
               private userService: UserService,
               private locationService: LocationService,
-              private dataService: DataService) {
+              private messagingService: MessagingService) {
 
     locationService.atUserDetails();
   }
@@ -43,7 +42,7 @@ export class UserDetailsComponent implements OnInit {
 
     this.loading = true;
 
-    this.dataService.getMessagingUserData().subscribe(messagingUserData => {
+    this.messagingService.getMessagingUserData().subscribe(messagingUserData => {
       this.loading = false;
 
       if (messagingUserData) {

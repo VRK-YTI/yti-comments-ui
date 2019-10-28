@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { LanguageService } from '../../services/language.service';
-import { CommentRound } from '../../entity/commentround';
+import { CommentRound } from '../../entities/commentround';
 import { formatDisplayDateRange } from '../../utils/date';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { TranslateService } from '@ngx-translate/core';

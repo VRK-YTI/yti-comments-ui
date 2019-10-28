@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { IntegrationResource } from '../../entity/integration-resource';
+import { IntegrationResource } from '../../entities/integration-resource';
 import { ConfigurationService } from '../../services/configuration.service';
 import { LanguageService } from '../../services/language.service';
 import { DataService } from '../../services/data.service';

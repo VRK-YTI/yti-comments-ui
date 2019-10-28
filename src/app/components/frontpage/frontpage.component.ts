@@ -1,23 +1,23 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
-import { CommentRound } from '../../entity/commentround';
+import { CommentRound } from '../../entities/commentround';
 import { LocationService } from '../../services/location.service';
 import { AuthorizationManager } from '../../services/authorization-manager';
 import { Router } from '@angular/router';
 import { BehaviorSubject, combineLatest, Subscription, concat } from 'rxjs';
-import { Organization } from '../../entity/organization';
+import { Organization } from '../../entities/organization';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
 import { TranslateService } from '@ngx-translate/core';
-import { allCommentRoundStatuses, CommentRoundStatus } from '../../entity/comment-round-status';
+import { allCommentRoundStatuses, CommentRoundStatus } from '../../entities/comment-round-status';
 import { comparingLocalizable, comparingPrimitive } from 'yti-common-ui/utils/comparator';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { LanguageService } from '../../services/language.service';
 import { Option } from 'yti-common-ui/components/dropdown.component';
-import { OrganizationSimple } from '../../entity/organization-simple';
+import { OrganizationSimple } from '../../entities/organization-simple';
 import { debounceTime, flatMap, map, skip, take, tap } from 'rxjs/operators';
 import { containerTypes } from '../common/containertypes';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
-import { IntegrationResource } from '../../entity/integration-resource';
+import { IntegrationResource } from '../../entities/integration-resource';
 import { IntegrationResourceService } from '../../services/integrationresource.service';
 import { SearchLinkedContainerModalService } from '../form/search-linked-integration-container-modal.component';
 

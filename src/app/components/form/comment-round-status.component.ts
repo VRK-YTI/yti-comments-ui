@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CommentRoundStatus } from '../../entity/comment-round-status';
+import { CommentRoundStatus } from '../../entities/comment-round-status';
 
 @Component({
   selector: 'app-commentround-status',

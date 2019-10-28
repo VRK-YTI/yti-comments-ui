@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { LanguageService } from '../../services/language.service';
-import { CommentSimple } from '../../entity/comment-simple';
+import { CommentSimple } from '../../entities/comment-simple';
 import { DataService } from '../../services/data.service';
 import { CommentThreadType, CommentType } from '../../services/api-schema';
 import { v4 as uuid } from 'uuid';
@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { CommentsConfirmationModalService } from './confirmation-modal.service';
 import { AuthorizationManager } from '../../services/authorization-manager';
-import { CommentRound } from '../../entity/commentround';
+import { CommentRound } from '../../entities/commentround';
 import { Moment } from 'moment';
 
 @Component({

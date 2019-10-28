@@ -5,10 +5,10 @@ import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { DataService } from '../../services/data.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../services/language.service';
-import { CommentThread } from '../../entity/commentthread';
-import { CommentSimple } from '../../entity/comment-simple';
+import { CommentThread } from '../../entities/commentthread';
+import { CommentSimple } from '../../entities/comment-simple';
 import { SearchLinkedCommentModalService } from './search-linked-comment-modal.component';
-import { CommentRound } from '../../entity/commentround';
+import { CommentRound } from '../../entities/commentround';
 
 function addToControl<T>(control: FormControl, item: T) {
 

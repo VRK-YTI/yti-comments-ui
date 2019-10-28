@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Placement as NgbPlacement } from '@ng-bootstrap/ng-bootstrap';
-import { ProposedStatus, selectableProposedStatuses } from '../../entity/proposed-status';
+import { ProposedStatus, selectableProposedStatuses } from '../../entities/proposed-status';
 import { EditableService } from '../../services/editable.service';
 
 export type Placement = NgbPlacement;

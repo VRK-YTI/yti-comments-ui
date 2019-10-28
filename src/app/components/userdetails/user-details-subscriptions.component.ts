@@ -2,12 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { LanguageService } from '../../services/language.service';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { CommentsConfirmationModalService } from '../common/confirmation-modal.service';
-import { DataService } from '../../services/data.service';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { ConfigurationService } from '../../services/configuration.service';
 import { BehaviorSubject } from 'rxjs';
 import { CommentsErrorModalService } from '../common/error-modal.service';
-import { MessagingResource } from '../../entity/messaging-resource';
+import { MessagingResource } from '../../entities-messaging/messaging-resource';
+import { MessagingService } from '../../services/messaging-service';
 
 @Component({
   selector: 'app-user-details-subscriptions',
@@ -28,7 +28,7 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
   APPLICATION_COMMENTS = 'comments';
 
   constructor(public languageService: LanguageService,
-              private dataService: DataService,
+              private messagingService: MessagingService,
               private configurationService: ConfigurationService,
               private confirmationModalService: CommentsConfirmationModalService,
               private errorModalService: CommentsErrorModalService) {
@@ -43,7 +43,7 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
 
     this.loading = true;
 
-    this.dataService.getMessagingUserData().subscribe(messagingUserData => {
+    this.messagingService.getMessagingUserData().subscribe(messagingUserData => {
       this.loading = false;
       if (messagingUserData) {
 
@@ -101,7 +101,7 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
 
     this.confirmationModalService.openRemoveSubscription()
       .then(() => {
-        this.dataService.deleteSubscription(resource.uri).subscribe(success => {
+        this.messagingService.deleteSubscription(resource.uri).subscribe(success => {
           if (success) {
             const messagingResources = this.messagingResources;
             if (messagingResources != null) {
@@ -138,7 +138,7 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
 
     this.confirmationModalService.openToggleNotifications(subscriptionTargetType === 'DAILY')
       .then(() => {
-        this.dataService.setSubscriptionType(subscriptionTargetType).subscribe(messagingUserData => {
+        this.messagingService.setSubscriptionType(subscriptionTargetType).subscribe(messagingUserData => {
           this.subscriptionType = messagingUserData.subscriptionType;
         });
       }, ignoreModalClose);
@@ -163,6 +163,5 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
       default:
         return this.getUriWithEnv(uri);
     }
-
   }
 }

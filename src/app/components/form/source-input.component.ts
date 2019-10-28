@@ -5,7 +5,7 @@ import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { DataService } from '../../services/data.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../services/language.service';
-import { IntegrationResource } from '../../entity/integration-resource';
+import { IntegrationResource } from '../../entities/integration-resource';
 import { SearchLinkedContainerModalService } from './search-linked-integration-container-modal.component';
 
 function addToControl<T>(control: FormControl, item: T) {
@@ -35,7 +35,7 @@ function removeFromControl<T>(control: FormControl) {
           <a class="removal-X">
             <i id="remove_resource_link"
                class="fa fa-times"
-               (click)="removeSource(resource)"></i>
+               (click)="removeSource()"></i>
           </a>
           <span>{{resource.getDisplayName(languageService, false)}}</span>
         </div>

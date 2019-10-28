@@ -5,7 +5,7 @@ import { LanguageService } from '../../services/language.service';
 import { ModalService } from '../../services/modal.service';
 import { DataService } from '../../services/data.service';
 import { debounceTime, skip, take, tap } from 'rxjs/operators';
-import { IntegrationResource } from '../../entity/integration-resource';
+import { IntegrationResource } from '../../entities/integration-resource';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
 import { TranslateService } from '@ngx-translate/core';
 import { allStatuses, Status } from 'yti-common-ui/entities/status';

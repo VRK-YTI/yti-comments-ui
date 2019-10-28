@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { EditableService } from '../../services/editable.service';
 import { NgForm } from '@angular/forms';
-import { EditableEntity } from '../../entity/editable-entity';
+import { EditableEntity } from '../../entities/editable-entity';
 import { AuthorizationManager } from '../../services/authorization-manager';
 
 @Component({
