@@ -31,6 +31,11 @@ export class ConfigurationService {
     return this.configuration.env;
   }
 
+  get isMessagingEnabled(): boolean {
+
+    return this.configuration.messagingConfig.enabled;
+  }
+
   get groupManagementUrl(): string {
 
     return this.configuration.groupManagementConfig.url;

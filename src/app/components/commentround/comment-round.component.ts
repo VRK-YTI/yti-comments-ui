@@ -203,7 +203,7 @@ export class CommentRoundComponent implements OnInit {
 
   checkSubscription() {
 
-    if (!this.isAnonymous) {
+    if (this.isMessagingEnabled && !this.isAnonymous) {
       this.messagingService.getSubscription(this.commentRound.id).subscribe(resource => {
         if (resource) {
           this.hasSubscription = true;
@@ -270,5 +270,10 @@ export class CommentRoundComponent implements OnInit {
       this.myComments = comments;
       this.goToResources();
     });
+  }
+
+  isMessagingEnabled(): boolean {
+
+    return this.configurationService.isMessagingEnabled;
   }
 }

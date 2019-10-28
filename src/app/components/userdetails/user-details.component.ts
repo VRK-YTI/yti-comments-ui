@@ -6,6 +6,7 @@ import { NgbTabChangeEvent, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject } from 'rxjs';
 import { MessagingResource } from '../../entities-messaging/messaging-resource';
 import { MessagingService } from '../../services/messaging-service';
+import { ConfigurationService } from '../../services/configuration.service';
 
 @Component({
   selector: 'app-user-details',
@@ -28,14 +29,17 @@ export class UserDetailsComponent implements OnInit {
   constructor(private router: Router,
               private userService: UserService,
               private locationService: LocationService,
-              private messagingService: MessagingService) {
+              private messagingService: MessagingService,
+              private configurationService: ConfigurationService) {
 
     locationService.atUserDetails();
   }
 
   ngOnInit() {
 
-    this.getUserSubscriptionData();
+    if (this.isMessagingEnabled) {
+      this.getUserSubscriptionData();
+    }
   }
 
   getUserSubscriptionData() {
@@ -101,5 +105,10 @@ export class UserDetailsComponent implements OnInit {
   set messagingResources(value: Map<string, MessagingResource[]> | null) {
 
     this.messagingResources$.next(value);
+  }
+
+  isMessagingEnabled(): boolean {
+
+    return this.configurationService.isMessagingEnabled;
   }
 }
