@@ -108,9 +108,4 @@ export class UserDetailsComponent implements OnInit {
 
     this.messagingResources$.next(value);
   }
-
-  isMessagingEnabled(): boolean {
-
-    return this.configurationService.isMessagingEnabled;
-  }
 }
