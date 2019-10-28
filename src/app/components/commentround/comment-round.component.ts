@@ -193,7 +193,7 @@ export class CommentRoundComponent implements OnInit {
 
   get showMenu(): boolean {
 
-    return this.isEditorOrSuperUser;
+    return this.isEditorOrSuperUser || this.canSubscribe;
   }
 
   get isAnonymous(): boolean {
@@ -212,6 +212,21 @@ export class CommentRoundComponent implements OnInit {
         }
       });
     }
+  }
+
+  get canSubscribe(): boolean {
+
+    return this.configurationService.isMessagingEnabled && !this.userService.user.anonymous;
+  }
+
+  get canAddSubscription(): boolean {
+
+    return this.canSubscribe && !!this.hasSubscription;
+  }
+
+  get canRemoveSubscription(): boolean {
+
+    return this.canSubscribe && this.hasSubscription === true;
   }
 
   addSubscription() {
