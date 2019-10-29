@@ -94,7 +94,6 @@ export class CommentRoundComponent implements OnInit {
 
   goToResources() {
 
-    console.log('Trying to activate resources tab');
     this.tabSet.activeId = 'commentround_resources_tab';
   }
 
