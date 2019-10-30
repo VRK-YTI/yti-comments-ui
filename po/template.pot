@@ -310,6 +310,9 @@ msgstr ""
 msgid "Waiting for approval"
 msgstr ""
 
+msgid "Send access request"
+msgstr ""
+
 msgid ""
 "You have subscribed to be notified via email when the following resources "
 "change. To remove the subscription, click the icon next to the resource."

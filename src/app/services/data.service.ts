@@ -39,6 +39,7 @@ const containers = 'containers';
 const resources = 'resources';
 const fakeableUsers = 'fakeableUsers';
 const groupmanagement = 'groupmanagement';
+const request = 'request';
 const requests = 'requests';
 
 const codelist = 'codelist';
@@ -54,6 +55,7 @@ const organizationsBasePath = `${baseApiPath}/${organizations}`;
 const codelistBasePath = `${baseApiPath}/${codelist}`;
 const terminologyBasePath = `${baseApiPath}/${terminology}`;
 const datamodelBasePath = `${baseApiPath}/${datamodel}`;
+const groupManagementRequestBasePath = `${baseApiPath}/${groupmanagement}/${request}`;
 const groupManagementRequestsBasePath = `${baseApiPath}/${groupmanagement}/${requests}`;
 
 interface FakeableUser {
@@ -383,12 +385,6 @@ export class DataService {
       .pipe(map(res => res.results.map(data => new OrganizationSimple(data))));
   }
 
-  getUserRequests(): Observable<UserRequest[]> {
-
-    return this.http.get<WithResults<UserRequest>>(`${groupManagementRequestsBasePath}/`)
-      .pipe(map(response => response.results));
-  }
-
   getContainers(containerType: string, language: string): Observable<IntegrationResource[]> {
 
     const integrationRequest = new IntegrationRequest();
@@ -440,5 +436,17 @@ export class DataService {
       { responseType: 'json' })
       .pipe(map(res => res.results.map((data: IntegrationResourceType) => new IntegrationResource(data))));
     return fetchResult.toPromise();
+  }
+
+  getUserRequests(): Observable<UserRequest[]> {
+
+    return this.http.get<WithResults<UserRequest>>(`${groupManagementRequestsBasePath}/`)
+      .pipe(map(response => response.results));
+  }
+
+
+  sendUserRequest(organizationId: string): Observable<any> {
+
+    return this.http.post(`${groupManagementRequestBasePath}/?organizationId=${organizationId}`, null);
   }
 }
