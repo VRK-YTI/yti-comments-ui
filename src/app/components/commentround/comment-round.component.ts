@@ -195,14 +195,9 @@ export class CommentRoundComponent implements OnInit {
     return this.isEditorOrSuperUser || this.canSubscribe;
   }
 
-  get isAnonymous(): boolean {
-
-    return this.userService.user.anonymous;
-  }
-
   checkSubscription() {
 
-    if (this.isMessagingEnabled && !this.isAnonymous) {
+    if (this.canSubscribe) {
       this.messagingService.getSubscription(this.commentRound.id).subscribe(resource => {
         if (resource) {
           this.hasSubscription = true;
@@ -215,7 +210,7 @@ export class CommentRoundComponent implements OnInit {
 
   get canSubscribe(): boolean {
 
-    return this.configurationService.isMessagingEnabled && !this.userService.user.anonymous;
+    return this.configurationService.isMessagingEnabled && this.userService.isLoggedIn();
   }
 
   get canAddSubscription(): boolean {

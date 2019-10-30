@@ -38,7 +38,7 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
 
   ngOnInit() {
 
-    if (this.configurationService.isMessagingEnabled && !this.userService.user.anonymous) {
+    if (this.canSubscribe) {
       this.getUserSubscriptionData();
     } else {
       this.loading = false;
@@ -91,6 +91,10 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
         this.messagingResources = null;
       }
     });
+  }
+
+  get canSubscribe(): boolean {
+    return this.configurationService.isMessagingEnabled && this.userService.isLoggedIn();
   }
 
   get messagingResources(): Map<string, MessagingResource[]> | null {
