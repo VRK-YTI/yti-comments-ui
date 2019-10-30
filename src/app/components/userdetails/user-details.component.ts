@@ -49,7 +49,6 @@ export class UserDetailsComponent implements OnInit {
     this.loading = true;
 
     this.messagingService.getMessagingUserData().subscribe(messagingUserData => {
-      this.loading = false;
 
       if (messagingUserData) {
         const resources = new Map<string, MessagingResource[]>();
@@ -89,6 +88,7 @@ export class UserDetailsComponent implements OnInit {
       } else {
         this.messagingResources = null;
       }
+      this.loading = false;
     });
   }
 
