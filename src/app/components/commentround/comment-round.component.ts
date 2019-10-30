@@ -220,7 +220,7 @@ export class CommentRoundComponent implements OnInit {
 
   get canAddSubscription(): boolean {
 
-    return this.canSubscribe && !!this.hasSubscription;
+    return this.canSubscribe && !this.hasSubscription;
   }
 
   get canRemoveSubscription(): boolean {
