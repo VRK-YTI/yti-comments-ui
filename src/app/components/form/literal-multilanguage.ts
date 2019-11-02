@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../services/language.service';
+import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
 
 @Component({
   selector: 'app-literal-multilanguage',
@@ -37,6 +38,7 @@ export class LiteralMultilanguageComponent {
   get valueLanguages(): string[] {
 
     const languages: string[] = Object.keys(this.value);
+    languages.sort(comparingPrimitive<string>(language => language));
     const sortedLanguages: string[] = [];
     if (languages.includes('fi')) {
       sortedLanguages.push('fi');
