@@ -142,8 +142,9 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
     return this.subscriptionType !== 'DISABLED';
   }
 
-  toggleSubscription() {
+  toggleSubscription(event: Event) {
 
+    event.preventDefault();
     const subscriptionTargetType = this.subscriptionType === 'DAILY' ? 'DISABLED' : 'DAILY';
 
     this.confirmationModalService.openToggleNotifications(subscriptionTargetType === 'DAILY')
