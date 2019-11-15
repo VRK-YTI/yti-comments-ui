@@ -51,10 +51,10 @@ export class CommentThread extends AbstractResource {
   get route(): any[] {
 
     return [
-      'commentthread',
+      'round',
       {
-        commentRoundId: this.commentRound.id,
-        commentThreadId: this.id
+        round: this.commentRound.sequenceId,
+        thread: this.sequenceId
       }
     ];
   }
@@ -77,6 +77,8 @@ export class CommentThread extends AbstractResource {
     return {
       id: this.id,
       url: this.url,
+      uri: this.uri,
+      sequenceId: this.sequenceId,
       user: this.user ? this.user.serialize() : undefined,
       resourceUri: this.resourceUri,
       description: this.description,

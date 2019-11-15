@@ -8,7 +8,7 @@ import { Title } from '@angular/platform-browser';
 
 const frontPage = { localizationKey: 'Front page', route: [''] };
 const informationAboutServicePage = { localizationKey: 'Information about the service', route: ['information'] };
-const createCommentRoundPage = { localizationKey: 'Create comment round', route: ['createcommentround'] };
+const createCommentRoundPage = { localizationKey: 'Create comment round', route: ['createround'] };
 
 @Injectable()
 export class LocationService implements OnDestroy {

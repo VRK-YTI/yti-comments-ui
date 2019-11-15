@@ -193,6 +193,9 @@ msgstr ""
 msgid "Commenting subject"
 msgstr ""
 
+msgid "URI"
+msgstr ""
+
 msgid "Created"
 msgstr ""
 

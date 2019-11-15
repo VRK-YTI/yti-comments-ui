@@ -49,8 +49,10 @@ export class CommentSimple extends AbstractResource {
   serialize(): CommentSimpleType {
     return {
       id: this.id,
-      user: this.user ? this.user.serialize() : undefined,
       url: this.url,
+      uri: this.uri,
+      sequenceId: this.sequenceId,
+      user: this.user ? this.user.serialize() : undefined,
       content: this.content,
       proposedStatus: this.proposedStatus,
       endStatus: this.endStatus,

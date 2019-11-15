@@ -119,7 +119,7 @@ export class FrontpageComponent implements OnInit, OnDestroy {
     this.integrationResourceService.addIntegrationResource(integrationResource);
 
     this.router.navigate([
-      'createcommentround',
+      'createround',
       {
         integrationResourceUri: integrationResource.uri
       }

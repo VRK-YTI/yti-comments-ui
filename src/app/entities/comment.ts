@@ -49,11 +49,11 @@ export class Comment extends AbstractResource {
 
     return [
       ...this.commentThread.location,
-      'comment',
+      'round',
       {
-        commentRoundId: this.commentThread.commentRound.id,
-        commentThreadId: this.commentThread.id,
-        commentId: this.id
+        round: this.commentThread.commentRound.sequenceId,
+        thread: this.commentThread.sequenceId,
+        comment: this.sequenceId
       }
     ];
   }
@@ -86,6 +86,8 @@ export class Comment extends AbstractResource {
     return {
       id: this.id,
       url: this.url,
+      uri: this.uri,
+      sequenceId: this.sequenceId,
       content: this.content,
       user: this.user ? this.user.serialize() : undefined,
       proposedStatus: this.proposedStatus,

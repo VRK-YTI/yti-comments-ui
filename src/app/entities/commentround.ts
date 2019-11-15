@@ -102,9 +102,9 @@ export class CommentRound extends AbstractResource implements EditableEntity {
   get route(): any[] {
 
     return [
-      'commentround',
+      'round',
       {
-        commentRoundId: this.id
+        round: this.sequenceId
       }
     ];
   }
@@ -114,6 +114,8 @@ export class CommentRound extends AbstractResource implements EditableEntity {
     return {
       id: this.id,
       url: this.url,
+      uri: this.uri,
+      sequenceId: this.sequenceId,
       user: this.user ? this.user.serialize() : undefined,
       status: this.status,
       created: formatDateTime(this.created),

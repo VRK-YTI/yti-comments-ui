@@ -149,8 +149,8 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
 const appRoutes: Routes = [
   { path: '', component: FrontpageComponent, pathMatch: 'full' },
   { path: 'frontpage', redirectTo: '/', pathMatch: 'full' },
-  { path: 'commentround', component: CommentRoundComponent, pathMatch: 'full' },
-  { path: 'createcommentround', component: CommentRoundCreateComponent, pathMatch: 'full' },
+  { path: 'round', component: CommentRoundComponent, pathMatch: 'full' },
+  { path: 'createround', component: CommentRoundCreateComponent, pathMatch: 'full' },
   { path: 'information', component: InformationAboutServiceComponent },
   { path: 'userdetails', component: UserDetailsComponent },
   { path: 'cleancookies', component: CookieCleanupComponent },

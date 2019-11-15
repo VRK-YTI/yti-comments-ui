@@ -174,4 +174,9 @@ export class CommentRoundInformationComponent implements OnInit, OnDestroy, OnCh
 
     return this.editableService.editing;
   }
+
+  getCommentRoundUri() {
+
+    return this.configurationService.getUriWithEnv(this.commentRound.uri);
+  }
 }

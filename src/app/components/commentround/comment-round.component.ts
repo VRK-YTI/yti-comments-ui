@@ -51,29 +51,30 @@ export class CommentRoundComponent implements OnInit {
 
   ngOnInit() {
 
-    const commentRoundId = this.route.snapshot.params.commentRoundId;
-    this.activeThreadId = this.route.snapshot.params.commentThreadId;
+    const commentRoundIdentifier = this.route.snapshot.params.round;
+    this.activeThreadId = this.route.snapshot.params.thread;
 
-    if (!commentRoundId) {
-      throw new Error(`Illegal route, commentRound: '${commentRoundId}'`);
+    if (!commentRoundIdentifier) {
+      throw new Error(`Illegal route, commentRound: '${commentRoundIdentifier}'`);
     }
 
-    this.dataService.getCommentRound(commentRoundId).subscribe(commentRound => {
+    this.dataService.getCommentRound(commentRoundIdentifier).subscribe(commentRound => {
       this.commentRound = commentRound;
       this.checkSubscription();
       this.locationService.atCommentRoundPage(commentRound);
     });
 
-    this.dataService.getCommentRoundCommenterComments(commentRoundId).subscribe(comments => {
+    this.dataService.getCommentRoundCommenterComments(commentRoundIdentifier).subscribe(comments => {
       this.myComments = comments;
     });
 
-    this.dataService.getCommentRoundCommentThreads(commentRoundId).subscribe(commentThreads => {
+    this.dataService.getCommentRoundCommentThreads(commentRoundIdentifier).subscribe(commentThreads => {
       this.commentThreads = commentThreads;
     });
   }
 
   getInitialTabId(): string {
+
     if (this.activeThreadId) {
       return 'commentround_resources_tab';
     }
@@ -198,7 +199,7 @@ export class CommentRoundComponent implements OnInit {
   checkSubscription() {
 
     if (this.canSubscribe) {
-      this.messagingService.getSubscription(this.commentRound.id).subscribe(resource => {
+      this.messagingService.getSubscription(this.commentRound.uri).subscribe(resource => {
         if (resource) {
           this.hasSubscription = true;
         } else {
@@ -227,7 +228,7 @@ export class CommentRoundComponent implements OnInit {
 
     this.confirmationModalService.openAddSubscription()
       .then(() => {
-        this.messagingService.addSubscription(this.commentRound.id, 'commentround').subscribe(success => {
+        this.messagingService.addSubscription(this.commentRound.uri, 'commentround').subscribe(success => {
           if (success) {
             this.hasSubscription = true;
           } else {
@@ -242,7 +243,7 @@ export class CommentRoundComponent implements OnInit {
 
     this.confirmationModalService.openRemoveSubscription()
       .then(() => {
-        this.messagingService.deleteSubscription(this.commentRound.id).subscribe(success => {
+        this.messagingService.deleteSubscription(this.commentRound.uri).subscribe(success => {
           if (success) {
             this.hasSubscription = false;
           } else {

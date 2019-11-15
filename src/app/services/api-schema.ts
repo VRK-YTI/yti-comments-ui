@@ -5,6 +5,8 @@ export interface BaseResourceType {
 
   id: string;
   url: string;
+  sequenceId: number;
+  uri: string;
 }
 
 export interface ApiResponseType {

@@ -58,6 +58,8 @@ export class CommentRoundSimple extends AbstractResource {
     return {
       id: this.id,
       url: this.url,
+      uri: this.uri,
+      sequenceId: this.sequenceId,
       user: this.user ? this.user.serialize() : undefined,
       status: this.status,
       created: formatDateTime(this.created),
