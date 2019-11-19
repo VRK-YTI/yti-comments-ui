@@ -412,7 +412,10 @@ export class DataService {
                     status: string | null, searchTerm: string | null, restrictedResourceUris: string[]): Promise<IntegrationResource[]> {
 
     const integrationRequest = new IntegrationRequest();
-    integrationRequest.container = uri;
+    if (uri) {
+      integrationRequest.container = [];
+      integrationRequest.container.push(uri);
+    }
     integrationRequest.pageSize = pageSize;
     integrationRequest.pageFrom = from;
     integrationRequest.language = language;

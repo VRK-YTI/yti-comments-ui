@@ -1,6 +1,6 @@
 export class IntegrationRequest {
 
-  container: string;
+  container: string[];
   pageFrom: number;
   pageSize: number;
   status: string[];
