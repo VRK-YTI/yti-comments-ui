@@ -447,6 +447,9 @@ msgstr ""
 msgid "INFO_TEXT_FRONTPAGE_SEARCH"
 msgstr ""
 
+msgid "INFO_TEXT_URI"
+msgstr ""
+
 msgid "Front page"
 msgstr ""
 
