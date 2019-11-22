@@ -40,6 +40,7 @@ export class CommentRoundCommentsComponent implements OnInit, OnDestroy, OnChang
 
   commenting$ = new BehaviorSubject<boolean>(false);
   sortOption = 'alphabetical';
+  commentedThreadIds: string[];
 
   commentThreadForm = new FormGroup({
     commentThreads: new FormArray([])
@@ -58,7 +59,17 @@ export class CommentRoundCommentsComponent implements OnInit, OnDestroy, OnChang
 
   ngOnInit() {
 
+    this.resolveCommentedThreadIds();
     this.reset();
+  }
+
+  resolveCommentedThreadIds() {
+    this.commentedThreadIds = [];
+    this.myComments.forEach(comment => {
+      if (comment.commentThread.id !== null) {
+        this.commentedThreadIds.push(comment.commentThread.id);
+      }
+    });
   }
 
   ngOnChanges(changes: { [property: string]: SimpleChange }) {
@@ -290,21 +301,6 @@ export class CommentRoundCommentsComponent implements OnInit, OnDestroy, OnChang
     return partialComments;
   }
 
-  getMyCommentForCommentThread(commentThreadId: string): string | null {
-
-    let myComment = null;
-    if (this.myComments) {
-      this.myComments.forEach(comment => {
-        if (comment.commentThread.id === commentThreadId) {
-          myComment = comment;
-        }
-      });
-    }
-    if (myComment == null) {
-    }
-    return myComment;
-  }
-
   canModifyCommentProposedStatus(): boolean {
 
     return this.authorizationManager.canCreateComment(this.commentRound) && this.commentRound.status === 'INPROGRESS';
@@ -312,11 +308,19 @@ export class CommentRoundCommentsComponent implements OnInit, OnDestroy, OnChang
 
   canModifyComment(commentThreadId: string): boolean {
 
-    return this.getMyCommentForCommentThread(commentThreadId) == null;
+    if (this.commentedThreadIds != null) {
+      for (const threadId of this.commentedThreadIds) {
+        if (threadId === commentThreadId) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
   sortContent(sortingType: string) {
 
+    console.log('sort debug');
     this.sortOption = sortingType;
     switch (sortingType) {
       case 'alphabetical':
