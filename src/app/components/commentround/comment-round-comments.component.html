@@ -82,7 +82,6 @@
           </td>
           <td style="width: 13%">
             <app-literal-textarea *ngIf="canModifyComment(commentThread.value.id)"
-                                  [required]=requireComments
                                   [showRequired]=false
                                   [isEditing]="commenting"
                                   [id]="'commentthread_proposed_text_input_' + i"

@@ -305,11 +305,6 @@ export class CommentRoundCommentsComponent implements OnInit, OnDestroy, OnChang
     return myComment;
   }
 
-  get requireComments(): boolean {
-
-    return this.commentRound.fixedThreads;
-  }
-
   canModifyCommentProposedStatus(): boolean {
 
     return this.authorizationManager.canCreateComment(this.commentRound) && this.commentRound.status === 'INPROGRESS';
