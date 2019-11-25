@@ -58,6 +58,7 @@ export class ConfigurationService {
 
   getUriWithEnv(uri: string): string | null {
 
+    uri = uri.replace('#', '%23');
     if (uri && this.env !== 'prod') {
       return uri + '?env=' + this.env;
     }
