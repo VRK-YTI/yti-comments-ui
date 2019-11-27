@@ -4,7 +4,7 @@ import { BehaviorSubject, combineLatest, concat, Observable } from 'rxjs';
 import { debounceTime, map, skip, take, tap } from 'rxjs/operators';
 import { LanguageService } from '../../services/language.service';
 import { contains } from 'yti-common-ui/utils/array';
-import { ModalService } from '../../services/modal.service';
+import { ModalService } from 'yti-common-ui/services/modal.service';
 import { DataService } from '../../services/data.service';
 import { CommentSimple } from '../../entities/comment-simple';
 import { CommentThread } from '../../entities/commentthread';

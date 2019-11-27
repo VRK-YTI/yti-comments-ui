@@ -16,7 +16,7 @@ import { LanguageService } from './services/language.service';
 import { AUTHENTICATED_USER_ENDPOINT } from 'yti-common-ui/services/user.service';
 import { LOCALIZER, YtiCommonModule } from 'yti-common-ui';
 import { InformationAboutServiceComponent } from './components/information/information-about-service.component';
-import { ModalService } from './services/modal.service';
+import { ModalService } from 'yti-common-ui/services/modal.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserDetailsComponent } from './components/userdetails/user-details.component';
