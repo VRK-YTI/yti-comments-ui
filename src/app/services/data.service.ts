@@ -10,8 +10,7 @@ import {
   CommentThreadType,
   CommentType,
   IntegrationResourceType,
-  OrganizationSimpleType,
-  SourceType
+  OrganizationSimpleType
 } from './api-schema';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/internal/operators';
@@ -21,7 +20,6 @@ import { UserRequest } from '../entities/userrequest';
 import { IntegrationResource } from '../entities/integration-resource';
 import { CommentThreadSimple } from '../entities/commentthread-simple';
 import { CommentSimple } from '../entities/comment-simple';
-import { Source } from '../entities/source';
 import { IntegrationRequest } from '../entities/integration-request';
 import { AuthorizationManager } from './authorization-manager';
 import { OrganizationSimple } from '../entities/organization-simple';
@@ -30,7 +28,6 @@ const apiContext = 'comments-api';
 const api = 'api';
 const version = 'v1';
 const system = 'system';
-const sources = 'sources';
 const commentRounds = 'commentrounds';
 const commentThreads = 'commentthreads';
 const config = 'config';
@@ -49,7 +46,6 @@ const datamodel = 'datamodel';
 
 const baseApiPath = `/${apiContext}/${api}/${version}`;
 const commentRoundsApiPath = `${baseApiPath}/${commentRounds}`;
-const sourcesApiPath = `${baseApiPath}/${sources}`;
 const fakeableUsersPath = `/${apiContext}/${api}/${fakeableUsers}`;
 const configurationPath = `${baseApiPath}/${system}/${config}`;
 const organizationsBasePath = `${baseApiPath}/${organizations}`;
@@ -199,45 +195,18 @@ export class DataService {
       }));
   }
 
-  getCommentRoundCommentThreadComments(commentRoundId: string, commentThreadId: string): Observable<CommentSimple[]> {
+  getCommentRoundCommentThreadComments(commentRoundSequenceId: number, commentThreadSequenceId: number): Observable<CommentSimple[]> {
 
-    return this.http.get(commentRoundsApiPath + '/' + commentRoundId + '/' + commentThreads + '/' + commentThreadId + '/' + comments,
+    return this.http.get(commentRoundsApiPath + '/' +
+      commentRoundSequenceId + '/' +
+      commentThreads + '/' +
+      commentThreadSequenceId + '/' +
+      comments,
       { responseType: 'json' })
       .pipe(map((res: any) => {
         return res.results.map(
           (data: CommentSimpleType) => new CommentSimple(data));
       }));
-  }
-
-  getCommentRoundCommentThreadComment(commentRoundId: string, commentThreadId: string, commentId: string): Observable<Comment> {
-
-    const params = new HttpParams()
-      .set('expand', 'commentThread,commentRound');
-
-    return this.http.get(
-      commentRoundsApiPath + '/' + commentRoundId + '/' + commentThreads + '/' + commentThreadId + '/' + comments + '/' + commentId,
-      { params: params, responseType: 'json' })
-      .pipe(map((res: any) => {
-        return new Comment(res as CommentType);
-      }));
-  }
-
-  createSource(sourceToCreate: SourceType): Observable<Source> {
-
-    return this.createSources([sourceToCreate]).pipe(map(createdSources => {
-      if (createdSources.length !== 1) {
-        throw new Error('Exactly one comment source needs to be created');
-      } else {
-        return createdSources[0];
-      }
-    }));
-  }
-
-  createSources(sourcesList: SourceType[]): Observable<Source[]> {
-
-    return this.http.post<WithResults<SourceType>>(`${sourcesApiPath}/`,
-      sourcesList)
-      .pipe(map(res => res.results.map(data => new Source(data))));
   }
 
   createCommentRound(commentRoundToCreate: CommentRoundType): Observable<CommentRound> {
