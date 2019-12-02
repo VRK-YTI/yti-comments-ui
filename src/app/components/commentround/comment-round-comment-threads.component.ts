@@ -39,7 +39,7 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
   @Input() myComments: Comment[];
   @Input() commentThreads: CommentThreadSimple[];
   @Input() tabSet: NgbTabset;
-  @Input() activeThreadId: string | undefined;
+  @Input() activeThreadSequenceId: number | undefined;
 
   @Output() changeTabControl = new EventEmitter<boolean>();
   @Output() refreshCommentThreads = new EventEmitter();
@@ -115,6 +115,7 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
     this.commentThreads.forEach(commentThread => {
       const commentThreadFormGroup: FormGroup = new FormGroup({
         id: new FormControl(commentThread.id),
+        sequenceId: new FormControl(commentThread.sequenceId),
         url: new FormControl(commentThread.url),
         resourceUri: new FormControl(commentThread.resourceUri),
         label: new FormControl(commentThread.label),
@@ -140,14 +141,14 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
     return this.commentRound == null || this.commentThreads == null || this.myComments == null;
   }
 
-  toggleShowThreadComments(commentRoundId: string, commentThreadId: string, index: number) {
+  toggleShowThreadComments(commentThreadSequenceId: number, index: number) {
 
     if (index === this.showCommentsId) {
       this.showCommentsId = undefined;
-      this.activeThreadId = undefined;
+      this.activeThreadSequenceId = undefined;
       this.activeThreadComments = [];
     } else {
-      this.loadCommentThreadComments(commentRoundId, commentThreadId, index);
+      this.loadCommentThreadComments(commentThreadSequenceId, index);
     }
   }
 
@@ -167,22 +168,25 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
     return this.newIds.indexOf(id) !== -1;
   }
 
-  enableShowComments(commentRoundId: string, commentThreadId: string, index: number): boolean | undefined {
+  enableShowComments(commentRoundSequenceId: number, commentThreadSequenceId: number, index: number): boolean | undefined {
+
+    const commentThreadSequenceIdNumber: number = commentThreadSequenceId;
     if (this.showCommentsId === index) {
       return true;
-    } else if (this.activeThreadId === commentThreadId) {
-      this.loadCommentThreadComments(commentRoundId, commentThreadId, index);
+    } else if (this.activeThreadSequenceId !== undefined && this.activeThreadSequenceId.toString() === commentThreadSequenceId.toString()) {
+      this.loadCommentThreadComments(commentThreadSequenceIdNumber, index);
       return undefined;
     } else {
       return false;
     }
   }
 
-  loadCommentThreadComments(commentRoundId: string, commentThreadId: string, index: number) {
-    this.dataService.getCommentRoundCommentThreadComments(this.commentRound.id, commentThreadId).subscribe(comments => {
+  loadCommentThreadComments(commentRoundSequenceId: number, index: number) {
+
+    this.dataService.getCommentRoundCommentThreadComments(this.commentRound.sequenceId, commentRoundSequenceId).subscribe(comments => {
       if (comments.length > 0) {
         this.showCommentsId = index;
-        this.activeThreadId = commentThreadId;
+        this.activeThreadSequenceId = commentRoundSequenceId;
         this.sortCommentsByCreated(comments);
         this.activeThreadComments = comments;
       }
@@ -207,10 +211,10 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
     return comments.filter(comment => comment.parentComment == null);
   }
 
-  refreshComments(commentThreadId: string) {
+  refreshComments(commentThreadSequenceId: number) {
 
-    this.dataService.getCommentRoundCommentThreadComments(this.commentRound.id, commentThreadId).subscribe(comments => {
-      this.updateCommentCountForCommentThread(commentThreadId, comments.length);
+    this.dataService.getCommentRoundCommentThreadComments(this.commentRound.sequenceId, commentThreadSequenceId).subscribe(comments => {
+      this.updateCommentCountForCommentThread(commentThreadSequenceId, comments.length);
       this.sortCommentsByCreated(comments);
       comments.forEach(comment => {
         this.activeThreadComments.forEach(c => {
@@ -275,10 +279,10 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
     });
   }
 
-  updateCommentCountForCommentThread(commentThreadId: string, count: number) {
+  updateCommentCountForCommentThread(commentThreadSequenceId: number, count: number) {
 
     this.commentThreadForms.controls.forEach(commentThread => {
-      if (commentThread.value.id === commentThreadId) {
+      if (commentThread.value.sequenceId === commentThreadSequenceId) {
         commentThread.value.commentCount = count;
       }
     });

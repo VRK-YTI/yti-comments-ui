@@ -31,7 +31,7 @@ export class CommentRoundComponent implements OnInit {
   commentThreads: CommentThreadSimple[];
   myComments: Comment[];
   blockTabChange: boolean;
-  activeThreadId: string | undefined = undefined;
+  activeThreadId: number | undefined = undefined;
   hasSubscription: boolean | undefined = undefined;
 
   constructor(public languageService: LanguageService,
