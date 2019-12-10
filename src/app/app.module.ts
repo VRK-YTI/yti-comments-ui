@@ -16,7 +16,7 @@ import { LanguageService } from './services/language.service';
 import { AUTHENTICATED_USER_ENDPOINT } from 'yti-common-ui/services/user.service';
 import { LOCALIZER, YtiCommonModule } from 'yti-common-ui';
 import { InformationAboutServiceComponent } from './components/information/information-about-service.component';
-import { ModalService } from './services/modal.service';
+import { ModalService } from 'yti-common-ui/services/modal.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserDetailsComponent } from './components/userdetails/user-details.component';
@@ -45,11 +45,6 @@ import { CommentRoundStatusDropdownComponent } from './components/form/comment-r
 import { CommentRoundListitemComponent } from './components/commentround/comment-round-listitem.component';
 import { BooleanInputComponent } from './components/form/boolean-input-component';
 import { LocalizableInputComponent } from './components/form/localizable-input';
-import { CommentInputComponent } from './components/form/parent-comment-input';
-import {
-  SearchLinkedCommentModalComponent,
-  SearchLinkedCommentModalService
-} from './components/form/search-linked-comment-modal.component';
 import { CommentRoundStatusComponent } from './components/form/comment-round-status.component';
 import { LiteralTextareaComponent } from './components/form/literal-textarea';
 import { LocalizableTextareaComponent } from './components/form/localizable-textarea';
@@ -196,8 +191,6 @@ const appRoutes: Routes = [
     CommentRoundListitemComponent,
     BooleanInputComponent,
     LocalizableInputComponent,
-    CommentInputComponent,
-    SearchLinkedCommentModalComponent,
     CommentRoundStatusComponent,
     LiteralTextareaComponent,
     CurrentStatusComponent,
@@ -213,8 +206,7 @@ const appRoutes: Routes = [
   entryComponents: [
     SearchLinkedContainerModalComponent,
     SearchLinkedIntegrationResourceMultiModalComponent,
-    SearchLinkedOrganizationModalComponent,
-    SearchLinkedCommentModalComponent
+    SearchLinkedOrganizationModalComponent
   ],
   imports: [
     YtiCommonModule,
@@ -250,7 +242,6 @@ const appRoutes: Routes = [
     SearchLinkedContainerModalService,
     SearchLinkedIntegrationResourceMultiModalService,
     SearchLinkedOrganizationModalService,
-    SearchLinkedCommentModalService,
     CommentsErrorModalService,
     CookieService
   ],

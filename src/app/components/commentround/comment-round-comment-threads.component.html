@@ -59,7 +59,7 @@
               <div *ngIf="commentThread.value.commentCount != null && commentThread.value.commentCount > 0">
                         <span id="view_commentthread_{{i}}_comments_button"
                               class="fa-stack fa-1x icon h5"
-                              (click)="toggleShowThreadComments(commentRound.id, commentThread.value.id, i)">
+                              (click)="toggleShowThreadComments(commentThread.value.sequenceId, i)">
                           <a><i class="fa icon-bubble fa-stack-2x icon-blue comment-icons"></i></a>
                           <span class="fa fa-stack-1x comment-count h6">{{commentThread.value.commentCount}}</span>
                         </span>
@@ -140,7 +140,7 @@
               <span>-</span>
             </td>
           </tr>
-          <tr *ngIf="enableShowComments(commentRound.id, commentThread.value.id, i)">
+          <tr *ngIf="enableShowComments(commentRound.sequenceId, commentThread.value.sequenceId, i)">
             <td colspan="8">
               <div class="comments col-md-12">
                 <div class="row">
@@ -163,7 +163,7 @@
                       <a class="action-button">
                         <i id="close_commentthread_{{i}}_comments_button"
                            class="fa fa-times"
-                           (click)="toggleShowThreadComments(commentRound.id, commentThread.value.id, i)"></i>
+                           (click)="toggleShowThreadComments(commentThread.value.sequenceId, i)"></i>
                       </a>
                       <a class="action-button">
                         <i id="refresh_commentthread_{{i}}_comments_button"

@@ -112,6 +112,7 @@ export interface CommentThreadType extends BaseResourceType {
 export interface CommentThreadSimpleType {
 
   id?: string;
+  sequenceId?: number;
   url?: string;
   resourceUri?: string;
   label?: Localizable;

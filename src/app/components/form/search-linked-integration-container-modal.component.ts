@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, combineLatest, concat } from 'rxjs';
 import { LanguageService } from '../../services/language.service';
 import { contains } from 'yti-common-ui/utils/array';
-import { ModalService } from '../../services/modal.service';
+import { ModalService } from 'yti-common-ui/services/modal.service';
 import { DataService } from '../../services/data.service';
 import { debounceTime, map, skip, take, tap } from 'rxjs/operators';
 import { IntegrationResource } from '../../entities/integration-resource';

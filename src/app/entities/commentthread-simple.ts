@@ -8,6 +8,7 @@ import { CommentThreadResult } from './commentthreadresult';
 export class CommentThreadSimple {
 
   id: string;
+  sequenceId: number;
   url: string;
   resourceUri: string;
   label: Localizable = {};
@@ -25,6 +26,9 @@ export class CommentThreadSimple {
 
     if (data.id) {
       this.id = data.id;
+    }
+    if (data.sequenceId) {
+      this.sequenceId = data.sequenceId;
     }
     if (data.url) {
       this.url = data.url;
@@ -62,6 +66,7 @@ export class CommentThreadSimple {
 
     return {
       id: this.id ? this.id : undefined,
+      sequenceId: this.sequenceId ? this.sequenceId : undefined,
       url: this.url ? this.url : undefined,
       user: this.user ? this.user.serialize() : undefined,
       resourceUri: this.resourceUri ? this.resourceUri : undefined,

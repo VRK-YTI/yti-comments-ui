@@ -34,7 +34,7 @@ import { Moment } from 'moment';
         <span *ngIf="comment.proposedStatus != null && comment.proposedStatus === comment.endStatus"
               class="proposedStatus">, {{ comment.endStatus | translate }}</span>
         <span *ngIf="comment.proposedStatus !== comment.endStatus"
-              class="proposedStatus">, <s>{{ comment.proposedStatus | translate }}</s> \t&#x2192; {{ comment.endStatus | translate }}</span>
+              class="proposedStatus">, <s>{{ comment.proposedStatus | translate }}</s> &#x2192; {{ comment.endStatus | translate }}</span>
         <span class="actions"
               *ngIf="!this.commenting && canComment"
               [id]="'comment_' + this.comment.id + '_reply_button'"
@@ -115,6 +115,7 @@ import { Moment } from 'moment';
                                   [comments]="comments"
                                   [commentRound]="commentRound"
                                   [commentThreadId]="commentThreadId"
+                                  [commentThreadSequenceId]="commentThreadSequenceId"
                                   [activeCommentId$]="activeCommentId$"
                                   [canComment]="canComment"
                                   [canModifyOrDeleteComment]="canModifyOrDeleteInlineComment(childComment)"></app-hierarchical-comment>
@@ -128,6 +129,7 @@ export class HierarchicalCommentListitemComponent implements OnInit {
   @Input() comments: CommentSimple[];
   @Input() commentRound: CommentRound;
   @Input() commentThreadId: string;
+  @Input() commentThreadSequenceId: number;
   @Input() canModifyOrDeleteComment: boolean;
   @Input() canComment: boolean;
   @Input() activeCommentId$ = new BehaviorSubject<string | null>(null);

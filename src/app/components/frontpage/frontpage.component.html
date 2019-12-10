@@ -18,8 +18,7 @@
         </button>
       </div>
 
-
-      <div class="col-md-12">
+      <div *ngIf="isLoggedIn()" class="col-md-12">
         <div><span class="search-label" translate>Search for comment rounds</span>
           <app-information-symbol [infoText]="'INFO_TEXT_FRONTPAGE_SEARCH'"></app-information-symbol>
         </div>
@@ -37,7 +36,6 @@
       </div>
 
       <div class="col-md-12">
-
         <div *ngIf="searchInProgress" class="content-box">
           <app-ajax-loading-indicator></app-ajax-loading-indicator>
         </div>
