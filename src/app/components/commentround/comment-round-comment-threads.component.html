@@ -27,28 +27,28 @@
       <table>
         <thead>
         <tr>
-          <th style="width: 7%">
+          <th id="inline_bubble_header" style="width: 7%">
             <span translate>Comments</span>
           </th>
-          <th style="width: 15%">
+          <th id="resource_name_header" style="width: 15%">
             <div class="sort-content" (click)="sortContent('alphabetical')">
               <span translate>Resource</span>
               <span [class.sort-content-active]="sortOption === 'alphabetical'"> ▼</span>
             </div>
           </th>
-          <th style="width: 20%" translate>Proposer's comment</th>
-          <th style="width: 10%">
+          <th id="proposed_comment_header" style="width: 20%" translate>Proposer's comment</th>
+          <th id="added_header" style="width: 10%">
             <div class="sort-content" (click)="sortContent('created')">
               <span translate>Added</span>
               <span [class.sort-content-active]="sortOption === 'created'"> ▼</span>
             </div>
           </th>
-          <th *ngIf="!commentRound.fixedThreads" style="width: 10%" translate>Added by</th>
-          <th [ngClass]="isEditing ? '' : 'description'" style="width: 15%" translate>Description</th>
-          <th style="width: 15%" translate>Current status</th>
-          <th style="width: 10%" translate>Proposed status</th>
-          <th *ngIf="showActions" style="width: 3%" translate>Actions</th>
-          <th *ngIf="showResults" style="width: 15%"><span translate>Proposed statuses</span></th>
+          <th id="added_by_header" *ngIf="!commentRound.fixedThreads" style="width: 10%" translate>Added by</th>
+          <th id="description_header" [ngClass]="isEditing ? '' : 'description'" style="width: 15%" translate>Description</th>
+          <th id="current_status_header" style="width: 15%" translate>Current status</th>
+          <th id="proposed_status_header" style="width: 10%" translate>Proposed status</th>
+          <th id="actions_header" *ngIf="showActions" style="width: 3%" translate>Actions</th>
+          <th id="results_header" *ngIf="showResults" style="width: 15%"><span translate>Proposed statuses</span></th>
         </tr>
         </thead>
 
