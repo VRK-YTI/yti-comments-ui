@@ -39,7 +39,8 @@ export class CommentRoundInformationComponent implements OnInit, OnDestroy, OnCh
     openThreads: new FormControl(),
     validity: new FormControl({ start: null, end: null }, validDateRange),
     status: new FormControl('INCOMPLETE' as CommentRoundStatus),
-    organizations: new FormControl([], [requiredList])
+    organizations: new FormControl([], [requiredList]),
+    tempUsers: new FormControl([])
   }, null);
 
   constructor(public languageService: LanguageService,
@@ -86,7 +87,7 @@ export class CommentRoundInformationComponent implements OnInit, OnDestroy, OnCh
       return;
     }
 
-    const { label, description, fixedThreads, openThreads, startDate, endDate, organizations, status } = this.commentRound;
+    const { label, description, fixedThreads, openThreads, startDate, endDate, organizations, status, tempUsers } = this.commentRound;
 
     this.commentRoundForm.reset({
       label: label,
@@ -95,6 +96,7 @@ export class CommentRoundInformationComponent implements OnInit, OnDestroy, OnCh
       openThreads: openThreads,
       validity: { start: startDate, end: endDate },
       organizations: organizations.map(organization => organization.clone()),
+      tempUsers: tempUsers.map(tempUser => tempUser.clone()),
       status: status
     });
   }
@@ -142,7 +144,7 @@ export class CommentRoundInformationComponent implements OnInit, OnDestroy, OnCh
 
   save(formData: any): Observable<any> {
 
-    const { label, description, fixedThreads, openThreads, validity, organizations, status } = formData;
+    const { label, description, fixedThreads, openThreads, validity, organizations, tempUsers, status } = formData;
     const updatedCommentRound = this.commentRound.clone();
 
     Object.assign(updatedCommentRound, {
@@ -153,6 +155,7 @@ export class CommentRoundInformationComponent implements OnInit, OnDestroy, OnCh
       startDate: validity.start,
       endDate: validity.end,
       organizations: organizations,
+      tempUsers: tempUsers,
       source: this.commentRound.source,
       sourceLocalName: this.commentRound.sourceLocalName,
       sourceLabel: this.commentRound.sourceLabel,

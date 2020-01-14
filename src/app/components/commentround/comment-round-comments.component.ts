@@ -320,7 +320,6 @@ export class CommentRoundCommentsComponent implements OnInit, OnDestroy, OnChang
 
   sortContent(sortingType: string) {
 
-    console.log('sort debug');
     this.sortOption = sortingType;
     switch (sortingType) {
       case 'alphabetical':

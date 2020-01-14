@@ -31,6 +31,18 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
+msgid "First name"
+msgstr ""
+
+msgid "Last name"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
 msgid "Status"
 msgstr ""
 
@@ -67,12 +79,6 @@ msgstr ""
 msgid "Search organization"
 msgstr ""
 
-msgid "Select comment"
-msgstr ""
-
-msgid "Search comment"
-msgstr ""
-
 msgid "{{ selectedStatus }}"
 msgstr ""
 
@@ -95,6 +101,12 @@ msgid "Select resource"
 msgstr ""
 
 msgid "HELP_TEXT_COMMENTTHREAD_RESOURCE_MODAL_INSTRUCTION"
+msgstr ""
+
+msgid "Add user"
+msgstr ""
+
+msgid "Add user to comment round"
 msgstr ""
 
 msgid "All organizations"
@@ -154,7 +166,9 @@ msgstr ""
 msgid "{{ commenting ? 'Your comment' : 'Commenter\\'s comment' }}"
 msgstr ""
 
-msgid "{{ commenting ? 'Propose status' : 'Commenter\\'s proposal for status' }}"
+msgid ""
+"{{ commenting ? 'Propose status' :\n"
+"            'Commenter\\'s proposal for status' }}"
 msgstr ""
 
 msgid "Round name"
@@ -197,6 +211,9 @@ msgid "URI"
 msgstr ""
 
 msgid "Created"
+msgstr ""
+
+msgid "Users"
 msgstr ""
 
 msgid "Commentable resources"
@@ -299,9 +316,6 @@ msgid "User right management"
 msgstr ""
 
 msgid "Name"
-msgstr ""
-
-msgid "Email"
 msgstr ""
 
 msgid "Organizations and roles"
@@ -448,6 +462,15 @@ msgid "INFO_TEXT_FRONTPAGE_SEARCH"
 msgstr ""
 
 msgid "INFO_TEXT_URI"
+msgstr ""
+
+msgid "INFO_TEXT_USER_FIRSTNAME"
+msgstr ""
+
+msgid "INFO_TEXT_USER_LASTNAME"
+msgstr ""
+
+msgid "INFO_TEXT_USER_EMAIL"
 msgstr ""
 
 msgid "Front page"
@@ -670,8 +693,20 @@ msgstr ""
 msgid "INFO_TEXT_EMAIL_SUBSCRIPTIONS"
 msgstr ""
 
+msgid "REMOVE USER FROM COMMENT ROUND?"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_USERS"
+msgstr ""
+
 msgid "invalidDate"
 msgstr ""
 
 msgid "invalidDateRange"
+msgstr ""
+
+msgid "emailValidationError"
+msgstr ""
+
+msgid "emailExistsError"
 msgstr ""

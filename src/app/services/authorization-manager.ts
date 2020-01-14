@@ -23,6 +23,9 @@ export class AuthorizationManager {
       return true;
     }
     if (editableEntity.allowOrganizationEdit()) {
+      if (this.user.tokenRole === 'MEMBER' && this.user.containerUri === editableEntity.getContainerUri()) {
+        return true;
+      }
       return this.user.isInOrganization(editableEntity.getOwningOrganizationIds(),
         ['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR', 'MEMBER']);
     }
@@ -41,6 +44,9 @@ export class AuthorizationManager {
       return true;
     }
     if (editableEntity.allowOrganizationEdit()) {
+      if (this.user.tokenRole === 'MEMBER' && this.user.containerUri === editableEntity.getContainerUri()) {
+        return true;
+      }
       return this.user.isInOrganization(editableEntity.getOwningOrganizationIds(),
         ['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR', 'MEMBER']);
     }
@@ -53,6 +59,9 @@ export class AuthorizationManager {
       return true;
     }
     if (editableEntity.allowOrganizationComment()) {
+      if (this.user.tokenRole === 'MEMBER' && this.user.containerUri === editableEntity.getContainerUri()) {
+        return true;
+      }
       return this.user.isInOrganization(editableEntity.getOwningOrganizationIds(),
         ['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR', 'MEMBER']);
     }

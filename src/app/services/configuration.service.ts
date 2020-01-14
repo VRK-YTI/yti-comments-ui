@@ -79,4 +79,9 @@ export class ConfigurationService {
     }
     return '';
   }
+
+  get showUnfinishedFeature(): boolean {
+
+    return this.env === 'awsdev' || this.env === 'local';
+  }
 }
