@@ -203,7 +203,7 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
 
   get isEditorOrSuperUser(): boolean {
 
-    return this.authorizationManager.user.superuser || this.commentRound.user.email === this.authorizationManager.user.email;
+    return this.authorizationManager.user.superuser || this.commentRound.user.id === this.authorizationManager.user.id;
   }
 
   filterTopLevelComments(comments: CommentSimple[]): CommentSimple[] {
@@ -317,7 +317,7 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
 
   canModifyOrDeleteInlineComment(comment: CommentSimple): boolean {
 
-    return (this.authorizationManager.user.email === comment.user.email) &&
+    return (this.authorizationManager.user.id === comment.user.id) &&
       this.commentRound.status === 'INPROGRESS';
   }
 

@@ -40,6 +40,9 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
+msgid "+ Add row"
+msgstr ""
+
 msgid "Add"
 msgstr ""
 

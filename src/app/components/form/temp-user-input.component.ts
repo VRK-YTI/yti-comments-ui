@@ -101,7 +101,7 @@ export class TempUserInputComponent implements ControlValueAccessor {
     const restrictedEmails = this.tempUsers ? this.tempUsers.map(tempUser => tempUser.email) : [];
 
     this.addTempUsersModalService.open(titleLabel, addLabel, restrictedEmails, true)
-      .then(tempUser => addToControl(this.control, tempUser), ignoreModalClose);
+      .then(tempUsers => tempUsers.forEach(tempUser => addToControl(this.control, tempUser)), ignoreModalClose);
   }
 
   removeTempUser(tempUser: TempUser) {

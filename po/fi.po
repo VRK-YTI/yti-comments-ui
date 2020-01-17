@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-01-14 14:37+0200\n"
+"PO-Revision-Date: 2020-01-17 08:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -48,6 +48,9 @@ msgstr "Sukunimi"
 
 msgid "Email"
 msgstr "Sähköposti"
+
+msgid "+ Add row"
+msgstr "+ Lisää rivi"
 
 msgid "Add"
 msgstr "Lisää"
@@ -751,7 +754,7 @@ msgid "emailValidationError"
 msgstr "Sähköpostiosoite ei ole oikeassa muodossa."
 
 msgid "emailExistsError"
-msgstr "Tällä sähköpostiosoitteella on jo käyttäjä kommentointikierroksella."
+msgstr "Sähköpostiosoite on jo olemassa."
 
 #~ msgid "Select comment"
 #~ msgstr "Valitse kommentti"

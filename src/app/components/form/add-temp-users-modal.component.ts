@@ -2,7 +2,7 @@ import { Component, Injectable, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { LanguageService } from '../../services/language.service';
 import { ModalService } from 'yti-common-ui/services/modal.service';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../entities/user';
 import { UserType } from '../../services/api-schema';
 import { EditableService } from '../../services/editable.service';
@@ -20,39 +20,67 @@ import { contains } from 'yti-common-ui/utils/array';
       </h4>
     </div>
     <div class="modal-body">
-      <div class="row">
-        <div class="col-12">
-          <form [formGroup]="userForm" #form="ngForm">
-            <app-literal-input class="col-md-12"
-                               [id]="'user_firstname_input'"
-                               [label]="'First name' | translate"
-                               [required]="true"
-                               [infoText]="'INFO_TEXT_USER_FIRSTNAME'"
-                               [formControlName]="'firstName'"></app-literal-input>
+      <form [formGroup]="tempUsersForm" #form="ngForm">
+        <div *ngIf="tempUserForms.controls.length > 0" formArrayName="tempUsers">
+          <div class="row">
+            <dt class="col-md-3">
+              <label translate>First name</label>
+              <app-information-symbol [infoText]="'INFO_TEXT_USER_FIRSTNAME'"></app-information-symbol>
+              <app-required-symbol></app-required-symbol>
+            </dt>
+            <dt class="col-md-4">
+              <label translate>Last name</label>
+              <app-information-symbol [infoText]="'INFO_TEXT_USER_LASTNAME'"></app-information-symbol>
+              <app-required-symbol></app-required-symbol>
+            </dt>
+            <dt class="col-md-4">
+              <label translate>Email</label>
+              <app-information-symbol [infoText]="'INFO_TEXT_USER_EMAIL'"></app-information-symbol>
+              <app-required-symbol></app-required-symbol>
+            </dt>
+            <div class="col-md-1"></div>
+          </div>
+          <ng-container *ngFor="let userForm of tempUserForms.controls; let i = index" [formGroupName]="i">
+            <div class="row">
+              <app-literal-input class="col-md-3"
+                                 [id]="'user_' + i + '_firstname_input'"
+                                 [required]="true"
+                                 [formControlName]="'firstName'"></app-literal-input>
 
-            <app-literal-input class="col-md-12"
-                               [id]="'user_lastname_input'"
-                               [label]="'Last name' | translate"
-                               [required]="true"
-                               [infoText]="'INFO_TEXT_USER_LASTNAME'"
-                               [formControlName]="'lastName'"></app-literal-input>
+              <app-literal-input class="col-md-4"
+                                 [id]="'user_' + i + '_lastname_input'"
+                                 [required]="true"
+                                 [formControlName]="'lastName'"></app-literal-input>
 
-            <app-literal-input class="col-md-12"
-                               [id]="'user_email_input'"
-                               [label]="'Email' | translate"
-                               [required]="true"
-                               [infoText]="'INFO_TEXT_USER_EMAIL'"
-                               [formControlName]="'email'"></app-literal-input>
-          </form>
+              <app-literal-input class="col-md-4"
+                                 [id]="'user_' + i + '_email_input'"
+                                 [required]="true"
+                                 [formControlName]="'email'"></app-literal-input>
+              <div class="col-md-1">
+                <button *ngIf="tempUserForms.controls.length > 1"
+                        [id]="'remove_row_' + i + '_button'"
+                        type="button"
+                        class="icon icon-trash"
+                        (click)="removeRow(i)">
+                </button>
+              </div>
+            </div>
+          </ng-container>
         </div>
-      </div>
-    </div>
-    <div class="modal-footer">
+      </form>
       <button id="add_user_button"
               type="button"
+              class="btn btn-secondary-action"
+              (click)="addNewRowToUserForm()">
+        <span translate>+ Add row</span>
+      </button>
+    </div>
+    <div class="modal-footer">
+      <button id="add_users_button"
+              type="button"
               class="btn btn-action"
-              [disabled]="!userForm.valid"
-              (click)="addUser()">
+              [disabled]="!tempUsersForm.valid"
+              (click)="addUsers()">
         <span translate>Add</span>
       </button>
       <button id="cancel_modal_button"
@@ -73,28 +101,51 @@ export class AddTempUsersModalComponent {
 
   emailValidator = '(?:[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\\])';
 
-  userForm = new FormGroup({
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, this.filterEmails.bind(this), this.validateEmail.bind(this)])
-  }, null);
+  tempUsersForm = new FormGroup({
+    tempUsers: new FormArray([])
+  });
 
   constructor(public modal: NgbActiveModal,
               private editableService: EditableService,
               public languageService: LanguageService) {
 
     this.editableService.edit();
+    this.addNewRowToUserForm();
   }
 
-  addUser() {
+  removeRow(i: number) {
+    this.tempUserForms.removeAt(i);
+  }
 
-    const userType: UserType = <UserType>{
-      firstName: this.userForm.controls['firstName'].value,
-      lastName: this.userForm.controls['lastName'].value,
-      email: this.userForm.controls['email'].value
-    };
-    const user: User = new User(userType);
-    this.modal.close(user);
+  get tempUserForms(): FormArray {
+
+    return this.tempUsersForm.get('tempUsers') as FormArray;
+  }
+
+  addNewRowToUserForm() {
+    // email: new FormControl('', [Validators.required, this.validateEmail.bind(this)], this.asyncFilterEmails().bind(this))
+
+    const userFormGroup: FormGroup = new FormGroup({
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, this.validateEmail.bind(this), this.filterEmails.bind(this)])
+    });
+    this.tempUserForms.push(userFormGroup);
+  }
+
+  addUsers() {
+
+    const users: User[] = [];
+    const tempUsers: FormArray = this.tempUserForms;
+    tempUsers.controls.forEach(tempUserFormGroup => {
+      const userType: UserType = <UserType>{
+        firstName: tempUserFormGroup.value.firstName,
+        lastName: tempUserFormGroup.value.lastName,
+        email: tempUserFormGroup.value.email
+      };
+      users.push(new User(userType));
+    });
+    this.modal.close(users);
   }
 
   cancel() {
@@ -103,8 +154,25 @@ export class AddTempUsersModalComponent {
   }
 
   filterEmails(control: AbstractControl) {
-    if (this.restrictedEmails != null && control.value != null && control.value.length > 0) {
-      const isNotRestricted = !contains(this.restrictedEmails, control.value.toLowerCase());
+
+    const allRestrictedEmails: string[] = [];
+    if (this.restrictedEmails != null) {
+      this.restrictedEmails.forEach(restrictedEmail => {
+        allRestrictedEmails.push(restrictedEmail);
+      });
+    }
+    if (this.tempUserForms) {
+      this.tempUserForms.controls.forEach(tempUserControl => {
+        if (tempUserControl !== control) {
+          const controlEmail: string = tempUserControl.value.email;
+          if (controlEmail !== '') {
+            allRestrictedEmails.push(controlEmail);
+          }
+        }
+      });
+    }
+    if (allRestrictedEmails.length > 0 && control.value != null && control.value.length > 0) {
+      const isNotRestricted = !contains(allRestrictedEmails, control.value.toLowerCase());
       return !isNotRestricted ? { 'emailExistsError': { value: control.value } } : null;
     }
     return null;
@@ -128,9 +196,9 @@ export class AddTempUsersModalService {
   open(titleLabel: string,
        addLabel: string,
        restrictedEmails: string[],
-       useUILanguage: boolean = false): Promise<TempUser> {
+       useUILanguage: boolean = false): Promise<TempUser[]> {
 
-    const modalRef = this.modalService.open(AddTempUsersModalComponent, { size: 'sm' });
+    const modalRef = this.modalService.open(AddTempUsersModalComponent, { size: 'lg' });
     const instance = modalRef.componentInstance as AddTempUsersModalComponent;
     instance.titleLabel = titleLabel;
     instance.addLabel = addLabel;

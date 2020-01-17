@@ -9,9 +9,15 @@ export class User {
 
   constructor(data: UserType) {
     this.id = data.id;
-    this.email = data.email;
-    this.firstName = data.firstName;
-    this.lastName = data.lastName;
+    if (data.email) {
+      this.email = data.email;
+    }
+    if (data.firstName) {
+      this.firstName = data.firstName;
+    }
+    if (data.lastName) {
+      this.lastName = data.lastName;
+    }
   }
 
   serialize(): UserType {
@@ -24,7 +30,11 @@ export class User {
   }
 
   getDisplayName(): string {
-    return this.firstName + ' ' + this.lastName;
+    if (this.firstName != null && this.lastName != null) {
+      return this.firstName + ' ' + this.lastName;
+    } else {
+      return this.id;
+    }
   }
 
   getDisplayNameWithEmail(): string {
