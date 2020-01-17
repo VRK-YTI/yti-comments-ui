@@ -96,7 +96,7 @@ export class TempUserInputComponent implements ControlValueAccessor {
 
   addTempUser() {
 
-    const titleLabel = this.translateService.instant('Add user to comment round');
+    const titleLabel = this.translateService.instant('Add users to comment round');
     const addLabel = this.translateService.instant('Add user');
     const restrictedEmails = this.tempUsers ? this.tempUsers.map(tempUser => tempUser.email) : [];
 

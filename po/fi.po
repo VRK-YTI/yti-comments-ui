@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-01-17 08:23+0200\n"
+"PO-Revision-Date: 2020-01-17 10:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -123,8 +123,8 @@ msgstr ""
 msgid "Add user"
 msgstr "Lisää käyttäjä"
 
-msgid "Add user to comment round"
-msgstr "Lisää käyttäjä kommentointikierrokselle"
+msgid "Add users to comment round"
+msgstr "Lisää käyttäjiä kommentointikierrokselle"
 
 msgid "All organizations"
 msgstr "Kaikki organisaatiot"
@@ -755,18 +755,3 @@ msgstr "Sähköpostiosoite ei ole oikeassa muodossa."
 
 msgid "emailExistsError"
 msgstr "Sähköpostiosoite on jo olemassa."
-
-#~ msgid "Select comment"
-#~ msgstr "Valitse kommentti"
-
-#~ msgid "Search comment"
-#~ msgstr "Etsi kommentti"
-
-#~ msgid "This user does not have any roles in organizations."
-#~ msgstr "Tällä käyttäjällä ei ole rooleja organisaatioissa."
-
-#~ msgid "(edited)"
-#~ msgstr "(muokattu)"
-
-#~ msgid "There are resources in this comment round."
-#~ msgstr "Kierroksella ei ole tietosisältöjä."

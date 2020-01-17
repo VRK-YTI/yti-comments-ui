@@ -109,7 +109,7 @@ msgstr ""
 msgid "Add user"
 msgstr ""
 
-msgid "Add user to comment round"
+msgid "Add users to comment round"
 msgstr ""
 
 msgid "All organizations"
