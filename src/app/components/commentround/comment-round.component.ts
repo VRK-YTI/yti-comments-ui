@@ -181,11 +181,6 @@ export class CommentRoundComponent implements OnInit {
     return this.authorizationManager.canDeleteCommentRound(this.commentRound);
   }
 
-  get showExcelExport(): boolean {
-
-    return this.commentRound.status === 'ENDED' || this.commentRound.status === 'CLOSED';
-  }
-
   get exportUrl(): string {
 
     return this.commentRound.url + '/?format=excel';
