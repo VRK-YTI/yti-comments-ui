@@ -94,7 +94,9 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
   }
 
   get canSubscribe(): boolean {
-    return this.configurationService.isMessagingEnabled && this.userService.isLoggedIn();
+    return this.configurationService.isMessagingEnabled &&
+      this.userService.isLoggedIn() &&
+      this.userService.user.containerUri === undefined;
   }
 
   get messagingResources(): Map<string, MessagingResource[]> | null {
