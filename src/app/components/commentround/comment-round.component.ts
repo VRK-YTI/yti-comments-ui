@@ -143,7 +143,7 @@ export class CommentRoundComponent implements OnInit {
 
   get isEditorOrSuperUser(): boolean {
 
-    return this.authorizationManager.user.superuser || this.commentRound.user.email === this.authorizationManager.user.email;
+    return this.authorizationManager.user.superuser || this.commentRound.user.id === this.authorizationManager.user.id;
   }
 
   get toolType(): string {

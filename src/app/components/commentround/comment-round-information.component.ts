@@ -107,7 +107,7 @@ export class CommentRoundInformationComponent implements OnInit, OnDestroy, OnCh
 
   get isEditorOrSuperUser(): boolean {
 
-    return this.authorizationManager.user.superuser || this.commentRound.user.email === this.authorizationManager.user.email;
+    return this.authorizationManager.user.superuser || this.commentRound.user.id === this.authorizationManager.user.id;
   }
 
   hasLocalization(localizable: Localizable) {
