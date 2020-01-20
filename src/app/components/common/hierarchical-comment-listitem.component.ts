@@ -11,6 +11,7 @@ import { CommentsConfirmationModalService } from './confirmation-modal.service';
 import { AuthorizationManager } from '../../services/authorization-manager';
 import { CommentRound } from '../../entities/commentround';
 import { Moment } from 'moment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hierarchical-comment',
@@ -24,7 +25,7 @@ import { Moment } from 'moment';
       </div>
 
       <div class="comment" x-ms-format-detection="none">
-        <span class="name">{{ comment.user.firstName }} {{ comment.user.lastName }}</span>
+        <span class="name">{{ getCommentUserDisplayName() }}</span>
         <span *ngIf="comment.created && comment.modified && isSameMoment(comment.created, comment.modified)"
               class="created">{{ comment.createdDisplayValue}}</span>
         <span *ngIf="comment.created && comment.modified && !isSameMoment(comment.created, comment.modified)"
@@ -142,6 +143,7 @@ export class HierarchicalCommentListitemComponent implements OnInit {
   updating = false;
 
   constructor(public languageService: LanguageService,
+              private translateService: TranslateService,
               private dataService: DataService,
               private errorModalService: CommentsErrorModalService,
               private confirmationModalService: CommentsConfirmationModalService,
@@ -251,7 +253,7 @@ export class HierarchicalCommentListitemComponent implements OnInit {
 
   canModifyOrDeleteInlineComment(comment: CommentSimple): boolean {
 
-    return (this.authorizationManager.user.email === comment.user.email) &&
+    return (this.authorizationManager.user.id === comment.user.id) &&
       this.commentRound.status === 'INPROGRESS';
   }
 
@@ -298,5 +300,15 @@ export class HierarchicalCommentListitemComponent implements OnInit {
   emitCollapseComment(commentId: string) {
 
     this.collapseComment.emit(commentId);
+  }
+
+  getCommentUserDisplayName(): string {
+
+    const userDisplayName = this.comment.user.getDisplayName();
+    if (userDisplayName.length > 0) {
+      return userDisplayName;
+    } else {
+      return this.translateService.instant('Removed user');
+    }
   }
 }

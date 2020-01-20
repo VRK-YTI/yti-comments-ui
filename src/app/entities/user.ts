@@ -33,7 +33,7 @@ export class User {
     if (this.firstName != null && this.lastName != null) {
       return this.firstName + ' ' + this.lastName;
     } else {
-      return this.id;
+      return '';
     }
   }
 

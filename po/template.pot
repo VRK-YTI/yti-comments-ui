@@ -31,6 +31,9 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
+msgid "Removed user"
+msgstr ""
+
 msgid "First name"
 msgstr ""
 

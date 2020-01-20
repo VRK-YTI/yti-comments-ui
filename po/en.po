@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-01-20 10:52+0200\n"
+"PO-Revision-Date: 2020-01-20 13:33+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -38,6 +38,9 @@ msgid "Cancel"
 msgstr ""
 
 msgid "Save"
+msgstr ""
+
+msgid "Removed user"
 msgstr ""
 
 msgid "First name"

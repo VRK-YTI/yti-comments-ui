@@ -96,7 +96,7 @@
               <span>{{ formatDisplayDate(commentThread.value.created) }}</span>
             </td>
             <td style="width: 10%" *ngIf="!commentRound.fixedThreads">
-              <span>{{ commentThread.value.user ? commentThread.value.user.getDisplayName() : authorizationManager.user ? authorizationManager.user.name : '-'}}</span>
+              <span>{{ getCommentThreadUserDisplayName(commentThread.value.user) }}</span>
             </td>
             <td [ngClass]="isEditing ? '' : 'description'" style="width: 15%">
                       <span class="wrap"

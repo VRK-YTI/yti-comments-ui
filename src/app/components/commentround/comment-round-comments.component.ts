@@ -19,6 +19,8 @@ import { comparingLocalizable, comparingPrimitive } from 'yti-common-ui/utils/co
 import { Localizable } from 'yti-common-ui/types/localization';
 import { hasLocalization } from 'yti-common-ui/utils/localization';
 import { CommentThread } from '../../entities/commentthread';
+import { User } from '../../entities/user';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-comment-round-comments',
@@ -48,6 +50,7 @@ export class CommentRoundCommentsComponent implements OnInit, OnDestroy, OnChang
 
   constructor(public configurationService: ConfigurationService,
               public languageService: LanguageService,
+              private translateService: TranslateService,
               private authorizationManager: AuthorizationManager,
               private dataService: DataService,
               private editableService: EditableService,
@@ -348,5 +351,19 @@ export class CommentRoundCommentsComponent implements OnInit, OnDestroy, OnChang
   getCommentThreadResourceUri(commentThread: CommentThread): string | null {
 
     return this.configurationService.getUriWithEnv(commentThread.resourceUri);
+  }
+
+  getCommentThreadUserDisplayName(user: User): string {
+
+    if (user) {
+      const userDisplayName = user.getDisplayName();
+      if (userDisplayName.length > 0) {
+        return userDisplayName;
+      } else {
+        return this.translateService.instant('Removed user');
+      }
+    } else {
+      return '-';
+    }
   }
 }
