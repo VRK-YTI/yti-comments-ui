@@ -198,7 +198,7 @@ export class AddTempUsersModalService {
        restrictedEmails: string[],
        useUILanguage: boolean = false): Promise<TempUser[]> {
 
-    const modalRef = this.modalService.open(AddTempUsersModalComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(AddTempUsersModalComponent, { size: 'lg', backdrop: 'static', keyboard: false });
     const instance = modalRef.componentInstance as AddTempUsersModalComponent;
     instance.titleLabel = titleLabel;
     instance.addLabel = addLabel;
