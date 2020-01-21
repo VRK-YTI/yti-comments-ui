@@ -37,12 +37,12 @@ import { TranslateService } from '@ngx-translate/core';
         <span *ngIf="comment.proposedStatus !== comment.endStatus"
               class="proposedStatus">, <s>{{ comment.proposedStatus | translate }}</s> &#x2192; {{ comment.endStatus | translate }}</span>
         <span class="actions"
-              *ngIf="!this.commenting && canComment"
+              *ngIf="!this.commenting && !this.updating && canComment"
               [id]="'comment_' + this.comment.id + '_reply_button'"
               (click)="toggleCommenting()"
               translate>Reply</span>
         <span class="actions"
-              *ngIf="!this.updating && canModifyOrDeleteComment && !hasChildComments && comment.parentComment"
+              *ngIf="!this.commenting && !this.updating && canModifyOrDeleteComment && !hasChildComments && comment.parentComment"
               [id]="'comment_' + this.comment.id + '_modify_button'"
               (click)="toggleUpdatingComment()"
               translate>Modify</span>
