@@ -25,7 +25,7 @@ import { TranslateService } from '@ngx-translate/core';
       </div>
 
       <div class="comment" x-ms-format-detection="none">
-        <span class="name">{{ getCommentUserDisplayName() }}</span>
+        <span class="name">{{ this.getCommentUserDisplayName() }}</span>
         <span *ngIf="comment.created && comment.modified && isSameMoment(comment.created, comment.modified)"
               class="created">{{ comment.createdDisplayValue}}</span>
         <span *ngIf="comment.created && comment.modified && !isSameMoment(comment.created, comment.modified)"
@@ -304,11 +304,12 @@ export class HierarchicalCommentListitemComponent implements OnInit {
 
   getCommentUserDisplayName(): string {
 
-    const userDisplayName = this.comment.user.getDisplayName();
-    if (userDisplayName.length > 0) {
-      return userDisplayName;
-    } else {
-      return this.translateService.instant('Removed user');
+    if (this.comment && this.comment.user) {
+      const userDisplayName = this.comment.user.getDisplayName();
+      if (userDisplayName.length > 0) {
+        return userDisplayName;
+      }
     }
+    return this.translateService.instant('Removed user');
   }
 }
