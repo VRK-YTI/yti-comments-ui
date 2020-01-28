@@ -24,7 +24,6 @@ import { RefreshComponent } from './refresh.component';
 import { CommentRoundCreateComponent } from './components/commentround/comment-round-create.component';
 import { EditableButtonsComponent } from './components/form/editable-buttons.component';
 import { ErrorMessagesComponent } from './components/form/error-messages.component';
-import { OrganizationsInputComponent } from './components/form/organizations-input.compontent';
 import { LocalizableLiteralComponent } from './components/form/localizable-literal';
 import { LocalizableTextareaInputComponent } from './components/form/localizable-textarea-input';
 import { LiteralComponent } from './components/form/literal';
@@ -79,6 +78,9 @@ import {
 import { UserDetailsSubscriptionsComponent } from './components/userdetails/user-details-subscriptions.component';
 import { UserDetailsInformationComponent } from './components/userdetails/user-details-information.component';
 import { MessagingService } from './services/messaging-service';
+import { TempUserInputComponent } from './components/form/temp-user-input.component';
+import { AddTempUsersModalComponent, AddTempUsersModalService } from './components/form/add-temp-users-modal.component';
+import { OrganizationsInputComponent } from './components/form/organizations-input.component';
 
 declare var require: any;
 
@@ -172,6 +174,7 @@ const appRoutes: Routes = [
     EditableButtonsComponent,
     ErrorMessagesComponent,
     OrganizationsInputComponent,
+    TempUserInputComponent,
     LocalizableLiteralComponent,
     LocalizableTextareaInputComponent,
     LocalizableTextareaComponent,
@@ -186,6 +189,7 @@ const appRoutes: Routes = [
     SearchLinkedContainerModalComponent,
     SearchLinkedIntegrationResourceMultiModalComponent,
     SearchLinkedOrganizationModalComponent,
+    AddTempUsersModalComponent,
     ContentLanguageComponent,
     CommentRoundStatusDropdownComponent,
     CommentRoundListitemComponent,
@@ -206,7 +210,8 @@ const appRoutes: Routes = [
   entryComponents: [
     SearchLinkedContainerModalComponent,
     SearchLinkedIntegrationResourceMultiModalComponent,
-    SearchLinkedOrganizationModalComponent
+    SearchLinkedOrganizationModalComponent,
+    AddTempUsersModalComponent
   ],
   imports: [
     YtiCommonModule,
@@ -242,6 +247,7 @@ const appRoutes: Routes = [
     SearchLinkedContainerModalService,
     SearchLinkedIntegrationResourceMultiModalService,
     SearchLinkedOrganizationModalService,
+    AddTempUsersModalService,
     CommentsErrorModalService,
     CookieService
   ],

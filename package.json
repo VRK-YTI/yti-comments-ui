@@ -45,7 +45,7 @@
     "simple-line-icons": "^2.4.1",
     "sonarqube-scanner": "^2.5.0",
     "uuid": "3.0.1",
-    "yti-common-ui": "https://github.com/VRK-YTI/yti-common-ui.git/#d2b4d44eb5f5eb50d36c942fb812abe5c3b4ee53",
+    "yti-common-ui": "https://github.com/VRK-YTI/yti-common-ui.git/#23216a8015412115117f8e8fafc3a459966da962",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

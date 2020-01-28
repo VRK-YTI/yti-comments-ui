@@ -143,7 +143,7 @@ export class CommentRoundComponent implements OnInit {
 
   get isEditorOrSuperUser(): boolean {
 
-    return this.authorizationManager.user.superuser || this.commentRound.user.email === this.authorizationManager.user.email;
+    return this.authorizationManager.user.superuser || this.commentRound.user.id === this.authorizationManager.user.id;
   }
 
   get toolType(): string {
@@ -183,7 +183,7 @@ export class CommentRoundComponent implements OnInit {
 
   get showExcelExport(): boolean {
 
-    return this.commentRound.status === 'ENDED' || this.commentRound.status === 'CLOSED';
+    return this.authorizationManager.canExportExcel(this.commentRound);
   }
 
   get exportUrl(): string {
@@ -211,7 +211,9 @@ export class CommentRoundComponent implements OnInit {
 
   get canSubscribe(): boolean {
 
-    return this.configurationService.isMessagingEnabled && this.userService.isLoggedIn();
+    return this.configurationService.isMessagingEnabled &&
+      this.userService.isLoggedIn() &&
+      this.userService.user.containerUri === undefined;
   }
 
   get canAddSubscription(): boolean {

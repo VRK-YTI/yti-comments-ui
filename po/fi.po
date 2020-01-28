@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-12-04 11:35+0200\n"
+"PO-Revision-Date: 2020-01-20 13:34+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -40,6 +40,24 @@ msgstr "Peruuta"
 msgid "Save"
 msgstr "Tallenna"
 
+msgid "Removed user"
+msgstr "Poistettu käyttäjä"
+
+msgid "First name"
+msgstr "Etunimi"
+
+msgid "Last name"
+msgstr "Sukunimi"
+
+msgid "Email"
+msgstr "Sähköposti"
+
+msgid "+ Add row"
+msgstr "+ Lisää rivi"
+
+msgid "Add"
+msgstr "Lisää"
+
 msgid "Status"
 msgstr "Tila"
 
@@ -76,12 +94,6 @@ msgstr "Valitse organisaatio"
 msgid "Search organization"
 msgstr "Etsi organisaatio"
 
-msgid "Select comment"
-msgstr "Valitse kommentti"
-
-msgid "Search comment"
-msgstr "Etsi kommentti"
-
 msgid "{{ selectedStatus }}"
 msgstr ""
 
@@ -110,6 +122,12 @@ msgid "HELP_TEXT_COMMENTTHREAD_RESOURCE_MODAL_INSTRUCTION"
 msgstr ""
 "Hae tietosisältö kommentoitavaksi. Valinta tehdään klikkaamalla tietosisällön nimeä. "
 "Tietosisältöjen tilaa voi rajata hakutermillä ja erillisellä alasvetovalikolla."
+
+msgid "Add user"
+msgstr "Lisää käyttäjä"
+
+msgid "Add users to comment round"
+msgstr "Lisää käyttäjiä kommentointikierrokselle"
 
 msgid "All organizations"
 msgstr "Kaikki organisaatiot"
@@ -168,7 +186,9 @@ msgstr "Lähetä kommentit"
 msgid "{{ commenting ? 'Your comment' : 'Commenter\\'s comment' }}"
 msgstr ""
 
-msgid "{{ commenting ? 'Propose status' : 'Commenter\\'s proposal for status' }}"
+msgid ""
+"{{ commenting ? 'Propose status' :\n"
+"            'Commenter\\'s proposal for status' }}"
 msgstr ""
 
 msgid "Round name"
@@ -212,6 +232,9 @@ msgstr "URI"
 
 msgid "Created"
 msgstr "Luontiajankohta"
+
+msgid "Users"
+msgstr "Käyttäjät"
 
 msgid "Commentable resources"
 msgstr "Kommentoitavia tietosisältöjä {{ value }} kpl"
@@ -318,9 +341,6 @@ msgstr "Oikeuksienhallinta"
 
 msgid "Name"
 msgstr "Nimi"
-
-msgid "Email"
-msgstr "Sähköposti"
 
 msgid "Organizations and roles"
 msgstr "Organisaatiot ja roolit"
@@ -483,6 +503,15 @@ msgstr "Haku kohdistuu kierrosten nimiin"
 
 msgid "INFO_TEXT_URI"
 msgstr "Kommentointikierroksen pysyvä tunniste ja verkko-osoite."
+
+msgid "INFO_TEXT_USER_FIRSTNAME"
+msgstr "Käyttäjän etunimi"
+
+msgid "INFO_TEXT_USER_LASTNAME"
+msgstr "Käyttäjän sukunimi"
+
+msgid "INFO_TEXT_USER_EMAIL"
+msgstr "Käyttäjän sähköpostiosoite"
 
 msgid "Front page"
 msgstr "Etusivu"
@@ -710,17 +739,22 @@ msgstr ""
 "kohdasta “Päivittäin” voit kytkeä kaikki ilmoitukset pois päältä kerralla. "
 "Palauttamalla rastin ilmoitukset aktivoituvat jälleen."
 
+msgid "REMOVE USER FROM COMMENT ROUND?"
+msgstr "POISTA KÄYTTÄJÄ KOMMENTOINTIKIERROKSELTA?"
+
+msgid "INFO_TEXT_COMMENTROUND_USERS"
+msgstr ""
+"Kommentointikierrokselle kutsutut väliaikaiset käyttäjät, jotka saavat kutsun "
+"sähköpostitse"
+
 msgid "invalidDate"
 msgstr "Virheellinen päivämäärä"
 
 msgid "invalidDateRange"
 msgstr "Virheellinen päivämääräväli"
 
-#~ msgid "This user does not have any roles in organizations."
-#~ msgstr "Tällä käyttäjällä ei ole rooleja organisaatioissa."
+msgid "emailValidationError"
+msgstr "Sähköpostiosoite ei ole oikeassa muodossa."
 
-#~ msgid "(edited)"
-#~ msgstr "(muokattu)"
-
-#~ msgid "There are resources in this comment round."
-#~ msgstr "Kierroksella ei ole tietosisältöjä."
+msgid "emailExistsError"
+msgstr "Sähköpostiosoite on jo olemassa."

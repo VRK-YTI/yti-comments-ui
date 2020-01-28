@@ -51,7 +51,8 @@ export interface CommentRoundType extends BaseResourceType {
   endDate?: string;
   source: SourceType;
   organizations: OrganizationSimpleType[];
-  commentThreads?: CommentThreadSimpleType[] | null;
+  tempUsers: TempUserType[];
+  commentThreads?: CommentThreadSimpleType[] | null;
 }
 
 export interface SourceType {
@@ -149,6 +150,15 @@ export interface OrganizationSimpleType {
   prefLabel: Localizable;
   description: Localizable;
   url: string;
+}
+
+export interface TempUserType {
+
+  id?: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  commentRoundUri: string;
 }
 
 export interface IntegrationResourceType {

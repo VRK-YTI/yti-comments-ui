@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-11-19 15:50+0200\n"
+"PO-Revision-Date: 2020-01-20 13:33+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -38,6 +38,24 @@ msgid "Cancel"
 msgstr ""
 
 msgid "Save"
+msgstr ""
+
+msgid "Removed user"
+msgstr ""
+
+msgid "First name"
+msgstr ""
+
+msgid "Last name"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "+ Add row"
+msgstr ""
+
+msgid "Add"
 msgstr ""
 
 msgid "Status"
@@ -76,12 +94,6 @@ msgstr ""
 msgid "Search organization"
 msgstr ""
 
-msgid "Select comment"
-msgstr ""
-
-msgid "Search comment"
-msgstr ""
-
 msgid "{{ selectedStatus }}"
 msgstr ""
 
@@ -111,6 +123,12 @@ msgstr ""
 "Search for a resource to comment. Selecting a resource adds it to the comment round. "
 "Filter resources by typing in a search term and their statuses using the status-"
 "dropdown."
+
+msgid "Add user"
+msgstr ""
+
+msgid "Add users to comment round"
+msgstr ""
 
 msgid "All organizations"
 msgstr ""
@@ -169,7 +187,9 @@ msgstr ""
 msgid "{{ commenting ? 'Your comment' : 'Commenter\\'s comment' }}"
 msgstr ""
 
-msgid "{{ commenting ? 'Propose status' : 'Commenter\\'s proposal for status' }}"
+msgid ""
+"{{ commenting ? 'Propose status' :\n"
+"            'Commenter\\'s proposal for status' }}"
 msgstr ""
 
 msgid "Round name"
@@ -212,6 +232,9 @@ msgid "URI"
 msgstr ""
 
 msgid "Created"
+msgstr ""
+
+msgid "Users"
 msgstr ""
 
 msgid "Commentable resources"
@@ -319,9 +342,6 @@ msgid "User right management"
 msgstr ""
 
 msgid "Name"
-msgstr ""
-
-msgid "Email"
 msgstr ""
 
 msgid "Organizations and roles"
@@ -475,6 +495,15 @@ msgstr "The search targets the names of the comment rounds"
 
 msgid "INFO_TEXT_URI"
 msgstr "Permanent web address of the comment round."
+
+msgid "INFO_TEXT_USER_FIRSTNAME"
+msgstr "First name of the user"
+
+msgid "INFO_TEXT_USER_LASTNAME"
+msgstr "Last name of the user"
+
+msgid "INFO_TEXT_USER_EMAIL"
+msgstr "E-mail address of the user"
 
 msgid "Front page"
 msgstr ""
@@ -696,8 +725,20 @@ msgstr ""
 "“Daily” you can disable all subscriptions at once. Checking it activates the "
 "subscriptions again."
 
+msgid "REMOVE USER FROM COMMENT ROUND?"
+msgstr ""
+
+msgid "INFO_TEXT_COMMENTROUND_USERS"
+msgstr "Temporary users invited to participate in this comment round via e-mail"
+
 msgid "invalidDate"
 msgstr "Invalid date"
 
 msgid "invalidDateRange"
 msgstr "Invalid date range"
+
+msgid "emailValidationError"
+msgstr "E-mail address is not valid."
+
+msgid "emailExistsError"
+msgstr "E-mail already exists."

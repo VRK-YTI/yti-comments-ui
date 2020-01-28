@@ -26,6 +26,8 @@ import { CommentSimple } from '../../entities/comment-simple';
 import { Comment } from '../../entities/comment';
 import { SearchLinkedIntegrationResourceMultiModalService } from '../form/search-linked-integration-resource-multi-modal.component';
 import { nonEmptyLocalizableValidator } from '../../utils/validators';
+import { User } from '../../entities/user';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-comment-round-comment-threads',
@@ -59,6 +61,7 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
 
   constructor(public languageService: LanguageService,
               public configurationService: ConfigurationService,
+              private translateService: TranslateService,
               private authorizationManager: AuthorizationManager,
               private dataService: DataService,
               private confirmationModalService: CommentsConfirmationModalService,
@@ -203,7 +206,7 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
 
   get isEditorOrSuperUser(): boolean {
 
-    return this.authorizationManager.user.superuser || this.commentRound.user.email === this.authorizationManager.user.email;
+    return this.authorizationManager.user.superuser || this.commentRound.user.id === this.authorizationManager.user.id;
   }
 
   filterTopLevelComments(comments: CommentSimple[]): CommentSimple[] {
@@ -317,7 +320,7 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
 
   canModifyOrDeleteInlineComment(comment: CommentSimple): boolean {
 
-    return (this.authorizationManager.user.email === comment.user.email) &&
+    return (this.authorizationManager.user.id === comment.user.id) &&
       this.commentRound.status === 'INPROGRESS';
   }
 
@@ -589,5 +592,19 @@ export class CommentRoundCommentThreadsComponent implements OnInit, OnDestroy, O
   allowExpandAllAndCollapseAll() {
 
     return this.hasHierarchy && this.activeThreadComments.length <= 500;
+  }
+
+  getCommentThreadUserDisplayName(user: User): string {
+
+    if (user) {
+      const userDisplayName = user.getDisplayName();
+      if (userDisplayName.length > 0) {
+        return userDisplayName;
+      } else {
+        return this.translateService.instant('Removed user');
+      }
+    } else {
+      return '-';
+    }
   }
 }

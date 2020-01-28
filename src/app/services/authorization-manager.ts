@@ -19,10 +19,13 @@ export class AuthorizationManager {
     if (this.user.superuser) {
       return true;
     }
-    if (editableEntity.allowUserEdit() && this.user.email === editableEntity.getUser().email) {
+    if (editableEntity.allowUserEdit() && this.user.id === editableEntity.getUser().id) {
       return true;
     }
     if (editableEntity.allowOrganizationEdit()) {
+      if (this.user.tokenRole === 'MEMBER' && this.user.containerUri === editableEntity.getContainerUri()) {
+        return true;
+      }
       return this.user.isInOrganization(editableEntity.getOwningOrganizationIds(),
         ['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR', 'MEMBER']);
     }
@@ -37,10 +40,13 @@ export class AuthorizationManager {
 
   canCreateCommentThread(editableEntity: EditableEntity) {
 
-    if (this.user.superuser || this.user.email === editableEntity.getUser().email) {
+    if (this.user.superuser || this.user.id === editableEntity.getUser().id) {
       return true;
     }
     if (editableEntity.allowOrganizationEdit()) {
+      if (this.user.tokenRole === 'MEMBER' && this.user.containerUri === editableEntity.getContainerUri()) {
+        return true;
+      }
       return this.user.isInOrganization(editableEntity.getOwningOrganizationIds(),
         ['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR', 'MEMBER']);
     }
@@ -49,10 +55,13 @@ export class AuthorizationManager {
 
   canCreateComment(editableEntity: EditableEntity) {
 
-    if (this.user.superuser || this.user.email === editableEntity.getUser().email) {
+    if (this.user.superuser || this.user.id === editableEntity.getUser().id) {
       return true;
     }
     if (editableEntity.allowOrganizationComment()) {
+      if (this.user.tokenRole === 'MEMBER' && this.user.containerUri === editableEntity.getContainerUri()) {
+        return true;
+      }
       return this.user.isInOrganization(editableEntity.getOwningOrganizationIds(),
         ['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR', 'MEMBER']);
     }
@@ -61,6 +70,17 @@ export class AuthorizationManager {
 
   canDeleteCommentRound(commentRound: CommentRound) {
 
-    return this.user.superuser || this.user.email === commentRound.user.email;
+    return this.user.superuser || this.user.id === commentRound.user.id;
+  }
+
+  canExportExcel(commentRound: CommentRound) {
+    if (this.user.superuser) {
+      return true;
+    }
+    if (this.user.tokenRole === 'MEMBER' && this.user.containerUri === commentRound.getContainerUri()) {
+      return true;
+    }
+    return this.user.isInOrganization(commentRound.getOwningOrganizationIds(),
+      ['ADMIN', 'CODE_LIST_EDITOR', 'TERMINOLOGY_EDITOR', 'DATA_MODEL_EDITOR', 'MEMBER']);
   }
 }

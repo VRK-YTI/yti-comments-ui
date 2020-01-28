@@ -38,25 +38,27 @@
       <table *ngIf="hasCommentThreads">
         <thead>
         <tr>
-          <th style="width: 10%">
+          <th id="resource_name_header" style="width: 10%">
             <div class="sort-content" (click)="sortContent('alphabetical')">
               <span translate>Resource</span>
               <span [class.sort-content-active]="sortOption === 'alphabetical'"> ▼</span>
             </div>
           </th>
-          <th style="width: 13%" translate>Proposer's comment</th>
-          <th style="width: 13%" translate>{{ commenting ? 'Your comment' : 'Commenter\'s comment' }}</th>
-          <th style="width: 9%">
+          <th id="proposed_comment_header" style="width: 13%" translate>Proposer's comment</th>
+          <th id="comment_header" style="width: 13%"
+              translate>{{ commenting ? 'Your comment' : 'Commenter\'s comment' }}</th>
+          <th id="added_header" style="width: 9%">
             <div class="sort-content" (click)="sortContent('created')">
               <span translate>Added</span>
               <span [class.sort-content-active]="sortOption === 'created'"> ▼</span>
             </div>
           </th>
-          <th *ngIf="!commentRound.fixedThreads" style="width: 10%" translate>Added by</th>
-          <th class="description" style="width: 15%" translate>Description</th>
-          <th style="width: 10%" translate>Current status</th>
-          <th style="width: 10%" translate>Proposed status</th>
-          <th style="width: 10%" translate>{{ commenting ? 'Propose status' : 'Commenter\'s proposal for status' }}</th>
+          <th id="added_by_header" *ngIf="!commentRound.fixedThreads" style="width: 10%" translate>Added by</th>
+          <th id="description_header" class="description" style="width: 15%" translate>Description</th>
+          <th id="current_status_header" style="width: 10%" translate>Current status</th>
+          <th id="proposed_status_header" style="width: 10%" translate>Proposed status</th>
+          <th id="resource_commenters_status_header" style="width: 10%" translate>{{ commenting ? 'Propose status' :
+            'Commenter\'s proposal for status' }}</th>
         </tr>
         </thead>
 
@@ -92,7 +94,7 @@
             <span>{{ formatDisplayDate(commentThread.value.created) }}</span>
           </td>
           <td *ngIf="!commentRound.fixedThreads" style="width: 10%">
-            <span>{{ commentThread.value.user ? commentThread.value.user.getDisplayName() : authorizationManager.user ? authorizationManager.user.name : '-'}}</span>
+            <span>{{ commentThread.value.user ? getCommentThreadUserDisplayName(commentThread.value.user) : authorizationManager.user ? authorizationManager.user.name : '-'}}</span>
           </td>
           <td class="description" style="width: 15%">
                     <span class="wrap"

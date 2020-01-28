@@ -9,5 +9,7 @@ export interface EditableEntity {
 
   getUser(): User;
 
+  getContainerUri(): string;
+
   allowUserEdit(): boolean;
 }

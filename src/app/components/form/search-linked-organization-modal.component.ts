@@ -10,7 +10,7 @@ import { Organization } from '../../entities/organization';
 import { comparingLocalizable } from 'yti-common-ui/utils/comparator';
 
 @Component({
-  selector: 'app-search-linked-organizatione-modal',
+  selector: 'app-search-linked-organization-modal',
   styleUrls: ['./search-linked-organization-modal.component.scss'],
   template: `
     <div class="modal-header">
