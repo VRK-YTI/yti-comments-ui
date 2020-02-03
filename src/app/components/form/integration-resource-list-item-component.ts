@@ -22,7 +22,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
         </div>
         <div>
           <a class="uri"
-             href="{{configurationService.getUriWithEnv(resource.uri)}}" target="_blank">
+             href="{{configurationService.getUriWithEnv(resource.uri)}}" target="_blank" rel="noopener noreferrer">
             {{ configurationService.getUriWithEnv(resource.uri) }}
           </a>
         </div>
