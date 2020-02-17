@@ -1,0 +1,763 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2020-02-14 11:18+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: xls-to-po 1.0\n"
+"X-Generator: Poedit 2.3\n"
+
+msgid "Commenting period"
+msgstr "Tid för att inge kommentarer"
+
+msgid "-type"
+msgstr ""
+
+msgid "(modified)"
+msgstr "(redigerad)"
+
+msgid "Reply"
+msgstr "Svara"
+
+msgid "Modify"
+msgstr "Redigera"
+
+msgid "Delete"
+msgstr "Ta bort"
+
+msgid "Send"
+msgstr "Sänd"
+
+msgid "Cancel"
+msgstr "Ångra"
+
+msgid "Save"
+msgstr "Spara"
+
+msgid "Removed user"
+msgstr "Borttagen användare"
+
+msgid "First name"
+msgstr "Förnamn"
+
+msgid "Last name"
+msgstr "Efternamn"
+
+msgid "Email"
+msgstr "E-post"
+
+msgid "+ Add row"
+msgstr "+ Lägg till rad"
+
+msgid "Add"
+msgstr "Lägg till"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Valid from"
+msgstr "Startdatum"
+
+msgid "Valid to"
+msgstr "Slutdatum"
+
+msgid "Edit"
+msgstr "Redigera"
+
+msgid "Copy value to clipboard"
+msgstr "Kopiera {{value}} till urklipp"
+
+msgid "Copied to clipboard"
+msgstr "Kopierades till urklipp"
+
+msgid "Last modification"
+msgstr "Senaste redigering"
+
+msgid "Search did not find in any resources for commenting."
+msgstr "Sökningen gav inga resurser att kommentera"
+
+msgid "{{ control.value }}"
+msgstr ""
+
+msgid "Add organization"
+msgstr "Välj organisation"
+
+msgid "Select organization"
+msgstr "Välj organisation"
+
+msgid "Search organization"
+msgstr "Sök organisation"
+
+msgid "{{ selectedStatus }}"
+msgstr ""
+
+msgid "Search term"
+msgstr "Sökterm"
+
+msgid "Select tool"
+msgstr "Välj verktyg"
+
+msgid "All statuses"
+msgstr "Alla statusar"
+
+msgid "Select source"
+msgstr "Välj källa"
+
+msgid "HELP_TEXT_COMMENTROUND_SOURCE_MODAL_INSTRUCTION"
+msgstr ""
+"Välj en källa för kommentaromgången genom att först välja verktyget för "
+"Interoperabilitetsplattformen i rullgardinsmenyn Välj källan genom att klicka på "
+"den. Källorna kan begränsas genom att ange en term i sökfältet och med "
+"rullgardinsmenyn för status."
+
+msgid "Select resource"
+msgstr "Välj informerande innehåll"
+
+msgid "HELP_TEXT_COMMENTTHREAD_RESOURCE_MODAL_INSTRUCTION"
+msgstr ""
+"Välj informerande innehåll att kommentera. Välj det informerande innehållet genom "
+"att klicka på dess namn. Status för informerande innehåll kan begränsas med "
+"söktermer och olika rullgardinsmenyer."
+
+msgid "Add user"
+msgstr "Lägg till användare"
+
+msgid "Add users to comment round"
+msgstr "Lägg användare till kommentarsomgången"
+
+msgid "All organizations"
+msgstr "Alla organisationer"
+
+msgid "All tools"
+msgstr "Alla verktyg"
+
+msgid "Comments"
+msgstr "Kommentarer"
+
+msgid "Add new resource"
+msgstr "Lägg till nytt informerande innehåll"
+
+msgid "This comment round does not have any resources."
+msgstr "Denna kommenteringsomgång saknar informerande innehåll"
+
+msgid "Resource"
+msgstr "Informerande innehåll"
+
+msgid "Proposer's comment"
+msgstr "Kommentar från förslagsgivaren"
+
+msgid "Added"
+msgstr "Har lagts till"
+
+msgid "Added by"
+msgstr "Den som lagt till"
+
+msgid "Description"
+msgstr "Beskrivning"
+
+msgid "Current status"
+msgstr "Nuvarande status"
+
+msgid "Proposed status"
+msgstr "Föreslagen status"
+
+msgid "Actions"
+msgstr "Funktioner"
+
+msgid "Proposed statuses"
+msgstr "Statusförslag"
+
+msgid "Expand all"
+msgstr "Visa allt"
+
+msgid "Collapse all"
+msgstr "Stäng allt"
+
+msgid "Start commenting"
+msgstr "Börja kommentera"
+
+msgid "Send comments"
+msgstr "Skicka kommentarer"
+
+msgid "{{ commenting ? 'Your comment' : 'Commenter\\'s comment' }}"
+msgstr ""
+
+msgid ""
+"{{ commenting ? 'Propose status' :\n"
+"            'Commenter\\'s proposal for status' }}"
+msgstr ""
+
+msgid "Round name"
+msgstr "Omgångens namn"
+
+msgid "Tool"
+msgstr "Verktyg"
+
+msgid "Start of commenting"
+msgstr "Ingivande av kommentarer börjar"
+
+msgid "End of commenting"
+msgstr "Ingivande av kommentarer avslutas"
+
+msgid "Source"
+msgstr "Källa"
+
+msgid "Only selected resources"
+msgstr "Endast valda objekt"
+
+msgid "Allow new comment threads"
+msgstr "Tillåt nya förslag"
+
+msgid "Source URI"
+msgstr "Källans URI"
+
+msgid "Organization"
+msgstr "Organisation"
+
+msgid "Comment round information"
+msgstr "Uppgifter om kommentarsomgången"
+
+msgid "Editor"
+msgstr "Administratör"
+
+msgid "Commenting subject"
+msgstr "Objektet för kommentarerna"
+
+msgid "URI"
+msgstr "URI"
+
+msgid "Created"
+msgstr "Tidpunkt för skapande"
+
+msgid "Users"
+msgstr "Användare"
+
+msgid "Commentable resources"
+msgstr "Informerande innehåll som kommenteras {{ value }} st."
+
+msgid "There are no resources to comment."
+msgstr "Inget informerande innehåll som kommenteras."
+
+msgid "You will receive an email notification when this resource changes."
+msgstr "Du meddelas per e-post när det görs ändringar i detta material."
+
+msgid "Choose action"
+msgstr "Välj funktion"
+
+msgid "Add email subscription"
+msgstr "Beställ e-postaviseringar"
+
+msgid "Remove email subscription"
+msgstr "Ta bort e-postaviseringar"
+
+msgid "Start comment round"
+msgstr "Börja kommentarsomgången"
+
+msgid "Close comment round"
+msgstr "Avsluta kommentarsomgången"
+
+msgid "Delete comment round"
+msgstr "Ta bort kommentarsomgången"
+
+msgid "Export Excel"
+msgstr "Exportera till Excel"
+
+msgid "INFORMATION"
+msgstr "UPPGIFTER"
+
+msgid "RESOURCES"
+msgstr "INFORMERANDE INNEHÅLL"
+
+msgid "OWN COMMENTS"
+msgstr "MINA KOMMENTARER"
+
+msgid "Filter results"
+msgstr "Avgränsa sökresultaten"
+
+msgid "Please select tool to get container resources for commenting."
+msgstr "Välj verktyg, varifrån de resurser som ska kommenteras hämtas."
+
+msgid "Resources"
+msgstr "Informerande innehåll"
+
+msgid "Select"
+msgstr "Välj"
+
+msgid "Create new suggestion and add selected resources"
+msgstr "Skapa nytt förslag och lägg till valda informerande innehåll"
+
+msgid "Create new suggestion"
+msgstr "Skapa nytt förslag"
+
+msgid "comment round"
+msgstr "kommentarsomgång"
+
+msgid "comment rounds"
+msgstr "kommentarsomgångar"
+
+msgid "Frontpage long description"
+msgstr ""
+"I tjänsten Kommentarer i Interoperabilitetsplattformen kan du skapa "
+"kommentarsomgångar om informerande innehåll i verktygen Ordlistor, Kodlistor och "
+"Informationsmodeller. Dessutom kan man via tjänsten kommentera de informerande "
+"innehåll som skickats på en kommentarsomgång samt läsa andras kommentarer. "
+"Användningen av tjänsten förutsätter inloggning."
+
+msgid "Add new comment round"
+msgstr "Skapa ny kommentarsomgång"
+
+msgid "Search for comment rounds"
+msgstr "Hämta kommentarsomgångar"
+
+msgid "Did not find any comment rounds."
+msgstr "Det gick inte att hitta kommentarsomgångar"
+
+msgid "Impersonate user"
+msgstr "Agera som användare"
+
+msgid "LOG IN"
+msgstr "LOGGA IN"
+
+msgid "LOG OUT"
+msgstr "LOGGA UT"
+
+msgid "User details"
+msgstr "Användaruppgifter"
+
+msgid "Suomi.fi Reference Data"
+msgstr "Suomi.fi-kodlistor"
+
+msgid "Suomi.fi Terminologies"
+msgstr "Suomi.fi-ordlistor"
+
+msgid "Suomi.fi Data Vocabularies"
+msgstr "Suomi.fi-informationsmodeller"
+
+msgid "User right management"
+msgstr "Administrering av behörigheter"
+
+msgid "Name"
+msgstr "Namn"
+
+msgid "Organizations and roles"
+msgstr "Organisationer och roller"
+
+msgid "Unknown organization"
+msgstr "Okänd organisation"
+
+msgid "Waiting for approval"
+msgstr "Väntar på godkännande"
+
+msgid "Send access request"
+msgstr "Skicka begäran om behörighet"
+
+msgid ""
+"You have subscribed to be notified via email when the following resources change. To "
+"remove the subscription, click the icon next to the resource."
+msgstr ""
+"Du har beställt e-postaviseringar om ändringar i följande material. För att ta bort "
+"aviseringen, klicka på ikonen bredvid materialet."
+
+msgid "Email notifications"
+msgstr "E-postaviseringar"
+
+msgid "Daily"
+msgstr "Dagligen"
+
+msgid "Code list resources"
+msgstr "Material som hänför sig kodlistor"
+
+msgid "Terminology resources"
+msgstr "Suomi.fi-ordlistor"
+
+msgid "Datamodel resources"
+msgstr "Material som hänför sig till informationsmodeller"
+
+msgid "Comments resources"
+msgstr "Material som hänför sig till kommentarer"
+
+msgid "SUBSCRIPTIONS"
+msgstr "BESTÄLLNINGAR"
+
+msgid "INFO_TEXT_COMMENTROUND_USER"
+msgstr "Användare som skapar kommentarsomgången"
+
+msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE"
+msgstr "Informerande innehåll som kommenteras på kommentarsomgångens huvudnivå"
+
+msgid "INFO_TEXT_COMMENTROUND_INTEGRATION_RESOURCE_URI"
+msgstr "URI-adress för det informerande innehåll på kommentarsomgångens huvudnivå"
+
+msgid "INFO_TEXT_COMMENTROUND_NAME"
+msgstr "Kommentarsomgångens namn som visas i rubriken och sökresultaten"
+
+msgid "INFO_TEXT_COMMENTROUND_TOOL_TYPE"
+msgstr ""
+"Verktyg i Interoperabilitetsplattformen vars informerande innehåll kommenteras i "
+"denna kommentarsomgång"
+
+msgid "INFO_TEXT_COMMENTROUND_DESCRIPTION"
+msgstr "Text som beskriver kommentarsomgången"
+
+msgid "INFO_TEXT_COMMENTROUND_ORGANIZATION"
+msgstr ""
+"Organisationer som kopplats till kommentarsomgången och vars användare kan lägga "
+"till kommentarer"
+
+msgid "INFO_TEXT_COMMENTROUND_FIXED_THREADS"
+msgstr ""
+"Bestämmer om en användare kan lägga till nytt informerande innehåll för kommentering "
+"till omgången efter att den påbörjats. Aktiverat som standard, varvid det "
+"informerande innehåll ska läggas till innan omgången börjar"
+
+msgid "INFO_TEXT_COMMENTROUND_OPEN_THREADS"
+msgstr ""
+"Bestämmer om en användare kan lägga till nytt innehåll för kommentering utan en "
+"länkning till det informerande innehållet. T.ex. Förslag till ett helt nytt "
+"informerande innehåll"
+
+msgid "INFO_TEXT_COMMENTROUND_STATUS"
+msgstr "Status för kommentarsomgången"
+
+msgid "INFO_TEXT_COMMENTROUND_VALIDITY"
+msgstr "Tidsperiod då det är möjligt att ge kommentarer under kommentarsomgången"
+
+msgid "INFO_TEXT_COMMENTROUND_VALIDITY_START_DATE"
+msgstr "Stardatum för kommentarsomgången, varpå det är möjligt att kommentera"
+
+msgid "INFO_TEXT_COMMENTROUND_VALIDITY_END_DATE"
+msgstr ""
+"Slutdatum för kommentarsomgången. Efter detta datum stängs kommentarsomgången "
+"automatiskt och kommenteringen upphör"
+
+msgid "INFO_TEXT_COMMENTROUND_CREATED"
+msgstr "Tidpunkt för skapande av kommentarsomgången"
+
+msgid "INFO_TEXT_COMMENTROUND_LAST_MODIFICATION"
+msgstr "Tidpunkt för senaste redigering"
+
+msgid "INFO_TEXT_COMMENTTHREAD_USER"
+msgstr "Användare som skapat kommentarskedjan"
+
+msgid "INFO_TEXT_COMMENTTHREAD_NAME"
+msgstr "Kommentarskedjans namn"
+
+msgid "INFO_TEXT_COMMENTTHREAD_DESCRIPTION"
+msgstr "Beskrivning av kommentarskedjan"
+
+msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCE"
+msgstr "Informerande innehåll som kommenteras i kommentarskedjan"
+
+msgid "INFO_TEXT_COMMENTTHREAD_INTEGRATION_RESOURCEURI"
+msgstr "URI-adress för det informerande innehåll som kommenteras i kommentarskedjan"
+
+msgid "INFO_TEXT_COMMENTTHREAD_PROPOSEDTEXT"
+msgstr "Föreslagen funktion"
+
+msgid "INFO_TEXT_COMMENTTHREAD_PROPOSEDSTATUS"
+msgstr "Status som föreslagits i kommentarskedjan"
+
+msgid "INFO_TEXT_COMMENTTHREAD_CREATED"
+msgstr "Tidpunkt för skapande"
+
+msgid "INFO_TEXT_COMMENTTHREAD_CURRENTSTATUS"
+msgstr "Nuvarande status för det informerande innehåll som kommenteras"
+
+msgid "INFO_TEXT_COMMENT_USER"
+msgstr "Användare som lagt till kommentaren"
+
+msgid "INFO_TEXT_COMMENT_COMMENTROUND_NAME"
+msgstr "Namn på kommentarsomgången som kommentaren gäller"
+
+msgid "INFO_TEXT_COMMENT_COMMENTTHREAD_NAME"
+msgstr "Namn på kommentarskedjan som kommentaren gäller"
+
+msgid "INFO_TEXT_COMMENT_CONTENT"
+msgstr "Användarens kommentar till det informerande innehållet"
+
+msgid "INFO_TEXT_COMMENT_COMMENTTHREAD_RESOURCEURI"
+msgstr "URI-adress för det informerande innehåll i kommentarskedjan"
+
+msgid "INFO_TEXT_COMMENT_PARENT_COMMENT"
+msgstr "Kommentar på överordnad nivå som denna kommentar gäller"
+
+msgid "INFO_TEXT_COMMENT_PROPOSEDSTATUS"
+msgstr "Föreslagen status för det kommenterade informerande innehållet"
+
+msgid "INFO_TEXT_COMMENT_CREATED"
+msgstr "Tidpunkt för skapandet av kommentaren"
+
+msgid "INFO_TEXT_INTEGRATION_RESOURCEURI"
+msgstr "URI-adress för det informerande innehåll i kommentarsomgången"
+
+msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
+msgstr ""
+"Sökresultaten kan begränsas med hjälp av rullgardinsmenyerna för organisation, "
+"status och verktyg"
+
+msgid "INFO_TEXT_FRONTPAGE_SEARCH"
+msgstr "Sökningen omfattar omgångarnas namn"
+
+msgid "INFO_TEXT_URI"
+msgstr "Permanent webbadress för kommentarsomgången"
+
+msgid "INFO_TEXT_USER_FIRSTNAME"
+msgstr "Användarens förnamn"
+
+msgid "INFO_TEXT_USER_LASTNAME"
+msgstr "Användarens efternamn"
+
+msgid "INFO_TEXT_USER_EMAIL"
+msgstr "Användarens e-postadress"
+
+msgid "Front page"
+msgstr "Startsida"
+
+msgid "NOSTATUS"
+msgstr "Ingen status har valts"
+
+msgid "SUPERSEDED"
+msgstr "Ersatt"
+
+msgid "RETIRED"
+msgstr "Borttaget"
+
+msgid "VALID"
+msgstr "Gällande"
+
+msgid "INVALID"
+msgstr "Felaktig"
+
+msgid "DRAFT"
+msgstr "Utkast"
+
+msgid "INCOMPLETE"
+msgstr "Halvfärdig"
+
+msgid "SUGGESTED"
+msgstr "Förslag"
+
+msgid "AWAIT"
+msgstr "Väntar"
+
+msgid "INPROGRESS"
+msgstr "På gång"
+
+msgid "ENDED"
+msgstr "Upphört"
+
+msgid "CLOSED"
+msgstr "Stängd"
+
+msgid "ERR_MSG_USER_401"
+msgstr "Behörighet saknas"
+
+msgid "ERR_MSG_USER_404"
+msgstr "Resursen kan inte hittas"
+
+msgid "ERR_MSG_USER_406"
+msgstr "Olämpliga data"
+
+msgid "ERR_MSG_USER_500"
+msgstr "Det skedde ett oväntat fel"
+
+msgid "ERR_MSG_USER_END_BEFORE_START_DATE"
+msgstr "Slutdatum före startdatumet"
+
+msgid "ERR_MSG_USER_CANNOT_MODIFY_EXISTING_COMMENT"
+msgstr "En befintlig kommentar kan inte redigeras."
+
+msgid "ERR_MSG_USER_CANNOT_MODIFY_EXISTING_COMMENTTHREAD"
+msgstr "En befintlig kommentarskedja kan inte redigeras."
+
+msgid "ERR_MSG_USER_CANNOT_CREATE_EMPTY_COMMENT"
+msgstr "Det går inte att skapa en tom kommentar."
+
+msgid "ERR_MSG_USER_INVALID_PARENTCOMMENT"
+msgstr "Kommentaren har kopplats till en felaktig kommentar på huvudnivå."
+
+msgid "ERR_MSG_USER_NOT_ALLOWED_TO_MODIFY_CONTENT_FROM_ANOTHER_USER"
+msgstr "Användaren kan inte redigera värden som getts av en annan användare."
+
+msgid "ERR_MSG_COMMENT_HAS_INVALID_COMMENTTHREAD_ID"
+msgstr "Kommentaren har kopplats till en felaktig kommentarskedja"
+
+msgid "ERR_MSG_COMMENT_DOES_NOT_HAVE_COMMENTTHREAD"
+msgstr "Kommentaren saknar kommentarskedja"
+
+msgid "ERR_MSG_NO_RESOURCES_TO_COMMENT_STATUS_CHANGE_NOT_ALLOWED"
+msgstr "Omgången saknar informerande innehåll, status kan inte ändras."
+
+msgid "ERR_MSG_USER_COMMENTTHREAD_HAS_INVALID_COMMENTROUND_ID"
+msgstr "Kommentarskedjan har en felaktig kommentarsomgång."
+
+msgid "ERR_MSG_INVALID_SOURCE_DATA"
+msgstr "Felaktiga källuppgifter."
+
+msgid "ERR_MSG_INVALID_ID"
+msgstr "Felaktigt ID i uppgifterna."
+
+msgid "ERR_MSG_USER_PROPOSED_STATUS_REQUIRED"
+msgstr "Statusförslag krävs för kommentarer på huvudnivå."
+
+msgid "ERR_MSG_USER_OTHER_USER_ALREADY_RESPONDED_TO_THIS_COMMENT_CANT_MODIFY_OR_DELETE"
+msgstr "Din kommentar har redan kommenterats, det går inte att redigera/ta bort"
+
+msgid "Submit error"
+msgstr "Det skedde ett fel i funktionen"
+
+msgid "Unexpected error"
+msgstr "Det skedde ett oväntat fel"
+
+msgid "ADMIN"
+msgstr "Administratör"
+
+msgid "DATA_MODEL_EDITOR"
+msgstr "Datamodellerare"
+
+msgid "TERMINOLOGY_EDITOR"
+msgstr "Terminologiredigerare"
+
+msgid "CODE_LIST_EDITOR"
+msgstr "Kodlistredigerare"
+
+msgid "MEMBER"
+msgstr "Medlem"
+
+msgid "required"
+msgstr "Obligatorisk inmatning"
+
+msgid "codelist"
+msgstr "Suomi.fi-kodlistor"
+
+msgid "terminology"
+msgstr "Suomi.fi-ordlistor"
+
+msgid "datamodel"
+msgstr "Suomi.fi-informationsmodeller"
+
+msgid "alphabetical"
+msgstr "Alfabetisk"
+
+msgid "created"
+msgstr "Tidpunkt för skapande"
+
+msgid "codelist-type"
+msgstr "Kodlista"
+
+msgid "terminology-type"
+msgstr "Ordlista"
+
+msgid "datamodel-type"
+msgstr "Informationsmodell"
+
+msgid "Comment round"
+msgstr "kommentarsomgång"
+
+msgid "Comment thread"
+msgstr "Kommentarskedja"
+
+msgid "Comment"
+msgstr "Kommentar"
+
+msgid "Commenter's proposal for status"
+msgstr "Kommentatorns statusförslag"
+
+msgid "Commenter's comment"
+msgstr "Kommentatorns kommentar"
+
+msgid "Your comment"
+msgstr "Kommentera"
+
+msgid "Propose status"
+msgstr "Föreslå status"
+
+msgid "Create comment round"
+msgstr "Skapa en kommentarsomgång"
+
+msgid "Create comment thread"
+msgstr "Skapa en kommentarskedja"
+
+msgid "Create comment"
+msgstr "Skapa en kommentar"
+
+msgid "-"
+msgstr "-"
+
+msgid "START COMMENT ROUND?"
+msgstr "INLED KOMMENTARSOMGÅNGEN"
+
+msgid "CLOSE COMMENT ROUND?"
+msgstr "STÄNG KOMMENTARSOMGÅNGEN"
+
+msgid "DELETE COMMENT ROUND?"
+msgstr "TA BORT KOMMENTARSOMGÅNGEN?"
+
+msgid "DELETE COMMENT THREAD?"
+msgstr "TA BORT KOMMENTARSKEDJAN?"
+
+msgid "DELETE COMMENT?"
+msgstr "TA BORT KOMMENTAR?"
+
+msgid "SEND COMMENTS?"
+msgstr "SKICKA KOMMENTARER"
+
+msgid ""
+"You have not commented all resources. Are you sure you want to send partial comments?"
+msgstr ""
+"Du har inte kommenterat allt informerande innehåll som ingår i omgången. Är du säker "
+"att du vill skicka kommentarerna? Du kan fortsätta kommentera senare."
+
+msgid "ADD EMAIL SUBSCRIPTION TO RESOURCE REGARDING CHANGES?"
+msgstr "BESTÄLL E-POSTAVISERINGAR OM ÄNDRINGAR I MATERIALET?"
+
+msgid "REMOVE EMAIL SUBSCRIPTION TO RESOURCE?"
+msgstr "TA BORT E-POSTBESTÄLLNINGEN OM MATERIALET?"
+
+msgid "ARE YOU SURE YOU WANT TO ENABLE THE NOTIFICATION EMAIL SUBSCRIPTION?"
+msgstr "ÄR DU SÄKER ATT DU VILL AKTIVERA INSTÄLLNINGEN FÖR ATT TA EMOT E-POST?"
+
+msgid "ARE YOU SURE YOU WANT TO DISABLE THE NOTIFICATION EMAIL SUBSCRIPTION?"
+msgstr "ÄR DU SÄKER ATT DU VILL INAKTIVERA INSTÄLLNINGEN FÖR ATT TA EMOT E-POST?"
+
+msgid "Adding subscription failed."
+msgstr "Det gick inte att beställa aviseringar."
+
+msgid "Subscription deletion failed."
+msgstr "Borttagning av aviseringar misslyckades."
+
+msgid "INFO_TEXT_EMAIL_SUBSCRIPTIONS"
+msgstr ""
+"Med denna funktion väljer du att aktivera/inaktivera aviseringsfunktionen. Genom att "
+"ta bort krysset för ”Dagligen” kan du inaktivera alla aviseringar på en gång. Genom "
+"att kryssa för på nytt aktiveras aviseringar."
+
+msgid "REMOVE USER FROM COMMENT ROUND?"
+msgstr "TA BORT ANVÄNDAREN FRÅN KOMMENTARSOMGÅNGEN"
+
+msgid "INFO_TEXT_COMMENTROUND_USERS"
+msgstr ""
+"Tillfälliga användare inbjudna till kommentarsomgången, vem kommer att få inbjudan"
+
+msgid "invalidDate"
+msgstr "Fel datum"
+
+msgid "invalidDateRange"
+msgstr "Felaktigt datumintervall"
+
+msgid "emailValidationError"
+msgstr "E-postadressen är inte giltig"
+
+msgid "emailExistsError"
+msgstr "E-post finns redan"
+
+#~ msgid "Select comment"
+#~ msgstr "Välj kommentar"
+
+#~ msgid "Search comment"
+#~ msgstr "Sök kommentar"

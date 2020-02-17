@@ -9,6 +9,7 @@ import { CommentsErrorModalService } from '../common/error-modal.service';
 import { MessagingResource } from '../../entities-messaging/messaging-resource';
 import { MessagingService } from '../../services/messaging-service';
 import { UserService } from 'yti-common-ui/services/user.service';
+import { comparingLocalizable, comparingPrimitive } from 'yti-common-ui/utils/comparator';
 
 @Component({
   selector: 'app-user-details-subscriptions',
@@ -34,6 +35,10 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
               private userService: UserService,
               private confirmationModalService: CommentsConfirmationModalService,
               private errorModalService: CommentsErrorModalService) {
+
+    this.languageService.language$.subscribe(language => {
+      this.sortMessagingResources();
+    });
   }
 
   ngOnInit() {
@@ -83,6 +88,7 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
         }
         if (resources.size > 0) {
           this.messagingResources = resources;
+          this.sortMessagingResources();
         } else {
           this.messagingResources = null;
         }
@@ -91,6 +97,31 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
       }
       this.loading = false;
     });
+  }
+
+  sortMessagingResources() {
+
+    const resourceMap: Map<string, MessagingResource[]> | null = this.messagingResources$.getValue();
+    if (resourceMap) {
+      this.sortApplicationResources(resourceMap, this.APPLICATION_TERMINOLOGY);
+      this.sortApplicationResources(resourceMap, this.APPLICATION_DATAMODEL);
+      this.sortApplicationResources(resourceMap, this.APPLICATION_CODELIST);
+      this.sortApplicationResources(resourceMap, this.APPLICATION_COMMENTS);
+    }
+    this.messagingResources = resourceMap;
+  }
+
+  sortApplicationResources(resourceMap: Map<string, MessagingResource[]>,
+                           applicationIdentifier: string) {
+    if (resourceMap.has(applicationIdentifier)) {
+      // @ts-ignore
+      resourceMap.get(applicationIdentifier).sort(comparingPrimitive<MessagingResource>(
+        resource => this.languageService.isLocalizableEmpty(resource.prefLabel))
+        .andThen(comparingPrimitive<MessagingResource>(resource =>
+          this.languageService.isLocalizableEmpty(resource.prefLabel) ? resource.uri.toLowerCase() : null))
+        .andThen(comparingLocalizable<MessagingResource>(this.languageService,
+          resource => resource.prefLabel ? resource.prefLabel : {}, true)));
+    }
   }
 
   get canSubscribe(): boolean {

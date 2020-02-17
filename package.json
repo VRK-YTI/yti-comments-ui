@@ -41,11 +41,11 @@
     "ngx-clipboard": "11.1.9",
     "ngx-cookie-service": "^2.2.0",
     "ngx-virtual-scroller": "3.0.2",
-   "rxjs": "~6.3.3",
+    "rxjs": "~6.3.3",
     "simple-line-icons": "^2.4.1",
     "sonarqube-scanner": "^2.5.0",
     "uuid": "3.0.1",
-    "yti-common-ui": "https://github.com/VRK-YTI/yti-common-ui.git/#23216a8015412115117f8e8fafc3a459966da962",
+    "yti-common-ui": "https://github.com/VRK-YTI/yti-common-ui.git/#4c0e8c75d566241730d34148578207dcef8911ce",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
