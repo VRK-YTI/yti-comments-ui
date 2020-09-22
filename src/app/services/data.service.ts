@@ -131,8 +131,6 @@ export class DataService {
 
     if (status) {
       params = params.append('status', status);
-    } else {
-      params = params.append('status', 'INCOMPLETE,AWAIT,INPROGRESS');
     }
 
     if (filterIncomplete) {
