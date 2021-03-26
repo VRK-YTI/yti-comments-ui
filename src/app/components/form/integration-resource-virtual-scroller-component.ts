@@ -74,8 +74,8 @@ export class IntegrationResourceVirtualScrollerComponent {
         this.restricts);
 
       results.forEach(x => {
-        // hide from the list in case they are visible
-        this.virtualScroller.viewPortItems
+        // mark any item already downloaded as hidden (unexpanded)
+        this.buffer
           .filter(item => item.uri === x.uri)
           .forEach(item => {
             item.expanded = false
