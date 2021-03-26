@@ -48,20 +48,44 @@
                            id="integration_status_filter_dropdown"
                            [filterSubject]="status$"
                            [options]="statusOptions"></app-filter-dropdown>
+
+      <div class="d-inline-block">
+        <div class="input-group input-group-lg pl-2">
+          <button
+                  id="pick_all_modal_button"
+                  type="button"
+                  class="btn btn-action"
+                  (click)="pickAll()">
+            <span translate>Pick all</span>
+          </button>
+        </div>
+      </div>
     </div>
 
     <div class="modal-section-flexible content-box">
-      <app-integration-resource-virtual-scroller *ngIf="virtualScrollerInstanceToggle" [containerUri]="containerUri"
-                                                 [containerType]="containerType" [language]="languageService.language"
-                                                 [items]="searchResults$" [status$]="status$" [search$]="search$" [restricts]="restricts"
-                                                 [selectedResources$]="selectedResources$"
-                                                 (selectResourceEvent)="selectResource($event)">
+      <app-integration-resource-virtual-scroller
+        *ngIf="virtualScrollerInstanceToggle"
+        [containerUri]="containerUri"
+        [containerType]="containerType"
+        [language]="languageService.language"
+        [items]="searchResults$"
+        [status$]="status$"
+        [search$]="search$"
+        [restricts]="restricts"
+        [selectedResources$]="selectedResources$"
+        (selectResourceEvent)="selectResource($event)">
       </app-integration-resource-virtual-scroller>
-      <app-integration-resource-virtual-scroller *ngIf="!virtualScrollerInstanceToggle" [containerUri]="containerUri"
-                                                 [containerType]="containerType" [language]="languageService.language"
-                                                 [items]="searchResults$" [status$]="status$" [search$]="search$" [restricts]="restricts"
-                                                 [selectedResources$]="selectedResources$"
-                                                 (selectResourceEvent)="selectResource($event)">
+      <app-integration-resource-virtual-scroller
+        *ngIf="!virtualScrollerInstanceToggle"
+        [containerUri]="containerUri"
+        [containerType]="containerType"
+        [language]="languageService.language"
+        [items]="searchResults$"
+        [status$]="status$"
+        [search$]="search$"
+        [restricts]="restricts"
+        [selectedResources$]="selectedResources$"
+        (selectResourceEvent)="selectResource($event)">
       </app-integration-resource-virtual-scroller>
     </div>
   </div>
