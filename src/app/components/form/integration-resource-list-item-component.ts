@@ -9,7 +9,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
   styleUrls: ['./integration-resource-list-item.component.scss'],
   template: `
     <div id="{{resource.id + '_resource_link'}}"
-         class="resource-result" *ngIf="resource.expanded; else flattened" [class.last]="theLast">
+         class="resource-result" *ngIf="resource.expanded" [class.last]="theLast">
       <div class="scrollable-content">
         <app-status class="status" [status]="resource.status"></app-status>
         <span class="title" (click)="emitSelectResourceEvent(resource)">{{ resource.getDisplayName(languageService, true) }}</span>
@@ -28,10 +28,6 @@ import { BehaviorSubject, Subscription } from 'rxjs';
         </div>
       </div>
     </div>
-    <ng-template #flattened>
-      <div class="flattened">
-      </div>
-    </ng-template>
   `
 })
 export class IntegrationResourceListItemComponent implements OnInit, OnDestroy {
