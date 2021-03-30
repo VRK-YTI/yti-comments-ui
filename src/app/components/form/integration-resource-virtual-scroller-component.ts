@@ -36,6 +36,7 @@ export class IntegrationResourceVirtualScrollerComponent {
   @Input() search$ = new BehaviorSubject('');
   @Input() restricts: string[];
   @Input() selectedResources$: BehaviorSubject<IntegrationResource[]>;
+
   public buffer: IntegrationResource[] = [];
   public loading = false;
   private previousRequestGotZeroResults = false; // this variable is used to stop an eternal loop in case of 0 results (due to filtering)
@@ -50,6 +51,48 @@ export class IntegrationResourceVirtualScrollerComponent {
   constructor(public configurationService: ConfigurationService,
               public languageService: LanguageService,
               private dataService: DataService) {
+  }
+
+  // pick all search results as selections
+  // this works separately from the virtual scrolling by fetching
+  // (or often re-fetching) the data and adding all of them to the selections
+  public async pickAll() {
+
+    this.loading = true;
+    let count = 0;
+
+    while (true) {
+      // fetch one page
+      const results = await this.dataService.getResourcesPaged(
+        this.containerType,
+        this.containerUri,
+        this.language,
+        this.thePageSize,
+        count,
+        this.status$.value,
+        this.search$.value,
+        this.restricts);
+
+      results.forEach(x => {
+        // mark any item already downloaded as hidden (unexpanded)
+        this.buffer
+          .filter(item => item.uri === x.uri)
+          .forEach(item => {
+            item.expanded = false
+          });
+
+        // add as selected resource
+        this.selectResourceEvent.emit(x);
+      });
+
+      count += results.length;
+
+      if (results.length !== this.thePageSize) {
+        break;
+      }
+    }
+    this.virtualScroller.invalidateAllCachedMeasurements();
+    this.loading = false;
   }
 
   public fetchMore(event: IPageInfo) {
