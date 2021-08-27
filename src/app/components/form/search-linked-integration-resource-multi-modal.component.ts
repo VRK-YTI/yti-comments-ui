@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { allStatuses, Status } from 'yti-common-ui/entities/status';
 import { IntegrationResourceType } from '../../services/api-schema';
 import { ConfigurationService } from '../../services/configuration.service';
+import { IntegrationResourceVirtualScrollerComponent } from './integration-resource-virtual-scroller-component';
 
 @Component({
   selector: 'app-search-linked-source-multi-modal',
@@ -20,6 +21,10 @@ import { ConfigurationService } from '../../services/configuration.service';
 export class SearchLinkedIntegrationResourceMultiModalComponent implements AfterViewInit, OnInit {
 
   @ViewChild('searchInput') searchInput: ElementRef;
+
+  // for accessing pickAll() of the child component
+  @ViewChild(IntegrationResourceVirtualScrollerComponent)
+  private virtualScrollerComponent: IntegrationResourceVirtualScrollerComponent;
 
   @Input() restricts: string[];
   @Input() useUILanguage: boolean;
@@ -115,6 +120,11 @@ export class SearchLinkedIntegrationResourceMultiModalComponent implements After
 
   select() {
     this.modal.close(this.selectedResources);
+  }
+
+  // pick all search results as selections
+  pickAll() {
+    this.virtualScrollerComponent.pickAll();
   }
 
   ngAfterViewInit() {

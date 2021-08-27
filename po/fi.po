@@ -287,6 +287,9 @@ msgstr "Tietosisällöt"
 msgid "Select"
 msgstr "Valitse"
 
+msgid "Pick all"
+msgstr "Poimi kaikki"
+
 msgid "Create new suggestion and add selected resources"
 msgstr "Luo uusi ehdotus ja lisää valitut tietosisällöt"
 

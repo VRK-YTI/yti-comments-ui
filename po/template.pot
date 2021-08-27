@@ -4,6 +4,9 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+msgid "Removed user"
+msgstr ""
+
 msgid "Commenting period"
 msgstr ""
 
@@ -29,9 +32,6 @@ msgid "Cancel"
 msgstr ""
 
 msgid "Save"
-msgstr ""
-
-msgid "Removed user"
 msgstr ""
 
 msgid "First name"
@@ -268,6 +268,9 @@ msgid "Please select tool to get container resources for commenting."
 msgstr ""
 
 msgid "Resources"
+msgstr ""
+
+msgid "Pick All"
 msgstr ""
 
 msgid "Select"
