@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { LocationService } from './services/location.service';
 import { Router } from '@angular/router';
 
+const versionInfo = require('!raw-loader!../version.txt');
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,8 +11,11 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
+  version: string;
+
   constructor(private locationService: LocationService,
               private router: Router) {
+    this.version = versionInfo;
   }
 
   get location() {
